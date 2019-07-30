@@ -1,122 +1,56 @@
-// Vehicle object
+// Stone class
 
-class Predator {
-  constructor(x, y) {
-    this.position = createVector(x, y); // initiate at a random spot
-    this.r = 20; // size of the fish
-    this.maxspeed = random(0.5, 4); // Maximum speed
-    this.maxforce = random(0, 0.6); // Maximum steering force
-    this.acceleration = createVector(0, 0); //start the fish at a constant velocity
-    this.velocity = createVector(random(-1, 1), random(-1, 1)); //start the fish moving in a random direction
+/*determiner par une position aleatoire x 
+y = 0 au debut
+peut avoir une vitesse plus ou moins rapide
+si contact avec oiseau mort de l'oiseau
+une taille plus ou moins grande
+*/
+
+class Stone {
+  constructor(x) {
+    this.position = createVector(x, random(-2000, -10)); // initiate at a random spot
+    //this.position = createVector(x, random(0, height)); // initiate at a random spot
+    this.stoneSize =  random(20, 100); // size of the stone
+    this.maxspeed = random(1, 3); // Maximum speed
+    // console.log('position.x' + this.position.x + 'position.y' + this.position.y);
   }
 
-  applyBehaviors(predators, mX, mY) {
 
-    let separateForce = this.separate(predators); //set the separate force to keep predators separated from colliding with each other
-    let seekForce = this.seek(createVector(mX, mY)); // set the seek force to steer predators towards player
-
-    separateForce.mult(slider1); //multiply the separate force by slider amount (now hard coded)
-    seekForce.mult(slider2); //multiply the seek force by slider amount (now hard coded)
-
-    this.applyForce(separateForce); // apply it!
-    this.applyForce(seekForce); //apply it!
-  }
-
-  applyForce(force) {
-    // standard acceleration addition
-    this.acceleration.add(force);
-  }
-
-  // Method checks for nearby predators and steers away from them
-  separate(predators) {
-    //set how far away from each other you want predators to stay
-    let desiredseparation = slider3;
-    let sum = createVector();
-    let count = 0;
-    // For every predator in the system, check if it's too close
-    for (let i = 0; i < predators.length; i++) {
-      let d = p5.Vector.dist(this.position, predators[i].position);
-      // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
-      if ((d > 0) && (d < desiredseparation)) {
-        // Calculate vector pointing away from neighbor
-        let diff = p5.Vector.sub(this.position, predators[i].position);
-        diff.normalize();
-        diff.div(d); // Weight by distance
-        sum.add(diff);
-        count++; // Keep track of how many
-      }
-    }
-    // Average -- divide by how many
-    if (count > 0) {
-      sum.div(count);
-      // Our desired vector is the average scaled to maximum speed
-      sum.normalize();
-      sum.mult(this.maxspeed);
-      // Implement Reynolds: Steering = Desired - Velocity
-      sum.sub(this.velocity);
-      sum.limit(this.maxforce);
-    }
-    return sum;
-  }
-
-  // A method that calculates a steering force towards the player
-  // STEER = DESIRED MINUS VELOCITY
-  seek(target) {
-    let desired = p5.Vector.sub(target, this.position); // A vector pointing from the location to the target
-
-    let eyesight = desired.mag();
-
-    // Normalize desired and scale to maximum speed
-    desired.normalize();
-    desired.mult(this.maxspeed);
-    // Steering = Desired minus velocity
-    let steer = p5.Vector.sub(desired, this.velocity);
-    steer.limit(this.maxforce); // Limit to maximum steering force
-    if (eyesight < 200) {
-      return steer;
-    } else {
-      return this.velocity
-    }
-  }
-
-  // Method to update location
-  update() {
-    // Update velocity
-    this.velocity.add(this.acceleration);
-    // Limit speed
-    this.velocity.limit(this.maxspeed);
-    this.position.add(this.velocity);
-    // Reset accelertion to 0 each cycle
-    this.acceleration.mult(0);
-  }
 
   //draw predator
-  display() {
-    fill(127, 0, 0);
-    stroke(200);
-    strokeWeight(2);
+  display(y) {
+    let newPosition = this.maxspeed * y;
+    //console.log('position x : ' + this.position.x +'this.direction : '+ this.direction + 'newX : '+ newX );
+    // fill(127, 0, 0);
+    // stroke(200);
+    // strokeWeight(2);
     push();
-    translate(this.position.x, this.position.y);
-    if (this.velocity.x <= 0) {
-      image(badFish, -30, -30, 60, 60);
-    } else if (this.velocity.x > 0) {
-      scale(-1, 1);
-      image(badFish, -30, -30, 60, 60);
-    }
+    translate(this.position.x, this.position.y + newPosition);
+    image(imgStone, this.stoneSize/2 , this.stoneSize/2 , this.stoneSize, this.stoneSize);
+
     pop();
   }
 
   // keep all fish in the scene by having them enter the frame from the opposite side they leave the frame 
   borders() {
-    if (this.position.x < -this.r) this.position.x = width + this.r;
-    if (this.position.y < -this.r) this.position.y = height + this.r;
-    if (this.position.x > width + this.r) this.position.x = -this.r;
-    if (this.position.y > height + this.r) this.position.y = -this.r;
+    if (this.position.x < -this.stoneSize) this.position.x = width + this.stoneSize;
+    if (this.position.y < -this.stoneSize) this.position.y = height + this.stoneSize;
+    if (this.position.x > width + this.stoneSize) this.position.x = -this.stoneSize;
+    if (this.position.y > height + this.stoneSize) this.position.y = -this.stoneSize;
   }
 
   //check if the predator has caught the player
-  isOver(mX, mY) {
-    if (dist(mX, mY, this.position.x, this.position.y) < this.r) {
+  isOver(width, mX, mY,  y) {
+    let newPosition = width - mX;
+    let vertical = this.position.y + y*this.maxspeed;
+    // console.log('nez' + mY);
+    // console.log('caillou ' + vertical);
+
+    // console.log("mX :" + mX );
+    //console.log("mY :" + mY + ", this.position.y : " + this.position.y);
+
+    if (dist(newPosition, mY, this.position.x, vertical) <= this.stoneSize) {
       return true;
     } else {
       return false;

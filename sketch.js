@@ -1,135 +1,140 @@
 let video;
 let poseNet;
+
 let noseX = 0;
 let noseY = 0;
-
 let lastNoseX = 0;
 let lastNoseY = 0;
-
 let eyelX = 0;
 let eyelY = 0;
 
 let imgBackground;
+
+let stones = [];
 let imgStone;
-let y = 0;
 
-let positionStone = [];
+let score = 0; 
+let y = 0;//speed of falling object
 
-var images = [];
-var totalImages = 12;
+var birdImages = [];//box contain each movement of the bird
+var totalImages = 12;// number of images in the bird box
 var counterImage = 0;
 var loadingImage = false;
-
 var loading = true;
-
-let index = 0;
-
-let extraCanvas;
+let index = 0;//will allowed to move fom one image to another in birdImages
 
 function preload(){
     imgBackground = loadImage('montagnes.jpg');
     imgStone = loadImage('stone.png');
-    imgTest = loadImage('nez.png');
 }
 
 function loadImageElement(filename) {
-  loadImage(filename, imageLoaded);
+    loadImage(filename, imageLoaded);
 
-  function imageLoaded(image) {
-    console.log(filename);
-    images.push(image);
-
-    counterImage++;
-    if (counterImage == totalImages) {
-      loadingImage = true;
+    function imageLoaded(image) {
+        console.log(filename);
+        birdImages.push(image);
+        counterImage++;
+        if (counterImage == totalImages) {
+            loadingImage = true;
+        }
     }
-  }
 }
 
 function setup() {
     frameRate(18);
 
-  createCanvas(windowWidth, windowHeight);
-  video = createCapture(VIDEO);
-  video.size(displayWidth, displayHeight);
-  video.hide();
+    createCanvas(windowWidth, windowHeight);
+    video = createCapture(VIDEO);
+    video.size(width, height);
+    video.hide();
 
-  for (var i = 0; i <= totalImages; i++) {
-    // positionStone.push(new Stone(random(width), 0))
-    positionStone.push(random(0 , width));
+    for (var i = 0; i <= totalImages; i++) {
+        loadImageElement("bird" + i + ".png");
+    }
+    for (var i = 0; i < 30; i++) {
+        stones.push(new Stone(random(0, width)));    
+    }
 
-    loadImageElement("bird" + i + ".png");
-  }
-
-
-  poseNet = ml5.poseNet(video, modelReady);
-  poseNet.on('pose', gotPoses);
+    //ml5 posenet initialisation
+    poseNet = ml5.poseNet(video, modelReady);
+    poseNet.on('pose', gotPoses);
 }
 
 function modelReady(){
-  console.log('model ready');
+    console.log('model ready');
 }
 
 function gotPoses(poses){
-  // console.log('poses');
-  if (poses.length > 0) {
-    lastNoseX = noseX;
-    lastNoseY = noseY;
+    if (poses.length > 0) {
+        lastNoseX = noseX;
+        lastNoseY = noseY;
 
-    let newX = poses[0].pose.keypoints[0].position.x;
-    let newY = poses[0].pose.keypoints[0].position.y;    
-    let newEyeLX = poses[0].pose.keypoints[1].position.x;
-    let newEyeLY = poses[0].pose.keypoints[1].position.y;    
-    noseX = lerp(noseX, newX, 0.7);
-    noseY = lerp(noseY, newY, 0.7);
-    eyelX = lerp(eyelX, newEyeLX, 0.5);
-    eyelY = lerp(eyelY, newEyeLY, 0.5);
-
-    // console.log("lastNoseX : " + lastNoseX + ", noseX : "+ noseX);
-  }
+        let newNoseX = poses[0].pose.keypoints[0].position.x;
+        let newNoseY = poses[0].pose.keypoints[0].position.y;    
+        let newEyeLX = poses[0].pose.keypoints[1].position.x;
+        let newEyeLY = poses[0].pose.keypoints[1].position.y;    
+        noseX = lerp(noseX, newNoseX, 0.9);
+        noseY = lerp(noseY, newNoseY, 0.9);
+        eyelX = lerp(eyelX, newEyeLX, 0.9);
+        eyelY = lerp(eyelY, newEyeLY, 0.9);
+    }
 }
 
 function draw() {
-  push();
-  translate(width, 0);
-  scale(-1, 1);
-  //image(video, 0, 0, displayWidth, displayHeight);//met la video dans le canvas
-  image(imgBackground, 0,0, width, height);
-  pop();
-  //image(imgBackground,  0, 0);
-  let d = dist(noseX, noseY, eyelX, eyelY);
-  // extraCanvas.image(imgEye,random(width),random(height), d*1.4 , d*1.4);  
-  // image( imgNose, (noseX - d), (noseY - d), d*1.4 , d*1.4);
-  // Animate by increasing our x value
-  y = y + 4;
+    push();
+    translate(width, 0);
+    scale(-1, 1);
+    //image(video, 0, 0, displayWidth, displayHeight);//met la video dans le canvas
+    image(imgBackground, 0,0, width, height);
 
+    pop();
+    drawStone(y);
+    y = y + 4;
 
-  if (loadingImage) {
-    loading = false;
-  }
+    // Animate by increasing our Y value
 
-  if (!loading) {
-    // fill(255);
-    // noStroke();
-    if (lastNoseX > noseX ) {
-      image(images[index], width - noseX - d, noseY - d ) ;
+    if (loadingImage) {
+        loading = false;
+    }
+
+    if (!loading) {
+        if (lastNoseX > noseX ) {
+        image(birdImages[index], width - noseX, noseY );
     }
     else if (lastNoseX < noseX){
-      push();
-      translate(width, 0);
-      scale(-1, 1);
-      image(images[index], noseX - d, noseY - d);
-      pop();
+        push();
+        translate(width, 0);
+        scale(-1, 1);
+        image(birdImages[index], noseX, noseY);
+        pop();
     }
-
-
-    // for (var i = 0; i < 12; i++) {
-    //       translate(positionStone[i] , y);
-    //       image(imgStone, i*50 , -100 / 2, 100, 100);
-    // }
+    //create the animation of the bird
     index = (index + 1);
     if (index == 12) {
       index = 0;
     }
+
   }
+}
+
+function drawStone(y){
+    for (let v of stones) {
+        // v.applyBehaviors(predators, keypoint.position.x, keypoint.position.y);
+        // v.update();
+        // v.borders();
+        v.display(y);
+        //console.log(noseX);
+        if (v.isOver(width, noseX, noseY, y)) {
+            console.log("nose over predators");
+
+            stones.splice(v, 1);
+            score ++;
+            console.log('score :' + score)
+            // predators.push(new Predator(random(width), 0));
+            // if (health > 0) health -= 1;
+            // console.log("health: " + health)
+        }
+    }
+
 }
