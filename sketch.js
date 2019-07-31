@@ -18,6 +18,10 @@ let diamond;
 let gems = [];
 let boxGems = [];
 
+let pills;
+let potion;
+
+
 let life = 100;
 
 let explosionSprite;
@@ -31,9 +35,7 @@ let imgBirdSprite;
 let bird = [];
 
 let score = 0; 
-
 var counterImage = 0;
-
 let index = 0;//will allowed to move fom one image to another in birdImages
 
 function preload(){
@@ -45,6 +47,10 @@ function preload(){
     diamond = loadImage('diamond.png');
     gems.push(ruby);
     gems.push(diamond);
+
+    pills = loadImage('pill.png'); 
+    potion = loadImage('potion.png'); 
+
 }
 
 function setup() {
@@ -58,10 +64,10 @@ function setup() {
     sprite(imgBirdSprite, bird, 110, 101, 5, 14);
     sprite(explosionSprite, explose, 192, 192, 5, 6);
 
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 40; i++) {
         stones.push(new Rocks(random(0, width)));    
     }
-    for (var i = 0; i < 10; i++) {      
+    for (var i = 0; i < 20; i++) {      
 
         var item = gems[Math.floor(Math.random()*gems.length)];
         boxGems.push(new Gems(random(0, width), item));    
@@ -93,14 +99,16 @@ function gotPoses(poses){
 }
 
 function draw() {
-    push();
-    translate(width, 0);
-    scale(-1, 1);
-    //image(video, 0, 0, displayWidth, displayHeight);//met la video dans le canvas
-    //image(imgBackground, 0,0, width, height);
-    background(0);
-    pop();
-    drawStone();
+
+    if( life > 0){
+        push();
+        translate(width, 0);
+        scale(-1, 1);
+        //image(video, 0, 0, displayWidth, displayHeight);//met la video dans le canvas
+        image(imgBackground, 0,0, width, height);
+        //background(0);
+        pop();
+        drawStone();
 
         if (lastNoseX - noseX > -10 ) {//-10 give a direction when player dont move
             // ellipse(width - noseX, noseY, 100, 100);
@@ -120,7 +128,37 @@ function draw() {
             exploseindex += 1;
         }
 
-
+        //health bar
+        noStroke();
+        fill(255);
+        textSize(20);
+        text("Santé", 20, 20);
+        stroke(255);
+        strokeWeight(2);
+        noFill();
+        rect(18, 28, 250, 22);
+        noStroke();
+        fill(81, 221, 37);
+        rect(19, 28, map(life, 0, 100, 0, 248), 21);
+        
+        //Points
+        push();
+        textAlign(RIGHT);
+        fill(255);
+        text("Score : ", width-80, 24);
+        textSize(24);
+        text(score, width-50, 24);
+        pop();
+    }
+    
+    else{
+        background(0);
+        fill(244, 36, 36);
+        textSize(40);
+        textAlign(CENTER);
+        text("GAME OVER", width / 2, height / 3);
+        text("SCORE : " + score, width/2, height/2);
+    }
         //create the animation of the bird
         index = (index + 1);
         if (index == 12) {
@@ -144,9 +182,6 @@ function drawStone(){
                 stones.splice(i, 1);
                 explosion = true;
                 console.log('vie :' + life);
-                if (life <= 0) {
-                    dieLittleBird();
-                }
             }
 
             if(currentY > height){
@@ -166,12 +201,4 @@ function drawStone(){
     }
 }
 
-
-function dieLittleBird(){
-    //la partie s'arrete, un message s'affiche
-    console.log('GAME OVER !!');
-    p5 = null;
-
-    remove();
-}
 
