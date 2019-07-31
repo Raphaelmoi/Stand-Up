@@ -5,34 +5,29 @@ class Stone {
     this.stoneSize =  random(20, 100); // size of the stone
     this.maxspeed = random(1, 3); // Maximum speed
     // console.log('position.x' + this.position.x + 'position.y' + this.position.y);
-
+    this.stone = imgStone;
+    this.explosion;
   }
 
   //draw predator
   display(y) {
     let newPosition = this.maxspeed * y;
-    //console.log('position x : ' + this.position.x +'this.direction : '+ this.direction + 'newX : '+ newX );
-
+    //console.log('position x : ' + this.position.x +'this.direction : '+ this.direction + 'newX : '+ newX ); 
     push();
     translate(this.position.x, this.position.y + newPosition);
     fill(255, 0,0);
     ellipse(20,20,this.stoneSize,this.stoneSize)
-    image(imgStone, -this.stoneSize/PI , -this.stoneSize/PI , this.stoneSize, this.stoneSize);
+    image(this.stone, -this.stoneSize/PI , -this.stoneSize/PI , this.stoneSize, this.stoneSize);
 
     pop();
   }
-  destroy(Y){
+  destroy(y){
     let newPosition = this.maxspeed * y;
-    //console.log('position x : ' + this.position.x +'this.direction : '+ this.direction + 'newX : '+ newX );
-
     push();
     translate(this.position.x, this.position.y + newPosition);
     fill(0, 0, 255);
     ellipse(20,20,this.stoneSize,this.stoneSize)
-    //image(imgStone, -this.stoneSize/PI , -this.stoneSize/PI , this.stoneSize, this.stoneSize);
-
     pop();
-    //image(imgStone, -this.stoneSize/PI , -this.stoneSize/PI , this.stoneSize, this.stoneSize);
   }
 
   // keep all fish in the scene by having them enter the frame from the opposite side they leave the frame 
