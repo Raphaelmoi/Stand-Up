@@ -1,7 +1,8 @@
 // Stone class
-class Stone {
+class FallingItems {
   constructor(x) {
-    this.position = createVector(x, random(-2000, -10)); // initiate at a random spot
+    this.y =  random(-2000, -10);
+    this.position = createVector(x, this.y); // initiate at a random spot
 
     this.stoneSize =  random(30, 100); // size of the stone
     this.maxspeed = random(1, 3); // Maximum speed

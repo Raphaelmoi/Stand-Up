@@ -10,7 +10,8 @@ let eyelY = 0;
 
 let imgBackground;
 
-let imgStone;
+let imgStone0, imgStone1, imgStone2, imgStone3, imgStone4, imgStone5;
+let boxImgStones = [];
 let stones = [];
 
 let ruby;
@@ -18,9 +19,10 @@ let diamond;
 let gems = [];
 let boxGems = [];
 
-let pills;
-let potion;
-
+let pillImg;
+let potionImg;
+let pills = [];
+let potions = [];
 
 let life = 100;
 
@@ -40,7 +42,19 @@ let index = 0;//will allowed to move fom one image to another in birdImages
 
 function preload(){
     imgBackground = loadImage('montagnes.jpg');
-    imgStone = loadImage('stone.png');
+    imgStone0 = loadImage('stone0.png');
+    imgStone1 = loadImage('stone1.png');
+    imgStone2 = loadImage('stone2.png');
+    imgStone3 = loadImage('stone3.png');
+    imgStone4 = loadImage('stone4.png');
+    imgStone5 = loadImage('stone5.png');
+    boxImgStones.push(imgStone0);
+    boxImgStones.push(imgStone1);
+    boxImgStones.push(imgStone2);
+    boxImgStones.push(imgStone3);
+    boxImgStones.push(imgStone4);
+    boxImgStones.push(imgStone5);
+
     imgBirdSprite = loadImage('bird.png');
     explosionSprite = loadImage('explosion.png');
     ruby = loadImage('ruby.png');
@@ -48,9 +62,8 @@ function preload(){
     gems.push(ruby);
     gems.push(diamond);
 
-    pills = loadImage('pill.png'); 
-    potion = loadImage('potion.png'); 
-
+    pillImg = loadImage('pill.png'); 
+    potionImg = loadImage('potion.png'); 
 }
 
 function setup() {
@@ -64,14 +77,18 @@ function setup() {
     sprite(imgBirdSprite, bird, 110, 101, 5, 14);
     sprite(explosionSprite, explose, 192, 192, 5, 6);
 
-    for (var i = 0; i < 40; i++) {
-        stones.push(new Rocks(random(0, width)));    
+    for (var i = 0; i < 30; i++) {
+        var choice = boxImgStones[Math.floor(Math.random()*boxImgStones.length)];
+        stones.push(new Rocks(random(0, width), choice));    
     }
-    for (var i = 0; i < 20; i++) {      
-
+    for (var i = 0; i < 20; i++) { 
         var item = gems[Math.floor(Math.random()*gems.length)];
         boxGems.push(new Gems(random(0, width), item));    
     }
+    for (var i = 0; i < 2; i++) {   
+        pills.push(new Pill(random(0, width)));  
+    }
+    potions.push(new Potion(random(0, width)));  
     //ml5 posenet initialisation
     poseNet = ml5.poseNet(video, modelReady);
     poseNet.on('pose', gotPoses);
@@ -172,9 +189,11 @@ function draw() {
 }
 
 function drawStone(){
+
     for (var i = stones.length - 1; i >= 0; i--) {
-        let currentY = stones[i].position.y + stones[i].fall*stones[i].maxspeed;
-            stones[i].display();
+        var choice = boxImgStones[Math.floor(Math.random() * boxImgStones.length)];
+        let currentY = stones[i].position.y + stones[i].fall * stones[i].maxspeed;
+        stones[i].display();
             if (stones[i].isOver(width, noseX, noseY)) {
                 life -= 20;
                 explosionX = stones[i].position.x;
@@ -186,19 +205,66 @@ function drawStone(){
 
             if(currentY > height){
                 stones.splice(i, 1);
-                stones.push(new Rocks(random(0, width)));    
+                stones.push(new Rocks(random(0, width), choice));    
             }   
         }
 
     for (var i = boxGems.length - 1; i >= 0; i--) {
+        let currentY = boxGems[i].position.y + boxGems[i].fall*boxGems[i].maxspeed;
         boxGems[i].display();
+        var item = gems[Math.floor(Math.random()*gems.length)];
+
         //console.log(noseX);
         if (boxGems[i].isOver(width, noseX, noseY)) {
             boxGems.splice(i, 1);
             score ++;
             console.log('score :' + score)
+            boxGems.push(new Gems(random(0, width), item));   
+        } 
+        if(currentY > height){
+            boxGems.splice(i, 1);
+            boxGems.push(new Gems(random(0, width), item));    
         } 
     }
+
+    for (var i = pills.length - 1; i >= 0; i--) {
+        let currentY = pills[i].position.y + pills[i].fall*pills[i].maxspeed;
+        pills[i].display();
+        //console.log(noseX);
+        if (pills[i].isOver(width, noseX, noseY)) {
+            if (life + pills[i].getSante() >= 100 ) {
+                life = 100;
+            } else{
+                life += pills[i].getSante();
+            }
+            pills.splice(i, 1);
+            pills.push(new Pill(random(0, width)));  
+        } 
+        if(currentY > height){
+            pills.splice(i, 1);
+            pills.push(new Pill(random(0, width)));    
+        } 
+    }
+    for (var i = potions.length - 1; i >= 0; i--) {
+        let currentY = potions[i].position.y + potions[i].fall*potions[i].maxspeed;
+        potions[i].display();
+        //console.log(noseX);
+        if (potions[i].isOver(width, noseX, noseY)) {
+            if (life + potions[i].getSante() >= 100 ) {
+                life = 100;
+            } else{
+                life += potions[i].getSante();
+            }
+            potions.splice(i, 1); 
+            potions.push(new Potion(random(0, width)));    
+
+        } 
+        if(currentY > height){
+            potions.splice(i, 1);
+            potions.push(new Potion(random(0, width)));    
+        } 
+    }
+
 }
 
 

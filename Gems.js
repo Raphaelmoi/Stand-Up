@@ -1,5 +1,5 @@
 // Stone class
-class Gems extends Stone {
+class Gems extends FallingItems {
   constructor(x, imgGem) {
     super(x , x);
 
