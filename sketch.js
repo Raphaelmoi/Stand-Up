@@ -13,6 +13,13 @@ let imgBackground;
 let imgStone;
 let stones = [];
 
+let ruby;
+let diamond;
+let gems = [];
+let boxGems = [];
+
+let life = 100;
+
 let explosionSprite;
 let explose = [];
 let explosionX = 0;
@@ -24,7 +31,6 @@ let imgBirdSprite;
 let bird = [];
 
 let score = 0; 
-let y = 0;//speed of falling object
 
 var counterImage = 0;
 
@@ -35,6 +41,10 @@ function preload(){
     imgStone = loadImage('stone.png');
     imgBirdSprite = loadImage('bird.png');
     explosionSprite = loadImage('explosion.png');
+    ruby = loadImage('ruby.png');
+    diamond = loadImage('diamond.png');
+    gems.push(ruby);
+    gems.push(diamond);
 }
 
 function setup() {
@@ -48,10 +58,14 @@ function setup() {
     sprite(imgBirdSprite, bird, 110, 101, 5, 14);
     sprite(explosionSprite, explose, 192, 192, 5, 6);
 
-    for (var i = 0; i < 30; i++) {
-        stones.push(new Stone(random(0, width)));    
+    for (var i = 0; i < 20; i++) {
+        stones.push(new Rocks(random(0, width)));    
     }
+    for (var i = 0; i < 10; i++) {      
 
+        var item = gems[Math.floor(Math.random()*gems.length)];
+        boxGems.push(new Gems(random(0, width), item));    
+    }
     //ml5 posenet initialisation
     poseNet = ml5.poseNet(video, modelReady);
     poseNet.on('pose', gotPoses);
@@ -83,13 +97,11 @@ function draw() {
     translate(width, 0);
     scale(-1, 1);
     //image(video, 0, 0, displayWidth, displayHeight);//met la video dans le canvas
-    image(imgBackground, 0,0, width, height);
+    //image(imgBackground, 0,0, width, height);
+    background(0);
     pop();
-    drawStone(y);
-    y = y + 4;
+    drawStone();
 
-
-    // Animate by increasing our Y value        
         if (lastNoseX - noseX > -10 ) {//-10 give a direction when player dont move
             // ellipse(width - noseX, noseY, 100, 100);
             image(bird[index], width - noseX-50, noseY-50);
@@ -106,7 +118,6 @@ function draw() {
         if (explosion) {
             image(explose[exploseindex], explosionX -50, explosionY -50);  
             exploseindex += 1;
-            console.log(explosionX);
         }
 
 
@@ -122,21 +133,45 @@ function draw() {
         }
 }
 
-function drawStone(y){
-    for (let v of stones) {
-        v.display(y);
+function drawStone(){
+    for (var i = stones.length - 1; i >= 0; i--) {
+        let currentY = stones[i].position.y + stones[i].fall*stones[i].maxspeed;
+            stones[i].display();
+            if (stones[i].isOver(width, noseX, noseY)) {
+                life -= 20;
+                explosionX = stones[i].position.x;
+                explosionY = currentY;
+                stones.splice(i, 1);
+                explosion = true;
+                console.log('vie :' + life);
+                if (life <= 0) {
+                    dieLittleBird();
+                }
+            }
+
+            if(currentY > height){
+                stones.splice(i, 1);
+                stones.push(new Rocks(random(0, width)));    
+            }   
+        }
+
+    for (var i = boxGems.length - 1; i >= 0; i--) {
+        boxGems[i].display();
         //console.log(noseX);
-        if (v.isOver(width, noseX, noseY, y)) {
-            console.log(v);
-            explosionX = v.position.x;
-            explosionY = v.position.y + y*v.maxspeed;
-            stones.splice(v, 1);
-            explosion = true;
-            //v.destroy();
+        if (boxGems[i].isOver(width, noseX, noseY)) {
+            boxGems.splice(i, 1);
             score ++;
             console.log('score :' + score)
-            // predators.push(new Predator(random(width), 0));
-        }
+        } 
     }
+}
+
+
+function dieLittleBird(){
+    //la partie s'arrete, un message s'affiche
+    console.log('GAME OVER !!');
+    p5 = null;
+
+    remove();
 }
 

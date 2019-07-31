@@ -2,31 +2,26 @@
 class Stone {
   constructor(x) {
     this.position = createVector(x, random(-2000, -10)); // initiate at a random spot
-    this.stoneSize =  random(20, 100); // size of the stone
+
+    this.stoneSize =  random(30, 100); // size of the stone
     this.maxspeed = random(1, 3); // Maximum speed
     // console.log('position.x' + this.position.x + 'position.y' + this.position.y);
-    this.stone = imgStone;
     this.explosion;
+    this.stone = 0;
+    this.fall = 4;
   }
 
   //draw predator
-  display(y) {
-    let newPosition = this.maxspeed * y;
+  display() {
+    this.fall += 4;
+    let newPosition = this.maxspeed * this.fall;
     //console.log('position x : ' + this.position.x +'this.direction : '+ this.direction + 'newX : '+ newX ); 
     push();
     translate(this.position.x, this.position.y + newPosition);
-    fill(255, 0,0);
-    ellipse(20,20,this.stoneSize,this.stoneSize)
-    image(this.stone, -this.stoneSize/PI , -this.stoneSize/PI , this.stoneSize, this.stoneSize);
+    //fill(255, 0,0);
+    //ellipse(20,20,this.stoneSize,this.stoneSize)
+    image(this.stone, -this.stoneSize/3.7 , -this.stoneSize/3.7 , this.stoneSize, this.stoneSize);
 
-    pop();
-  }
-  destroy(y){
-    let newPosition = this.maxspeed * y;
-    push();
-    translate(this.position.x, this.position.y + newPosition);
-    fill(0, 0, 255);
-    ellipse(20,20,this.stoneSize,this.stoneSize)
     pop();
   }
 
@@ -39,14 +34,9 @@ class Stone {
   }
 
   //check if the predator has caught the player
-  isOver(width, mX, mY,  y) {
+  isOver(width, mX, mY) {
     let newPosition = width - mX;
-    let vertical = this.position.y + y*this.maxspeed;
-    // console.log('nez' + mY);
-    // console.log('caillou ' + vertical);
-
-    // console.log("mX :" + mX );
-    //console.log("mY :" + mY + ", this.position.y : " + this.position.y);
+    let vertical = this.position.y + this.fall * this.maxspeed;
 
     if (dist(newPosition, mY, this.position.x, vertical) <= this.stoneSize) {
       return true;
