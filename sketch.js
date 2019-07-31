@@ -1,6 +1,6 @@
 let video;
 let poseNet;
-
+//body position
 let noseX = 0;
 let noseY = 0;
 let lastNoseX = 0;
@@ -13,45 +13,34 @@ let imgBackground;
 let stones = [];
 let imgStone;
 
+let imgBirdSprite;
+let birds = [];
+
 let score = 0; 
 let y = 0;//speed of falling object
 
 var birdImages = [];//box contain each movement of the bird
-var totalImages = 12;// number of images in the bird box
+var totalImages = 14;// number of images in the bird box
 var counterImage = 0;
-var loadingImage = false;
-var loading = true;
+
 let index = 0;//will allowed to move fom one image to another in birdImages
 
 function preload(){
     imgBackground = loadImage('montagnes.jpg');
     imgStone = loadImage('stone.png');
-}
-
-function loadImageElement(filename) {
-    loadImage(filename, imageLoaded);
-
-    function imageLoaded(image) {
-        console.log(filename);
-        birdImages.push(image);
-        counterImage++;
-        if (counterImage == totalImages) {
-            loadingImage = true;
-        }
-    }
+    imgBirdSprite = loadImage('bird.png');
 }
 
 function setup() {
-    frameRate(18);
-
     createCanvas(windowWidth, windowHeight);
     video = createCapture(VIDEO);
     video.size(width, height);
     video.hide();
 
-    for (var i = 0; i <= totalImages; i++) {
-        loadImageElement("bird" + i + ".png");
-    }
+    frameRate(18);
+
+    sprite(imgBirdSprite, birds, 110, 101, 5);
+
     for (var i = 0; i < 30; i++) {
         stones.push(new Stone(random(0, width)));    
     }
@@ -60,6 +49,7 @@ function setup() {
     poseNet = ml5.poseNet(video, modelReady);
     poseNet.on('pose', gotPoses);
 }
+
 
 function modelReady(){
     console.log('model ready');
@@ -87,54 +77,47 @@ function draw() {
     scale(-1, 1);
     //image(video, 0, 0, displayWidth, displayHeight);//met la video dans le canvas
     image(imgBackground, 0,0, width, height);
-
     pop();
-    drawStone(y);
+    //drawStone(y);
     y = y + 4;
 
+
     // Animate by increasing our Y value
-
-    if (loadingImage) {
-        loading = false;
-    }
-
-    if (!loading) {
-        if (lastNoseX > noseX ) {
-        image(birdImages[index], width - noseX, noseY );
-    }
-    else if (lastNoseX < noseX){
-        push();
-        translate(width, 0);
-        scale(-1, 1);
-        image(birdImages[index], noseX, noseY);
-        pop();
-    }
-    //create the animation of the bird
-    index = (index + 1);
-    if (index == 12) {
-      index = 0;
-    }
-
-  }
+        image(birds[index], 200, 200);
+        
+        if (lastNoseX - noseX > -10 ) {//-10 give a direction when player dont move
+            ellipse(width - noseX, noseY, 100, 100);
+            image(birds[index], width - noseX-50, noseY-50);
+        }
+        else if (lastNoseX - noseX < -10){
+            push();
+            translate(width, 0);
+            scale(-1, 1);
+            ellipse(noseX, noseY, 100, 100);
+            image(birds[index], noseX-50, noseY-50);
+            pop();
+        }
+        //create the animation of the bird
+        index = (index + 1);
+        if (index == 12) {
+          index = 0;
+        }
+    
 }
 
 function drawStone(y){
     for (let v of stones) {
-        // v.applyBehaviors(predators, keypoint.position.x, keypoint.position.y);
-        // v.update();
-        // v.borders();
         v.display(y);
         //console.log(noseX);
         if (v.isOver(width, noseX, noseY, y)) {
             console.log("nose over predators");
-
+            v.destroy();
             stones.splice(v, 1);
             score ++;
             console.log('score :' + score)
             // predators.push(new Predator(random(width), 0));
-            // if (health > 0) health -= 1;
-            // console.log("health: " + health)
         }
     }
 
 }
+
