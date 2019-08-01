@@ -31,6 +31,7 @@ let explosionX = 0;
 let explosionY = 0;
 let explosion = false;
 let exploseindex = 0;
+let explosionSound, catchGemSound, gameoverSound;
 
 let imgBirdSprite;
 let bird = [];
@@ -41,9 +42,10 @@ let index = 0;//will allowed to move fom one image to another in birdImages
 let morestone = 0;
 let level = 1;
 
-
+let gameOver = true;
 
 function preload(){
+        video = createCapture(VIDEO);
     imgBackground = loadImage('sky3.png');
     imgStone0 = loadImage('stone0.png');
     imgStone1 = loadImage('stone1.png');
@@ -64,11 +66,14 @@ function preload(){
     explosionSprite = loadImage('explosion.png');
     pillImg = loadImage('pill.png'); 
     potionImg = loadImage('potion.png'); 
+
+    explosionSound = loadSound('sound/fall.wav');
+    catchGemSound = loadSound('sound/coin.wav');
+    gameoverSound = loadSound('sound/round_end.wav');
 }
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    video = createCapture(VIDEO);
     video.size(width, height);
     video.hide();
 
@@ -175,16 +180,7 @@ function draw() {
         textSize(24);
         text(score*level, width-50, 24);
         pop();
-    }
-    
-    else{
-        background(0);
-        fill(244, 36, 36);
-        textSize(40);
-        textAlign(CENTER);
-        text("GAME OVER", width / 2, height / 3);
-        text("SCORE : " + score*level + (', pierres : ')+ score, width/2, height/2);
-    }
+
         //create the animation of the bird
         index = (index + 1);
         if (index == 12) {
@@ -195,6 +191,20 @@ function draw() {
             exploseindex = 0;
             explosion = false;
         }
+    }
+    
+    else{
+        if (gameOver) {
+            gameoverSound.play();
+            gameOver = false;
+        }
+        background(0);
+        fill(244, 36, 36);
+        textSize(40);
+        textAlign(CENTER);
+        text("GAME OVER", width / 2, height / 3);
+        text("SCORE : " + score*level + (', pierres : ')+ score, width/2, height/2);
+    }
 }
 
 function drawStone(){
@@ -209,6 +219,7 @@ function drawStone(){
                 explosionY = currentY;
                 stones.splice(i, 1);
                 explosion = true;
+                explosionSound.play();
             }
 
             if(currentY > height){
@@ -225,6 +236,7 @@ function drawStone(){
         if (boxGems[i].isOver(width, noseX, noseY)) {
             boxGems.splice(i, 1);
             score++;
+            catchGemSound.play();
             boxGems.push(new Gems(random(0, width), item));   
         } 
         if(currentY > height){
@@ -237,6 +249,7 @@ function drawStone(){
         let currentY = pills[i].position.y + pills[i].fall*pills[i].speed;
         pills[i].display();
         if (pills[i].isOver(width, noseX, noseY)) {
+            catchGemSound.play();
             if (life + pills[i].getSante() >= 100 ) {
                 life = 100;
             } else{
@@ -254,6 +267,8 @@ function drawStone(){
         let currentY = potions[i].position.y + potions[i].fall*potions[i].speed;
         potions[i].display();
         if (potions[i].isOver(width, noseX, noseY)) {
+
+            catchGemSound.play();
             if (life + potions[i].getSante() >= 100 ) {
                 life = 100;
             } else{
