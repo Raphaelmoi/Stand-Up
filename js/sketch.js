@@ -37,27 +37,31 @@ let life = 100;
 let score = 0; 
 let level = 1;
 
+let screenSizeAdaptator;
+
+
+
 function preload(){
-    imgBackground = loadImage('sky.jpg');
-    imgStone0 = loadImage('stone0.png');
-    imgStone1 = loadImage('stone1.png');
-    imgStone2 = loadImage('stone2.png');
-    imgStone3 = loadImage('stone3.png');
-    imgStone4 = loadImage('stone4.png');
-    imgStone5 = loadImage('stone5.png');
-    imgStone6 = loadImage('stone6.png');
-    imgStone7 = loadImage('stone7.png');
+    imgBackground = loadImage('img/sky.jpg');
+    imgStone0 = loadImage('img/stone0.png');
+    imgStone1 = loadImage('img/stone1.png');
+    imgStone2 = loadImage('img/stone2.png');
+    imgStone3 = loadImage('img/stone3.png');
+    imgStone4 = loadImage('img/stone4.png');
+    imgStone5 = loadImage('img/stone5.png');
+    imgStone6 = loadImage('img/stone6.png');
+    imgStone7 = loadImage('img/stone7.png');
     boxImgStones.push(imgStone0, imgStone1, imgStone2, imgStone3, imgStone4, imgStone5, imgStone6, imgStone7);
-    ruby0 = loadImage('ruby0.png');
-    ruby1 = loadImage('ruby1.png');
-    ruby2 = loadImage('ruby2.png');
-    saphir = loadImage('saphir.png');
-    diamond = loadImage('diamond.png');
+    ruby0 = loadImage('img/ruby0.png');
+    ruby1 = loadImage('img/ruby1.png');
+    ruby2 = loadImage('img/ruby2.png');
+    saphir = loadImage('img/saphir.png');
+    diamond = loadImage('img/diamond.png');
     boxImgGems.push(ruby0, ruby1, ruby2, saphir, diamond);
-    imgBirdSprite = loadImage('bird.png');
-    explosionSprite = loadImage('explosion.png');
-    pillImg = loadImage('pill.png'); 
-    potionImg = loadImage('potion.png'); 
+    imgBirdSprite = loadImage('img/bird.png');
+    explosionSprite = loadImage('img/explosion.png');
+    pillImg = loadImage('img/pill.png'); 
+    potionImg = loadImage('img/potion.png'); 
 
     explosionSound = loadSound('sound/fall.wav');
     catchGemSound = loadSound('sound/coin.wav');
@@ -73,6 +77,11 @@ function setup() {
     poseNet = ml5.poseNet(video, modelReady);
     poseNet.on('pose', gotPoses);
     
+    screenSizeAdaptator = windowWidth/1400;
+    if (screenSizeAdaptator < 0.5) {
+        screenSizeAdaptator = 0.5;
+    }
+
     frameRate(18);
     sprite(imgBirdSprite, bird, 110, 101, 5, 14);
     sprite(explosionSprite, explose, 192, 192, 5, 6);

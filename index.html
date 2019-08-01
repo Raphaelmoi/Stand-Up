@@ -6,107 +6,29 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>image_classification</title>
-
+    <link rel="stylesheet" type="text/css" href="css/style.css">    
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
 	<script src="https://unpkg.com/ml5@0.3.1/dist/ml5.min.js"></script>
-	<script src="sketch.js"></script>
-	<script src="draws.js"></script>
-	<script src="FallingItems.js"></script>
-	<script src="Rocks.js"></script>
-	<script src="Gems.js"></script>
-	<script src="Sprite.js"></script>
-	<script src="Pill.js"></script>
-	<script src="Potion.js"></script>
+	<script src="js/sketch.js"></script>
+	<script src="js/draws.js"></script>
+	<script src="js/FallingItems.js"></script>
+	<script src="js/Rocks.js"></script>
+	<script src="js/Gems.js"></script>
+	<script src="js/Sprite.js"></script>
+	<script src="js/Pill.js"></script>
+	<script src="js/Potion.js"></script>
 <!-- 	<img src="nose.png">
  --></head>
 
 	<body>
-
-	<div class="bubbles-wrapper">
-	  <div class="bubbles" id="b1">&nbsp</div>
-	  <div class="bubbles" id="b2">&nbsp</div>
-	  <div class="bubbles" id="b3">&nbsp</div>
-	  <div class="bubbles" id="b4">&nbsp</div>
-	  <div class="bubbles" id="b5">&nbsp</div>
-	</div>
-
+    	<div class="bubbles-wrapper">
+    	  <div class="bubbles" id="b1">&nbsp</div>
+    	  <div class="bubbles" id="b2">&nbsp</div>
+    	  <div class="bubbles" id="b3">&nbsp</div>
+    	  <div class="bubbles" id="b4">&nbsp</div>
+    	  <div class="bubbles" id="b5">&nbsp</div>
+    	</div>
 	</body>
-<style type="text/css">
-
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-.bubbles-wrapper {
-    position: absolute;
-    top: 70%;
-    width: 100%;
-    text-align: center;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
-    z-index: 10;
-}
-.bubbles {
-    position: relative;
-    display: inline-block;
-    width: 70px;
-    height: 70px;
-    margin: auto;
-    border-radius: 100%;
-    -webkit-animation-name: up-down;
-            animation-name: up-down;
-    -webkit-animation-duration: 1.2s;
-            animation-duration: 1.2s;
-    -webkit-animation-timing-function: cubic-bezier(.42, 0, .58, 1);
-            animation-timing-function: cubic-bezier(.42, 0, .58, 1);
-    -webkit-animation-iteration-count: infinite;
-            animation-iteration-count: infinite;
-    -webkit-animation-fill-mode: both;
-            animation-fill-mode: both;
-}
-#b1 {
-    background-color: #8861A4;
-}
-#b2 {
-    background-color: #2495C1;
-    -webkit-animation-delay: 100ms;
-            animation-delay: 100ms;
-}
-#b3 {
-    background-color: #48BB6D;
-    -webkit-animation-delay: 200ms;
-            animation-delay: 200ms;
-}
-#b4 {
-    background-color: #F1C500;
-    -webkit-animation-delay: 300ms;
-            animation-delay: 300ms;
-}
-#b5 {
-    background-color: #F35957;
-    -webkit-animation-delay: 400ms;
-            animation-delay: 400ms;
-}
-@-webkit-keyframes up-down {
-    0% {-webkit-transform: translateY(-50%) scale(0.2);transform: translateY(-50%) scale(0.2);}
-    50% {-webkit-transform: translateY(50%) scale(1.2);transform: translateY(50%) scale(1.2);}
-    100% {-webkit-transform: translateY(-50%) scale(0.2);transform: translateY(-50%) scale(0.2);}
-}
-@keyframes up-down {
-    0% {-webkit-transform: translateY(-50%) scale(0.2);transform: translateY(-50%) scale(0.2);}
-    50% {-webkit-transform: translateY(50%) scale(1.2);transform: translateY(50%) scale(1.2);}
-    100% {-webkit-transform: translateY(-50%) scale(0.2);transform: translateY(-50%) scale(0.2);}
-}
-
-.display-none {
-  display: none;
-}
-
-</style>
-
 </html>
