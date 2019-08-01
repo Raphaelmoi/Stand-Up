@@ -10,12 +10,11 @@ let eyelY = 0;
 
 let imgBackground;
 
-let imgStone0, imgStone1, imgStone2, imgStone3, imgStone4, imgStone5;
+let imgStone0, imgStone1, imgStone2, imgStone3, imgStone4, imgStone5, imgStone6, imgStone7;
 let boxImgStones = [];
 let stones = [];
 
-let ruby;
-let diamond;
+let ruby0, ruby1, ruby2, saphir, diamond;
 let gems = [];
 let boxGems = [];
 
@@ -39,29 +38,30 @@ let bird = [];
 let score = 0; 
 var counterImage = 0;
 let index = 0;//will allowed to move fom one image to another in birdImages
+let morestone = 0;
+let level = 1;
+
+
 
 function preload(){
-    imgBackground = loadImage('montagnes.jpg');
+    imgBackground = loadImage('sky3.png');
     imgStone0 = loadImage('stone0.png');
     imgStone1 = loadImage('stone1.png');
     imgStone2 = loadImage('stone2.png');
     imgStone3 = loadImage('stone3.png');
     imgStone4 = loadImage('stone4.png');
     imgStone5 = loadImage('stone5.png');
-    boxImgStones.push(imgStone0);
-    boxImgStones.push(imgStone1);
-    boxImgStones.push(imgStone2);
-    boxImgStones.push(imgStone3);
-    boxImgStones.push(imgStone4);
-    boxImgStones.push(imgStone5);
-
+    imgStone6 = loadImage('stone6.png');
+    imgStone7 = loadImage('stone7.png');
+    boxImgStones.push(imgStone0, imgStone1, imgStone2, imgStone3, imgStone4, imgStone5, imgStone6, imgStone7);
+    ruby0 = loadImage('ruby0.png');
+    ruby1 = loadImage('ruby1.png');
+    ruby2 = loadImage('ruby2.png');
+    saphir = loadImage('saphir.png');
+    diamond = loadImage('diamond.png');
+    gems.push(ruby0, ruby1, ruby2, saphir, diamond);
     imgBirdSprite = loadImage('bird.png');
     explosionSprite = loadImage('explosion.png');
-    ruby = loadImage('ruby.png');
-    diamond = loadImage('diamond.png');
-    gems.push(ruby);
-    gems.push(diamond);
-
     pillImg = loadImage('pill.png'); 
     potionImg = loadImage('potion.png'); 
 }
@@ -77,11 +77,11 @@ function setup() {
     sprite(imgBirdSprite, bird, 110, 101, 5, 14);
     sprite(explosionSprite, explose, 192, 192, 5, 6);
 
-    for (var i = 0; i < 30; i++) {
+    for (var i = 0; i < 15; i++) {
         var choice = boxImgStones[Math.floor(Math.random()*boxImgStones.length)];
         stones.push(new Rocks(random(0, width), choice));    
     }
-    for (var i = 0; i < 20; i++) { 
+    for (var i = 0; i < 10; i++) { 
         var item = gems[Math.floor(Math.random()*gems.length)];
         boxGems.push(new Gems(random(0, width), item));    
     }
@@ -116,6 +116,15 @@ function gotPoses(poses){
 }
 
 function draw() {
+
+    if (score >= level*7) {
+        level++;
+        for (var i = 0; i < 7; i++) {
+        let choice = boxImgStones[Math.floor(Math.random()*boxImgStones.length)];
+        stones.push(new Rocks(random(0, width), choice)); 
+        console.log('more stone, level : '+ level); 
+        }
+    }
 
     if( life > 0){
         push();
@@ -164,7 +173,7 @@ function draw() {
         fill(255);
         text("Score : ", width-80, 24);
         textSize(24);
-        text(score, width-50, 24);
+        text(score*level, width-50, 24);
         pop();
     }
     
@@ -174,7 +183,7 @@ function draw() {
         textSize(40);
         textAlign(CENTER);
         text("GAME OVER", width / 2, height / 3);
-        text("SCORE : " + score, width/2, height/2);
+        text("SCORE : " + score*level + (', pierres : ')+ score, width/2, height/2);
     }
         //create the animation of the bird
         index = (index + 1);
@@ -184,7 +193,7 @@ function draw() {
             
         if (exploseindex == 6) {
             exploseindex = 0;
-            explosion = false
+            explosion = false;
         }
 }
 
@@ -192,7 +201,7 @@ function drawStone(){
 
     for (var i = stones.length - 1; i >= 0; i--) {
         var choice = boxImgStones[Math.floor(Math.random() * boxImgStones.length)];
-        let currentY = stones[i].position.y + stones[i].fall * stones[i].maxspeed;
+        let currentY = stones[i].position.y + stones[i].fall * stones[i].speed;
         stones[i].display();
             if (stones[i].isOver(width, noseX, noseY)) {
                 life -= 20;
@@ -200,7 +209,6 @@ function drawStone(){
                 explosionY = currentY;
                 stones.splice(i, 1);
                 explosion = true;
-                console.log('vie :' + life);
             }
 
             if(currentY > height){
@@ -210,15 +218,13 @@ function drawStone(){
         }
 
     for (var i = boxGems.length - 1; i >= 0; i--) {
-        let currentY = boxGems[i].position.y + boxGems[i].fall*boxGems[i].maxspeed;
+        let currentY = boxGems[i].position.y + boxGems[i].fall*boxGems[i].speed;
         boxGems[i].display();
         var item = gems[Math.floor(Math.random()*gems.length)];
 
-        //console.log(noseX);
         if (boxGems[i].isOver(width, noseX, noseY)) {
             boxGems.splice(i, 1);
-            score ++;
-            console.log('score :' + score)
+            score++;
             boxGems.push(new Gems(random(0, width), item));   
         } 
         if(currentY > height){
@@ -228,9 +234,8 @@ function drawStone(){
     }
 
     for (var i = pills.length - 1; i >= 0; i--) {
-        let currentY = pills[i].position.y + pills[i].fall*pills[i].maxspeed;
+        let currentY = pills[i].position.y + pills[i].fall*pills[i].speed;
         pills[i].display();
-        //console.log(noseX);
         if (pills[i].isOver(width, noseX, noseY)) {
             if (life + pills[i].getSante() >= 100 ) {
                 life = 100;
@@ -246,9 +251,8 @@ function drawStone(){
         } 
     }
     for (var i = potions.length - 1; i >= 0; i--) {
-        let currentY = potions[i].position.y + potions[i].fall*potions[i].maxspeed;
+        let currentY = potions[i].position.y + potions[i].fall*potions[i].speed;
         potions[i].display();
-        //console.log(noseX);
         if (potions[i].isOver(width, noseX, noseY)) {
             if (life + potions[i].getSante() >= 100 ) {
                 life = 100;

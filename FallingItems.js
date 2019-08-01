@@ -1,21 +1,16 @@
 // Stone class
 class FallingItems {
   constructor(x) {
-    this.y =  random(-2000, -10);
+    this.y =  random(-2000, -100);
     this.position = createVector(x, this.y); // initiate at a random spot
-
-    this.stoneSize =  random(30, 100); // size of the stone
-    this.maxspeed = random(1, 3); // Maximum speed
-    // console.log('position.x' + this.position.x + 'position.y' + this.position.y);
-    this.explosion;
-    this.stone = 0;
+    this.speed = random(1, 3); // Maximum speed
     this.fall = 4;
   }
 
   //draw predator
   display() {
     this.fall += 4;
-    let newPosition = this.maxspeed * this.fall;
+    let newPosition = this.speed * this.fall;
     //console.log('position x : ' + this.position.x +'this.direction : '+ this.direction + 'newX : '+ newX ); 
     push();
     translate(this.position.x, this.position.y + newPosition);
@@ -37,7 +32,7 @@ class FallingItems {
   //check if the predator has caught the player
   isOver(width, mX, mY) {
     let newPosition = width - mX;
-    let vertical = this.position.y + this.fall * this.maxspeed;
+    let vertical = this.position.y + this.fall * this.speed;
 
     if (dist(newPosition, mY, this.position.x, vertical) <= this.stoneSize) {
       return true;
