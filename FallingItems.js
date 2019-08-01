@@ -5,6 +5,7 @@ class FallingItems {
     this.position = createVector(x, this.y); // initiate at a random spot
     this.speed = random(1, 3); // Maximum speed
     this.fall = 4;
+    this.sante = 0;
   }
 
   //draw predator
@@ -41,5 +42,11 @@ class FallingItems {
     }
   }
 
+  currentYPosition(){
+      return this.position.y + this.fall * this.speed;
+  }
 
+  getSante(){
+    return this.sante;
+  }
 }

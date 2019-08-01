@@ -7,8 +7,4 @@ class Pill extends FallingItems {
     this.stone = pillImg;
     this.sante = 10;
   }
-
-  getSante(){
-  	return this.sante;
-  }
 }
