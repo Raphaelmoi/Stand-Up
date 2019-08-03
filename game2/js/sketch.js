@@ -50,6 +50,9 @@ let util, draws, noseSpaceShip, leftHandSpaceShip, rightHandSpaceShip;
 let laserX = 0, laserY = 0;
 // let mouvement = 0;
 
+let switchSide = false;
+let test = 0;
+
 function preload() {
     imgBackground = loadImage('img/sky.jpg');
     imgStone0 = loadImage('img/stone0.png');
@@ -145,6 +148,25 @@ function draw() {
             draws.drawPotionsOrPills(potions);
             draws.drawExplosion();
             draws.drawHealthAndText();
+
+            // for (var i = 7; i >= 0; i--) {
+            //     test = i;
+            //     setTimeout(function(){
+            //         timeOut(test);
+            //     }, i*200);
+            // }
+            draws.drawLaser(leftHandX, leftHandY, laserLeftImg, 0, 30);
+            draws.drawLaser(rightHandX, rightHandY, laserRightImg, 1, 30);   
+            draws.drawLaser(leftHandX, leftHandY, laserLeftImg, 2, -30);
+            draws.drawLaser(rightHandX, rightHandY , laserRightImg, 3, -30);
+            draws.drawLaser(leftHandX, leftHandY, laserLeftImg, 4, 30);
+            draws.drawLaser(rightHandX, rightHandY, laserRightImg, 5, 30);   
+            draws.drawLaser(leftHandX, leftHandY, laserLeftImg, 6, -30);
+            draws.drawLaser(rightHandX, rightHandY , laserRightImg, 7, -30);             
+            // draws.drawLaser(leftHandX, leftHandY, laserLeftImg, 4, 30);
+            // draws.drawLaser(rightHandX, rightHandY, laserRightImg, 5, 30);   
+            // draws.drawLaser(leftHandX, leftHandY, laserLeftImg, 6, -30);
+            // draws.drawLaser(rightHandX, rightHandY, laserRightImg, 7, -30); 
         } else {
             if (gameOver) { //prevent the song to be play more than one time
                 noLoop();
@@ -190,4 +212,21 @@ function gotPoses(poses) {
         rightHandX = lerp(rightHandX, newrightHandX, 0.3);
         rightHandY = lerp(rightHandY, newrightHandY, 0.3);
     }
+}
+
+function timeOut(i){
+    let side;
+                if (switchSide) {
+                    side= 30;
+                    switchSide = !switchSide;
+                }else{
+                    side = -30;
+                    switchSide = !switchSide;
+                }                
+                if (i%2 == 0) {
+                    draws.drawLaser(leftHandX, leftHandY, laserLeftImg, i, side);
+                }
+                else{
+                    draws.drawLaser(rightHandX, rightHandY, laserRightImg, i, side)
+                }
 }

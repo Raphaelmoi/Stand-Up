@@ -13,11 +13,8 @@ class Draws {
         this.explosionY = 0;
         this.explosion = false;
         this.exploseindex = 0;
-        this.index = 0; //will allowed to move fom one image to another in birdImages
-        this.trajectoryA = 0;
-        this.trajectoryB = 0;
-        this.trajectoryC = 0;
-        this.trajectoryC = 0;
+        this.index = [0 , 0, -150, -150,-300 ,-300, -450, -450]; //will allowed to move fom one image to another in birdImages
+        this.trajectory = [0 , 0, 0, 0, 0 , 0, 0, 0];
 
     }
     drawNoseShip() {
@@ -25,25 +22,29 @@ class Draws {
     }
     drawLeftHandship(){
         image(spaceShipLeftHand, width - leftHandX - 50, leftHandY - 50);
-        this.drawLaser(leftHandX, leftHandY, laserLeftImg);
     }
     drawRightHandship(){
-        image(spaceShipRightHand, width - rightHandX - 50, rightHandY - 50);
-        this.drawLaser(rightHandX, rightHandY, laserRightImg);   
+        image(spaceShipRightHand, width - rightHandX - 50, rightHandY - 50);  
     }
 
-    drawLaser(x, y, imageLaser){
-        laserX = x - 50 ;
-        laserY = y -50 - this.index;
-        if (this.index == 0) {
-            this.xOfLaser = laserX;
+    drawLaser(x, y, imageLaser, id, side){
+        laserX = x - side ;
+        if (this.index[id] == 0) {
+            this.trajectory[id] = laserX;
         }
+        
+        laserY = y -50 - this.index[id];
+        console.log(this.index[id]);
         //console.log(rightHandY);
-        this.index += 40; 
-        if (this.index > height){
-            this.index = 0 ;
+        this.index[id] += 40; 
+
+        if(this.index[id] > 0){
+            image(imageLaser, width - this.trajectory[id], laserY- 50);    
         }
-        image(imageLaser, width - this.xOfLaser, laserY- 50);
+        if (this.index[id] > height){
+            this.index[id] = 0 ;
+            this.trajectory[id] = 0;
+        }
     }
     drawStones() {
         for (var i = stones.length - 1; i >= 0; i--) {
