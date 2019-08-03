@@ -5,23 +5,25 @@ class FallingItems {
         this.position = createVector(x, this.y); // initiate at a random spot
         this.speed = random(1, 3) + level / 200; // Maximum speed
         this.fall = 0; //falling constant
+        this.newPosition = 0;
     }
     //draw stone or else
     display() {
         this.fall += 4;
-        let newPosition = this.speed * this.fall;
+        this.newPosition = this.speed * this.fall;
         push();
-        translate(this.position.x, this.position.y + newPosition);
+        translate(this.position.x, this.position.y + this.newPosition);
+        //ellipse(-this.elementSize / 3.7, -this.elementSize / 3.7, this.elementSize, this.elementSize)
         image(this.imgOfTheObject, -this.elementSize / 3.7, -this.elementSize / 3.7, this.elementSize, this.elementSize);
         pop();
     }
 
     //check if the falling item has caught the bird
-    isOver(width, mX) {
+    isOver(width, mX, mY) {
         let newPosition = width - mX;
         let vertical = this.position.y + this.fall * this.speed;
-        //500 -> position vertical du nez
-        if (dist(newPosition, height-200, this.position.x, vertical) <= this.elementSize) {
+
+        if (dist(newPosition, mY, this.position.x, vertical) <= this.elementSize) {
             return true;
         } else {
             return false;

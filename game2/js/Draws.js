@@ -29,34 +29,58 @@ class Draws {
 
     drawLaser(x, y, imageLaser, id, side){
         laserX = x - side ;
+        laserY = y -50 - this.index[id];
+        //if index is 0, the origin of the shoot is the ship
         if (this.index[id] == 0) {
             this.trajectory[id] = laserX;
         }
-        
-        laserY = y -50 - this.index[id];
-        console.log(this.index[id]);
-        //console.log(rightHandY);
+        //the speed
         this.index[id] += 40; 
-
+        //hide the laser until is bigger than 0
         if(this.index[id] > 0){
-            image(imageLaser, width - this.trajectory[id], laserY- 50);    
+            //ellipse(width - laserX, laserY- 50, 30, 30,)
+            image(imageLaser, width - laserX, laserY- 50);    
         }
-        if (this.index[id] > height){
+        this.shootStone(laserX, laserY-50 );
+        //reset values if laser is out the screen
+        if (this.index[id] > (height*0.5)){
             this.index[id] = 0 ;
             this.trajectory[id] = 0;
         }
     }
+
+    shootStone(x, y){
+        // console.log('x :' + x);
+        // console.log('y :' + y);
+
+
+        for (var i = 0; i < stones.length; i++) {
+            if (stones[i].isOver(width, x, y)) {
+                let currentY = stones[i].currentYPosition();
+                this.explosionX = stones[i].position.x;
+                this.explosionY = currentY;
+                console.log('test');
+                stones.splice(i, 1);
+                this.explosion = true;
+                util.newStone(1);
+            }
+            
+        }
+    }
+
+
     drawStones() {
         for (var i = stones.length - 1; i >= 0; i--) {
             let currentY = stones[i].currentYPosition();
             stones[i].display();
-            if (stones[i].isOver(width, noseX)) {
+            if (stones[i].isOver(width, noseX, noseY)) {
                 life = life + stones[i].getSante();
                 this.explosionX = stones[i].position.x;
                 this.explosionY = currentY;
                 stones.splice(i, 1);
                 this.explosion = true;
             }
+
             if (currentY > height) {
                 stones.splice(i, 1);
                 util.newStone(1);
@@ -67,7 +91,7 @@ class Draws {
         for (var i = boxGems.length - 1; i >= 0; i--) {
             let currentY = boxGems[i].currentYPosition();
             boxGems[i].display();
-            if (boxGems[i].isOver(width, noseX)) {
+            if (boxGems[i].isOver(width, noseX, noseY)) {
                 boxGems.splice(i, 1);
                 score++;
                 catchGemSound.play();
@@ -83,7 +107,7 @@ class Draws {
         for (var i = choice.length - 1; i >= 0; i--) {
             let currentY = choice[i].currentYPosition();
             choice[i].display();
-            if (choice[i].isOver(width, noseX)) {
+            if (choice[i].isOver(width, noseX, noseY)) {
                 catchGemSound.play();
                 life = life + choice[i].getSante();
                 if (life >= 100) {

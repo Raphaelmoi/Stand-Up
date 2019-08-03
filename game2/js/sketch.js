@@ -109,6 +109,10 @@ function setup() {
     util.newGem(10);
     util.newPill(2);
     util.newPotion(1);
+
+    noseY = height-100;
+    // leftHandY = height-100;
+    // rightHandY = height-100;
 }
 
 function modelReady() {
@@ -135,38 +139,29 @@ function draw() {
             push();
             translate(width, 0);
             scale(-1, 1);
-            image(video, 0, 0, displayWidth, displayHeight);//met la video dans le canvas
-            //image(imgBackground, 0, 0, width, height);
+            //image(video, 0, 0, displayWidth, displayHeight);//met la video dans le canvas
+            image(imgBackground, 0, 0, width, height);
             pop();
 
             draws.drawNoseShip();
             draws.drawLeftHandship();
             draws.drawRightHandship();
+            //draws.drawLaser(rightHandX, rightHandY , laserRightImg, 3, -30);
+
+            for (var i = 0; i < 8; i+=4) {
+                draws.drawLaser(leftHandX, leftHandY, laserLeftImg, i, 30);
+                draws.drawLaser(rightHandX, rightHandY, laserRightImg, i+1, 30);   
+                draws.drawLaser(leftHandX, leftHandY, laserLeftImg, i+2, -30);
+                draws.drawLaser(rightHandX, rightHandY , laserRightImg, i+3, -30);
+            }    
             draws.drawStones();
             draws.drawGems();
             draws.drawPotionsOrPills(pills);
             draws.drawPotionsOrPills(potions);
-            draws.drawExplosion();
             draws.drawHealthAndText();
+     
+            draws.drawExplosion();
 
-            // for (var i = 7; i >= 0; i--) {
-            //     test = i;
-            //     setTimeout(function(){
-            //         timeOut(test);
-            //     }, i*200);
-            // }
-            draws.drawLaser(leftHandX, leftHandY, laserLeftImg, 0, 30);
-            draws.drawLaser(rightHandX, rightHandY, laserRightImg, 1, 30);   
-            draws.drawLaser(leftHandX, leftHandY, laserLeftImg, 2, -30);
-            draws.drawLaser(rightHandX, rightHandY , laserRightImg, 3, -30);
-            draws.drawLaser(leftHandX, leftHandY, laserLeftImg, 4, 30);
-            draws.drawLaser(rightHandX, rightHandY, laserRightImg, 5, 30);   
-            draws.drawLaser(leftHandX, leftHandY, laserLeftImg, 6, -30);
-            draws.drawLaser(rightHandX, rightHandY , laserRightImg, 7, -30);             
-            // draws.drawLaser(leftHandX, leftHandY, laserLeftImg, 4, 30);
-            // draws.drawLaser(rightHandX, rightHandY, laserRightImg, 5, 30);   
-            // draws.drawLaser(leftHandX, leftHandY, laserLeftImg, 6, -30);
-            // draws.drawLaser(rightHandX, rightHandY, laserRightImg, 7, -30); 
         } else {
             if (gameOver) { //prevent the song to be play more than one time
                 noLoop();
@@ -194,23 +189,23 @@ function draw() {
 function gotPoses(poses) {
     if (poses.length > 0) {
         lastNoseX = noseX;
-        lastNoseY = noseY;
+        // lastNoseY = noseY;
         lastLeftHandX = leftHandX;
         lastRightHandX = rightHandX;
 
         let newNoseX = poses[0].pose.keypoints[0].position.x;
-        let newNoseY = poses[0].pose.keypoints[0].position.y;
-
-        let newleftHandX = poses[0].pose.keypoints[9].position.x;
-        let newleftHandY = poses[0].pose.keypoints[9].position.y;
-        let newrightHandX = poses[0].pose.keypoints[10].position.x;
-        let newrightHandY = poses[0].pose.keypoints[10].position.y;
+        // let newNoseY = poses[0].pose.keypoints[0].position.y;
+        // console.log(poses[0].pose.keypoints[9].score);
+        let newleftHandX = poses[0].pose.keypoints[3].position.x;
+        let newleftHandY = poses[0].pose.keypoints[3].position.y;
+        let newrightHandX = poses[0].pose.keypoints[4].position.x;
+        let newrightHandY = poses[0].pose.keypoints[4].position.y;
         noseX = lerp(noseX, newNoseX, 0.9);
-        noseY = lerp(noseY, newNoseY, 0.9);
-        leftHandX = lerp(leftHandX, newleftHandX, 0.3);
-        leftHandY = lerp(leftHandY, newleftHandY, 0.3);
-        rightHandX = lerp(rightHandX, newrightHandX, 0.3);
-        rightHandY = lerp(rightHandY, newrightHandY, 0.3);
+        // noseY = lerp(noseY, newNoseY, 0.9);
+        leftHandX = lerp(leftHandX, newleftHandX, 0.9);
+        leftHandY = lerp(leftHandY, newleftHandY, 0.9);
+        rightHandX = lerp(rightHandX, newrightHandX, 0.9);
+        rightHandY = lerp(rightHandY, newrightHandY, 0.9);
     }
 }
 
