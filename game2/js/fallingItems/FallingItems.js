@@ -20,10 +20,9 @@ class FallingItems {
 
     //check if the falling item has caught the bird
     isOver(width, mX, mY) {
-        let newPosition = width - mX;
+        let positionX = width - mX;
         let vertical = this.position.y + this.fall * this.speed;
-
-        if (dist(newPosition, mY, this.position.x, vertical) <= this.elementSize) {
+        if (dist(positionX, mY, this.position.x, vertical) <= this.elementSize) {
             return true;
         } else {
             return false;
@@ -37,7 +36,6 @@ class FallingItems {
     getSante() {
         return this.sante;
     }
-
     getAmmo(){
         return this.ammo;
     }

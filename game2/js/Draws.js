@@ -16,6 +16,25 @@ class Draws {
         this.index = [0 , 0, -150, -150,-300 ,-300, -450, -450]; //make a difference beetwen each laser
         this.trajectory = [0 , 0, 0, 0, 0 , 0, 0, 0];
     }
+
+    drawsEverything(){
+        this.drawNoseShip();
+        this.drawLeftEarship();
+        this.drawRightEarship();
+        this.drawStones();
+        this.drawGems();
+        this.drawPotionsOrPills(pills);
+        this.drawPotionsOrPills(potions);
+        this.drawHealthAndText();
+        this.drawAmmo();
+        this.drawExplosion();
+        if(fallingSpaceShipL){
+            this.drawNewSpaceShip(0);
+        }
+        if (fallingSpaceShipR) {
+            this.drawNewSpaceShip(1);
+        }
+    }
     drawNoseShip() {
         image(astroImg, width - noseX - 50, noseY - 50, 150, 150);
     }
@@ -40,71 +59,53 @@ class Draws {
                 this.drawLaser(rightEarX, rightEarY, laserRightImg, 5, -30);
                 this.drawLaser(rightEarX, rightEarY , laserRightImg, 7, -30);
                 ammoR -=4;
-            }
-                    
-
+            }                  
         }
     }
-
     drawLaser(x, y, imageLaser, id, side){
         laserX = x - side ;
-        laserY = y -50 - this.index[id];
+        laserY = y- 50 - this.index[id];
         //if index is 0, the origin of the shoot is the ship
         if (this.index[id] == 0) {
             this.trajectory[id] = laserX;
-        }
-        //the speed
+        } //the speed
         this.index[id] += 40; 
         //hide the laser until is bigger than 0
         if(this.index[id] > 0){
-            //ellipse(width - laserX, laserY- 50, 30, 30,)
-            image(imageLaser, width - laserX, laserY- 50);    
+            image(imageLaser, width - laserX, laserY);    
         }
-        this.shootStone(laserX, laserY-50 );
+        this.shootStone(laserX, laserY);
         //reset values if laser is out the screen
         if (this.index[id] > (height*0.5)){
             this.index[id] = 0 ;
             this.trajectory[id] = 0;
         }
     }
-
     shootStone(x, y){
         for (var i = 0; i < stones.length; i++) {
             if (stones[i].isOver(width, x, y)) {
-                let currentY = stones[i].currentYPosition();
                 this.explosionX = stones[i].position.x;
-                this.explosionY = currentY;
+                this.explosionY = stones[i].currentYPosition();
                 stones.splice(i, 1);
                 this.explosion = true;
                 util.newStone(1);
             }            
         }
     }
-
     drawStones() {
         for (var i = stones.length - 1; i >= 0; i--) {
-            let currentY = stones[i].currentYPosition();
             stones[i].display();
             if (stones[i].isOver(width, noseX, noseY) ) {
                 asstroLife = asstroLife + stones[i].getSante();
-                this.explosionX = stones[i].position.x;
-                this.explosionY = currentY;
-                stones.splice(i, 1);
-                this.explosion = true;
+                this.explosionXY(stones[i].position.x, stones[i].currentYPosition(), stones, i);
             }
             else if (leftShipLife > 0 && stones[i].isOver(width, leftEarX, leftEarY) ) {
                 leftShipLife = leftShipLife + stones[i].getSante();
-                this.explosionX = stones[i].position.x;
-                this.explosionY = currentY;
-                stones.splice(i, 1);
-                this.explosion = true;
+                this.explosionXY(stones[i].position.x, stones[i].currentYPosition(), stones, i);
             }
             else if (rightShipLife >  0 && stones[i].isOver(width, rightEarX, rightEarY) ) {
                 rightShipLife = rightShipLife + stones[i].getSante();
-                this.explosionX = stones[i].position.x;
-                this.explosionY = currentY;
-                stones.splice(i, 1);
-                this.explosion = true;
+                this.explosionXY(stones[i].position.x, stones[i].currentYPosition(), stones, i);
             }
             if (leftShipLife < 0) {
                 leftShipLife = 0;
@@ -114,15 +115,20 @@ class Draws {
                 rightShipLife = 0;
                 util.newSpaceShip(1);
             } 
-            if (currentY > height) {
+            if (stones[i].currentYPosition() > height) {
                 stones.splice(i, 1);
                 util.newStone(1);
             }
         }
     }
+    explosionXY(x, y, item, i){
+        this.explosionX = x;
+        this.explosionY = y;
+        item.splice(i, 1);
+        this.explosion = true;
+    }
     drawGems() {
         for (var i = boxGems.length - 1; i >= 0; i--) {
-            let currentY = boxGems[i].currentYPosition();
             boxGems[i].display();
             if (boxGems[i].isOver(width, noseX, noseY)) {
                 boxGems.splice(i, 1);
@@ -130,7 +136,7 @@ class Draws {
                 catchGemSound.play();
                 util.newGem(1);
             }
-            if (currentY > height) {
+            if (boxGems[i].currentYPosition() > height) {
                 boxGems.splice(i, 1);
                 util.newGem(1);
             }
@@ -138,10 +144,8 @@ class Draws {
     }
     drawPotionsOrPills(choice) {
         for (var i = choice.length - 1; i >= 0; i--) {
-            let currentY = choice[i].currentYPosition();
             choice[i].display();
             if (choice[i].isOver(width, noseX, noseY)) {
-                catchGemSound.play();
                 if (leftShipLife > 0) {
                     leftShipLife = leftShipLife + (choice[i].getSante()/2);
                     if (leftShipLife > 50) { leftShipLife = 50;}
@@ -150,14 +154,14 @@ class Draws {
                     rightShipLife = rightShipLife + (choice[i].getSante()/2);
                     if (rightShipLife > 50) { rightShipLife = 50;}     
                 }
+                catchGemSound.play();
                 choice.splice(i, 1);
                 if (choice == pills) {
                     util.newPill(1);
                 } else {
                     util.newPotion(1);
                 }
-
-                if (currentY > height) {
+                if (choice[i].currentYPosition() > height) {
                     choice.splice(i, 1);
                     if (choice == pills) {
                         util.newPill(1);
@@ -170,37 +174,34 @@ class Draws {
     }
     drawAmmo(){
         for (var i = ammos.length - 1; i >= 0; i--) {
-            let currentY = ammos[i].currentYPosition();
             ammos[i].display();
             if (ammos[i].isOver(width, noseX, noseY)) {
                 ammoL += ammos[i].getAmmo()/2;
                 ammoR += ammos[i].getAmmo()/2;
-                ammos.splice(i, 1);
                 catchGemSound.play();
+                ammos.splice(i, 1);
                 util.newAmmo(1);
             }
-            if (ammos[i].isOver(width, leftEarX, leftEarY)) {
+            else if (ammos[i].isOver(width, leftEarX, leftEarY)) {
                 ammoL += ammos[i].getAmmo();
                 catchGemSound.play();
                 ammos.splice(i, 1);
                 util.newAmmo(1);
             }
-            if (ammos[i].isOver(width, rightEarX, rightEarY)) {
+            else if (ammos[i].isOver(width, rightEarX, rightEarY)) {
                 ammoR += ammos[i].getAmmo();
                 catchGemSound.play();
                 ammos.splice(i, 1);
                 util.newAmmo(1);
             }
-            if (currentY > height) {
+            if (ammos[i].currentYPosition() > height) {
                 ammos.splice(i, 1);
                 util.newAmmo(1);
             }
         }
     }
-
     drawNewSpaceShip(side){
         if (side == 0) {
-            let currentY = newSpaceShipL.currentYPosition();
             newSpaceShipL.display();
             if (newSpaceShipL.isOver(width, noseX, noseY)) {
                 fallingSpaceShipL= false;
@@ -208,14 +209,12 @@ class Draws {
                 ammoL = 1200;
                 catchGemSound.play();
             }
-            if (currentY > height) {
+            if (newSpaceShipL.currentYPosition() > height) {
                 fallingSpaceShipL= false;
                 util.newSpaceShip(0);
             }
         }
-        
         if (side == 1) {
-            let currentY = newSpaceShipR.currentYPosition();
             newSpaceShipR.display();
             if (newSpaceShipR.isOver(width, noseX, noseY)) {
                 fallingSpaceShipR= false;
@@ -223,15 +222,12 @@ class Draws {
                 ammoR = 1200;
                 catchGemSound.play();
             }
-            if (currentY > height) {
+            if (newSpaceShipR.currentYPosition() > height) {
                 fallingSpaceShipR= false;
                 util.newSpaceShip(1);
             }
-        }
-            
+        }            
     }
-
-
     drawExplosion() {
         if (this.explosion) {
             explosionSound.play();
@@ -248,7 +244,8 @@ class Draws {
         noStroke();
         fill(255);
         textSize(20);
-        text("UFO gauche", 100, 20);
+        textAlign(LEFT);
+        text("Vaisseau bleu, munitions : " + ammoL, 10, 20);
         stroke(255);
         strokeWeight(2);
         noFill();
@@ -258,7 +255,7 @@ class Draws {
         rect(19, 28, map(leftShipLife, 0, 50, 0, 248), 21);
         
         fill(255);
-        text("UFO droite", 100, 75);
+        text("Vaisseau orange, munitions : " + ammoR, 10, 75);
         stroke(255);
         strokeWeight(2);
         noFill();
@@ -273,7 +270,7 @@ class Draws {
         text("Niveau " + level, width / 2, 30);
         textAlign(RIGHT);
         fill(255);
-        text(" Score : ", width - 80, 30);
+        text(" Score : ", width - 120, 30);
         textSize(24);
         text(score * level, width - 50, 30);
         pop();

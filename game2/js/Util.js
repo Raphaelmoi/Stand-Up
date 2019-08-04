@@ -52,7 +52,6 @@ class Util{
         if (choiceSide == 0 ) {
             newSpaceShipL = new LeftEarSpaceShip(random(0, width));
             fallingSpaceShipL = true;
-
         }
         else if(choiceSide == 1){
             newSpaceShipR = new RightEarSpaceShip(random(0, width));

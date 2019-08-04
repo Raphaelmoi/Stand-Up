@@ -3,19 +3,15 @@ let poseNet;
 let screenSizeAdaptator;
 let readyToStart = false;
 let gameOver = true;
-let asstroLife = 1;
-let leftShipLife = 50;
-let rightShipLife = 50;
-let ammoL = 1200;
-let ammoR = 1200;
 let score = 0;
 let level = 1;
+let asstroLife = 1;
+let leftShipLife = 50, rightShipLife = 50;
+let ammoL = 1200, ammoR = 1200;
 //body position
 let noseX = 0, noseY = 0;
 let leftEarX =0, leftEarY = 0;
 let rightEarX = 0, rightEarY = 0;
-let lastLeftEarX = 0, lastRightEarX = 0, lastNoseX = 0;
-
 let laserX = 0, laserY = 0;//laser position
 //determine if a new spaceShip item have to fall
 let fallingSpaceShipL = false, fallingSpaceShipR = false;
@@ -30,11 +26,7 @@ let boxImgGems = [];
 let pillImg, potionImg;
 let ammoImg;
 //array of objects
-let boxGems = [];
-let stones = [];
-let pills = [];
-let potions = [];
-let ammos = [];
+let boxGems = [], stones = [], pills = [], potions = [], ammos = [];
 //explosion of stone
 let explosionSprite;
 let explose = [];
@@ -43,12 +35,9 @@ let astroImg;
 let spaceShipLeftEar, spaceShipRightEar;//SpaceShips left and right Img
 let laserLeftImg, laserRightImg;//laser img
 let fallingShipL, fallingShipR; //img of falling ufo
-let newSpaceShipL, newSpaceShipR;
+let newSpaceShipL, newSpaceShipR;//the future object of falling ship
 
-let gameOverBck;
-//sound
 let explosionSound, catchGemSound, gameoverSound;
-
 let util, draws;
 
 function preload() {
@@ -79,8 +68,7 @@ function preload() {
     explosionSprite = loadImage('img/explosion.png');
     fallingShipL = loadImage('img/PNG/ufoBlue.png');
     fallingShipR = loadImage('img/PNG/ufoRed.png');
-    // gameOverBck = loadImage('img/asstronaute.gif');
-
+    
     explosionSound = loadSound('sound/fall.wav');
     catchGemSound = loadSound('sound/coin.wav');
     gameoverSound = loadSound('sound/round_end.wav');
@@ -96,7 +84,7 @@ function setup() {
     //ml5 posenet initialisation
     poseNet = ml5.poseNet(video, modelReady);
     poseNet.on('pose', gotPoses);
-
+    //adapt size of items, 'normal' screen width is 1400
     screenSizeAdaptator = windowWidth / 1400;
     if (screenSizeAdaptator < 0.5) {
         screenSizeAdaptator = 0.5;
@@ -118,7 +106,6 @@ function modelReady() {
     readyToStart = true;
     loadingAnimation.addClass('display-none');
     deadAstroGif = select('.deadAstro');
-
 }
 
 function draw() {
@@ -138,42 +125,19 @@ function draw() {
             //image(video, 0, 0, displayWidth, displayHeight);//met la video dans le canvas
             image(imgBackground, 0, 0, width, height);
             pop();
-
-            draws.drawNoseShip();
-            draws.drawLeftEarship();
-            draws.drawRightEarship();
-            draws.drawStones();
-            draws.drawGems();
-            draws.drawPotionsOrPills(pills);
-            draws.drawPotionsOrPills(potions);
-            draws.drawHealthAndText();
-            draws.drawAmmo();
-            draws.drawExplosion();
-            if(fallingSpaceShipL){
-                draws.drawNewSpaceShip(0);
-            }
-            if (fallingSpaceShipR) {
-                draws.drawNewSpaceShip(1);
-            }
+            draws.drawsEverything();
         } else {
-
-            // gameOverBck = createImg("img/asstronaute.gif", 200, 200);
-            // gameOverBck.position( 250,  210);
-
             if (gameOver) { //prevent the song to be play more than one time
                 gameoverSound.play();
                 gameOver = false;
                 background(0);
                 deadAstroGif.removeClass('display-none');
                 deadAstroGif.addClass('deadAstro');
-                // gameOverBck.position( (width / 2 - 250), (height / 2 - 210));
                 fill(244, 36, 36);
                 textSize(40);
                 textAlign(CENTER);
                 text("GAME OVER", width / 2, height / 3);
                 text("SCORE : " + score * level + (', pierres : ') + score, width / 2, height / 2);
-
-
             }
         }
     } //if still loading        
@@ -189,22 +153,15 @@ function draw() {
 //give body position from the ml5 posenet.on
 function gotPoses(poses) {
     if (poses.length > 0) {
-        lastNoseX = noseX;
-        lastLeftEarX = leftEarX;
-        lastRightEarX = rightEarX;
-
         let newNoseX = poses[0].pose.keypoints[0].position.x;
-        // let newNoseY = poses[0].pose.keypoints[0].position.y;
-        // console.log(poses[0].pose.keypoints[9].score);
         let newleftEarX = poses[0].pose.keypoints[3].position.x;
         let newleftEarY = poses[0].pose.keypoints[3].position.y;
         let newrightEarX = poses[0].pose.keypoints[4].position.x;
         let newrightEarY = poses[0].pose.keypoints[4].position.y;
         noseX = lerp(noseX, newNoseX, 0.9);
-        // noseY = lerp(noseY, newNoseY, 0.9);
-        leftEarX = lerp(leftEarX, newleftEarX, 0.9);
-        leftEarY = lerp(leftEarY, newleftEarY, 0.9);
-        rightEarX = lerp(rightEarX, newrightEarX, 0.9);
-        rightEarY = lerp(rightEarY, newrightEarY, 0.9);
+        leftEarX = lerp(leftEarX, newleftEarX, 0.8);
+        leftEarY = lerp(leftEarY, newleftEarY, 0.8);
+        rightEarX = lerp(rightEarX, newrightEarX, 0.8);
+        rightEarY = lerp(rightEarY, newrightEarY, 0.8);
     }
 }
