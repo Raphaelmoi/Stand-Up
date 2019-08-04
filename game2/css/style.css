@@ -41,25 +41,25 @@ body
             animation-fill-mode: both;
 }
 #b1 {
-    background-color: #8861A4;
+    background-color: white;
 }
 #b2 {
-    background-color: #2495C1;
+    background-color: white;
     -webkit-animation-delay: 100ms;
             animation-delay: 100ms;
 }
 #b3 {
-    background-color: #48BB6D;
+    background-color: white;
     -webkit-animation-delay: 200ms;
             animation-delay: 200ms;
 }
 #b4 {
-    background-color: #F1C500;
+    background-color: white;
     -webkit-animation-delay: 300ms;
             animation-delay: 300ms;
 }
 #b5 {
-    background-color: #F35957;
+    background-color: white;
     -webkit-animation-delay: 400ms;
             animation-delay: 400ms;
 }
@@ -73,7 +73,20 @@ body
     50% {-webkit-transform: translateY(50%) scale(1.2);transform: translateY(50%) scale(1.2);}
     100% {-webkit-transform: translateY(-50%) scale(0.2);transform: translateY(-50%) scale(0.2);}
 }
-
 .display-none {
   display: none;
+  z-index: -10;
+}
+.deadAstro{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+.deadAstro img{
+    width: 250px;
+    height: 200px;
+    object-fit: cover;
 }

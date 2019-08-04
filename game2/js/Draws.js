@@ -13,35 +13,32 @@ class Draws {
         this.explosionY = 0;
         this.explosion = false;
         this.exploseindex = 0;
-        this.index = [0 , 0, -150, -150,-300 ,-300, -450, -450]; //will allowed to move fom one image to another in birdImages
-        //this.index = [0 , -150,-300, -450]; //will allowed to move fom one image to another in birdImages
+        this.index = [0 , 0, -150, -150,-300 ,-300, -450, -450]; //make a difference beetwen each laser
         this.trajectory = [0 , 0, 0, 0, 0 , 0, 0, 0];
-        //this.trajectory = [0 , 0, 0, 0];
-        // this.asstroIndex = 0;
     }
     drawNoseShip() {
-        image(astro3, width - noseX - 50, noseY - 50, 150, 150);
+        image(astroImg, width - noseX - 50, noseY - 50, 150, 150);
     }
-    drawLeftHandship(){
+    drawLeftEarship(){
         if (leftShipLife > 0) {
-            image(spaceShipLeftHand, width - leftHandX - 50, leftHandY - 50);
+            image(spaceShipLeftEar, width - leftEarX - 50, leftEarY - 50);
             if(ammoL> 0){
-                this.drawLaser(leftHandX, leftHandY, laserLeftImg, 0, 30);
-                this.drawLaser(leftHandX, leftHandY, laserLeftImg, 2, 30);   
-                this.drawLaser(leftHandX, leftHandY, laserLeftImg, 4, -30);
-                this.drawLaser(leftHandX, leftHandY , laserLeftImg, 6, -30);
+                this.drawLaser(leftEarX, leftEarY, laserLeftImg, 0, 30);
+                this.drawLaser(leftEarX, leftEarY, laserLeftImg, 2, 30);   
+                this.drawLaser(leftEarX, leftEarY, laserLeftImg, 4, -30);
+                this.drawLaser(leftEarX, leftEarY , laserLeftImg, 6, -30);
                 ammoL -=4;
             }            
         }
     }
-    drawRightHandship(){
+    drawRightEarship(){
         if (rightShipLife > 0) {
-            image(spaceShipRightHand, width - rightHandX - 50, rightHandY - 50);  
+            image(spaceShipRightEar, width - rightEarX - 50, rightEarY - 50);  
             if (ammoR > 0) {
-                this.drawLaser(rightHandX, rightHandY, laserRightImg, 1, 30);
-                this.drawLaser(rightHandX, rightHandY, laserRightImg, 3, 30);   
-                this.drawLaser(rightHandX, rightHandY, laserRightImg, 5, -30);
-                this.drawLaser(rightHandX, rightHandY , laserRightImg, 7, -30);
+                this.drawLaser(rightEarX, rightEarY, laserRightImg, 1, 30);
+                this.drawLaser(rightEarX, rightEarY, laserRightImg, 3, 30);   
+                this.drawLaser(rightEarX, rightEarY, laserRightImg, 5, -30);
+                this.drawLaser(rightEarX, rightEarY , laserRightImg, 7, -30);
                 ammoR -=4;
             }
                     
@@ -95,14 +92,14 @@ class Draws {
                 stones.splice(i, 1);
                 this.explosion = true;
             }
-            if (leftShipLife > 0 && stones[i].isOver(width, leftHandX, leftHandY) ) {
+            else if (leftShipLife > 0 && stones[i].isOver(width, leftEarX, leftEarY) ) {
                 leftShipLife = leftShipLife + stones[i].getSante();
                 this.explosionX = stones[i].position.x;
                 this.explosionY = currentY;
                 stones.splice(i, 1);
                 this.explosion = true;
             }
-            if (rightShipLife >  0 && stones[i].isOver(width, rightHandX, rightHandY) ) {
+            else if (rightShipLife >  0 && stones[i].isOver(width, rightEarX, rightEarY) ) {
                 rightShipLife = rightShipLife + stones[i].getSante();
                 this.explosionX = stones[i].position.x;
                 this.explosionY = currentY;
@@ -113,7 +110,7 @@ class Draws {
                 leftShipLife = 0;
                 util.newSpaceShip(0);
             }
-            if (rightShipLife < 0) {
+            else if (rightShipLife < 0) {
                 rightShipLife = 0;
                 util.newSpaceShip(1);
             } 
@@ -182,13 +179,13 @@ class Draws {
                 catchGemSound.play();
                 util.newAmmo(1);
             }
-            if (ammos[i].isOver(width, leftHandX, leftHandY)) {
+            if (ammos[i].isOver(width, leftEarX, leftEarY)) {
                 ammoL += ammos[i].getAmmo();
                 catchGemSound.play();
                 ammos.splice(i, 1);
                 util.newAmmo(1);
             }
-            if (ammos[i].isOver(width, rightHandX, rightHandY)) {
+            if (ammos[i].isOver(width, rightEarX, rightEarY)) {
                 ammoR += ammos[i].getAmmo();
                 catchGemSound.play();
                 ammos.splice(i, 1);
@@ -203,9 +200,9 @@ class Draws {
 
     drawNewSpaceShip(side){
         if (side == 0) {
-            let currentY = newSpaceShiftL.currentYPosition();
-            newSpaceShiftL.display();
-            if (newSpaceShiftL.isOver(width, noseX, noseY)) {
+            let currentY = newSpaceShipL.currentYPosition();
+            newSpaceShipL.display();
+            if (newSpaceShipL.isOver(width, noseX, noseY)) {
                 fallingSpaceShipL= false;
                 leftShipLife = 50;
                 ammoL = 1200;
@@ -218,9 +215,9 @@ class Draws {
         }
         
         if (side == 1) {
-            let currentY = newSpaceShiftR.currentYPosition();
-            newSpaceShiftR.display();
-            if (newSpaceShiftR.isOver(width, noseX, noseY)) {
+            let currentY = newSpaceShipR.currentYPosition();
+            newSpaceShipR.display();
+            if (newSpaceShipR.isOver(width, noseX, noseY)) {
                 fallingSpaceShipR= false;
                 rightShipLife = 50;
                 ammoR = 1200;

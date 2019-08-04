@@ -1,8 +1,8 @@
 let video;
 let poseNet;
+let screenSizeAdaptator;
 let readyToStart = false;
 let gameOver = true;
-let screenSizeAdaptator;
 let asstroLife = 1;
 let leftShipLife = 50;
 let rightShipLife = 50;
@@ -11,24 +11,16 @@ let ammoR = 1200;
 let score = 0;
 let level = 1;
 //body position
-let noseX = 0,
-    noseY = 0;
-let lastNoseX = 0,
-    lastNoseY = 0;
+let noseX = 0, noseY = 0;
+let leftEarX =0, leftEarY = 0;
+let rightEarX = 0, rightEarY = 0;
+let lastLeftEarX = 0, lastRightEarX = 0, lastNoseX = 0;
 
-let leftHandX =0, leftHandY = 0;
-let rightHandX = 0, rightHandY = 0;
-let lastLeftHandX = 0, lastRightHandX = 0;
-
-let fallingShipL;
-let fallingShipR;
-
-let fallingSpaceShipL = false;
-let fallingSpaceShipR = false;
-
-
+let laserX = 0, laserY = 0;//laser position
+//determine if a new spaceShip item have to fall
+let fallingSpaceShipL = false, fallingSpaceShipR = false;
 //loading animation
-let loadingAnimation;
+let loadingAnimation, deadAstroGif;
 //Images
 let imgBackground;
 let imgStone0, imgStone1, imgStone2, imgStone3, imgStone4, imgStone5, imgStone6, imgStone7;
@@ -36,6 +28,7 @@ let boxImgStones = [];
 let ruby0, ruby1, ruby2, saphir, diamond;
 let boxImgGems = [];
 let pillImg, potionImg;
+let ammoImg;
 //array of objects
 let boxGems = [];
 let stones = [];
@@ -45,28 +38,18 @@ let ammos = [];
 //explosion of stone
 let explosionSprite;
 let explose = [];
-//the spaceship
-//let astronaute = [];
-let astro1, astro2, astro3, astro4;
-let spaceShipLeftHand;
-let spaceShipRightHand;
-let ammoImg;
 
-let newSpaceShiftL;
-let newSpaceShiftR;
+let astroImg;
+let spaceShipLeftEar, spaceShipRightEar;//SpaceShips left and right Img
+let laserLeftImg, laserRightImg;//laser img
+let fallingShipL, fallingShipR; //img of falling ufo
+let newSpaceShipL, newSpaceShipR;
 
-
-let laserLeftImg;
-let laserRightImg;
-
+let gameOverBck;
 //sound
 let explosionSound, catchGemSound, gameoverSound;
 
 let util, draws;
-let laserX = 0, laserY = 0;
-// let mouvement = 0;
-
-let switchSide = false;
 
 function preload() {
     imgBackground = loadImage('img/sky.jpg');
@@ -85,21 +68,18 @@ function preload() {
     saphir = loadImage('img/saphir.png');
     diamond = loadImage('img/diamond.png');
     boxImgGems.push(ruby0, ruby1, ruby2, saphir, diamond);
-    astro1  = loadImage('img/assto1.png');
-    astro2  = loadImage('img/assto2.png');
-    astro3  = loadImage('img/assto3.png');
-    astro4  = loadImage('img/assto4.png');
-    //astronaute.push(astro1, astro4);
-    spaceShipLeftHand = loadImage('img/PNG/playerShip2_blue.png');
-    spaceShipRightHand = loadImage('img/PNG/playerShip2_orange.png');
+    pillImg = loadImage('img/pill.png');
+    potionImg = loadImage('img/potion.png');
+    ammoImg = loadImage('img/ammo.png');
+    astroImg  = loadImage('img/assto2.png');
+    spaceShipLeftEar = loadImage('img/PNG/playerShip2_blue.png');
+    spaceShipRightEar = loadImage('img/PNG/playerShip2_orange.png');
     laserLeftImg = loadImage('img/PNG/Lasers/laserBlue16.png');
     laserRightImg = loadImage('img/PNG/Lasers/laserRed16.png');
     explosionSprite = loadImage('img/explosion.png');
-    pillImg = loadImage('img/pill.png');
-    potionImg = loadImage('img/potion.png');
-    ammoImg = loadImage('img/PNG/Power-ups/bolt_gold.png');
     fallingShipL = loadImage('img/PNG/ufoBlue.png');
     fallingShipR = loadImage('img/PNG/ufoRed.png');
+    // gameOverBck = loadImage('img/asstronaute.gif');
 
     explosionSound = loadSound('sound/fall.wav');
     catchGemSound = loadSound('sound/coin.wav');
@@ -109,7 +89,6 @@ function preload() {
 function setup() {
     util = new Util();
     draws = new Draws();
-
     createCanvas(windowWidth, windowHeight);
     video = createCapture(VIDEO);
     video.size(width, height);
@@ -122,37 +101,35 @@ function setup() {
     if (screenSizeAdaptator < 0.5) {
         screenSizeAdaptator = 0.5;
     }
-
     frameRate(24);
-    //util.spriteImage(imgBirdSprite, bird, 110, 101, 5, 14);
     util.spriteImage(explosionSprite, explose, 192, 192, 5, 6);
     //falling items minimum set
     util.newStone(12);
     util.newGem(10);
-    util.newPill(2);
+    util.newPill(1);
     util.newPotion(1);
     util.newAmmo(3);
-    //util.newSpaceShip(1);
+    //fixed position for the astronaute(noseY)
     noseY = height-110;
-    // leftHandY = height-100;
-    // rightHandY = height-100;
 }
 
 function modelReady() {
     console.log('model ready');
     readyToStart = true;
     loadingAnimation.addClass('display-none');
+    deadAstroGif = select('.deadAstro');
+
 }
 
 function draw() {
-
     if (readyToStart) {
         //win a level every 7 gems catch
         if (score >= level * 7) {
             level++;
             util.newStone(5);
-            util.newGem(2);
+            util.newGem(1);
             util.newPill(1);
+            util.newAmmo(1);
         } //Since player is alive
         if (asstroLife > 0) {
             push();
@@ -163,9 +140,8 @@ function draw() {
             pop();
 
             draws.drawNoseShip();
-            draws.drawLeftHandship();
-            draws.drawRightHandship();
-   
+            draws.drawLeftEarship();
+            draws.drawRightEarship();
             draws.drawStones();
             draws.drawGems();
             draws.drawPotionsOrPills(pills);
@@ -173,25 +149,31 @@ function draw() {
             draws.drawHealthAndText();
             draws.drawAmmo();
             draws.drawExplosion();
-
             if(fallingSpaceShipL){
                 draws.drawNewSpaceShip(0);
             }
             if (fallingSpaceShipR) {
                 draws.drawNewSpaceShip(1);
             }
-
         } else {
+
+            // gameOverBck = createImg("img/asstronaute.gif", 200, 200);
+            // gameOverBck.position( 250,  210);
+
             if (gameOver) { //prevent the song to be play more than one time
-                noLoop();
                 gameoverSound.play();
                 gameOver = false;
                 background(0);
+                deadAstroGif.removeClass('display-none');
+                deadAstroGif.addClass('deadAstro');
+                // gameOverBck.position( (width / 2 - 250), (height / 2 - 210));
                 fill(244, 36, 36);
                 textSize(40);
                 textAlign(CENTER);
                 text("GAME OVER", width / 2, height / 3);
                 text("SCORE : " + score * level + (', pierres : ') + score, width / 2, height / 2);
+
+
             }
         }
     } //if still loading        
@@ -208,39 +190,21 @@ function draw() {
 function gotPoses(poses) {
     if (poses.length > 0) {
         lastNoseX = noseX;
-        // lastNoseY = noseY;
-        lastLeftHandX = leftHandX;
-        lastRightHandX = rightHandX;
+        lastLeftEarX = leftEarX;
+        lastRightEarX = rightEarX;
 
         let newNoseX = poses[0].pose.keypoints[0].position.x;
         // let newNoseY = poses[0].pose.keypoints[0].position.y;
         // console.log(poses[0].pose.keypoints[9].score);
-        let newleftHandX = poses[0].pose.keypoints[3].position.x;
-        let newleftHandY = poses[0].pose.keypoints[3].position.y;
-        let newrightHandX = poses[0].pose.keypoints[4].position.x;
-        let newrightHandY = poses[0].pose.keypoints[4].position.y;
+        let newleftEarX = poses[0].pose.keypoints[3].position.x;
+        let newleftEarY = poses[0].pose.keypoints[3].position.y;
+        let newrightEarX = poses[0].pose.keypoints[4].position.x;
+        let newrightEarY = poses[0].pose.keypoints[4].position.y;
         noseX = lerp(noseX, newNoseX, 0.9);
         // noseY = lerp(noseY, newNoseY, 0.9);
-        leftHandX = lerp(leftHandX, newleftHandX, 0.9);
-        leftHandY = lerp(leftHandY, newleftHandY, 0.9);
-        rightHandX = lerp(rightHandX, newrightHandX, 0.9);
-        rightHandY = lerp(rightHandY, newrightHandY, 0.9);
+        leftEarX = lerp(leftEarX, newleftEarX, 0.9);
+        leftEarY = lerp(leftEarY, newleftEarY, 0.9);
+        rightEarX = lerp(rightEarX, newrightEarX, 0.9);
+        rightEarY = lerp(rightEarY, newrightEarY, 0.9);
     }
-}
-
-function timeOut(i){
-    let side;
-                if (switchSide) {
-                    side= 30;
-                    switchSide = !switchSide;
-                }else{
-                    side = -30;
-                    switchSide = !switchSide;
-                }                
-                if (i%2 == 0) {
-                    draws.drawLaser(leftHandX, leftHandY, laserLeftImg, i, side);
-                }
-                else{
-                    draws.drawLaser(rightHandX, rightHandY, laserRightImg, i, side)
-                }
 }

@@ -50,16 +50,13 @@ class Util{
     }
     newSpaceShip(choiceSide){
         if (choiceSide == 0 ) {
-            console.log('dead left');
-            newSpaceShiftL = new LeftHandSpaceShip(random(0, width));
+            newSpaceShipL = new LeftEarSpaceShip(random(0, width));
             fallingSpaceShipL = true;
 
         }
         else if(choiceSide == 1){
-            console.log('dead right');
-            newSpaceShiftR = new RightHandSpaceShip(random(0, width));
+            newSpaceShipR = new RightEarSpaceShip(random(0, width));
             fallingSpaceShipR = true;
-
         }
     }
 }
