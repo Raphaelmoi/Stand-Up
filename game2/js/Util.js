@@ -43,4 +43,23 @@ class Util{
             potions.push(new Potion(random(0, width))); 
         }
     }
+    newAmmo(qtt){
+        for (let i = 0; i < qtt; i++) { 
+            ammos.push(new Ammo(random(0, width))); 
+        }
+    }
+    newSpaceShip(choiceSide){
+        if (choiceSide == 0 ) {
+            console.log('dead left');
+            newSpaceShiftL = new LeftHandSpaceShip(random(0, width));
+            fallingSpaceShipL = true;
+
+        }
+        else if(choiceSide == 1){
+            console.log('dead right');
+            newSpaceShiftR = new RightHandSpaceShip(random(0, width));
+            fallingSpaceShipR = true;
+
+        }
+    }
 }

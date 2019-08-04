@@ -37,4 +37,8 @@ class FallingItems {
     getSante() {
         return this.sante;
     }
+
+    getAmmo(){
+        return this.ammo;
+    }
 }

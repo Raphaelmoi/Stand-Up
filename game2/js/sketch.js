@@ -3,7 +3,11 @@ let poseNet;
 let readyToStart = false;
 let gameOver = true;
 let screenSizeAdaptator;
-let life = 100;
+let asstroLife = 1;
+let leftShipLife = 50;
+let rightShipLife = 50;
+let ammoL = 1200;
+let ammoR = 1200;
 let score = 0;
 let level = 1;
 //body position
@@ -16,6 +20,11 @@ let leftHandX =0, leftHandY = 0;
 let rightHandX = 0, rightHandY = 0;
 let lastLeftHandX = 0, lastRightHandX = 0;
 
+let fallingShipL;
+let fallingShipR;
+
+let fallingSpaceShipL = false;
+let fallingSpaceShipR = false;
 
 
 //loading animation
@@ -32,13 +41,20 @@ let boxGems = [];
 let stones = [];
 let pills = [];
 let potions = [];
+let ammos = [];
 //explosion of stone
 let explosionSprite;
 let explose = [];
 //the spaceship
-let spaceShip;
+//let astronaute = [];
+let astro1, astro2, astro3, astro4;
 let spaceShipLeftHand;
 let spaceShipRightHand;
+let ammoImg;
+
+let newSpaceShiftL;
+let newSpaceShiftR;
+
 
 let laserLeftImg;
 let laserRightImg;
@@ -46,12 +62,11 @@ let laserRightImg;
 //sound
 let explosionSound, catchGemSound, gameoverSound;
 
-let util, draws, noseSpaceShip, leftHandSpaceShip, rightHandSpaceShip;
+let util, draws;
 let laserX = 0, laserY = 0;
 // let mouvement = 0;
 
 let switchSide = false;
-let test = 0;
 
 function preload() {
     imgBackground = loadImage('img/sky.jpg');
@@ -70,7 +85,11 @@ function preload() {
     saphir = loadImage('img/saphir.png');
     diamond = loadImage('img/diamond.png');
     boxImgGems.push(ruby0, ruby1, ruby2, saphir, diamond);
-    spaceShip = loadImage('img/PNG/ufoGreen.png');
+    astro1  = loadImage('img/assto1.png');
+    astro2  = loadImage('img/assto2.png');
+    astro3  = loadImage('img/assto3.png');
+    astro4  = loadImage('img/assto4.png');
+    //astronaute.push(astro1, astro4);
     spaceShipLeftHand = loadImage('img/PNG/playerShip2_blue.png');
     spaceShipRightHand = loadImage('img/PNG/playerShip2_orange.png');
     laserLeftImg = loadImage('img/PNG/Lasers/laserBlue16.png');
@@ -78,6 +97,9 @@ function preload() {
     explosionSprite = loadImage('img/explosion.png');
     pillImg = loadImage('img/pill.png');
     potionImg = loadImage('img/potion.png');
+    ammoImg = loadImage('img/PNG/Power-ups/bolt_gold.png');
+    fallingShipL = loadImage('img/PNG/ufoBlue.png');
+    fallingShipR = loadImage('img/PNG/ufoRed.png');
 
     explosionSound = loadSound('sound/fall.wav');
     catchGemSound = loadSound('sound/coin.wav');
@@ -109,8 +131,9 @@ function setup() {
     util.newGem(10);
     util.newPill(2);
     util.newPotion(1);
-
-    noseY = height-100;
+    util.newAmmo(3);
+    //util.newSpaceShip(1);
+    noseY = height-110;
     // leftHandY = height-100;
     // rightHandY = height-100;
 }
@@ -119,10 +142,6 @@ function modelReady() {
     console.log('model ready');
     readyToStart = true;
     loadingAnimation.addClass('display-none');
-    noseSpaceShip = new NoseSpaceShip();
-    leftHandSpaceShip = new LeftHandSpaceShip();
-    rightHandSpaceShip = new RightHandSpaceShip();
-
 }
 
 function draw() {
@@ -135,7 +154,7 @@ function draw() {
             util.newGem(2);
             util.newPill(1);
         } //Since player is alive
-        if (life > 0) {
+        if (asstroLife > 0) {
             push();
             translate(width, 0);
             scale(-1, 1);
@@ -146,21 +165,21 @@ function draw() {
             draws.drawNoseShip();
             draws.drawLeftHandship();
             draws.drawRightHandship();
-            //draws.drawLaser(rightHandX, rightHandY , laserRightImg, 3, -30);
-
-            for (var i = 0; i < 8; i+=4) {
-                draws.drawLaser(leftHandX, leftHandY, laserLeftImg, i, 30);
-                draws.drawLaser(rightHandX, rightHandY, laserRightImg, i+1, 30);   
-                draws.drawLaser(leftHandX, leftHandY, laserLeftImg, i+2, -30);
-                draws.drawLaser(rightHandX, rightHandY , laserRightImg, i+3, -30);
-            }    
+   
             draws.drawStones();
             draws.drawGems();
             draws.drawPotionsOrPills(pills);
             draws.drawPotionsOrPills(potions);
             draws.drawHealthAndText();
-     
+            draws.drawAmmo();
             draws.drawExplosion();
+
+            if(fallingSpaceShipL){
+                draws.drawNewSpaceShip(0);
+            }
+            if (fallingSpaceShipR) {
+                draws.drawNewSpaceShip(1);
+            }
 
         } else {
             if (gameOver) { //prevent the song to be play more than one time

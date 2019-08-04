@@ -14,17 +14,39 @@ class Draws {
         this.explosion = false;
         this.exploseindex = 0;
         this.index = [0 , 0, -150, -150,-300 ,-300, -450, -450]; //will allowed to move fom one image to another in birdImages
+        //this.index = [0 , -150,-300, -450]; //will allowed to move fom one image to another in birdImages
         this.trajectory = [0 , 0, 0, 0, 0 , 0, 0, 0];
-
+        //this.trajectory = [0 , 0, 0, 0];
+        // this.asstroIndex = 0;
     }
     drawNoseShip() {
-        image(spaceShip, width - noseX - 50, noseY - 50);
+        image(astro3, width - noseX - 50, noseY - 50, 150, 150);
     }
     drawLeftHandship(){
-        image(spaceShipLeftHand, width - leftHandX - 50, leftHandY - 50);
+        if (leftShipLife > 0) {
+            image(spaceShipLeftHand, width - leftHandX - 50, leftHandY - 50);
+            if(ammoL> 0){
+                this.drawLaser(leftHandX, leftHandY, laserLeftImg, 0, 30);
+                this.drawLaser(leftHandX, leftHandY, laserLeftImg, 2, 30);   
+                this.drawLaser(leftHandX, leftHandY, laserLeftImg, 4, -30);
+                this.drawLaser(leftHandX, leftHandY , laserLeftImg, 6, -30);
+                ammoL -=4;
+            }            
+        }
     }
     drawRightHandship(){
-        image(spaceShipRightHand, width - rightHandX - 50, rightHandY - 50);  
+        if (rightShipLife > 0) {
+            image(spaceShipRightHand, width - rightHandX - 50, rightHandY - 50);  
+            if (ammoR > 0) {
+                this.drawLaser(rightHandX, rightHandY, laserRightImg, 1, 30);
+                this.drawLaser(rightHandX, rightHandY, laserRightImg, 3, 30);   
+                this.drawLaser(rightHandX, rightHandY, laserRightImg, 5, -30);
+                this.drawLaser(rightHandX, rightHandY , laserRightImg, 7, -30);
+                ammoR -=4;
+            }
+                    
+
+        }
     }
 
     drawLaser(x, y, imageLaser, id, side){
@@ -50,37 +72,51 @@ class Draws {
     }
 
     shootStone(x, y){
-        // console.log('x :' + x);
-        // console.log('y :' + y);
-
-
         for (var i = 0; i < stones.length; i++) {
             if (stones[i].isOver(width, x, y)) {
                 let currentY = stones[i].currentYPosition();
                 this.explosionX = stones[i].position.x;
                 this.explosionY = currentY;
-                console.log('test');
                 stones.splice(i, 1);
                 this.explosion = true;
                 util.newStone(1);
-            }
-            
+            }            
         }
     }
-
 
     drawStones() {
         for (var i = stones.length - 1; i >= 0; i--) {
             let currentY = stones[i].currentYPosition();
             stones[i].display();
-            if (stones[i].isOver(width, noseX, noseY)) {
-                life = life + stones[i].getSante();
+            if (stones[i].isOver(width, noseX, noseY) ) {
+                asstroLife = asstroLife + stones[i].getSante();
                 this.explosionX = stones[i].position.x;
                 this.explosionY = currentY;
                 stones.splice(i, 1);
                 this.explosion = true;
             }
-
+            if (leftShipLife > 0 && stones[i].isOver(width, leftHandX, leftHandY) ) {
+                leftShipLife = leftShipLife + stones[i].getSante();
+                this.explosionX = stones[i].position.x;
+                this.explosionY = currentY;
+                stones.splice(i, 1);
+                this.explosion = true;
+            }
+            if (rightShipLife >  0 && stones[i].isOver(width, rightHandX, rightHandY) ) {
+                rightShipLife = rightShipLife + stones[i].getSante();
+                this.explosionX = stones[i].position.x;
+                this.explosionY = currentY;
+                stones.splice(i, 1);
+                this.explosion = true;
+            }
+            if (leftShipLife < 0) {
+                leftShipLife = 0;
+                util.newSpaceShip(0);
+            }
+            if (rightShipLife < 0) {
+                rightShipLife = 0;
+                util.newSpaceShip(1);
+            } 
             if (currentY > height) {
                 stones.splice(i, 1);
                 util.newStone(1);
@@ -109,9 +145,13 @@ class Draws {
             choice[i].display();
             if (choice[i].isOver(width, noseX, noseY)) {
                 catchGemSound.play();
-                life = life + choice[i].getSante();
-                if (life >= 100) {
-                    life = 100;
+                if (leftShipLife > 0) {
+                    leftShipLife = leftShipLife + (choice[i].getSante()/2);
+                    if (leftShipLife > 50) { leftShipLife = 50;}
+                }
+                if (rightShipLife > 0) {
+                    rightShipLife = rightShipLife + (choice[i].getSante()/2);
+                    if (rightShipLife > 50) { rightShipLife = 50;}     
                 }
                 choice.splice(i, 1);
                 if (choice == pills) {
@@ -131,6 +171,70 @@ class Draws {
             }
         }
     }
+    drawAmmo(){
+        for (var i = ammos.length - 1; i >= 0; i--) {
+            let currentY = ammos[i].currentYPosition();
+            ammos[i].display();
+            if (ammos[i].isOver(width, noseX, noseY)) {
+                ammoL += ammos[i].getAmmo()/2;
+                ammoR += ammos[i].getAmmo()/2;
+                ammos.splice(i, 1);
+                catchGemSound.play();
+                util.newAmmo(1);
+            }
+            if (ammos[i].isOver(width, leftHandX, leftHandY)) {
+                ammoL += ammos[i].getAmmo();
+                catchGemSound.play();
+                ammos.splice(i, 1);
+                util.newAmmo(1);
+            }
+            if (ammos[i].isOver(width, rightHandX, rightHandY)) {
+                ammoR += ammos[i].getAmmo();
+                catchGemSound.play();
+                ammos.splice(i, 1);
+                util.newAmmo(1);
+            }
+            if (currentY > height) {
+                ammos.splice(i, 1);
+                util.newAmmo(1);
+            }
+        }
+    }
+
+    drawNewSpaceShip(side){
+        if (side == 0) {
+            let currentY = newSpaceShiftL.currentYPosition();
+            newSpaceShiftL.display();
+            if (newSpaceShiftL.isOver(width, noseX, noseY)) {
+                fallingSpaceShipL= false;
+                leftShipLife = 50;
+                ammoL = 1200;
+                catchGemSound.play();
+            }
+            if (currentY > height) {
+                fallingSpaceShipL= false;
+                util.newSpaceShip(0);
+            }
+        }
+        
+        if (side == 1) {
+            let currentY = newSpaceShiftR.currentYPosition();
+            newSpaceShiftR.display();
+            if (newSpaceShiftR.isOver(width, noseX, noseY)) {
+                fallingSpaceShipR= false;
+                rightShipLife = 50;
+                ammoR = 1200;
+                catchGemSound.play();
+            }
+            if (currentY > height) {
+                fallingSpaceShipR= false;
+                util.newSpaceShip(1);
+            }
+        }
+            
+    }
+
+
     drawExplosion() {
         if (this.explosion) {
             explosionSound.play();
@@ -147,14 +251,24 @@ class Draws {
         noStroke();
         fill(255);
         textSize(20);
-        text("Santé", 45, 20);
+        text("UFO gauche", 100, 20);
         stroke(255);
         strokeWeight(2);
         noFill();
         rect(18, 28, 250, 22);
         noStroke();
         fill(81, 221, 37);
-        rect(19, 28, map(life, 0, 100, 0, 248), 21);
+        rect(19, 28, map(leftShipLife, 0, 50, 0, 248), 21);
+        
+        fill(255);
+        text("UFO droite", 100, 75);
+        stroke(255);
+        strokeWeight(2);
+        noFill();
+        rect(18, 80, 250, 22);
+        noStroke();
+        fill(81, 221, 37);
+        rect(19, 80, map(rightShipLife, 0, 50, 0, 248), 21);
         //Points
         push();
         textAlign(CENTER);
