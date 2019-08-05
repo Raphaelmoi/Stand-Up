@@ -3,7 +3,7 @@ class FallingItems {
     constructor(x) {
         this.y = random(-2000, -100);
         this.position = createVector(x, this.y); // initiate at a random spot
-        this.speed = random(1, 3) + level / 200; // Maximum speed
+        this.speed = (random(1, 3) + level / 200)* screenSizeAdaptator; // Maximum speed
         this.fall = 0; //falling constant
         this.newPosition = 0;
     }

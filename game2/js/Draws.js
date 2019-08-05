@@ -36,7 +36,7 @@ class Draws {
         }
     }
     drawNoseShip() {
-        image(astroImg, width - noseX - 50, noseY - 50, 150, 150);
+        image(astroImg, width - noseX - 50, noseY - 50, 180*screenSizeAdaptator, 180*screenSizeAdaptator);
     }
     drawLeftEarship(){
         if (leftShipLife > 0) {
@@ -89,6 +89,7 @@ class Draws {
                 stones.splice(i, 1);
                 this.explosion = true;
                 util.newStone(1);
+                explosedStones ++;
             }            
         }
     }
@@ -132,7 +133,7 @@ class Draws {
             boxGems[i].display();
             if (boxGems[i].isOver(width, noseX, noseY)) {
                 boxGems.splice(i, 1);
-                score++;
+                collectedGems++;
                 catchGemSound.play();
                 util.newGem(1);
             }
@@ -198,6 +199,8 @@ class Draws {
                 ammos.splice(i, 1);
                 util.newAmmo(1);
             }
+            if (ammoL>3000) { ammoL =3000;}
+            if (ammoR>3000) { ammoR =3000;}
         }
     }
     drawNewSpaceShip(side){
@@ -243,26 +246,49 @@ class Draws {
         //health bar
         noStroke();
         fill(255);
-        textSize(20);
+        textSize(16*screenSizeAdaptator);
         textAlign(LEFT);
-        text("Vaisseau bleu, munitions : " + ammoL, 10, 20);
+        text("Vaisseau bleu", 18*screenSizeAdaptator, 19*screenSizeAdaptator);
         stroke(255);
         strokeWeight(2);
         noFill();
-        rect(18, 28, 250, 22);
+        rect(18*screenSizeAdaptator, 28*screenSizeAdaptator, 250*screenSizeAdaptator, 22*screenSizeAdaptator);
         noStroke();
         fill(81, 221, 37);
-        rect(19, 28, map(leftShipLife, 0, 50, 0, 248), 21);
-        
+        rect(19*screenSizeAdaptator, 28*screenSizeAdaptator, map(leftShipLife, 0, 50, 0, 248*screenSizeAdaptator), 21*screenSizeAdaptator);
+        noStroke();        
+        stroke(255);
+        strokeWeight(2);
+        noFill();
+        rect(280*screenSizeAdaptator, 28*screenSizeAdaptator, 150*screenSizeAdaptator, 22*screenSizeAdaptator);
+        noStroke();
+        fill(93, 64, 56);
+        rect(280*screenSizeAdaptator, 29*screenSizeAdaptator, map(ammoL, 0, 3000, 0, 150*screenSizeAdaptator), 20*screenSizeAdaptator);
         fill(255);
-        text("Vaisseau orange, munitions : " + ammoR, 10, 75);
+        text('Munitions' , 282*screenSizeAdaptator, 19*screenSizeAdaptator)
+        text(ammoL, 282*screenSizeAdaptator, 44*screenSizeAdaptator);
+
+        text("Vaisseau orange", 18*screenSizeAdaptator, 72*screenSizeAdaptator);
         stroke(255);
         strokeWeight(2);
         noFill();
-        rect(18, 80, 250, 22);
+        rect(18*screenSizeAdaptator, 80*screenSizeAdaptator, 250*screenSizeAdaptator, 22*screenSizeAdaptator);
         noStroke();
         fill(81, 221, 37);
-        rect(19, 80, map(rightShipLife, 0, 50, 0, 248), 21);
+        rect(19*screenSizeAdaptator, 80*screenSizeAdaptator, map(rightShipLife, 0, 50, 0, 248*screenSizeAdaptator), 21*screenSizeAdaptator);
+        noStroke();        
+        stroke(255);
+        strokeWeight(2);
+        noFill();
+        rect(280*screenSizeAdaptator, 80*screenSizeAdaptator, 150*screenSizeAdaptator, 22*screenSizeAdaptator);
+        noStroke();
+        fill(93, 64, 56);
+        rect(280*screenSizeAdaptator, 81*screenSizeAdaptator, map(ammoR, 0, 3000, 0, 150*screenSizeAdaptator), 20*screenSizeAdaptator);
+        fill(255);
+        text('Munitions' , 282*screenSizeAdaptator, 72*screenSizeAdaptator)
+        text(ammoR, 282*screenSizeAdaptator, 98*screenSizeAdaptator);
+
+
         //Points
         push();
         textAlign(CENTER);
@@ -272,7 +298,7 @@ class Draws {
         fill(255);
         text(" Score : ", width - 120, 30);
         textSize(24);
-        text(score * level, width - 50, 30);
+        text((collectedGems * level) + explosedStones, width - 50, 30);
         pop();
     }
 }

@@ -3,7 +3,8 @@ let poseNet;
 let screenSizeAdaptator;
 let readyToStart = false;
 let gameOver = true;
-let score = 0;
+let collectedGems = 0;
+let explosedStones = 0;
 let level = 1;
 let asstroLife = 1;
 let leftShipLife = 50, rightShipLife = 50;
@@ -16,7 +17,7 @@ let laserX = 0, laserY = 0;//laser position
 //determine if a new spaceShip item have to fall
 let fallingSpaceShipL = false, fallingSpaceShipR = false;
 //loading animation
-let loadingAnimation, deadAstroGif;
+let loadingAnimation;
 //Images
 let imgBackground;
 let imgStone0, imgStone1, imgStone2, imgStone3, imgStone4, imgStone5, imgStone6, imgStone7;
@@ -37,7 +38,7 @@ let laserLeftImg, laserRightImg;//laser img
 let fallingShipL, fallingShipR; //img of falling ufo
 let newSpaceShipL, newSpaceShipR;//the future object of falling ship
 
-let explosionSound, catchGemSound, gameoverSound;
+let explosionSound, catchGemSound, gameoverSound, startSound;
 let util, draws;
 
 function preload() {
@@ -60,7 +61,7 @@ function preload() {
     pillImg = loadImage('img/pill.png');
     potionImg = loadImage('img/potion.png');
     ammoImg = loadImage('img/ammo.png');
-    astroImg  = loadImage('img/assto2.png');
+    astroImg  = loadImage('img/assto7.png');
     spaceShipLeftEar = loadImage('img/PNG/playerShip2_blue.png');
     spaceShipRightEar = loadImage('img/PNG/playerShip2_orange.png');
     laserLeftImg = loadImage('img/PNG/Lasers/laserBlue16.png');
@@ -72,6 +73,7 @@ function preload() {
     explosionSound = loadSound('sound/fall.wav');
     catchGemSound = loadSound('sound/coin.wav');
     gameoverSound = loadSound('sound/round_end.wav');
+    startSound = loadSound('sound/start73.mp3');
 }
 
 function setup() {
@@ -98,20 +100,19 @@ function setup() {
     util.newPotion(1);
     util.newAmmo(3);
     //fixed position for the astronaute(noseY)
-    noseY = height-110;
+    noseY = height-(110 * screenSizeAdaptator);
 }
 
 function modelReady() {
     console.log('model ready');
     readyToStart = true;
     loadingAnimation.addClass('display-none');
-    deadAstroGif = select('.deadAstro');
 }
 
 function draw() {
     if (readyToStart) {
         //win a level every 7 gems catch
-        if (score >= level * 7) {
+        if (collectedGems >= level * 7) {
             level++;
             util.newStone(5);
             util.newGem(1);
@@ -130,14 +131,12 @@ function draw() {
             if (gameOver) { //prevent the song to be play more than one time
                 gameoverSound.play();
                 gameOver = false;
-                background(0);
-                deadAstroGif.removeClass('display-none');
-                deadAstroGif.addClass('deadAstro');
+                //background(0);
                 fill(244, 36, 36);
                 textSize(40);
                 textAlign(CENTER);
                 text("GAME OVER", width / 2, height / 3);
-                text("SCORE : " + score * level + (', pierres : ') + score, width / 2, height / 2);
+                text("SCORE : " + (collectedGems * level + explosedStones ) , width / 2, height / 2);
             }
         }
     } //if still loading        
@@ -148,6 +147,7 @@ function draw() {
         textSize(40);
         textAlign(CENTER);
         text("GAME IS LOADING...", width / 2, height / 2);
+        startSound.play();
     }
 }
 //give body position from the ml5 posenet.on
