@@ -36,7 +36,7 @@ class Draws {
             let currentY = stones[i].currentYPosition();
             stones[i].display();
             if (stones[i].isOver(width, noseX, noseY)) {
-                asstroLife = asstroLife + stones[i].getSante();
+                life = life + stones[i].getSante();
                 this.explosionX = stones[i].position.x;
                 this.explosionY = currentY;
                 stones.splice(i, 1);
@@ -70,10 +70,10 @@ class Draws {
             choice[i].display();
             if (choice[i].isOver(width, noseX, noseY)) {
                 catchGemSound.play();
-                //life = life + choice[i].getSante();
-                // if (life >= 100) {
-                //     life = 100;
-                // }
+                life = life + choice[i].getSante();
+                if (life >= 100) {
+                    life = 100;
+                }
                 choice.splice(i, 1);
                 if (choice == pills) {
                     util.newPill(1);

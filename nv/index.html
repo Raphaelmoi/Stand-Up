@@ -1,0 +1,131 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Stand up</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Architects+Daughter&display=swap" rel="stylesheet">
+
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
+    <script src="https://unpkg.com/ml5@0.3.1/dist/ml5.min.js"></script>
+<!--     <script src="Util.js"></script>
+    <script src="sketch.js"></script>
+    <script type="text/javascript" src="Draws.js"></script> -->
+</head>
+<body>
+    <header id="bigHeader">
+        <div class="connect">
+            <div>
+                <a href="#">Inscription</a>
+            </div>
+            <div>
+                <a href="#">
+                    <i class="fas fa-user"><span>Connexion </span></i>
+                </a>                
+            </div>
+
+        </div>
+        <h1> STAND UP !</h1>
+        <div id="triangleYellow">  
+        </div>
+        <div id='traingleTranspa'></div>
+    </header>
+
+    <header id="smallHeader">
+        <div class="connect">
+            <div>
+                <a href="#">Inscription</a>
+            </div>
+            <div>
+                <a href="#">
+                    <i class="fas fa-user"><span>Connexion </span></i>
+                </a>                
+            </div>
+        </div>
+        <h1> stand up !</h1>
+    </header>
+    <img src="assto2.png" class="birdImg">      
+    <img src="assto2.png" class="birdImg deux">   
+
+    <section >
+    <img src="G10.jpg" class="backgroundImg">      
+
+        <article>
+            <h2>Esquivez les météorites et attrapez un maximum de pierres préciseuses</h2>
+            <div class="displayGame">
+                <a href="">
+                    <img src="sc.jpg">
+                    <div class="unlockedGame"> jeux 1</div>
+                </a>
+                <a href="">
+                    <img src="assto4.png">
+                    <div class="lockedGame"><i class="fas fa-lock"></i></div>
+                </a>
+            </div>
+            <p>Grâce à votre webcam, ces jeux se jouent avec la position de votre nez ou de vos oreilles (ou autre organes).</p>
+            <p><a href="">Inscrivez-vous</a> et rejoignez la communauté de StandUp! </p>
+
+        </article>
+
+    </section>
+            <div class="button">Jouer</div>
+
+<script type="text/javascript">
+
+    window.onscroll = function() {
+        myFunction()
+    };
+
+    function myFunction() {
+        if (document.body.scrollTop > 380 || document.documentElement.scrollTop > 380) {
+            document.getElementById('bigHeader').style.display = 'none';
+            document.getElementById('smallHeader').style.display = 'block';      
+            document.getElementById('smallHeader').style.height = '40px'; 
+            document.getElementsByTagName('h1')[1].style.fontSize = '30px'; 
+            document.getElementsByTagName('h1')[1].style.lineHeight = '30px';
+            document.getElementsByClassName('birdImg')[1].style.width = '0';
+
+       }
+        else if (document.body.scrollTop > 120 || document.documentElement.scrollTop > 120) {
+            document.getElementById('bigHeader').style.display = 'none';
+            document.getElementById('smallHeader').style.display = 'block';
+            document.getElementById('smallHeader').style.height = '100px';     
+            document.getElementsByTagName('h1')[1].style.fontSize = '50px';   
+            document.getElementsByTagName('h1')[1].style.lineHeight = '100px';
+            document.getElementsByClassName('birdImg')[0].style.width = '0';
+            document.getElementsByClassName('birdImg')[1].style.width = '100px';
+            document.getElementsByClassName('birdImg')[1].style.top = '10px';
+
+        }
+        else{
+            // let triangleOpacity = document.getElementById(traingleTranspa);
+
+            // if (triangleOpacity != null) {
+            //     triangleOpacity.style.opacity = document.body.scrollTop > 70;
+            // }
+
+
+
+            document.getElementById('bigHeader').style.display = 'block';
+            document.getElementById('smallHeader').style.display = 'none';    
+            document.getElementsByClassName('birdImg')[0].style.width = '200px'; 
+            document.getElementsByClassName('birdImg')[1].style.width = '200px';
+            document.getElementsByClassName('birdImg')[1].style.top = '50px';
+
+
+        }
+    }
+
+    
+
+
+</script>
+</body>
+</html>
+

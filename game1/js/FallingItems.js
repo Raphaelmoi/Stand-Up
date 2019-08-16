@@ -21,7 +21,7 @@ class FallingItems {
         let newPosition = width - mX;
         let vertical = this.position.y + this.fall * this.speed;
 
-        if (dist(newPosition, mY, this.position.x, vertical) <= this.elementSize) {
+        if (dist(newPosition, mY, this.position.x, vertical) <= this.elementSize*0.9) {
             return true;
         } else {
             return false;

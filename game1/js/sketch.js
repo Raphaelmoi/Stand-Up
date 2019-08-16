@@ -32,9 +32,11 @@ let explose = [];
 let imgBirdSprite;
 let bird = [];
 //sound
-let explosionSound, catchGemSound, gameoverSound;
+let explosionSound, catchGemSound, gameoverSound, startSound;
 
 let util, draws;
+let soundAlreadyPlay = false;
+
 
 function preload() {
     imgBackground = loadImage('img/sky.jpg');
@@ -61,6 +63,7 @@ function preload() {
     explosionSound = loadSound('sound/fall.wav');
     catchGemSound = loadSound('sound/coin.wav');
     gameoverSound = loadSound('sound/round_end.wav');
+    startSound = loadSound('sound/start73.mp3');
 }
 
 function setup() {
@@ -98,6 +101,10 @@ function modelReady() {
 
 function draw() {
     if (readyToStart) {
+        if (!soundAlreadyPlay) {
+            startSound.play();
+            soundAlreadyPlay = true;
+        }
         //win a level every 7 gems catch
         if (score >= level * 7) {
             level++;
@@ -130,7 +137,7 @@ function draw() {
                 textSize(40);
                 textAlign(CENTER);
                 text("GAME OVER", width / 2, height / 3);
-                text("SCORE : " + score * level + (', pierres : ') + score, width / 2, height / 2);
+                text("SCORE : " + score * level, width / 2, height / 2);
             }
         }
     } //if still loading        

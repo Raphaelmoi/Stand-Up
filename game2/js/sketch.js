@@ -39,10 +39,12 @@ let fallingShipL, fallingShipR; //img of falling ufo
 let newSpaceShipL, newSpaceShipR;//the future object of falling ship
 
 let explosionSound, catchGemSound, gameoverSound, startSound;
+let soundAlreadyPlay = false;
 let util, draws;
 
 function preload() {
     imgBackground = loadImage('img/sky.jpg');
+
     imgStone0 = loadImage('img/stone0.png');
     imgStone1 = loadImage('img/stone1.png');
     imgStone2 = loadImage('img/stone2.png');
@@ -111,6 +113,10 @@ function modelReady() {
 
 function draw() {
     if (readyToStart) {
+        if (!soundAlreadyPlay) {
+            startSound.play();
+            soundAlreadyPlay = true;
+        }
         //win a level every 7 gems catch
         if (collectedGems >= level * 7) {
             level++;
@@ -147,7 +153,6 @@ function draw() {
         textSize(40);
         textAlign(CENTER);
         text("GAME IS LOADING...", width / 2, height / 2);
-        startSound.play();
     }
 }
 //give body position from the ml5 posenet.on
