@@ -4,19 +4,12 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Stand up</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-
-
-<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Architects+Daughter&display=swap" rel="stylesheet">
-
-
-<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Architects+Daughter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
     <script src="https://unpkg.com/ml5@0.3.1/dist/ml5.min.js"></script>
-<!--     <script src="Util.js"></script>
-    <script src="sketch.js"></script>
-    <script type="text/javascript" src="Draws.js"></script> -->
 </head>
 <body>
     <header id="bigHeader">
@@ -32,9 +25,21 @@
 
         </div>
         <h1> STAND UP !</h1>
-        <div id="triangleYellow">  
-        </div>
-        <div id='traingleTranspa'></div>
+<!--          <form class= "connexionBox">
+            <h2>Se connecter</h2>
+            <input type="name" name="name" placeholder="Pseudo">
+            <input type="password" name="pass" placeholder="mot de passe">
+        </form> -->
+        <!-- <form class="inscriptionBox">
+            <h2>S'inscrire</h2>
+            <input type="name" name="name" placeholder="Pseudo">
+            <input type="password" name="pass" placeholder="mot de passe">
+            <input type="password" name="pass" placeholder=" Confirmez mot de passe">
+            <input type="mail" name="mail" placeholder="adresse email">
+            <div> image </div>
+        </form> -->
+        <div id="triangleYellow"></div>
+        <div id='triangleTranspa'></div>
     </header>
 
     <header id="smallHeader">
@@ -48,83 +53,185 @@
                 </a>                
             </div>
         </div>
-        <h1> stand up !</h1>
+        <h1> Stand up !</h1>
     </header>
-    <img src="assto2.png" class="birdImg">      
-    <img src="assto2.png" class="birdImg deux">   
+    <img src="assto2.png" class="astroImg">      
+    <img src="assto2.png" class="astroImg deux"> 
 
-    <section >
     <img src="G10.jpg" class="backgroundImg">      
 
+    <section >
         <article>
             <h2>Esquivez les météorites et attrapez un maximum de pierres préciseuses</h2>
-            <div class="displayGame">
-                <a href="">
-                    <img src="sc.jpg">
-                    <div class="unlockedGame"> jeux 1</div>
-                </a>
-                <a href="">
-                    <img src="assto4.png">
-                    <div class="lockedGame"><i class="fas fa-lock"></i></div>
+
+            <div class="startGame">
+                <a href="#"> 
+                    <img src="g10.jpg">
+                    <div > 
+                        <h3> Finger in the noise</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
                 </a>
             </div>
-            <p>Grâce à votre webcam, ces jeux se jouent avec la position de votre nez ou de vos oreilles (ou autre organes).</p>
-            <p><a href="">Inscrivez-vous</a> et rejoignez la communauté de StandUp! </p>
+        </article>
+        <article class="deuxiemeArticle">
+            <h2>--- Tous les jeux --- </h2>
+            <div class="displayGame">
+                <div id="contenuOfDisplayGame">
+                     <a href="">
+                        <img src="sc.jpg">
+                        <div class="unlockedGame"> jeux 1</div>
+                    </a>
+                    <a href="">
+                        <img src="assto4.png">
+                        <div class="lockedGame"><i class="fas fa-lock"></i></div>
+                    </a>
+                    <a href="">
+                        <img src="assto4.png">
+                        <div class="lockedGame"><i class="fas fa-lock"></i></div>
+                    </a>
+                    <a href="">
+                        <img src="assto4.png">
+                        <div class="lockedGame"><i class="fas fa-lock"></i></div>
+                    </a>                   
+                </div>
+            </div>
+            <div id='scrollerbox'>
+                <button id='scroller'></button>
+            </div>
 
+            <p>Grâce à votre webcam, ces jeux se jouent avec la position de votre nez ou de vos oreilles (ou autre organes).</p>
+            <p>Vous devez atteindre 200 points pour accéder au deuxième jeu et être connecter pour jouer aux autres jeux</p>
+            <p><a href="">Inscrivez-vous</a> et rejoignez la communauté de StandUp! </p>
         </article>
 
     </section>
-            <div class="button">Jouer</div>
-
+<!--     <div class="button">Jouer</div>
+ -->
 <script type="text/javascript">
 
     window.onscroll = function() {
-        myFunction()
+        adaptableMenu();
     };
+    function adaptableMenu() {
+        let astroLeft = document.getElementsByClassName('astroImg')[0];
+        let astroRight = document.getElementsByClassName('astroImg')[1];
+        let smallTitle = document.getElementsByTagName('h1')[1];
+        let smallHeader = document.getElementById('smallHeader');
 
-    function myFunction() {
         if (document.body.scrollTop > 380 || document.documentElement.scrollTop > 380) {
             document.getElementById('bigHeader').style.display = 'none';
-            document.getElementById('smallHeader').style.display = 'block';      
-            document.getElementById('smallHeader').style.height = '40px'; 
-            document.getElementsByTagName('h1')[1].style.fontSize = '30px'; 
-            document.getElementsByTagName('h1')[1].style.lineHeight = '30px';
-            document.getElementsByClassName('birdImg')[1].style.width = '0';
-
+            smallHeader.style.display = 'block';      
+            smallHeader.style.height = '40px'; 
+            smallTitle.style.fontSize = '30px'; 
+            smallTitle.style.lineHeight = '30px';
+            astroRight.style.width = '0';
        }
         else if (document.body.scrollTop > 120 || document.documentElement.scrollTop > 120) {
             document.getElementById('bigHeader').style.display = 'none';
-            document.getElementById('smallHeader').style.display = 'block';
-            document.getElementById('smallHeader').style.height = '100px';     
-            document.getElementsByTagName('h1')[1].style.fontSize = '50px';   
-            document.getElementsByTagName('h1')[1].style.lineHeight = '100px';
-            document.getElementsByClassName('birdImg')[0].style.width = '0';
-            document.getElementsByClassName('birdImg')[1].style.width = '100px';
-            document.getElementsByClassName('birdImg')[1].style.top = '10px';
-
+            smallHeader.style.display = 'block';
+            smallHeader.style.height = '100px';     
+            smallTitle.style.fontSize = '50px';   
+            smallTitle.style.lineHeight = '100px';
+            astroLeft.style.width = '0';
+            astroRight.style.width = '100px';
+            astroRight.style.top = '10px';
         }
         else{
-            // let triangleOpacity = document.getElementById(traingleTranspa);
-
-            // if (triangleOpacity != null) {
-            //     triangleOpacity.style.opacity = document.body.scrollTop > 70;
-            // }
-
-
-
             document.getElementById('bigHeader').style.display = 'block';
-            document.getElementById('smallHeader').style.display = 'none';    
-            document.getElementsByClassName('birdImg')[0].style.width = '200px'; 
-            document.getElementsByClassName('birdImg')[1].style.width = '200px';
-            document.getElementsByClassName('birdImg')[1].style.top = '50px';
-
-
+            smallHeader.style.display = 'none';    
+            astroLeft.style.width = '200px'; 
+            astroRight.style.width = '200px';
+            astroRight.style.top = '50px';
         }
     }
 
-    
+                
+    let scrollerBox = document.getElementById('scrollerbox');
+    let btnScroll = document.getElementById('scroller');
+    let boxImg = document.getElementById('contenuOfDisplayGame');
+    let positionX = 0;
+    let scrollerboxWidth = scrollerbox.offsetWidth;
+    let btnScrollWidth = btnScroll.offsetWidth;
 
 
+    function findPos(el) {
+        var x = 0;
+        if(el.offsetParent) {
+            x = el.offsetLeft;
+            while(el = el.offsetParent) {
+                x += el.offsetLeft;
+            }
+        }
+        return x;
+    }
+
+    // quand on click
+
+    scrollerBox.addEventListener('mousedown',function(e) {
+        moveItem(e);
+        // tant que click maintenue on recupere mvt
+        scrollerBox.addEventListener('mousemove',
+         moveItem, false);
+    }, false);
+
+    scrollerBox.addEventListener('click', function() {
+        scrollerBox.removeEventListener('mousemove', moveItem, false)
+    }, false);
+
+    function moveItem(e){
+            var ev = e || document.event;
+            var pos = findPos(scrollerbox);
+            positionX = ev.clientX - pos;
+            // console.log(positionX)
+            boxImg.style.right = positionX- btnScrollWidth;
+            //if x plus grand que la taille de la barre moins celle du bouton divisé par 2 soit position souris
+            if (positionX >= scrollerboxWidth - btnScrollWidth/2) {
+                btnScroll.style.left =  scrollerboxWidth - btnScrollWidth;
+                boxImg.style.right =  scrollerboxWidth - 2*btnScrollWidth;
+            }   //if x plus petit que la taille de la barre moins celle du boutond 
+            else if (positionX <= btnScrollWidth/2){
+                btnScroll.style.left = 0; 
+                boxImg.style.right = 0;
+            }
+            else{
+                btnScroll.style.left = positionX - btnScrollWidth/2;
+            }
+        }
+
+    window.onkeydown = function(e) {
+        let key = e.keyCode;
+        if (key == 37) { //Left Arrow
+            positionX -= btnScrollWidth; 
+            if (positionX < 0) {
+                positionX = 0;
+            }
+            else {
+                btnScroll.style.left = positionX +'px';
+                boxImg.style.right =  positionX +'px';
+            }
+        } 
+
+        else if (key == 39) { //Right Arrow
+            if (positionX + btnScrollWidth < scrollerboxWidth) {
+                positionX += btnScrollWidth; 
+
+                btnScroll.style.left = positionX +'px';
+                boxImg.style.right =  positionX  +'px';
+
+                if (positionX + btnScrollWidth >= scrollerboxWidth) {
+                    // console.log(scrollerboxWidth  - btnScrollWidth);
+                    boxImg.style.right = scrollerboxWidth  - 2*btnScrollWidth;
+                    btnScroll.style.left = scrollerboxWidth - btnScrollWidth;
+                }
+            }
+        }
+    }
 </script>
 </body>
 </html>
