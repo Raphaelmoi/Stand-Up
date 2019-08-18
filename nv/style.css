@@ -69,7 +69,7 @@ article p
     border-left: 1000px solid transparent;
     border-right: 1000px solid transparent;
     border-top: 100px solid #fdd835;
-    z-index: 0;
+    z-index: -1;
 }
 #triangleTranspa{
 	position: absolute;
@@ -81,7 +81,7 @@ article p
     border-left: 1100px solid transparent;
     border-right: 1100px solid transparent;
     border-top: 117px solid #0288d1;
-    z-index: -1
+    z-index: -2;
 }
 
 #bigHeader

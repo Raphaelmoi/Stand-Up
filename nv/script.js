@@ -4,33 +4,57 @@ window.onscroll = function() {
     function adaptableMenu() {
         let astroLeft = document.getElementsByClassName('astroImg')[0];
         let astroRight = document.getElementsByClassName('astroImg')[1];
-        let smallTitle = document.getElementsByTagName('h1')[1];
         let smallHeader = document.getElementById('smallHeader');
+        let triangleYellow = document.getElementById('triangleYellow');
+        let triangleTranspa = document.getElementById('triangleTranspa');
+        let bigHeader = document.getElementById('bigHeader');
+        let titleH1 = document.getElementsByTagName('h1')[0];
+        let smallTitle = document.getElementsByTagName('h1')[1];
+        let Yposition = window.scrollY;
 
-        if (document.body.scrollTop > 380 || document.documentElement.scrollTop > 380) {
+        if (Yposition > 145) {
             document.getElementById('bigHeader').style.display = 'none';
             smallHeader.style.display = 'block';      
             smallHeader.style.height = '40px'; 
             smallTitle.style.fontSize = '30px'; 
             smallTitle.style.lineHeight = '30px';
             astroRight.style.width = '0';
-       }
-        else if (document.body.scrollTop > 120 || document.documentElement.scrollTop > 120) {
-            document.getElementById('bigHeader').style.display = 'none';
-            smallHeader.style.display = 'block';
-            smallHeader.style.height = '100px';     
-            smallTitle.style.fontSize = '50px';   
-            smallTitle.style.lineHeight = '100px';
             astroLeft.style.width = '0';
-            astroRight.style.width = '100px';
-            astroRight.style.top = '10px';
-        }
-        else{
-            document.getElementById('bigHeader').style.display = 'block';
+       }
+        else if (Yposition <= 145){
+            bigHeader.style.display = 'block';
             smallHeader.style.display = 'none';    
-            astroLeft.style.width = '200px'; 
-            astroRight.style.width = '200px';
-            astroRight.style.top = '50px';
+            console.log('astroLeft.offsetWidth' + astroLeft.offsetWidth)
+            astroLeft.style.width =  200 - Yposition + 'px'; 
+            astroRight.style.width = 200 - Yposition + 'px';
+            astroLeft.style.opacity = 1 - Yposition/100;
+
+            bigHeader.style.height =  210 -  Yposition;
+            triangleTranspa.style.top = 200 -  Yposition;
+            triangleYellow.style.top = 200 -  Yposition;
+
+            triangleYellow.style.borderTop = 100 - Yposition /2 + "px solid #fdd835";
+            triangleTranspa.style.borderLeft = 1100 + Yposition + "px solid transparent";
+            triangleTranspa.style.borderRight = 1100 + Yposition + "px solid transparent";  
+            titleH1.style.fontSize = 120 - Yposition/2;
+            titleH1.style.lineHeight = (210- Yposition) +'px';
+
+            if (Yposition > 130) {
+                triangleTranspa.style.borderTop = 117 - Yposition  + "px solid transparent";
+                astroRight.style.top = 10 + 'px';
+                titleH1.style.transform = "rotate(-2deg)"; 
+            }
+            else if(Yposition > 70){
+                titleH1.style.transform = "rotate(-4deg)"; 
+                astroRight.style.top = 50 - Yposition/3 + 'px';
+                triangleTranspa.style.borderTop = 117 - Yposition/2   + "px solid #0288d1";
+            }
+            else
+            {
+                triangleTranspa.style.borderTop = 117 - Yposition /2  + "px solid #0288d1";
+                astroRight.style.top = 50 - Yposition/2 + 'px';
+                titleH1.style.transform = "rotate(-6deg)"; 
+            }                             
         }
     }
 
