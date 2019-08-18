@@ -1,18 +1,10 @@
-<html>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Stand up</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Architects+Daughter&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
-    <script src="https://unpkg.com/ml5@0.3.1/dist/ml5.min.js"></script>
-</head>
-<body>
-    <header id="bigHeader">
+<!-- HOME PAGE -->
+<?php
+$title = 'page principale';
+ob_start();
+
+?>
+<header id="bigHeader">
         <div class="connect">
             <div>
                 <a href="#">Inscription</a>
@@ -55,8 +47,8 @@
         </div>
         <h1> Stand up !</h1>
     </header>
-    <img src="assto2.png" class="astroImg">      
-    <img src="assto2.png" class="astroImg astroImgTwo"> 
+    <img src="public/img/assto2.png" class="astroImg">      
+    <img src="public/img/assto2.png" class="astroImg astroImgTwo"> 
 
     <section >
         <article class="premierArticle">
@@ -64,7 +56,7 @@
 
             <div class="startGame">
                 <a href="#"> 
-                    <img src="g10.jpg">
+                    <img src="public/img/g10.jpg">
                     <div class="titleBtn">Commencer la partie</div>
 
                     <div class="panel"> 
@@ -84,19 +76,19 @@
             <div class="displayGame">
                 <div id="contenuOfDisplayGame">
                      <a href="">
-                        <img src="sc.jpg">
+                        <img src="public/img/sc.jpg">
                         <div class="unlockedGame"> jeux 1</div>
                     </a>
                     <a href="">
-                        <img src="G10.jpg">
+                        <img src="public/img/G10.jpg">
                         <div class="lockedGame"><i class="fas fa-lock">2</i></div>
                     </a>
                     <a href="">
-                        <img src="assto4.png">
+                        <img src="public/img/assto4.png">
                         <div class="lockedGame"><i class="fas fa-lock">3</i></div>
                     </a>
                     <a href="">
-                        <img src="G10.jpg">
+                        <img src="public/img/G10.jpg">
                         <div class="lockedGame"><i class="fas fa-lock">4</i></div>
                     </a>  
                  
@@ -112,11 +104,9 @@
         </article>
 
     </section>
-<!--     <div class="button">Jouer</div>
- -->
-<script type="text/javascript" src="script.js">
-   
-</script>
-</body>
-</html>
 
+<?php 
+
+$content = ob_get_clean();
+require ('template.php'); 
+?>

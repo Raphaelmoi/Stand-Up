@@ -1,8 +1,8 @@
 body, html{
 	margin: 0;
 	background-color: #111;
-	background: url('G10.jpg') center;
-	    background-size: cover;
+	background: url('../img/G10.jpg') center;
+	background-size: cover;
     background-repeat: no-repeat;
   	background-attachment: fixed;
 }
