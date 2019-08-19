@@ -7,8 +7,14 @@ try {
     if (isset($_GET['action'])) {
         //---VIEWS---
         //HOME
-        if ($_GET['action'] == 'listPosts') {
-            $controller -> listPosts();
+        if ($_GET['action'] == 'homePage') {
+            $controller -> homePage();
+        }
+        else if ($_GET['action'] == 'signin') {
+            $controller -> signIn();
+        }
+        else if ($_GET['action'] == 'signup'){
+        	$controller -> signUp();
         }
     }
     else {

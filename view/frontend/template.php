@@ -14,10 +14,14 @@
     </head>
 
     <body>
+        <?php
+        include('view/frontend/headerFrontSide.php');
+        echo $alertBox;
+        ?>
+
         <?= $content ?> 
-        
 
-
-    <script type="text/javascript" src="public/js/script.js"></script>
+        <script type="text/javascript" src="public/js/scrollbar.js"></script>
+        <script type="text/javascript" src="public/js/menu.js"></script>
     </body>
 </html>
