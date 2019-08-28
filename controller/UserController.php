@@ -12,16 +12,7 @@ class UserController{
 	public function logIn($pseudo, $pass)
 	{
 		require_once("model/UserManager.php"); 
-		/*verifie la bonne recuperation des donnees d'un connexion en cours*/
-		$connexionIsOn = true;
 
-		// if (isset($_POST['connexion_pseudo']) AND isset($_POST['connexion_motdepasse']) )
-		// {
-		// 	$pseudo = htmlspecialchars($_POST['connexion_pseudo']);
-		// 	$motdepasse = htmlspecialchars($_POST['connexion_motdepasse']);
-		// 	$connexionIsOn = true;
-		// }
-	   	if ($connexionIsOn == true) {
 		    $connexionManager = new UserManager();
 		    $count = $connexionManager -> count($pseudo);
 		    echo $count;
@@ -32,8 +23,7 @@ class UserController{
 					if (empty($_SESSION['pseudo'])) {
 						if (password_verify($pass, $donnees['pass'])) {
 					    	$_SESSION['pseudo'] = $donnees['pseudo'];
-					    	header('Location: /projet5/index.php?action=homeControl&success=connexion&pseudo='.$donnees['pseudo']);
-					    	echo "connected";
+					    	header('Location: /projet5/index.php?action=backendHome&pseudo='.$donnees['pseudo']);
 					    }
 					    else {
 							header('Location: index.php?action=connect&erreur=3');
@@ -44,9 +34,6 @@ class UserController{
 				}
 				$req->closeCursor(); 
 			}
-			else
-				header('Location: index.php?action=connect&erreur=1');
-		}
 	}
 	public function logOut()
 	{
@@ -54,7 +41,7 @@ class UserController{
 		// delete current session and global variable SESSION
 		$_SESSION = array();
 		session_destroy();
-		header('Location: /projet4/index.php?success=disconnect');
+		header('Location: /projet5/index.php?success=disconnect');
 	}
 
 	public function newPass($oldPass, $newPass, $pseudo)

@@ -31,8 +31,12 @@ try {
             if (isset($_POST['name']) AND isset($_POST['pass'])) {
                 $controller -> connect($_POST['name'], $_POST['pass']);
             }
-            else
-                echo "not set";
+        }
+        elseif ($_GET['action'] == 'backendHome'){
+                $controller -> backendHome();
+        }
+        elseif ($_GET['action'] == 'logout'){
+                $controller -> logOut();
         }
     }
     else {

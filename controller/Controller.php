@@ -32,6 +32,17 @@ class Controller
         $connect = new UserController();
         $connexion = $connect -> logIn($pseudo, $motdepasse);         
     }
+
+    function backendHome(){
+        $UserManager = new UserManager(); 
+        $reponse = $UserManager -> getUser($_SESSION['pseudo']);
+        require('view/backend/backEndHome.php');        
+    }
+
+    function logOut(){
+        $connect = new UserController();
+        $connexion = $connect -> logOut();          
+    }
     // function post($id) {
     //     $postManager = new PostManager();
     //     $commentManager = new CommentManager();

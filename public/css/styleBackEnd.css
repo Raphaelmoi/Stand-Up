@@ -1,0 +1,145 @@
+body, html{
+	margin: 0;
+}
+*{
+	font-family: 'Open Sans', sans-serif;
+}
+a{
+	text-decoration: none;
+	color: #222;
+}
+header{
+	position: fixed;
+	top: 0;
+	background-color: #fdd835;
+	width: 100%;
+	padding: 0;
+	z-index: 10;
+	border-bottom: 4px #0288d1 solid;
+}
+h1{
+	color: white;
+	text-align: center;
+	text-shadow: 2px 3px 3px #795548;
+	margin: 0;
+	font-variant: small-caps;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.astroImg
+{
+	position: fixed;
+	top: 2px;
+	width: 50px;
+	z-index: 99;
+	background-color: transparent;
+	left: -5px;
+	transform: scale(-1, 1);
+}
+
+.connect
+{
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 40px;
+	z-index: 1;
+	padding: 10px;
+	display: flex;
+	padding: 0;
+	line-height: 40px;
+	padding-left: 10px;
+	overflow: hidden;
+	z-index: 9999;
+}
+.connect>div{
+	height: 90%;
+	padding: 0 10px;
+	margin-right: 2px;
+	background-color: orange;
+	border-left: 3px transparent solid; 
+	border-right: 3px transparent solid; 
+	border-bottom: 3px transparent solid; 
+	border-radius: 0 0px 10px 10px ;
+}
+.connect>div:hover
+{
+	border-left: 3px #fb8c00 solid; 
+	border-right: 3px #fb8c00 solid; 
+	border-bottom: 3px #fb8c00 solid; 
+}
+.connect span{
+	margin-left: 10px;
+	font-weight: normal;
+	line-height: 40px;
+}
+.connect a{
+	color: #4e342e;
+}
+
+section{
+	padding-top: 42px;
+	background: lightblue;
+	width: 100%;
+	display: flex;
+}
+.leftAside{
+	position: fixed;
+	left: 0;
+	top: 42px;
+	bottom: 0;
+	width: 15%;
+	background: whitesmoke;
+	border-right: 4px #0288d1 solid;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	justify-content: space-between;
+}
+.leftAside img{
+	width: 150px;
+	height: 150px;
+	border-radius: 20px;
+	object-fit: cover;
+	margin: 10px;
+	margin-bottom: 5px;
+	border: 4px #0288d1 solid;
+}
+.leftAside h3{
+	margin: 0;
+}
+.leftAside nav{
+	width: 100%;
+	align-self: flex-end;
+}
+.leftAside ul{
+	padding: 0;
+	margin-right: 2px;
+
+}
+.leftAside li {
+	list-style-type:none;
+	width: 100%;
+	margin: 0;
+	background-color: lightgray;
+	height: 32px;
+	border: 2px #0288d1 solid;
+	border-radius: 5px;
+	line-height: 32px;
+	overflow: hidden;
+	margin-top: 3px;
+}
+
+
+
+
+.rightAside
+{
+	border: 2px black solid;
+	flex: 1;
+	height: 100vh;
+}
+.centerArticle{
+	flex: 3;
+}
