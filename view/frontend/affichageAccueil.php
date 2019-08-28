@@ -2,18 +2,15 @@
 <?php
 $title = 'page principale';
 ob_start();
-
 ?>
-
     <section >
         <article class="premierArticle">
             <h2>Esquivez les météorites et attrapez un maximum de pierres préciseuses</h2>
 
             <div class="startGame">
-                <a href="#"> 
+                <a href="game1/index.html"> 
                     <img src="public/img/g10.jpg">
                     <div class="titleBtn">Commencer la partie</div>
-
                     <div class="panel"> 
                         <h3> Finger in the noise</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -30,11 +27,11 @@ ob_start();
             <h2>--- Tous les jeux --- </h2>
             <div class="displayGame">
                 <div id="contenuOfDisplayGame">
-                     <a href="">
+                     <a href="game1/index.html">
                         <img src="public/img/sc.jpg">
                         <div class="unlockedGame"> jeux 1</div>
                     </a>
-                    <a href="">
+                    <a href="game2/index.html">
                         <img src="public/img/G10.jpg">
                         <div class="lockedGame"><i class="fas fa-lock">2</i></div>
                     </a>
@@ -56,15 +53,15 @@ ob_start();
                     </a>  
                 </div>
             </div>
-            <div id='scrollerbox' >
+            <div id='scrollerbox' class="scrollerbox">
                 <button id='scroller'></button>
             </div>
-
-            <p>Grâce à votre webcam, ces jeux se jouent avec la position de votre nez ou de vos oreilles (ou autre organes).</p>
-            <p>Vous devez atteindre 200 points pour accéder au deuxième jeu et être connecter pour jouer aux autres jeux</p>
-            <p><a href="">Inscrivez-vous</a> et rejoignez la communauté de StandUp! </p>
         </article>
 
+        <article>
+            <p>Grâce à votre webcam, ces jeux se jouent avec la position de votre nez ou de vos oreilles. Vous devez atteindre 200 points pour accéder au deuxième jeu et être connecter pour jouer aux autres jeux</p>
+            <p><a href="index.php?action=signup">Inscrivez-vous</a> et rejoignez la communauté de StandUp! </p>       
+        </article>
     </section>
 
 <?php 

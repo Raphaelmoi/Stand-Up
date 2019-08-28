@@ -5,7 +5,7 @@ class Controller
     {
         spl_autoload_register('Controller::chargerClasse');
         // require 'controller/UtiController.php';
-        // require 'controller/UserController.php';
+        require 'controller/UserController.php';
     }
     //autoload
     function chargerClasse($classname)
@@ -13,12 +13,8 @@ class Controller
         require 'model/'.$classname.'.php';
     }
     function homePage() {
-        // $postManager = new PostManager();
-        // $uticontroller = new UtiController();
-        // $reponse = $postManager -> getPosts();
         require('view/frontend/affichageAccueil.php');
     }
-
     function signIn(){
         require ('view/frontend/affichageAccueil.php');
     }
@@ -27,7 +23,15 @@ class Controller
         require 'view/frontend/affichageAccueil.php';
     }
 
-    
+    function inscription($pseudo, $motdepasse, $motdepasseVerif, $email, $linkImg){
+        $register = new UserController();
+        $connexion = $register -> newUser($pseudo, $motdepasse, $motdepasseVerif, $email, $linkImg); 
+    } 
+
+    function connect($pseudo, $motdepasse){
+        $connect = new UserController();
+        $connexion = $connect -> logIn($pseudo, $motdepasse);         
+    }
     // function post($id) {
     //     $postManager = new PostManager();
     //     $commentManager = new CommentManager();

@@ -34,7 +34,6 @@ scrollerBox.addEventListener('mousedown', function(e) {
 }, false);
 
 scrollerBox.addEventListener('click', function() {
-
     scrollerBox.removeEventListener('mousemove', moveItem, false)
 }, false);
 
@@ -46,12 +45,7 @@ function moveItem(e) {
     positionX = ev.clientX - pos;
     boxImg.style.left = (-positionX - btnScrollWidth) + 'px';
 
-    // console.log(positionX);
-
-
-    let test = (size/ scrollerboxWidth )* positionX;
-
-    //if x plus petit que la taille de la barre moins celle du boutond 
+    //if x plus petit que la taille de la barre moins celle du bouton
     if (positionX  - btnScrollWidth/2 < 0) {
         btnScroll.style.left = 0;
         boxImg.style.left = 0;
@@ -65,14 +59,13 @@ function moveItem(e) {
             positionImg = positionX;
             positionX -= btnScrollWidth/2;
             btnScroll.style.left = positionX + 'px';
-            boxImg.style.left = -test + 'px';
+            boxImg.style.left = -positionX*2 + 'px';
         }
         else if (positionX < lastPosX ){
-            console.log('la')
             positionImg = positionX;
             positionX -= btnScrollWidth/2;
             btnScroll.style.left = positionX + 'px';
-            boxImg.style.left = -test + 'px';
+            boxImg.style.left = -positionX*2 + 'px';
         }
     }
     //if x plus grand que la taille de la barre moins celle du bouton divisé par 2 soit position souris
@@ -81,7 +74,6 @@ function moveItem(e) {
         boxImg.style.left = - (size - scrollerboxWidth ) + 'px';
         positionX = scrollerboxWidth;
         positionImg = (size - scrollerboxWidth);
-
     } 
 }
 

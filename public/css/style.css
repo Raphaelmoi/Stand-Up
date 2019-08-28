@@ -11,7 +11,6 @@ body, html{
 }
 a{
 	text-decoration: none;
-	color: blue;
 }
 header{
 	position: fixed;
@@ -37,9 +36,9 @@ section{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	font-size: 30px;
 	padding-bottom: 200px;
 }
+
 article
 {
 	width: 100%;
@@ -49,6 +48,7 @@ article
 }
 article h2
 {
+	font-size: 40px;
     font-family: 'Amatic SC', cursive;
 	text-align: center;
 	margin:  20px 0;
@@ -57,13 +57,13 @@ article h2
 article p
 {
 	margin:  30px 50px;
+	font-size: 20px;
 }
 #triangleYellow
 {
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
-   	top: 200px;
     width: 0;
     height: 0;
     border-left: 1000px solid transparent;
@@ -75,7 +75,6 @@ article p
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
-   	top: 200px;
     width: 0;
     height: 0;
     border-left: 1100px solid transparent;
@@ -83,12 +82,22 @@ article p
     border-top: 117px solid #0288d1;
     z-index: -2;
 }
-
-#bigHeader
+.topTriangle{
+	top: 200px;
+}
+.connectTY, .connectTT{
+	top: 400px;
+}
+#headerConnexion
+{
+	height: 400px;
+	background-color: #fdd835;
+}
+#bigHeader, #connectHeader
 {
 	height: 200px;
 }
-#bigHeader h1
+#bigHeader h1, #connectHeader h1
 {
 	font-size: 120px;
 	line-height: 210px;
@@ -116,6 +125,7 @@ article p
 	line-height: 40px;
 	padding-left: 10px;
 	overflow: hidden;
+	z-index: 9999;
 }
 .connect>div{
 	height: 90%;
@@ -132,6 +142,10 @@ article p
 	border-left: 3px #fb8c00 solid; 
 	border-right: 3px #fb8c00 solid; 
 	border-bottom: 3px #fb8c00 solid; 
+}
+#backBtn{
+	margin-right: 20px;
+	border-color: darkorange;
 }
 .connect span{
 	margin-left: 10px;
@@ -165,7 +179,6 @@ article p
 	overflow: hidden;
 	position: relative;
 	background: rgba(200,200,200,0.4);
-	padding-bottom: 20px;
 	z-index: 0;
 }
 #contenuOfDisplayGame
@@ -177,11 +190,11 @@ article p
 .displayGame a{
 	margin: 10px;
 	position: relative;
+	height: 220px;
 }
 .displayGame img{
-	border: 1px black solid;
 	width: 340px;
-	height: 220px;
+	height: 100%;
 	object-fit: cover;
 }
 .unlockedGame{
@@ -211,8 +224,8 @@ article p
         z-index: -1;
         width: 0px
     }
-
-    100% {opacity : 1;
+    100% {
+    	opacity : 1;
         z-index: 99;
         width: 100%;
     }
@@ -223,7 +236,7 @@ article p
 	position: absolute;
 	top: 0;
 	background-color: rgba(255, 255, 255, 0.5);
-	z-index: 999;
+	z-index: 19;
 	width: 100%;
 	height: 100%;
 	text-align: center;
@@ -240,34 +253,6 @@ article p
 {
 	color: rgba(50, 50, 50, 1);
 }
- .button {
-	position: fixed;
-	bottom: 10px;
-	text-align: center;
-	height: 42px;
-	width: 80%;
-	margin-left: 10%;
-	background: #fdd835;
-	border: 8px #ef6c00 solid;
-	padding: 15px 0;
-	-webkit-border-radius: 12px;
-	-moz-border-radius: 12px;
-	border-radius: 12px;
-	text-shadow: rgba(0,0,0,.4) 0 1px 0;
-	color: #222;
-/*	text-shadow: 0px 0px 4px #0288d1;
-*/	font-size: 30px;
-	line-height: 42px;
-	font-variant: small-caps;
-	font-weight: bold;
-	z-index: 3;
-   }  
-.button:hover {
-	border-color: #0288d1;
-	font-size: 35px;
-
-}
-
 
 form
 {
@@ -280,41 +265,73 @@ form
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	height: 270px;
-}
+	height: 300px;
+	}
 input
 {
 	width: 300px;
 	align-self: center;
 	height: 40px;
-	border-radius: 10px;
-	border: 4px #0288d1 solid;
+	border: none;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom: 5px #0288d1 solid;
+	background-color: #FFE; 
+	margin: 10px;
 	text-align: center;
+	font-size: 20px;
 }
 form h2{
 	font-family: 'Amatic SC', cursive;
-	font-size: 30px;
+	font-size: 39px;
 	letter-spacing: 4px;
-	margin: 0;
+	margin: 20px;
+	z-index: 0;
 }
-
+.connexionBox 
+{
+	width: 100%;
+	justify-content: flex-start;
+}
+.connexionBox input{
+	width: 400px;	
+}
 .inscriptionBox{
 	display: inline;
 }
 .inscriptionBox input{
 	margin-top: 10px;
 }
+#boxImg
+{
+	width: 150%;
+	transform: translateX(-15%);
+	height: 150px;
+	overflow: hidden;
+}
 
-#scrollerBox
+#boxImg img{
+	width: 130px;
+	height: 130px;
+	border-radius: 40px;
+	border: 5px transparent solid;
+	opacity: 0.85;
+	object-fit: cover;
+	margin: 10px;
+}
+#boxImg img:hover, .active {
+	border: 5px #0288d1 solid;
+	opacity: 1;
+}
+.scrollerBox
 {
 	width: 100%;
 	height: 18px;
-	position: relative;
+	position: absolute;
 	background-color: rgba(200, 200, 200, 0.4);
 	border-radius: 20px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
 }
 #scrollerbox button
 {
@@ -329,8 +346,13 @@ form h2{
  	height: 20px;
  }
 
-
-
+.btnFormValidate{
+	background-color: whitesmoke;
+	margin-top: 10px;
+	height: 50px;
+	border : 5px #0288d1 solid;
+	border-radius: 10px;
+}
 
 .startGame{
 	width: 80%;
@@ -348,6 +370,10 @@ form h2{
 	height: 100%;
 	margin: 0;
 }
+.startGame a:hover .titleBtn
+{
+	background-color: rgba(2, 136, 209, 0.85);
+}
 .startGame img{
 	margin: 0;
 	width: 100%;
@@ -364,7 +390,7 @@ form h2{
 	height: 60px;
 	line-height: 60px;
 	text-align: center;
-	background-color: rgba(2, 136, 209, 0.7);
+	background-color: rgba(2, 136, 209, 0.6);
 	color: #DDD;
 	font-family: 'Amatic SC', cursive;
 	font-size: 40px;
@@ -391,6 +417,7 @@ form h2{
 	font-family: 'Amatic SC', cursive;
 	margin: 0;
 	text-align: center;
+	font-size: 28px;
 }
 .panel p{
 	margin: 0 20px;

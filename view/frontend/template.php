@@ -11,6 +11,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
         <script src="https://unpkg.com/ml5@0.3.1/dist/ml5.min.js"></script>
+
+        <script src= public/js/ajax.js></script>
+        <script src= public/js/script.js></script>
     </head>
 
     <body>
@@ -20,8 +23,7 @@
         ?>
 
         <?= $content ?> 
-
-        <script type="text/javascript" src="public/js/scrollbar.js"></script>
         <script type="text/javascript" src="public/js/menu.js"></script>
+        <script type="text/javascript" src="public/js/scrollbar.js"></script>
     </body>
 </html>
