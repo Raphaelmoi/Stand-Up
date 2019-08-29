@@ -4,18 +4,17 @@ require_once("model/Manager.php");
 class CommentManager extends Manager
 {
     //get all the comments linked with the current post except if comment was report 10 times or more
-    public function getComments($postId)
+    public function getComments()
     {
         $bdd = $this->dbConnect();
-        $comment = $bdd->prepare("SELECT id, id_billet, auteur, commentaire, DATE_FORMAT(date_commentaire, '%d/%m/%Y à %Hh%imin') AS date_commentaire_fr, signalement FROM commentaires WHERE id_billet = ? && signalement < 10 ORDER BY date_commentaire");
-        $comment->execute(array($postId));
+        $comment = $bdd->query("SELECT id, id_user, comment, DATE_FORMAT(date_publication, '%d/%m/%Y à %Hh%imin') AS date_commentaire_fr, report FROM comment WHERE report < 10 ORDER BY date_publication");
         return $comment;
     }
     //get comment who are report at least one time or more
     public function getSignaledComments()
     {
         $bdd = $this->dbConnect();
-        $comment = $bdd->prepare("SELECT id, id_billet, auteur, commentaire, DATE_FORMAT(date_commentaire, '%d/%m/%Y à %Hh%imin') AS date_commentaire_fr, signalement FROM commentaires WHERE signalement != ? ORDER BY signalement DESC");
+        $comment = $bdd->prepare("SELECT id, id_user, auteur, commentaire, DATE_FORMAT(date_commentaire, '%d/%m/%Y à %Hh%imin') AS date_commentaire_fr, signalement FROM commentaires WHERE signalement != ? ORDER BY signalement DESC");
         $comment->execute(array(0));
 
         return $comment;

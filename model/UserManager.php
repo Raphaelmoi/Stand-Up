@@ -7,10 +7,19 @@ class UserManager extends Manager
     public function getUser($pseudo)
     {
     	$bdd = $this->dbConnect();
-		$req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, date_inscription FROM user WHERE pseudo = ?');
+		  $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, date_inscription FROM user WHERE pseudo = ?');
 		$req->execute(array($pseudo));
 		return $req;
     }
+
+    public function getUserWithId($id)
+    {
+      $bdd = $this->dbConnect();
+      $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, date_inscription FROM user WHERE id = ?');
+      $req->execute(array($id));
+      return $req;
+    }
+    
   //   //when user want to change password
   //   public function updateUserPw($pass, $pseudo){
   //   	$bdd = $this->dbConnect();

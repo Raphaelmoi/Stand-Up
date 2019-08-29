@@ -139,7 +139,8 @@ class UserController{
                 	{
 	                $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
 	                $newUser = $connexionManager -> newUser($pseudo, $hashed_password, $mail, $imgUrl);
-	                echo ('good');
+
+	                UserController::logIn($pseudo, $pass);
 					}
 					else{
 					 	header('Location: index.php?action=settings&change=pseudo&erreur=badmail'); 

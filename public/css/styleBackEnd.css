@@ -88,9 +88,9 @@ section{
 	top: 42px;
 	bottom: 0;
 	width: 18%;
-	background: whitesmoke;
-	border-right: 4px #0288d1 solid;
-	display: flex;
+/*	background: whitesmoke;
+*//*	border-right: 4px #0288d1 solid;
+*/	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
@@ -115,29 +115,29 @@ section{
 .leftAside ul{
 	padding: 0;
 	margin-right: 2px;
-
 }
 .leftAside li {
-	list-style-type:none;
+	list-style-type: none;
 	width: 100%;
 	margin: 0;
-	background-color: lightgray;
-	height: 32px;
-	border: 2px #0288d1 solid;
+	background-image:linear-gradient(#fdd835, orange );
+/*	background-color: orange;
+*/	height: 32px;
+	border: 2px orange solid;
 	border-radius: 5px;
 	line-height: 32px;
 	overflow: hidden;
-	margin-top: 3px;
+	margin-top: 1px;
 }
-
 .centerArticle{
 	width: 60%;
 	margin-left: 18%;
 	padding-top: 30px;
+	background-color: whitesmoke;
 }
 .startGame{
-	width: 80%;
-	margin-left: 10%;
+	width: 90%;
+	margin-left: 5%;
 	margin-bottom: 4%;
 	height: 300px;
 	position: relative;
@@ -228,14 +228,14 @@ section{
 	right: 0;
 	top: 42px;
 	bottom: 0px;
-	border: 2px #0288d1 solid;
-	width: 22%;
-	background-color: whitesmoke;
-}
+/*	border: 2px #0288d1 solid;
+*/	width: 22%;
+/*	background-color: whitesmoke;
+*/}
 .chatContainer{
 	position: absolute;
 	top: 0;
-	bottom: 200px;
+	bottom: 25%;
 	overflow-y: scroll;
 }
 .rightAside h2{
@@ -275,17 +275,15 @@ section{
 	font-size: 18px;
 	line-height: 50px;
 }
-
 .messageChat>p{
 	text-align: justify;
 	margin: 5px 10px;
 }
-
 .postComment{
 	position: absolute;
 	bottom: 0;
 	margin-bottom: 0;
-	border-radius: 0;
+	border-radius: 3px;
 	border : none;
 	border-top: 2px #0288d1 solid;
 }
@@ -295,10 +293,10 @@ section{
 .postComment form{
 	display: flex;
 	flex-direction: column;
-	height: 150px;
+	height: 100px;
 }
 .postComment textarea{
-	height: 120px;
+	height: 100%;
 	border: 1px #4fc3f7 solid;
 }
 .postComment input{

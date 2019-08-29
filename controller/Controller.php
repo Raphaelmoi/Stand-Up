@@ -34,8 +34,10 @@ class Controller
     }
 
     function backendHome(){
-        $UserManager = new UserManager(); 
-        $reponse = $UserManager -> getUser($_SESSION['pseudo']);
+        $userManager = new UserManager(); 
+        $reponse = $userManager -> getUser($_SESSION['pseudo']);
+        $commentManager = new CommentManager();
+        $comment = $commentManager -> getComments(); 
         require('view/backend/backEndHome.php');        
     }
 
@@ -43,24 +45,5 @@ class Controller
         $connect = new UserController();
         $connexion = $connect -> logOut();          
     }
-    // function post($id) {
-    //     $postManager = new PostManager();
-    //     $commentManager = new CommentManager();
-    //     $article = $postManager -> getPost($id);
-    //     $comment = $commentManager -> getComments($id);
-    //     require('view/frontend/postView.php');
-    // }
-    // function addComment($postId, $author, $comment) {
-    //     $postManager = new PostManager();
-    //     $commentManager = new CommentManager();
-    //     $article = $postManager -> getPosts();
-    //     $req = $commentManager -> postComment($postId, $author, $comment);
-    //     header('Location: index.php?action=post&id='.$postId);
-    // }
-    // function biographie(){
-    //     $postManager = new PostManager(); 
-    //     $reponse = $postManager -> getPosts();
-    //     require 'view/frontend/biographieView.php';
-    // }
 
 }
