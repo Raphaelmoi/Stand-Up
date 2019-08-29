@@ -248,37 +248,40 @@ section{
 .messageChat{
 	width: 95%;
 	margin: auto;
-	border : 2px #0288d1 solid;
-	border-radius: 5px;
+/*	border : 2px #0288d1 solid;
+*/	border-radius: 5px;
 	margin-bottom: 8px;
 }
 .messageChatTitle{
 	display: flex;
-	background: #0288d1;
+/*	background: #0288d1;
 	height: 50px;
+*/
 }
 .messageChatTitle img{
-	width: 46px;
-	height: 46px;
-	border: 2px #0288d1 solid;
+	width: 40px;
+	height: 40px;
+/*	border: 2px #0288d1 solid;
+*/	border-radius: 50%;
 	object-fit: cover;
 	background-color: whitesmoke;
 }
 .messageChatTitle h4{
-	margin: 0 20px;
-	line-height: 50px;
-	font-size: 25px;
-	color: white;
-}
+	margin: 0 10px;
+	line-height: 40px;
+	font-size: 20px;
+/*	color: white;
+*/}
 .messageChatTitle p{
 	margin: 0;
-	font-size: 18px;
-	line-height: 50px;
+	font-size: 12px;
+	line-height: 40px;
 }
 .messageChat>p{
 	text-align: justify;
-	margin: 5px 10px;
-}
+	margin: 0px 10px 15px 10px;
+/*	border-bottom: 1px #BBB solid;
+*/}
 .postComment{
 	position: absolute;
 	bottom: 0;

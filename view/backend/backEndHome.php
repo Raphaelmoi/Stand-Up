@@ -3,7 +3,7 @@
 $title = 'page principale';
 ob_start();
 ?>
-    <section >
+    <section id="backendHome" >
         <?php
         include('view/backend/asideLeft.php');
         echo $asideLeft;
@@ -13,7 +13,6 @@ ob_start();
         include('view/backend/mainContent.php');
         echo $mainContent;
         ?>
-        
         <?php
         include('view/backend/asideRight.php');
         echo $asideRight;

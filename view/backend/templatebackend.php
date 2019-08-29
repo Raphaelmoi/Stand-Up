@@ -11,6 +11,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
         <script src="https://unpkg.com/ml5@0.3.1/dist/ml5.min.js"></script>
+        <script
+              src="https://code.jquery.com/jquery-3.4.1.min.js"
+              integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+              crossorigin="anonymous"></script>        
+
+        <script src="public/libs/sendbird/SendBird.min.js"></script>
+        <script src= public/js/chat.js></script>
 
         <script src= public/js/ajax.js></script>
         <script src= public/js/script.js></script>

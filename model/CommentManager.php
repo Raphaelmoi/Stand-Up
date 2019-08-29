@@ -7,26 +7,25 @@ class CommentManager extends Manager
     public function getComments()
     {
         $bdd = $this->dbConnect();
-        $comment = $bdd->query("SELECT id, id_user, comment, DATE_FORMAT(date_publication, '%d/%m/%Y à %Hh%imin') AS date_commentaire_fr, report FROM comment WHERE report < 10 ORDER BY date_publication");
+        $comment = $bdd->query("SELECT id, id_user, comment, DATE_FORMAT(date_publication, '%d/%m/%Y à %Hh%i') AS date_commentaire_fr, report FROM comment WHERE report < 10 ORDER BY date_publication DESC");
         return $comment;
     }
-    //get comment who are report at least one time or more
-    public function getSignaledComments()
-    {
-        $bdd = $this->dbConnect();
-        $comment = $bdd->prepare("SELECT id, id_user, auteur, commentaire, DATE_FORMAT(date_commentaire, '%d/%m/%Y à %Hh%imin') AS date_commentaire_fr, signalement FROM commentaires WHERE signalement != ? ORDER BY signalement DESC");
-        $comment->execute(array(0));
+    // //get comment who are report at least one time or more
+    // public function getSignaledComments()
+    // {
+    //     $bdd = $this->dbConnect();
+    //     $comment = $bdd->prepare("SELECT id, id_user, auteur, commentaire, DATE_FORMAT(date_commentaire, '%d/%m/%Y à %Hh%imin') AS date_commentaire_fr, signalement FROM commentaires WHERE signalement != ? ORDER BY signalement DESC");
+    //     $comment->execute(array(0));
 
-        return $comment;
-    }
+    //     return $comment;
+    // }
     //post a new comment
-    public function postComment($idArticle, $auteur, $commentaire)
+    public function postComment( $id, $commentaire)
     {
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('INSERT INTO commentaires(id_billet, auteur, commentaire, date_commentaire) VALUES( :idArticle , :auteur, :commentaire, NOW())');
+        $req = $bdd->prepare('INSERT INTO comment(id_user, date_publication, comment) VALUES( :idUser , NOW(), :commentaire )');
         $req->execute(array(
-                    'idArticle' => $idArticle,
-                    'auteur' => $auteur,
+                    'idUser' => $id,
                     'commentaire' => $commentaire
                 ));
         return $req;

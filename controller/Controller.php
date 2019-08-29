@@ -46,4 +46,18 @@ class Controller
         $connexion = $connect -> logOut();          
     }
 
+    function postComment($id, $commentaire){
+        $commentManager = new CommentManager();
+        $comment = $commentManager -> postComment($id, $commentaire); 
+        Controller::backendHome();
+    }
+
+    // function refreshAside()
+    // {
+    //     $userManager = new userManager(); 
+    //     $reponse = $userManager -> getUser($_SESSION['pseudo']);
+    //     $commentManager = new CommentManager();
+    //     $comment = $commentManager -> getComments();
+    //     require('view/backend/asideRight.php');        
+    //}
 }

@@ -38,6 +38,15 @@ try {
         elseif ($_GET['action'] == 'logout'){
                 $controller -> logOut();
         }
+
+        elseif ($_GET['action'] == 'postcomment'){
+            if (isset($_POST['id_user']) AND isset($_POST['comm'])) {
+                $controller -> postComment($_POST['id_user'], $_POST['comm']);
+            }
+        }    
+        elseif ($_GET['action'] == 'refreshAside'){
+            $controller -> refreshAside();
+        }
     }
     else {
        //default view -> HOME
