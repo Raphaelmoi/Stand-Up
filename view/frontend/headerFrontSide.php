@@ -28,6 +28,7 @@ ob_start();
             </form>
             <div id="triangleYellow" class='topTriangle'></div>
             <div id='triangleTranspa' class='topTriangle'></div>
+            
         </header>
     <?php   
     }
@@ -70,6 +71,16 @@ ob_start();
             ?>
             <header id="bigHeader">
                 <div class="connect">
+                    <?php
+                    if (!empty($_SESSION['pseudo'])) {
+                    ?>
+                    <div id='backBtn'>
+                        <a href="index.php?action=backendHome">profil</a>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                    
                     <div>
                         <a href="index.php?action=signup">Inscription</a>
                     </div>
@@ -88,6 +99,15 @@ ob_start();
 ?>
     <header id="smallHeader">
         <div class="connect">
+            <?php
+                if (!empty($_SESSION['pseudo'])) {
+                ?>
+                    <div id='backBtn'>
+                        <a href="index.php?action=backendHome">profil</a>
+                    </div>
+                <?php
+                }
+            ?>
             <div>
                 <a href="index.php?action=signup">Inscription</a>
             </div>

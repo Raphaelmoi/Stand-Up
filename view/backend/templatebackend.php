@@ -25,6 +25,9 @@
     <body>
         <header id="smallHeader">
             <div class="connect">
+                <div id='backBtn'>
+                    <a href="index.php">Accueil</a>
+                </div>
                 <div>
                     <a href="index.php?action=logout">
                         <i class="fas fa-user"><span>Déconnexion </span></i>

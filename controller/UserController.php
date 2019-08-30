@@ -9,6 +9,7 @@
 *newUser()
 */
 class UserController{
+
 	public function logIn($pseudo, $pass)
 	{
 		require_once("model/UserManager.php"); 
@@ -26,10 +27,10 @@ class UserController{
 					    	header('Location: /projet5/index.php?action=backendHome&success=connexion&pseudo='.$donnees['pseudo']);
 					    }
 					    else {
-							header('Location: index.php?action=connect&erreur=3');
+							header('Location: index.php?action=connect&erreur=identifiant');
 						}				
 					}else {
-						header('Location: index.php?action=connect&erreur=2');
+						header('Location: index.php?action=connect&erreur=identifiant');
 					}	
 				}
 				$req->closeCursor(); 
