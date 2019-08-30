@@ -23,7 +23,7 @@ class UserController{
 					if (empty($_SESSION['pseudo'])) {
 						if (password_verify($pass, $donnees['pass'])) {
 					    	$_SESSION['pseudo'] = $donnees['pseudo'];
-					    	header('Location: /projet5/index.php?action=backendHome&pseudo='.$donnees['pseudo']);
+					    	header('Location: /projet5/index.php?action=backendHome&success=connexion&pseudo='.$donnees['pseudo']);
 					    }
 					    else {
 							header('Location: index.php?action=connect&erreur=3');

@@ -339,3 +339,38 @@ section{
 .infoAboutUser:hover{
 	display: block;
 }
+
+
+.alert{
+    position: absolute;
+    opacity: 0;
+    border-radius: 20px;
+    width: 90%;
+    left: 5%;
+    top: 15%;
+    z-index: -10;
+    text-align: center;
+    animation-name: disparait;
+    animation-duration: 3.5s;
+}
+.alertRed
+{
+    background-color: #f44336;
+}
+.alertGreen
+{
+    background-color: #aeea00;
+}
+.alert p{
+    font-size: 20px;
+}
+@keyframes disparait {
+    0%   {opacity : 1;
+        z-index: 99;
+    }
+    65%  {opacity : 0.9;
+        z-index: 99;}
+    100% {opacity : 0;
+        z-index: -1;
+    }
+}

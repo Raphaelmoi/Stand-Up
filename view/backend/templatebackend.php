@@ -33,7 +33,16 @@
             </div>
             <h1> Stand up !</h1>
             </header>
-            <img src="public/img/assto2.png" class="astroImg">      
+            <img src="public/img/assto2.png" class="astroImg">    
+
+        <!-- display success or error message -->
+        <?php 
+        if (isset($_GET['erreur']) || isset($_GET['success']))
+        {
+            require_once 'view/frontend/alertBox.php';
+            echo $alertBox;
+        }
+        ?>  
  
         <?= $content ?> 
     
