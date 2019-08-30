@@ -7,7 +7,7 @@ class UserManager extends Manager
     public function getUser($pseudo)
     {
     	$bdd = $this->dbConnect();
-		  $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, date_inscription FROM user WHERE pseudo = ?');
+		  $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, DATE_FORMAT(date_inscription, \'%d/%m/%Y \') AS date_inscription_fr FROM user WHERE pseudo = ?');
 		$req->execute(array($pseudo));
 		return $req;
     }

@@ -16,7 +16,6 @@
               integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
               crossorigin="anonymous"></script>        
 
-        <script src="public/libs/sendbird/SendBird.min.js"></script>
         <script src= public/js/chat.js></script>
 
         <script src= public/js/ajax.js></script>

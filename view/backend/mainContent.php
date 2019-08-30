@@ -4,7 +4,7 @@ ob_start();
 <article class="centerArticle">
     <div class="startGame">
         <a href="game1/index.html"> 
-            <img src="public/img/g10.jpg">
+            <img src="public/img/sc.jpg">
             <div class="titleBtn">Finger in the noise</div>
             <div class="panel"> 
                 <h3> Finger in the noise</h3>

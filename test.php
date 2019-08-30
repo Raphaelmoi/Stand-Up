@@ -19,7 +19,15 @@
                 while ($user = $userInfo->fetch())
                 {
                 ?>
-                    <img src="<?= $user['imageprofil']?>">
+                    <img class="catOfChat" src="<?= $user['imageprofil']?>">
+        
+                    <div class="infoAboutUser"> 
+                        <img src="<?= $user['imageprofil']?>">
+                        <div>                    
+                            <h4><?= $user['pseudo']?></h4>
+                        </div>
+                    </div>
+
                     <h4><?= $user['pseudo']?></h4>
                 <?php
                 }

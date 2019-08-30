@@ -88,9 +88,7 @@ section{
 	top: 42px;
 	bottom: 0;
 	width: 18%;
-/*	background: whitesmoke;
-*//*	border-right: 4px #0288d1 solid;
-*/	display: flex;
+	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
@@ -109,12 +107,12 @@ section{
 	margin: 0;
 }
 .leftAside nav{
-	width: 100%;
-	align-self: flex-end;
+	width: 90%;
 }
 .leftAside ul{
 	padding: 0;
-	margin-right: 2px;
+	margin: 0;
+	padding-bottom: 10px;
 }
 .leftAside li {
 	list-style-type: none;
@@ -127,7 +125,10 @@ section{
 	border-radius: 5px;
 	line-height: 32px;
 	overflow: hidden;
-	margin-top: 1px;
+/*	margin-top: 1px;
+*/}
+.leftAside li:hover{
+	background-image:linear-gradient(orange, #fdd835);
 }
 .centerArticle{
 	width: 60%;
@@ -228,15 +229,14 @@ section{
 	right: 0;
 	top: 42px;
 	bottom: 0px;
-/*	border: 2px #0288d1 solid;
-*/	width: 22%;
-/*	background-color: whitesmoke;
-*/}
+	width: 22%;
+}
 .chatContainer{
 	position: absolute;
 	top: 0;
-	bottom: 25%;
+	bottom: 20%;
 	overflow-y: scroll;
+	padding-bottom: 30px;
 }
 .rightAside h2{
 	text-align: center;
@@ -248,21 +248,16 @@ section{
 .messageChat{
 	width: 95%;
 	margin: auto;
-/*	border : 2px #0288d1 solid;
-*/	border-radius: 5px;
+	border-radius: 5px;
 	margin-bottom: 8px;
 }
 .messageChatTitle{
 	display: flex;
-/*	background: #0288d1;
-	height: 50px;
-*/
 }
 .messageChatTitle img{
 	width: 40px;
 	height: 40px;
-/*	border: 2px #0288d1 solid;
-*/	border-radius: 50%;
+	border-radius: 50%;
 	object-fit: cover;
 	background-color: whitesmoke;
 }
@@ -270,8 +265,7 @@ section{
 	margin: 0 10px;
 	line-height: 40px;
 	font-size: 20px;
-/*	color: white;
-*/}
+}
 .messageChatTitle p{
 	margin: 0;
 	font-size: 12px;
@@ -280,33 +274,68 @@ section{
 .messageChat>p{
 	text-align: justify;
 	margin: 0px 10px 15px 10px;
-/*	border-bottom: 1px #BBB solid;
-*/}
+}
 .postComment{
 	position: absolute;
 	bottom: 0;
 	margin-bottom: 0;
-	border-radius: 3px;
-	border : none;
-	border-top: 2px #0288d1 solid;
+	border-radius: 10px;
+	border: 1px #777 solid;
 }
 .postComment .messageChatTitle{
-	background-image:linear-gradient(#4fc3f7, #0288d1);
+	border-radius:  10px 10px 0 0;
+	background-color: whitesmoke;
+	padding: 3px;
+	border-bottom: 1px #BBB solid;
 }
+
 .postComment form{
 	display: flex;
 	flex-direction: column;
-	height: 100px;
+	height: 70px;
 }
 .postComment textarea{
 	height: 100%;
-	border: 1px #4fc3f7 solid;
-}
+	border : none;
+/*	border: 1px #4fc3f7 solid;
+*/}
 .postComment input{
 	background-image:linear-gradient(#4fc3f7, #0288d1);
 	height: 40px;
 	border: 1px #0288d1 solid;
+	border-radius: 0 0 10px 10px;
 }
 .postComment input:hover{
 	background-image:linear-gradient(#0288d1, #4fc3f7);
+}
+
+.infoAboutUser{
+	display: none;
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	left: 28px;
+	margin-top: 20px;
+	background-color: whitesmoke;
+	border-radius: 10px;
+	border: 1px #0288d1 solid;
+	z-index: 99;
+}
+.infoAboutUser img{
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+}
+.infoAboutUser div{
+	position: absolute;
+	background-color: rgba(200, 200, 200, 0.5);
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+}
+.messageChatTitle:hover  .infoAboutUser{
+	display: block;
+}
+.infoAboutUser:hover{
+	display: block;
 }

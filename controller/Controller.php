@@ -52,12 +52,4 @@ class Controller
         Controller::backendHome();
     }
 
-    // function refreshAside()
-    // {
-    //     $userManager = new userManager(); 
-    //     $reponse = $userManager -> getUser($_SESSION['pseudo']);
-    //     $commentManager = new CommentManager();
-    //     $comment = $commentManager -> getComments();
-    //     require('view/backend/asideRight.php');        
-    //}
 }
