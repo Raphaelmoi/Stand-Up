@@ -52,6 +52,12 @@ class CommentManager extends Manager
         $bdd = $this->dbConnect();
         $delete = $bdd->query("DELETE FROM commentaires WHERE id = $id; ");
     }    
+    //admin can delete any comment
+    public function deleteCommentFromOneUser($id)
+    {
+        $bdd = $this->dbConnect();
+        $delete = $bdd->query("DELETE FROM comment WHERE id_user = $id; ");
+    }   
     //count the number of differents reported comment
     public function countBadComment()
     {

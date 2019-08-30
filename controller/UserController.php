@@ -16,7 +16,6 @@ class UserController{
 
 		    $connexionManager = new UserManager();
 		    $count = $connexionManager -> count($pseudo);
-		    echo $count;
 			if ($count != 0) {//if the asked pseudo is found
 		    	$req = $connexionManager -> getUser($pseudo);
 				while ($donnees = $req->fetch())
@@ -42,7 +41,6 @@ class UserController{
 		// delete current session and global variable SESSION
 		$_SESSION = array();
 		session_destroy();
-		header('Location: /projet5/index.php?success=disconnect');
 	}
 
 	public function newPass($oldPass, $newPass, $pseudo)
@@ -58,7 +56,7 @@ class UserController{
 					if ($oldPass != $newPass) {
 						$hashed_password = password_hash($newPass, PASSWORD_DEFAULT);
 						$req = $connexionManager -> updateUserPw($hashed_password, $pseudo);
-						header('Location: index.php?action=homeControl&success=updatepass');  
+						header('Location: index.php?action=backendHome&success=updatepass');  
 					}
 					 else
 					 	header('Location: index.php?action=settings&erreur=samepw');   
@@ -80,11 +78,12 @@ class UserController{
 			while ($donnees = $test->fetch())
 			{
 				if (password_verify($pass, $donnees['pass'])) {
-					if ($oldmail == $donnees['email']) {
+					if ($oldmail == $donnees['mail']) {
 
 						if (preg_match ( " /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ " , $newmail )) {
 							$req = $connexionManager -> updateUserMail($newmail, $pseudo);
-							header('Location: index.php?action=homeControl&success=updatemail');  
+			                UserController::logIn($pseudo, $pass);
+							header('Location: index.php?action=settingsview&success=updatemail');  
 						}
 						else 
 							header('Location: index.php?action=settings&change=mail&erreur=mailbadsyntax');
@@ -113,7 +112,10 @@ class UserController{
 			if (password_verify($pass, $donnees['pass'])) {
 				if ($pseudo != $newpseudo) {
 					$req = $connexionManager -> updateUserPseudo($pseudo, $newpseudo);
-					header('Location: index.php?action=homeControl&success=updatepseudo');  
+					$_SESSION['pseudo'] = $newpseudo;
+
+	                // $this->logIn($newpseudo, $pass);
+					header('Location: index.php?action=settingsview&success=updatepseudo');  
 				}
 				 else
 				 	header('Location: index.php?action=settings&change=pseudo&erreur=diffpseudo'); 
@@ -155,6 +157,26 @@ class UserController{
 		}else{
 			header('Location: index.php?action=settings&change=pseudo&erreur=pseudoexistalready'); 
 		}
+	}
+
+	public function newCat($imageUrl){
+		require_once("model/UserManager.php"); 
+		$connexionManager = new UserManager();
+		// $user = $connexionManager -> getUser($pseudo);
+	    $user = $connexionManager -> updateCat($_SESSION['pseudo'], $imageUrl);
+	}
+	public function deleteAccount(){
+		require_once("model/UserManager.php"); 
+		$connexionManager = new UserManager();
+		$commentManager = new CommentManager();
+        $reponse = $connexionManager -> getUser($_SESSION['pseudo']);
+		// $user = $connexionManager -> getUser($pseudo);
+		while ($donnees = $reponse->fetch())
+		{
+			$deleteComments = $commentManager -> deleteCommentFromOneUser($donnees['id']);
+		}
+	    $user = $connexionManager -> deleteAccount($_SESSION['pseudo']);
+	    $this-> logOut();
 	}
 }
 

@@ -86,6 +86,16 @@ elseif (isset($_GET['success'])) {
 			<p>Votre article a bien été modifié! </p>
 			<?php
 		}
+		elseif ($_GET['success'] == 'updateimage' ) {
+			?>
+			<p>Votre photo de profil a bien été mise à jour! </p>
+			<?php
+		}
+		elseif ($_GET['success'] == 'bye' ) {
+			?>
+			<p>Au revoir ! </p>
+			<?php
+		}
 		?>
 	</section>  
 <?php

@@ -27,7 +27,7 @@ ob_start();
 			<?php
 		}
 		// default : change the password view
-		else{
+		elseif (isset($_GET['change']) && $_GET['change'] == 'pass' ){
 		?>
 		<form action="index.php?action=newpw" method="post">
 			<h2>changer mot de passe</h2>
@@ -38,7 +38,30 @@ ob_start();
 		</form> 
 		<?php
 		}
+		elseif (isset($_GET['change']) && $_GET['change'] == 'cat' ){
+		?>
+   			 <script> getTheCats(); </script>
+            <form class="inscriptionBox" action='index.php?action=newcat' method="post">
+                
+                <div id="boxImg"></div>
+
+                <input type="hidden" name="imageUrl" id="hiddenInputInscription" value="">
+                <input class="btnFormValidate" type="submit" name="submit" value="Inscription">
+            </form>
+
+		<?php
+		}
+		elseif (isset($_GET['change']) && $_GET['change'] == 'account' ){
+		?>
+
+			<h3> Supprimer mon compte</h3>
+            <form class="inscriptionBox" action='index.php?action=deleteaccount' method="post">
+                <label>etes vous sur de vouloir supprimer votre compte?</label><input type="checkbox" name="">
+                <input class="btnFormValidate" type="submit" name="submit" value="supprimer mon compte">
+            </form>
+		<?php
+		}
 		?>
 <?php
-$settingsview = ob_get_clean();
+$settingsforms = ob_get_clean();
 ?>

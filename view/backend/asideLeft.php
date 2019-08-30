@@ -13,22 +13,10 @@ ob_start();
         <p> Position n° : <?= $donnees['id'] ?> </p>
     </div>
 
-    <div>
-        <?php
-        require 'settingsUser.php';//choice of style and sort article
-        echo $settingsview;
-        ?>
-    </div>
 
-        <nav>
-            <ul>
-                <li><a href="index.php?action=changepseudo">Changer mon pseudo</a></li>
-                <li><a href="index.php?action=changepass">Changer mon mot de passe </a></li>
-                <li><a href="index.php?action=changemail">Changer mon adresse mail</a></li>
-                <li><a href="index.php?action=changecat">Changer mon chat</a></li>
-                <li><a href="index.php?action=deleteaccount">Supprimer mon compte</a></li>
-            </ul>
-        </nav>
+    <a class="settingsBtn" href="index.php?action=settingsview"><i class="fas fa-cog"></i>Paramètres</a>
+
+
     <?php
     }
     $reponse->closeCursor(); // Termine le traitement de la requête

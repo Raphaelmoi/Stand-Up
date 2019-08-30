@@ -29,7 +29,7 @@ try {
         }
         elseif ($_GET['action'] == 'login') {
             if (isset($_POST['name']) AND isset($_POST['pass'])) {
-                $controller -> connect($_POST['name'], $_POST['pass']);
+                $controller -> logIn($_POST['name'], $_POST['pass']);
             }
         }
         elseif ($_GET['action'] == 'backendHome'){
@@ -44,8 +44,36 @@ try {
                 $controller -> postComment($_POST['id_user'], $_POST['comm']);
             }
         }    
-        elseif ($_GET['action'] == 'refreshAside'){
-            $controller -> refreshAside();
+        elseif ($_GET['action'] == 'settingsview'){
+            $controller -> settingsView();
+        }
+
+        //CHANGE THE PASSWORD
+        elseif ($_GET['action'] == 'newpw') {
+            if (isset($_POST['pseudo']) and isset($_POST['old_password']) and isset($_POST['new_password'])) {
+                $controller -> updatePass(htmlspecialchars($_POST['old_password']), htmlspecialchars($_POST['new_password']), htmlspecialchars($_POST['pseudo']));
+            }
+            else echo 'isset bug';
+        }
+        //CHANGE THE EMAIL
+        elseif ($_GET['action'] == 'newmail') {
+            if (isset($_POST['pseudo']) and isset($_POST['old_mail']) and isset($_POST['new_mail']) and isset($_POST['pass'])) {
+                $controller -> updateMail(htmlspecialchars($_POST['pseudo']), htmlspecialchars($_POST['old_mail']), htmlspecialchars($_POST['new_mail']), htmlspecialchars($_POST['pass']));
+            }
+        }
+        //CHANGE THE PSEUDO
+        elseif ($_GET['action'] == 'newpseudo') {
+            if (isset($_POST['newpseudo']) and isset($_POST['pseudo']) and isset($_POST['pass'])) {
+                $controller -> updatePseudo(htmlspecialchars($_POST['newpseudo']), htmlspecialchars($_POST['pseudo']), htmlspecialchars($_POST['pass']));
+            }
+        }
+        elseif ($_GET['action'] == 'newcat') {
+            if (isset($_POST['imageUrl'])){
+                $controller -> updateCat(htmlspecialchars($_POST['imageUrl']));
+            }
+        }
+        elseif ($_GET['action'] == 'deleteaccount') {
+            $controller -> deleteAccount();
         }
     }
     else {
