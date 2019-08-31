@@ -178,5 +178,32 @@ class UserController{
 	    $user = $connexionManager -> deleteAccount($_SESSION['pseudo']);
 	    $this-> logOut();
 	}
+
+	public function endGameOne($score){
+		require_once("model/UserManager.php"); 
+		$connexionManager = new UserManager();
+	    $reponse = $connexionManager -> getUser($_SESSION['pseudo']);
+	   	while ($donnees = $reponse->fetch())
+		{
+			if ($score > $donnees['game_one_bs'] ) {
+	    		$user = $connexionManager -> updateScoreOne($_SESSION['pseudo'], $score, 1);
+			}else{
+			    $user = $connexionManager -> updateScoreOne($_SESSION['pseudo'], $score, 0);
+			}	
+		}
+	}
+	public function endGameTwo($score){
+		require_once("model/UserManager.php"); 
+		$connexionManager = new UserManager();
+		$reponse = $connexionManager -> getUser($_SESSION['pseudo']);
+	   	while ($donnees = $reponse->fetch())
+		{
+			if ($score > $donnees['game_two_bs'] ) {
+	    		$user = $connexionManager -> updateScoreTwo($_SESSION['pseudo'], $score, 1);
+			}else{
+			    $user = $connexionManager -> updateScoreTwo($_SESSION['pseudo'], $score, 0);
+			}	
+		}
+	}
 }
 

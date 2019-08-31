@@ -7,7 +7,7 @@ class UserManager extends Manager
     public function getUser($pseudo)
     {
     	$bdd = $this->dbConnect();
-		  $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, DATE_FORMAT(date_inscription, \'%d/%m/%Y \') AS date_inscription_fr FROM user WHERE pseudo = ?');
+		  $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, DATE_FORMAT(date_inscription, \'%d/%m/%Y \') AS date_inscription_fr, game_one, game_one_bs, game_two, game_two_bs, game_total FROM user WHERE pseudo = ?');
 		$req->execute(array($pseudo));
 		return $req;
     }
@@ -62,6 +62,27 @@ class UserManager extends Manager
             'adressmail' => $mail
         ));
     }
+    public function updateScoreOne($pseudo, $score, $bestScore){
+        $bdd = $this->dbConnect();
+        if ($bestScore == 1) {
+            $req = $bdd->query("UPDATE user SET game_one = '$score', game_total = game_total + '$score', game_one_bs = '$score'  WHERE pseudo = '$pseudo';");
+        }else{
+            $req = $bdd->query("UPDATE user SET game_one = '$score', game_total = game_total + '$score' WHERE pseudo = '$pseudo';");  
+        }
+
+        return $req;
+    }
+    public function updateScoreTwo($pseudo, $score, $bestScore){
+        $bdd = $this->dbConnect();
+        if ($bestScore == 1) {
+            $req = $bdd->query("UPDATE user SET game_two = '$score', game_total = game_total + '$score', game_two_bs = '$score'  WHERE pseudo = '$pseudo';");
+        }else{
+            $req = $bdd->query("UPDATE user SET game_two = '$score', game_total = game_total + '$score' WHERE pseudo = '$pseudo';");  
+        }
+        return $req;
+    }
+
+
     public function updateCat($pseudo, $imageUrl){
         $bdd = $this->dbConnect();
         $req = $bdd->query("UPDATE user SET imageprofil = '$imageUrl' WHERE pseudo = '$pseudo';");

@@ -143,6 +143,14 @@ function draw() {
                 textAlign(CENTER);
                 text("GAME OVER", width / 2, height / 3);
                 text("SCORE : " + (collectedGems * level + explosedStones ) , width / 2, height / 2);
+                fill(244, 244, 244);
+                textSize(25);
+                text('Vous serez redirigé vers la page d\'accueil dans moins de 3 secondes ', width / 2, (height / 3 *2));
+                function endGame () {
+                    remove();
+                    window.location.href = '/projet5/index.php?action=endgame&game=2&score='+ (collectedGems * level + explosedStones );
+                }
+                setTimeout(endGame, 3000);
             }
         }
     } //if still loading        

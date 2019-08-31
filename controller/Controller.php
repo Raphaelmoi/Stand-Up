@@ -83,4 +83,15 @@ class Controller
         $comment = $commentManager -> deleteComment($id); 
         header('Location: index.php?action=settingsview&success=deletecomment');
     }
+
+    function endGameOne($score){
+        $connect = new UserController();
+        $endGame = $connect -> endGameOne($score);
+        $this -> backendHome();
+    }
+    function endGameTwo($score){
+        $connect = new UserController();
+        $endGame = $connect -> endGameTwo($score);
+        $this -> backendHome();
+    }
 }

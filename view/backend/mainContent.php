@@ -19,7 +19,7 @@ ob_start();
     </div>
 
     <div class="startGame">
-        <a href="game1/index.html"> 
+        <a href="game2/index.html"> 
             <img src="public/img/g10.jpg">
             <div class="titleBtn">Finger in the hear</div>
             <div class="panel"> 

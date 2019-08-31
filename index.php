@@ -78,6 +78,16 @@ try {
         elseif ($_GET['action'] == 'deletecomment') {
             $controller -> deleteComment($_GET['id']);
         }
+        elseif ($_GET['action'] == 'endgame') {
+            if (isset($_GET['score'])) {
+                if (isset($_GET['game']) && $_GET['game'] == 1 ) {
+                    $controller -> endGameOne($_GET['score']);
+                }
+                if (isset($_GET['game']) && $_GET['game'] == 2 ) {
+                    $controller -> endGameTwo($_GET['score']);
+                }
+            }
+        }
     }
     else {
        //default view -> HOME
