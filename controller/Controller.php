@@ -50,6 +50,9 @@ class Controller
         Controller::backendHome();
     }
     function settingsView(){
+        $userManager = new UserManager(); 
+        $reponse = $userManager -> getUser($_SESSION['pseudo']);
+        $commentManager = new CommentManager();
         require('view/backend/settings.php');        
     }
     function updatePass($oldPass, $newPass, $pseudo){
@@ -74,5 +77,10 @@ class Controller
         $userController = new UserController();
         $deleteAccount = $userController -> deleteAccount();
         header('Location: index.php?success=bye');
+    }
+    function deleteComment($id){
+        $commentManager = new CommentManager();
+        $comment = $commentManager -> deleteComment($id); 
+        header('Location: index.php?action=settingsview&success=deletecomment');
     }
 }

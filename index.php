@@ -75,6 +75,9 @@ try {
         elseif ($_GET['action'] == 'deleteaccount') {
             $controller -> deleteAccount();
         }
+        elseif ($_GET['action'] == 'deletecomment') {
+            $controller -> deleteComment($_GET['id']);
+        }
     }
     else {
        //default view -> HOME

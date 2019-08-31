@@ -122,11 +122,13 @@ section{
 
 .settingView{
 	width: 100%;
+	height: 92vh;
+	align-items: center;
 }
 .settings{
-	margin-top: 50px;
-	display: inline-block;
-	margin-right: 50px;
+/*	margin-top: 50px;
+*/	display: inline-block;
+	margin: 0 50px 0 20px;
 }
 .settings ul{
 /*	display: inline-flex;
@@ -138,19 +140,25 @@ section{
 .settings li {
 	list-style-type: none;
 	width: 100%;
-	margin: 0;
-	background-image:linear-gradient(#0288d1, #4fc3f7);
+	margin: 5px;
+	background-image:linear-gradient(#fdd835, orange );
 	height: 50px;
-	border: 2px #0288d1 solid;
+	border: 2px #fdd835 solid;
 	border-radius: 5px;
 	line-height: 50px;
 	overflow: hidden;
 	text-align: center;
 }
 .settings li:hover{
-	background-image:linear-gradient(#4fc3f7, #0288d1);
+	background-image:linear-gradient(orange, #fdd835);
 }
-
+.btnBackSettings{
+	background: lightblue;
+	margin-bottom: 20px;
+}
+.btnBackSettings i{
+	margin-right: 15px;
+}
 .settingsBtn:hover{
 	background-image:linear-gradient(orange, #fdd835);
 }
@@ -341,18 +349,19 @@ section{
 	left: 28px;
 	margin-top: 20px;
 	background-color: whitesmoke;
-	border-radius: 10px;
+	border-radius: 0 16px 16px 16px;
 	border: 1px #0288d1 solid;
 	z-index: 99;
 }
 .infoAboutUser img{
 	width: 100%;
 	height: 100%;
-	border-radius: 10px;
+	border-radius: 0 16px 16px 16px;
 }
 .infoAboutUser div{
 	position: absolute;
 	background-color: rgba(200, 200, 200, 0.5);
+	border-radius: 0 0 16px 16px;
 	bottom: 0;
 	width: 100%;
 	text-align: center;
@@ -410,4 +419,52 @@ section{
 #boxImg img:hover, .active {
 	border: 5px #0288d1 solid;
 	opacity: 1;
+}
+
+.mainContentSettings{
+	background-color: whitesmoke;
+	width: 90%;
+	height: 100%;
+	padding: 20px;
+}
+.mainContentSettings h3{
+	text-align: center;
+	font-size: 36px;
+	font-family: 'Amatic SC', cursive;
+	margin: 10px;
+}
+.mainContentSettings>div{
+	display: flex;	
+	margin: 10px;
+/*	border: 2px black solid;
+*/}
+.infoUserSettings{
+	padding: 20px;
+}
+.infoUserSettings img{
+	width: 200px;
+	height: 200px;
+	border-radius: 10px;
+	margin-right: 20px;
+}
+.infoUserSettings h4{
+	font-size: 30px;
+	font-variant: small-caps;
+}
+.commentsSettings{
+	flex-direction: column;
+}
+.commentsSettings span{
+	font-weight: bold;
+}
+.commentsSettings a{
+	color:red; 
+	float: right;
+}
+.commentsSettings p{
+	margin: 0 10px;
+	padding: 5px;
+}
+.commentsSettings p:hover{
+	background-color: #DDD;
 }

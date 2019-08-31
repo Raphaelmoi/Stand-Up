@@ -61,7 +61,50 @@ ob_start();
             </form>
 		<?php
 		}
+		else{
 		?>
-<?php
+		<div class="mainContentSettings">
+			<h3>Mon profil</h3>
+			<div class="infoUserSettings">
+			    <?php
+			    while ($donnees = $reponse->fetch())
+			    {
+			    ?>
+			        <img src="<?= $donnees['imageprofil'] ?>">
+			        <div>
+						<h4> <?= $donnees['pseudo'] ?> </h4>
+						<p>Adresse email : <?= $donnees['mail'] ?></p>
+						<p>Inscrit depuis le <?= $donnees['date_inscription_fr'] ?></p>
+			        </div>
+			    <?php
+				$idUser = $donnees['id'];
+			    }
+
+			    $reponse->closeCursor(); // Termine le traitement de la requête
+			    ?>
+			</div>
+			<div class="commentsSettings" >
+				<h3>Mes commentaires</h3>
+
+			    <?php
+				$comment = $commentManager -> getCommentsForOneUser($idUser); 
+			    while ($donnees = $comment->fetch())
+			    {
+			    ?>
+					<p><span>Le <?= $donnees['date_commentaire_fr'] ?> :</span> <?= $donnees['comment'] ?>
+					<a href="index.php?action=deletecomment&amp;id=<?=$donnees['id'] ?>"
+					onclick="return confirm('Êtes vous sûr de vouloir supprimer ce commentaire ?\nCette action est irréversible')"
+						>Supprimer ce commentaire</a>
+				</p>
+			    <?php
+			    }
+			    $comment->closeCursor(); // Termine le traitement de la requête
+			    ?>
+			</div>
+
+		</div>
+		<?php
+		}
+		
 $settingsforms = ob_get_clean();
 ?>

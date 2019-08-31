@@ -7,7 +7,8 @@ ob_start();
 
         <nav class="settings">
             <ul>
-                <li><a href="index.php?action=backendHome">back home</a></li>
+                <li class="btnBackSettings"><a href="index.php?action=backendHome"><i class="fas fa-chevron-left fa-lg"></i> Retour accueil</a></li>
+                <li><a href="index.php?action=settingsview">Mon profil</a></li>
                 <li><a href="index.php?action=settingsview&change=pseudo">Changer mon pseudo</a></li>
                 <li><a href="index.php?action=settingsview&change=pass">Changer mon mot de passe </a></li>
                 <li><a href="index.php?action=settingsview&change=mail">Changer mon adresse mail</a></li>

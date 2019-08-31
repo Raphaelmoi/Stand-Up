@@ -10,11 +10,17 @@ class CommentManager extends Manager
         $comment = $bdd->query("SELECT id, id_user, comment, DATE_FORMAT(date_publication, '%d/%m/%Y à %Hh%i') AS date_commentaire_fr, report FROM comment WHERE report < 10 ORDER BY date_publication DESC");
         return $comment;
     }
+    public function getCommentsForOneUser($id)
+    {
+        $bdd = $this->dbConnect();
+        $comment = $bdd->query("SELECT id, id_user, comment, DATE_FORMAT(date_publication, '%d/%m/%Y à %Hh%i') AS date_commentaire_fr, report FROM comment WHERE id_user = '$id' ");
+        return $comment;
+    }
     // //get comment who are report at least one time or more
     // public function getSignaledComments()
     // {
     //     $bdd = $this->dbConnect();
-    //     $comment = $bdd->prepare("SELECT id, id_user, auteur, commentaire, DATE_FORMAT(date_commentaire, '%d/%m/%Y à %Hh%imin') AS date_commentaire_fr, signalement FROM commentaires WHERE signalement != ? ORDER BY signalement DESC");
+    //     $comment = $bdd->prepare("SELECT id, id_user, auteur, commentaire, DATE_FORMAT(date_commentaire, '%d/%m/%Y à %Hh%imin') AS date_commentaire_fr, signalement FROM comment WHERE signalement != ? ORDER BY signalement DESC");
     //     $comment->execute(array(0));
 
     //     return $comment;
@@ -34,7 +40,7 @@ class CommentManager extends Manager
     public function reportComment($currentId, $val)
     {
         $bdd = $this->dbConnect();
-        $req = $bdd->query("UPDATE commentaires SET signalement = signalement + $val WHERE id = $currentId;");
+        $req = $bdd->query("UPDATE comment SET signalement = signalement + $val WHERE id = $currentId;");
 
         return $req;
     }
@@ -42,7 +48,7 @@ class CommentManager extends Manager
     public function validateComment($currentId)
     {
         $bdd = $this->dbConnect();
-        $validate = $bdd->query("UPDATE commentaires SET signalement = 0 WHERE id = $currentId;");
+        $validate = $bdd->query("UPDATE comment SET signalement = 0 WHERE id = $currentId;");
 
         return $validate;
     }
@@ -50,7 +56,7 @@ class CommentManager extends Manager
     public function deleteComment($id)
     {
         $bdd = $this->dbConnect();
-        $delete = $bdd->query("DELETE FROM commentaires WHERE id = $id; ");
+        $delete = $bdd->query("DELETE FROM comment WHERE id = $id; ");
     }    
     //admin can delete any comment
     public function deleteCommentFromOneUser($id)
@@ -62,7 +68,7 @@ class CommentManager extends Manager
     public function countBadComment()
     {
         $bdd = $this->dbConnect();
-        $count = $bdd->query('SELECT COUNT(*) FROM commentaires where signalement != 0')->fetchColumn();
+        $count = $bdd->query('SELECT COUNT(*) FROM comment where signalement != 0')->fetchColumn();
         return $count;
     }
 }
