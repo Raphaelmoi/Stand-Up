@@ -69,7 +69,7 @@ class UserController{
 			header('Location: index.php?action=settings&erreur=passpseudo');	
 	}
 
-	public function newMail($pseudo, $oldmail, $newmail, $pass){
+	public function newMail($pseudo, $comfirmMail, $newmail, $pass){
 		require_once("model/UserManager.php"); 
 		$connexionManager = new UserManager();
 		$count = $connexionManager -> count($pseudo);
@@ -78,7 +78,7 @@ class UserController{
 			while ($donnees = $test->fetch())
 			{
 				if (password_verify($pass, $donnees['pass'])) {
-					if ($oldmail == $donnees['mail']) {
+					if ($comfirmMail == $newmail) {
 
 						if (preg_match ( " /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ " , $newmail )) {
 							$req = $connexionManager -> updateUserMail($newmail, $pseudo);
@@ -89,7 +89,7 @@ class UserController{
 							header('Location: index.php?action=settings&change=mail&erreur=mailbadsyntax');
 					}
 					else			
-					header('Location: index.php?action=settings&change=mail&erreur=badmailfrombbd');   
+					header('Location: index.php?action=settings&change=mail&erreur=diffmail');   
 				}
 				else
 					header('Location: index.php?action=settings&change=mail&erreur=passpseudo');   

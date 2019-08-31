@@ -59,9 +59,9 @@ class Controller
         $connect = new UserController();
         $newPass = $connect -> newPass($oldPass, $newPass, $pseudo);
     }
-    function updateMail($pseudo, $oldmail, $newmail, $pass){
+    function updateMail($pseudo, $comfirmMail, $newmail, $pass){
         $connect = new UserController();
-        $newMail = $connect -> newMail($pseudo, $oldmail, $newmail, $pass);
+        $newMail = $connect -> newMail($pseudo, $comfirmMail, $newmail, $pass);
     }
     function updatePseudo($newpseudo, $pseudo, $pass){
         $connect = new UserController();

@@ -57,8 +57,8 @@ try {
         }
         //CHANGE THE EMAIL
         elseif ($_GET['action'] == 'newmail') {
-            if (isset($_POST['pseudo']) and isset($_POST['old_mail']) and isset($_POST['new_mail']) and isset($_POST['pass'])) {
-                $controller -> updateMail(htmlspecialchars($_POST['pseudo']), htmlspecialchars($_POST['old_mail']), htmlspecialchars($_POST['new_mail']), htmlspecialchars($_POST['pass']));
+            if (isset($_POST['pseudo']) and isset($_POST['comfirm_mail']) and isset($_POST['new_mail']) and isset($_POST['pass'])) {
+                $controller -> updateMail(htmlspecialchars($_POST['pseudo']), htmlspecialchars($_POST['comfirm_mail']), htmlspecialchars($_POST['new_mail']), htmlspecialchars($_POST['pass']));
             }
         }
         //CHANGE THE PSEUDO

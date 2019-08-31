@@ -118,8 +118,6 @@ section{
 .settingsBtn i{
 	margin-right: 10px;
 }
-
-
 .settingView{
 	width: 100%;
 	height: 92vh;
@@ -129,10 +127,10 @@ section{
 /*	margin-top: 50px;
 */	display: inline-block;
 	margin: 0 50px 0 20px;
+	min-width: 20%;
 }
 .settings ul{
-/*	display: inline-flex;
-*/	width: 100%;
+	width: 100%;
 	padding: 0;
 	margin: 0;
 	padding-bottom: 10px;
@@ -331,13 +329,13 @@ section{
 	border : none;
 /*	border: 1px #4fc3f7 solid;
 */}
-.postComment input{
+.postComment input, .btnSubmitSetting{
 	background-image:linear-gradient(#4fc3f7, #0288d1);
 	height: 40px;
 	border: 1px #0288d1 solid;
 	border-radius: 0 0 10px 10px;
 }
-.postComment input:hover{
+.postComment input:hover, .btnSubmitSetting:hover{
 	background-image:linear-gradient(#0288d1, #4fc3f7);
 }
 
@@ -431,13 +429,26 @@ section{
 	text-align: center;
 	font-size: 36px;
 	font-family: 'Amatic SC', cursive;
-	margin: 10px;
+	margin: 15px;
 }
 .mainContentSettings>div{
 	display: flex;	
 	margin: 10px;
-/*	border: 2px black solid;
-*/}
+}
+.mainContentSettings form{
+	text-align: center;
+	margin-top: 50px;
+}
+.mainContentSettings form p{
+	font-size: 20px;
+}
+.mainContentSettings input{
+	height: 40px;
+	width: 300px;
+	border-radius: 5px;
+	font-size: 20px;
+	padding-left: 10px;
+}
 .infoUserSettings{
 	padding: 20px;
 }
