@@ -40,6 +40,7 @@ class Controller
     function backendHome(){
         $userManager = new UserManager(); 
         $reponse = $userManager -> getUser($_SESSION['pseudo']);
+        // $position = $userManager -> getUserPosition();
         $commentManager = new CommentManager();
         $comment = $commentManager -> getComments(); 
         require('view/backend/backEndHome.php');        

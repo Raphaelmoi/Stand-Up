@@ -11,6 +11,12 @@ class UserManager extends Manager
 		$req->execute(array($pseudo));
 		return $req;
     }
+    public function getUserPosition($userScore)
+    {
+        $bdd = $this->dbConnect();
+          $req = $bdd->query("SELECT count(*) from user where game_total > '$userScore'")->fetchColumn();
+        return $req;
+    }
 
     public function getUserWithId($id)
     {
@@ -19,7 +25,7 @@ class UserManager extends Manager
       $req->execute(array($id));
       return $req;
     }
-    
+
     //when user want to change password
     public function updateUserPw($pass, $pseudo){
     	$bdd = $this->dbConnect();

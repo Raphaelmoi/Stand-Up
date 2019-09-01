@@ -26,8 +26,7 @@
                         <div>                    
                             <h4><?= $user['pseudo']?></h4>
                         </div>
-                    </div>
-
+                    </div>                    
                     <h4><?= $user['pseudo']?></h4>
                 <?php
                 }
