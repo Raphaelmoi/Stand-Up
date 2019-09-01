@@ -1,31 +1,14 @@
 body, html{
 	margin: 0;
 }
-*{
-	font-family: 'Open Sans', sans-serif;
-}
-a{
-	text-decoration: none;
-	color: #222;
-}
 header{
-	position: fixed;
-	top: 0;
-	background-color: #fdd835;
-	width: 100%;
-	padding: 0;
-	z-index: 10;
 	border-bottom: 4px #0288d1 solid;
 }
-h1{
-	color: white;
-	text-align: center;
-	text-shadow: 2px 3px 3px #795548;
-	margin: 0;
-	font-variant: small-caps;
-    font-family: 'Open Sans', sans-serif;
+section{
+	padding-top: 42px;
+	width: 100%;
+	display: flex;
 }
-
 .astroImg
 {
 	position: fixed;
@@ -36,52 +19,7 @@ h1{
 	left: -5px;
 	transform: scale(-1, 1);
 }
-
-.connect
-{
-	position: absolute;
-	right: 0;
-	top: 0;
-	height: 40px;
-	z-index: 1;
-	padding: 10px;
-	display: flex;
-	padding: 0;
-	line-height: 40px;
-	padding-left: 10px;
-	overflow: hidden;
-	z-index: 9999;
-}
-.connect>div{
-	height: 90%;
-	padding: 0 10px;
-	margin-right: 2px;
-	background-color: orange;
-	border-left: 3px transparent solid; 
-	border-right: 3px transparent solid; 
-	border-bottom: 3px transparent solid; 
-	border-radius: 0 0px 10px 10px ;
-}
-.connect>div:hover
-{
-	border-left: 3px #fb8c00 solid; 
-	border-right: 3px #fb8c00 solid; 
-	border-bottom: 3px #fb8c00 solid; 
-}
-.connect span{
-	margin-left: 10px;
-	font-weight: normal;
-	line-height: 40px;
-}
-.connect a{
-	color: #4e342e;
-}
-
-section{
-	padding-top: 42px;
-	width: 100%;
-	display: flex;
-}
+/*LEFT ASIDE*/
 .leftAside{
 	position: fixed;
 	left: 0;
@@ -118,40 +56,7 @@ section{
 .settingsBtn i{
 	margin-right: 10px;
 }
-.settingView{
-	width: 100%;
-	height: 92vh;
-	align-items: center;
-}
-.settings{
-/*	margin-top: 50px;
-*/	display: inline-block;
-	margin: 0 50px 0 20px;
-	min-width: 20%;
-}
-.settings ul{
-	width: 100%;
-	padding: 0;
-	margin: 0;
-	padding-bottom: 10px;
-}
-.settings li {
-	list-style-type: none;
-	width: 100%;
-	margin: 5px;
-	background-image:linear-gradient(#fdd835, orange );
-	height: 50px;
-	border: 2px #fdd835 solid;
-	border-radius: 5px;
-	line-height: 50px;
-	overflow: hidden;
-	text-align: center;
-}
-.settings li:hover{
-	background-image:linear-gradient(orange, #fdd835);
-}
 .btnBackSettings{
-	background: lightblue;
 	margin-bottom: 20px;
 }
 .btnBackSettings i{
@@ -160,6 +65,7 @@ section{
 .settingsBtn:hover{
 	background-image:linear-gradient(orange, #fdd835);
 }
+/*CENTER*/
 .centerArticle{
 	width: 60%;
 	margin-left: 18%;
@@ -167,92 +73,9 @@ section{
 	background-color: whitesmoke;
 }
 .startGame{
-	width: 90%;
-	margin-left: 5%;
-	margin-bottom: 4%;
-	height: 300px;
-	position: relative;
-	background: orange;
-	border-radius: 10px;
+	margin-bottom: 30px;
 }
-.startGame a{
-	position:absolute;
-	width : 100%;
-	height: 100%;
-	margin: 0;
-}
-.startGame a:hover .titleBtn
-{
-	background-color: rgba(2, 136, 209, 0.85);
-}
-.startGame img{
-	margin: 0;
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	bottom: 0;
-	border-radius: 10px;
-	object-fit: cover;
-}
-.titleBtn{
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	height: 60px;
-	line-height: 60px;
-	text-align: center;
-	background-color: rgba(2, 136, 209, 0.6);
-	color: #DDD;
-	font-family: 'Amatic SC', cursive;
-	font-size: 40px;
-	border-radius: 0 0 10px 10px ;
-	border-top: 3px #0288d1 solid;
-	overflow: hidden;
-}
-.panel{
-	display: none;
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 63px;
-	overflow: hidden;
-	left: 30%;
-	background-color: rgba(2, 136, 209, 0.2);
-	border-left: 10px rgba(2, 136, 209, 1) solid;
-	border-top-left-radius: 4px;
-	border-bottom-left-radius: 4px;
-	color: #EEE;
-}
-.panel h3
-{
-	font-family: 'Amatic SC', cursive;
-	margin: 0;
-	text-align: center;
-	font-size: 28px;
-}
-.panel p{
-	margin: 0 20px;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 17px;
-}
-.startGame:hover .panel{
-	display: block;
-	animation-name: showDetails;
-    animation-duration: 1s;
-}
-@keyframes showDetails {
-    0%   
-    {
-    	opacity : 0;
-        right : 0;
-        left: 100%	;
-    }
-    100% {
-    	opacity : 1;
-        z-index: 99;
-        left : 30%;
-    }
-}
+/*RIGHT ASIDE chat*/
 .rightAside
 {
 	position: fixed;
@@ -265,6 +88,7 @@ section{
 	position: absolute;
 	top: 0;
 	bottom: 20%;
+	width: 100%;
 	overflow-y: scroll;
 	padding-bottom: 30px;
 }
@@ -274,9 +98,8 @@ section{
 	font-size: 30px;
 	margin: 10px;
 }
-
 .messageChat{
-	width: 95%;
+	width: 98%;
 	margin: auto;
 	border-radius: 5px;
 	margin-bottom: 8px;
@@ -305,12 +128,13 @@ section{
 	text-align: justify;
 	margin: 0px 10px 15px 10px;
 }
+/*Box for writing a new comment*/
 .postComment{
 	position: absolute;
 	bottom: 0;
 	margin-bottom: 0;
 	border-radius: 10px;
-	border: 1px #777 solid;
+	box-shadow: 0px 0px 5px gray;
 }
 .postComment .messageChatTitle{
 	border-radius:  10px 10px 0 0;
@@ -318,7 +142,6 @@ section{
 	padding: 3px;
 	border-bottom: 1px #BBB solid;
 }
-
 .postComment form{
 	display: flex;
 	flex-direction: column;
@@ -327,18 +150,19 @@ section{
 .postComment textarea{
 	height: 100%;
 	border : none;
-/*	border: 1px #4fc3f7 solid;
-*/}
+}
+/*Buttons design*/
 .postComment input, .btnSubmitSetting{
 	background-image:linear-gradient(#4fc3f7, #0288d1);
 	height: 40px;
 	border: 1px #0288d1 solid;
-	border-radius: 0 0 10px 10px;
+	margin-top: 5px;
+	border-radius:5px;
 }
 .postComment input:hover, .btnSubmitSetting:hover{
 	background-image:linear-gradient(#0288d1, #4fc3f7);
 }
-
+/*APPEAR in the chat when mouse hover pseudo or img of other player*/
 .infoAboutUser{
 	display: none;
 	position: absolute;
@@ -371,55 +195,7 @@ section{
 .infoAboutUser:hover{
 	display: block;
 }
-
-
-.alert{
-    position: absolute;
-    opacity: 0;
-    border-radius: 20px;
-    width: 90%;
-    left: 5%;
-    top: 15%;
-    z-index: -10;
-    text-align: center;
-    animation-name: disparait;
-    animation-duration: 3.5s;
-}
-.alertRed
-{
-    background-color: #f44336;
-}
-.alertGreen
-{
-    background-color: #aeea00;
-}
-.alert p{
-    font-size: 20px;
-}
-@keyframes disparait {
-    0%   {opacity : 1;
-        z-index: 99;
-    }
-    65%  {opacity : 0.9;
-        z-index: 99;}
-    100% {opacity : 0;
-        z-index: -1;
-    }
-}
-#boxImg img{
-	width: 130px;
-	height: 130px;
-	border-radius: 40px;
-	border: 5px transparent solid;
-	opacity: 0.85;
-	object-fit: cover;
-	margin: 10px;
-}
-#boxImg img:hover, .active {
-	border: 5px #0288d1 solid;
-	opacity: 1;
-}
-
+/*SETTINGS VIEW*/
 .mainContentSettings{
 	background-color: whitesmoke;
 	width: 90%;
@@ -449,6 +225,38 @@ section{
 	border-radius: 5px;
 	font-size: 20px;
 	padding-left: 10px;
+}
+.settingView{
+	width: 100%;
+	height: 92vh;
+	align-items: center;
+}
+/*NAV*/
+.settings{
+	display: inline-block;
+	margin: 0 50px 0 20px;
+	min-width: 20%;
+}
+.settings ul{
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	padding-bottom: 10px;
+}
+.settings li {
+	list-style-type: none;
+	width: 100%;
+	margin: 5px;
+	background-image:linear-gradient(#fdd835, orange );
+	height: 50px;
+	border: 2px #fdd835 solid;
+	border-radius: 5px;
+	line-height: 50px;
+	overflow: hidden;
+	text-align: center;
+}
+.settings li:hover{
+	background-image:linear-gradient(orange, #fdd835);
 }
 .infoUserSettings{
 	padding: 20px;
