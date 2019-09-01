@@ -40,7 +40,6 @@ class Controller
     function backendHome(){
         $userManager = new UserManager(); 
         $reponse = $userManager -> getUser($_SESSION['pseudo']);
-        // $position = $userManager -> getUserPosition();
         $commentManager = new CommentManager();
         $comment = $commentManager -> getComments(); 
         require('view/backend/backEndHome.php');        
@@ -94,5 +93,12 @@ class Controller
         $connect = new UserController();
         $endGame = $connect -> endGameTwo($score);
         $this -> backendHome();
+    }
+    function reloadChat(){
+        $userManager = new userManager(); 
+        $reponse = $userManager -> getUser($_SESSION['pseudo']);
+        $commentManager = new CommentManager();
+        $comment = $commentManager -> getComments();
+        require('view/backend/chatMessenger.php');        
     }
 }

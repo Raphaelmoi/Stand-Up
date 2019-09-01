@@ -3,7 +3,7 @@ ob_start();
 ?>
 <article class="centerArticle">
     <div class="startGame">
-        <a href="game1/index.html"> 
+        <a href="public/game1/index.html"> 
             <img src="public/img/sc.jpg">
             <div class="titleBtn">Finger in the noise</div>
             <div class="panel"> 
@@ -19,7 +19,7 @@ ob_start();
     </div>
 
     <div class="startGame">
-        <a href="game2/index.html"> 
+        <a href="public/game2/index.html"> 
             <img src="public/img/g10.jpg">
             <div class="titleBtn">Finger in the hear</div>
             <div class="panel"> 
@@ -34,7 +34,7 @@ ob_start();
         </a>
     </div>            
     <div class="startGame">
-        <a href="game1/index.html"> 
+        <a href="public/game1/index.html"> 
             <img src="public/img/g10.jpg">
             <div class="titleBtn">Commencer la partie</div>
             <div class="panel"> 

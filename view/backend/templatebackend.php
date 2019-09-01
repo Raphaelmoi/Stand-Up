@@ -21,7 +21,7 @@
         <script src= public/js/chat.js></script>
 
         <script src= public/js/ajax.js></script>
-        <script src= public/js/script.js></script>
+        <script src= public/js/catApi.js></script>
     </head>
 
     <body>

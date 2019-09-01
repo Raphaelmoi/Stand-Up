@@ -14,7 +14,7 @@
         <script src="https://unpkg.com/ml5@0.3.1/dist/ml5.min.js"></script>
 
         <script src= public/js/ajax.js></script>
-        <script src= public/js/script.js></script>
+        <script src= public/js/catApi.js></script>
     </head>
 
     <body>

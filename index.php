@@ -88,6 +88,9 @@ try {
                 }
             }
         }
+        elseif ($_GET['action'] == 'reload') {
+            $controller -> reloadChat();
+        }
     }
     else {
        //default view -> HOME

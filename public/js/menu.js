@@ -1,4 +1,3 @@
-
 let astroLeft = document.getElementsByClassName('astroImg')[0];
 let astroRight = document.getElementsByClassName('astroImg')[1];
 let smallHeader = document.getElementById('smallHeader');
@@ -17,15 +16,6 @@ window.onscroll = function() {
         adaptableMenu();
     }
 };
-
-//On ferme le modal en cliquant n'importe où ailleurs
-// window.onclick = function(event) {
-//     if (bigHeader == null) {
-//         if (event.target != headerActual ) {
-//             document.location.href="index.php";
-//         }        
-//     }
-// };
 
 function adaptableMenu() {
     let Yposition = window.scrollY;

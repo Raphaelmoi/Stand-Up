@@ -8,7 +8,7 @@ ob_start();
             <h2>Esquivez les météorites et attrapez un maximum de pierres préciseuses</h2>
 
             <div class="startGame">
-                <a href="game1/index.html"> 
+                <a href="public/game1/index.html"> 
                     <img src="public/img/g10.jpg">
                     <div class="titleBtn">Commencer la partie</div>
                     <div class="panel"> 
@@ -27,11 +27,11 @@ ob_start();
             <h2>--- Tous les jeux --- </h2>
             <div class="displayGame">
                 <div id="contenuOfDisplayGame">
-                     <a href="game1/index.html">
+                     <a href="public/game1/index.html">
                         <img src="public/img/sc.jpg">
                         <div class="unlockedGame"> jeux 1</div>
                     </a>
-                    <a href="game2/index.html">
+                    <a href="public/game2/index.html">
                         <img src="public/img/G10.jpg">
                         <div class="lockedGame"><i class="fas fa-lock">2</i></div>
                     </a>
