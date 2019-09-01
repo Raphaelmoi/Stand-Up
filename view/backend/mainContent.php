@@ -20,7 +20,7 @@ ob_start();
 
     <div class="startGame">
         <a href="public/game2/index.html"> 
-            <img src="public/img/g10.jpg">
+            <img src="public/img/G10.jpg">
             <div class="titleBtn">Finger in the hear</div>
             <div class="panel"> 
                 <h3> Finger in the noise</h3>
@@ -35,7 +35,7 @@ ob_start();
     </div>            
     <div class="startGame">
         <a href="public/game1/index.html"> 
-            <img src="public/img/g10.jpg">
+            <img src="public/img/G10.jpg">
             <div class="titleBtn">Commencer la partie</div>
             <div class="panel"> 
                 <h3> Finger in the noise</h3>

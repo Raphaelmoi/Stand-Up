@@ -9,7 +9,7 @@ ob_start();
 
             <div class="startGame">
                 <a href="public/game1/index.html"> 
-                    <img src="public/img/g10.jpg">
+                    <img src="public/img/sc.jpg">
                     <div class="titleBtn">Commencer la partie</div>
                     <div class="panel"> 
                         <h3> Finger in the noise</h3>

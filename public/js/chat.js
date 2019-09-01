@@ -1,6 +1,7 @@
 function reloadChat () {
 	if ($('#refreshAside') != null) {
-    	$('#refreshAside').load('index.php?action=reload');
+    	$('#refreshAside').load('chatMessenger.php');
+
     	console.log('aaa');
 	}
 }

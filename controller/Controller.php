@@ -4,7 +4,6 @@ class Controller
     function __construct()
     {
         spl_autoload_register('Controller::chargerClasse');
-        // require 'controller/UtiController.php';
         require 'controller/UserController.php';
     }
     //autoload
