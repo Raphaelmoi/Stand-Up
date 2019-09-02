@@ -1,27 +1,63 @@
 <!-- HOME PAGE -->
 <?php
-$title = 'players view';
+$title = 'Tous les joueurs';
 ob_start();
 ?>
-    <section class="settingView">  
+    <section class="playersViewSection">  
+        <a href="index.php?action=backendHome"><i class="fas fa-chevron-left fa-lg"></i> Retour accueil</a>
 
-        <nav class="settings">
-            <ul>
-                <a href="index.php?action=backendHome"><li><i class="fas fa-chevron-left fa-lg"></i> Retour accueil</li></a>
-                <a href="index.php?action=settingsview"><li>Mon profil</li></a>
-                <a href="index.php?action=settingsview&change=pseudo"><li>Changer mon pseudo</li></a>
-                <a href="index.php?action=settingsview&change=pass"><li>Changer mon mot de passe </li></a>
-                <a href="index.php?action=settingsview&change=mail"><li>Changer mon adresse mail</li></a>
-                <a href="index.php?action=settingsview&change=cat"><li>Changer mon chat</li></a>
-                <a href="index.php?action=settingsview&change=account"><li>Supprimer mon compte</li></a>
-            </ul>
-        </nav>
+        <table>
+            <tr class="titleTable">
+                <?php
 
-<?php 
-    require 'settingsUser.php';//choice of style and sort article
-    echo $settingsforms;
-?>
-</section>  
+                if(isset($_GET['order']) && $_GET['order'] == "antichrono" ){
+                ?>
+                   <th><i class="fas fa-chevron-down"></i></th>
+                   <th><a href="index.php?action=playersview&sortby=scoretotal&order=chrono">Position</a> </th>
+                   <th><a href="index.php?action=playersview&sortby=pseudo&order=chrono">Pseudo</a></th>
+                   <th><a href="index.php?action=playersview&sortby=scoreone&order=chrono">Meilleur score jeu 1</a></th>
+                   <th><a href="index.php?action=playersview&sortby=scoretwo&order=chrono">Meilleur score jeu 2</a></th>
+                   <th><a href="index.php?action=playersview&sortby=scoretotal&order=chrono">Nombre total de points</a> </th>
+                <?php
+                }
+                elseif(!isset($_GET['order']) || $_GET['order'] == "chrono" ){
+                ?>   
+                   <th><i class="fas fa-chevron-up"></i></th>
+                   <th><a href="index.php?action=playersview&sortby=scoretotal&order=antichrono">Position</a></th>
+                   <th><a href="index.php?action=playersview&sortby=pseudo&order=antichrono">Pseudo</a></th>
+                   <th><a href="index.php?action=playersview&sortby=scoreone&order=antichrono">Meilleur score jeu 1</a></th>
+                   <th><a href="index.php?action=playersview&sortby=scoretwo&order=antichrono">Meilleur score jeu 2</a></th>
+                   <th><a href="index.php?action=playersview&sortby=scoretotal&order=antichrono">Nombre total de points</a> </th>
+                <?php
+                }
+                ?>    
+           </tr>
+        <?php    
+
+        while ($data = $reponse->fetch())
+        {
+            $position = $userManager -> getUserPosition($data['game_total']);
+        ?>
+            <tr
+                <?php 
+                if ($data['pseudo'] == $_SESSION['pseudo'] ) {
+                    echo "style=\"background: rgba(253, 216, 53, 0.7);\"";
+                } 
+                ?>                  
+            >
+                <td> <img src="<?= $data['imageprofil']?>"></td>
+                <td ><?= $position + 1?></td>            
+                <td><?= $data['pseudo']?></td>
+                <td><?= $data['game_one_bs']?></td>
+                <td><?= $data['game_two_bs']?></td>
+                <td><?= $data['game_total']?></td>
+            </tr>
+            <?php 
+            }
+            ?>
+        </table>
+
+    </section>  
 <?php
 $content = ob_get_clean();
 require ('templatebackend.php'); 

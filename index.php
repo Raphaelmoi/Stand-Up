@@ -93,7 +93,37 @@ try {
             $controller -> reloadChat();
         }
         elseif ($_GET['action'] == 'playersview') {
-            $controller -> playersView();
+            if (isset($_GET['sortby']) && isset($_GET['order'])) {
+                if ( $_GET['order'] == 'antichrono') {
+                    if ($_GET['sortby'] == 'pseudo'){
+                        $controller -> playersView('pseudo', "DESC");
+                    }
+                    elseif ($_GET['sortby'] == 'scoreone'){
+                        $controller -> playersView('game_one_bs', "DESC");
+                    }
+                    elseif ($_GET['sortby'] == 'scoretwo'){
+                        $controller -> playersView('game_two_bs', "DESC");
+                    }
+                    elseif ($_GET['sortby'] == 'scoretotal'){
+                        $controller -> playersView('game_total', "DESC");
+                    }
+                }
+                elseif ( $_GET['order'] == 'chrono') {
+                    if ($_GET['sortby'] == 'pseudo'){
+                        $controller -> playersView('pseudo', "ASC");
+                    }
+                    elseif ($_GET['sortby'] == 'scoreone'){
+                        $controller -> playersView('game_one_bs', "ASC");
+                    }
+                    elseif ($_GET['sortby'] == 'scoretwo'){
+                        $controller -> playersView('game_two_bs', "ASC");
+                    }
+                    elseif ($_GET['sortby'] == 'scoretotal'){
+                        $controller -> playersView('game_total', "ASC");
+                    }
+                }
+            }
+            else $controller -> playersView('game_total', "DESC");
         }
     }
     else {

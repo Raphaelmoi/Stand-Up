@@ -321,3 +321,53 @@ section{
 .commentsSettings p:hover{
 	background-color: #DDD;
 }
+
+
+
+/*page players view*/
+.playersViewSection{
+	flex-direction: column;
+}
+
+.playersViewSection>a{
+	background-image:linear-gradient(#fdd835, orange );
+	width: 200px;
+	margin: 20px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	border: 2px #fdd835 solid;	
+	border-radius: 8px;
+}
+.playersViewSection i{
+	margin-right: 15px;
+}
+table{
+	background-color: whitesmoke;
+	width: 100%;
+	height: 100%;
+    border-collapse: collapse;
+}
+.titleTable{
+	height: 40px;
+	background-color: rgba(2, 136, 209, 0.7);
+}
+.titleTable:hover{
+	background-color: rgba(2, 136, 209, 0.7);
+}
+td img{
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	padding: 0;
+	margin-top: 5px;
+}
+td /* Mettre une bordure sur les td ET les th */
+{
+    text-align: center;
+    border-bottom: 1px #BBB solid;
+    margin: 0;
+}
+tr:hover {
+	background-color: rgba(253, 216, 53, 0.3);
+}

@@ -101,9 +101,9 @@ class Controller
         require('view/backend/chatMessenger.php');        
     }
 
-    function playersView(){
+    function playersView($arg, $order){
         $userManager = new UserManager(); 
-        $reponse = $userManager -> getUser($_SESSION['pseudo']);
+        $reponse = $userManager -> getAllUsers($arg, $order);
         require('view/backend/playersview.php');        
     }
 }

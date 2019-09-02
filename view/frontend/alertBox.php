@@ -137,7 +137,12 @@ elseif (isset($_GET['success'])) {
 		}
 		elseif ($_GET['success'] == 'bye' ) {
 			?>
-			<p>Au revoir ! </p>
+			<p>Votre compte a été supprimé! </p>
+			<?php
+		}
+		elseif ($_GET['success'] == 'deletecomment' ) {
+			?>
+			<p>Le commentaire a été supprimé </p>
 			<?php
 		}
 		?>

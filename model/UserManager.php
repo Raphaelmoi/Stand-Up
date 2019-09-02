@@ -12,6 +12,15 @@ class UserManager extends Manager
         $result = $req->fetch();
 		return $result;
     }
+
+    public function getAllUsers($arg, $order)
+    {
+        $bdd = $this->dbConnect();
+        $req = $bdd->query("SELECT * FROM user ORDER BY $arg $order");
+        return $req;
+    }
+
+
     public function getUserPosition($userScore)
     {
         $bdd = $this->dbConnect();
