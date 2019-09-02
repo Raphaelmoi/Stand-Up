@@ -3,7 +3,7 @@
 $title = 'page principale';
 ob_start();
 ?>
-    <section >
+    <section class="mainSection">
         <article class="premierArticle">
             <h2>Esquivez les météorites et attrapez un maximum de pierres préciseuses</h2>
 
@@ -31,23 +31,23 @@ ob_start();
                         <img src="public/img/sc.jpg">
                         <div class="unlockedGame"> jeux 1</div>
                     </a>
-                    <a href="public/game2/index.html">
+                    <a  href="javascript:;" onclick="alert('Vous devez être connecté pour accéder à cette partie ')">
                         <img src="public/img/G10.jpg">
                         <div class="lockedGame"><i class="fas fa-lock">2</i></div>
                     </a>
-                    <a href="">
+                    <a href="javascript:;">
                         <img src="public/img/assto4.png">
                         <div class="lockedGame"><i class="fas fa-lock">3</i></div>
                     </a>
-                    <a href="">
+                    <a href="javascript:;">
                         <img src="public/img/G10.jpg">
                         <div class="lockedGame"><i class="fas fa-lock">4</i></div>
                     </a>  
-                    <a href="">
+                    <a href="javascript:;">
                         <img src="public/img/assto4.png">
                         <div class="lockedGame"><i class="fas fa-lock">5</i></div>
                     </a>
-                    <a href="">
+                    <a href="javascript:;">
                         <img src="public/img/G10.jpg">
                         <div class="lockedGame"><i class="fas fa-lock">6</i></div>
                     </a>  

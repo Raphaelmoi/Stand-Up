@@ -1,11 +1,11 @@
 <?php
-        session_start();
-        require 'model/UserManager.php'; 
-        require 'model/CommentManager.php'; 
-        $userManager = new userManager(); 
-        $reponse = $userManager -> getUser($_SESSION['pseudo']);
-        $commentManager = new CommentManager();
-        $comment = $commentManager -> getComments();
+        // session_start();
+        // require 'model/UserManager.php'; 
+        // require 'model/CommentManager.php'; 
+        // $userManager = new userManager(); 
+        // $reponse = $userManager -> getUser($_SESSION['pseudo']);
+        // $commentManager = new CommentManager();
+        // $comment = $commentManager -> getComments();
 ?>
     <h2>--- Chat ---</h2>
     <?php

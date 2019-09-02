@@ -41,6 +41,7 @@ class Controller
         $reponse = $userManager -> getUser($_SESSION['pseudo']);
         $commentManager = new CommentManager();
         $comment = $commentManager -> getComments(); 
+
         require('view/backend/backEndHome.php');        
     }
     function postComment($id, $commentaire){
@@ -65,7 +66,6 @@ class Controller
     function updatePseudo($newpseudo, $pseudo, $pass){
         $connect = new UserController();
         $newMail = $connect -> newPseudo($newpseudo, $pseudo, $pass);
-        // header('Location: index.php?action=settingsview&success=updatepseudo');  
     }
     function updateCat($imageUrl){
         $connect = new UserController();
@@ -94,7 +94,7 @@ class Controller
         $this -> backendHome();
     }
     function reloadChat(){
-        $userManager = new userManager(); 
+        $userManager = new UserManager(); 
         $reponse = $userManager -> getUser($_SESSION['pseudo']);
         $commentManager = new CommentManager();
         $comment = $commentManager -> getComments();

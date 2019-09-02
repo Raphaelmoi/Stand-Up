@@ -45,65 +45,53 @@ ob_start();
 		</div>
 		<?php
 		}
+		// Change the profil picture
 		elseif (isset($_GET['change']) && $_GET['change'] == 'cat' ){
 		?>
 			<div class="mainContentSettings" >
-
 				<h3>Changer ma photo de profil</h3>
-
 	   			<script> getTheCats(); </script>
-	            <form class="inscriptionBox" action='index.php?action=newcat' method="post">
-	                
+	            <form class="inscriptionBox" action='index.php?action=newcat' method="post">	                
 	                <div id="boxImg"></div>
-
 	                <input type="hidden" name="imageUrl" id="hiddenInputInscription" value="">
 	                <input class="btnSubmitSetting" type="submit" name="submit" value="Changer mon image">
 	            </form>
 	        </div>
 		<?php
 		}
+		// Delete account
 		elseif (isset($_GET['change']) && $_GET['change'] == 'account' ){
 		?>
 			<div class="mainContentSettings" >
-
-			<h3> Supprimer mon compte</h3>
-            <form class="inscriptionBox" action='index.php?action=deleteaccount' method="post">
-                <p>Etes vous sûr de vouloir supprimer votre compte?</p> <input type="checkbox" required>
-                </br>
-            </br>
-                <input class="btnSubmitSetting" type="submit" name="submit" value="supprimer mon compte"
-                onclick="return confirm('Êtes vous sûr de vouloir supprimer votre compte ?\nCette action est irréversible')">
-            </form>
-        </div>
+				<h3> Supprimer mon compte</h3>
+	            <form class="inscriptionBox" action='index.php?action=deleteaccount' method="post">
+	                <p>Etes vous sûr de vouloir supprimer votre compte?</p> <input type="checkbox" required>
+	                </br>
+	            	</br>
+	                <input class="btnSubmitSetting" type="submit" name="submit" value="supprimer mon compte"
+	                onclick="return confirm('Êtes vous sûr de vouloir supprimer votre compte ?\nCette action est irréversible')">
+	            </form>
+	        </div>
 		<?php
 		}
 		else{
+			// Basic view with profil information and every comment from user
 		?>
 		<div class="mainContentSettings">
 			<h3>Mon profil</h3>
 			<div class="infoUserSettings">
-			    <?php
-			    while ($donnees = $reponse->fetch())
-			    {
-			    ?>
-			        <img src="<?= $donnees['imageprofil'] ?>">
-			        <div>
-						<h4> <?= $donnees['pseudo'] ?> </h4>
-						<p>Adresse email : <?= $donnees['mail'] ?></p>
-						<p>Inscrit depuis le <?= $donnees['date_inscription_fr'] ?></p>
-			        </div>
-			    <?php
-				$idUser = $donnees['id'];
-			    }
-
-			    $reponse->closeCursor(); // Termine le traitement de la requête
-			    ?>
+			    <img src="<?= $reponse['imageprofil'] ?>">
+			    <div>
+					<h4> <?= $reponse['pseudo'] ?> </h4>
+					<p>Adresse email : <?= $reponse['mail'] ?></p>
+					<p>Inscrit depuis le <?= $reponse['date_inscription_fr'] ?></p>
+			    </div>
 			</div>
 			<div class="commentsSettings" >
 				<h3>Mes commentaires</h3>
 
 			    <?php
-				$comment = $commentManager -> getCommentsForOneUser($idUser); 
+				$comment = $commentManager -> getCommentsForOneUser($reponse['id']); 
 			    while ($donnees = $comment->fetch())
 			    {
 			    ?>
@@ -117,7 +105,6 @@ ob_start();
 			    $comment->closeCursor(); // Termine le traitement de la requête
 			    ?>
 			</div>
-
 		</div>
 		<?php
 		}

@@ -9,7 +9,8 @@ class UserManager extends Manager
     	$bdd = $this->dbConnect();
 		  $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, DATE_FORMAT(date_inscription, \'%d/%m/%Y \') AS date_inscription_fr, game_one, game_one_bs, game_two, game_two_bs, game_total FROM user WHERE pseudo = ?');
 		$req->execute(array($pseudo));
-		return $req;
+        $result = $req->fetch();
+		return $result;
     }
     public function getUserPosition($userScore)
     {
@@ -23,7 +24,8 @@ class UserManager extends Manager
       $bdd = $this->dbConnect();
       $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, date_inscription FROM user WHERE id = ?');
       $req->execute(array($id));
-      return $req;
+        $result = $req->fetch();
+    return $result;
     }
 
     //when user want to change password

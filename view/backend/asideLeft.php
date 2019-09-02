@@ -2,16 +2,12 @@
 ob_start();
 ?>
 <aside class="leftAside">
-    <?php
-    while ($donnees = $reponse->fetch())
-    {
-    ?>
     <div>
-        <img src="<?= $donnees['imageprofil'] ?>">
-        <h3> <?= $donnees['pseudo'] ?> </h3>
-        <p>Stand-upper depuis le <?= $donnees['date_inscription_fr'] ?></p>
+        <img src="<?= $reponse['imageprofil'] ?>">
+        <h3> <?= $reponse['pseudo'] ?> </h3>
+        <p>Stand-upper depuis le <?= $reponse['date_inscription_fr'] ?></p>
         <?php
-            $position = $userManager -> getUserPosition($donnees['game_total']);
+            $position = $userManager -> getUserPosition($reponse['game_total']);
 
             if ($position == 0) {
                 ?>
@@ -29,18 +25,14 @@ ob_start();
                 <?php
             }
         ?>
-        <p> XP : <?= ceil($donnees['game_total']/1000)  ?> </p>
+        <p>Score jeu 1 :<?= $reponse['game_one_bs'] ?></p>
+        <p> XP : <?= ceil($reponse['game_total']/1000)  ?> </p>
 
     </div>
 
 
     <a class="settingsBtn" href="index.php?action=settingsview"><i class="fas fa-cog"></i>Paramètres</a>
 
-
-    <?php
-    }
-    $reponse->closeCursor(); // Termine le traitement de la requête
-    ?>
 </aside>
 
 <?php

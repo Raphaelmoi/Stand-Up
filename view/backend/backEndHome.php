@@ -8,13 +8,10 @@ if (!empty($_SESSION['pseudo'])) {
             <?php
             include('view/backend/asideLeft.php');
             echo $asideLeft;
-            ?>
 
-            <?php
             include('view/backend/mainContent.php');
             echo $mainContent;
-            ?>
-            <?php
+
             include('view/backend/asideRight.php');
             echo $asideRight;
             ?>
