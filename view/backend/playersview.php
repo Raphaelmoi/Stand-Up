@@ -2,6 +2,9 @@
 <?php
 $title = 'Tous les joueurs';
 ob_start();
+
+include('view/backend/asideLeft.php');
+echo $asideLeft;
 ?>
     <section class="playersViewSection">  
         <a href="index.php?action=backendHome"><i class="fas fa-chevron-left fa-lg"></i> Retour accueil</a>
@@ -34,7 +37,7 @@ ob_start();
            </tr>
         <?php    
 
-        while ($data = $reponse->fetch())
+        while ($data = $rep->fetch())
         {
             $position = $userManager -> getUserPosition($data['game_total']);
         ?>

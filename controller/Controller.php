@@ -103,7 +103,9 @@ class Controller
 
     function playersView($arg, $order){
         $userManager = new UserManager(); 
-        $reponse = $userManager -> getAllUsers($arg, $order);
+        $rep = $userManager -> getAllUsers($arg, $order);
+        $reponse = $userManager -> getUser($_SESSION['pseudo']);
+
         require('view/backend/playersview.php');        
     }
 }

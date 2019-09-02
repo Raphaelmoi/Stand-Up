@@ -15,7 +15,7 @@ ob_start();
         <form action="index.php?action=postcomment" method="post">
             <input type="hidden" name="id_user" value="<?= $reponse['id'] ?>">
             <textarea name="comm">Saisissez votre commentaire</textarea>
-            <input type="submit" name="valide">
+            <input class="btnValideChat" type="submit" name="valide">
         </form>
     </div>
 </aside>

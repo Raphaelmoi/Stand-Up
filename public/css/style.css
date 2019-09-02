@@ -11,7 +11,7 @@ header{
     background-color: #fdd835;
     width: 100%;
     padding: 0;
-    z-index: 10;
+    z-index: 100;
 }
 h1{
     color: white;
@@ -186,10 +186,13 @@ h1{
     width: 90%;
     left: 5%;
     top: 15%;
-    height: 100px;
+    height: 70px;
     z-index: -10;
+    color: whitesmoke;
+    font-size: 40px;
     text-align: center;
-    animation-name: disparait;
+    justify-content: center;
+        animation-name: disparait;
     animation-duration: 3.5s;
 }
 .alertRed

@@ -4,7 +4,7 @@ body, html{
 header{
 	border-bottom: 4px #0288d1 solid;
 }
-section{
+.backendHome{
 	padding-top: 42px;
 	width: 100%;
 	display: flex;
@@ -68,7 +68,7 @@ section{
 	border: 2px orange solid;
 	border-radius: 5px;
 	line-height: 32px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 .settingsBtn i{
 	margin-right: 10px;
@@ -86,7 +86,7 @@ section{
 .centerArticle{
 	width: 60%;
 	margin-left: 18%;
-	padding-top: 30px;
+	padding-top: 70px;
 	background-color: whitesmoke;
 }
 .startGame{
@@ -149,7 +149,7 @@ section{
 .postComment{
 	position: absolute;
 	bottom: 0;
-	margin-bottom: 0;
+	margin-bottom: 3px;
 	border-radius: 10px;
 	box-shadow: 0px 0px 5px gray;
 }
@@ -167,14 +167,24 @@ section{
 .postComment textarea{
 	height: 100%;
 	border : none;
+	padding: 15px;
 }
 /*Buttons design*/
-.postComment input, .btnSubmitSetting, .moreCats{
+
+.btnValideChat, .btnSubmitSetting, .moreCats{
 	background-image:linear-gradient(#4fc3f7, #0288d1);
 	height: 40px;
 	border: 1px #0288d1 solid;
 	margin-top: 5px;
 	border-radius:5px;
+}
+.btnValideChat{
+	width: 80px;
+	position: absolute;
+	bottom: 2px;	
+	right: 2px;
+	height: 20px;
+	color: #EEE;
 }
 .moreCats{
 	width: 300px;
@@ -184,7 +194,7 @@ section{
 	font-size: 20px;
 	line-height: 40px;
 }
-.postComment input:hover, .btnSubmitSetting:hover, .moreCats:hover{
+..btnValideChat, .btnSubmitSetting:hover, .moreCats:hover{
 	background-image:linear-gradient(#0288d1, #4fc3f7);
 }
 .btnInscriptionBox
@@ -261,6 +271,8 @@ section{
 	width: 100%;
 	height: 92vh;
 	align-items: center;
+	padding-top: 42px;
+	display: flex;
 }
 /*NAV*/
 .settings{
@@ -327,6 +339,9 @@ section{
 /*page players view*/
 .playersViewSection{
 	flex-direction: column;
+	width: 80%;
+	float: right;
+	clear: both;
 }
 
 .playersViewSection>a{
@@ -339,6 +354,9 @@ section{
 	border: 2px #fdd835 solid;	
 	border-radius: 8px;
 }
+.playersViewSection a:hover{
+	color: #444;
+}
 .playersViewSection i{
 	margin-right: 15px;
 }
@@ -350,10 +368,10 @@ table{
 }
 .titleTable{
 	height: 40px;
-	background-color: rgba(2, 136, 209, 0.7);
+	background-color: rgba(79, 195, 247, 0.4);
 }
 .titleTable:hover{
-	background-color: rgba(2, 136, 209, 0.7);
+	background-color: rgba(79, 195, 247, 0.4);
 }
 td img{
 	width: 100px;

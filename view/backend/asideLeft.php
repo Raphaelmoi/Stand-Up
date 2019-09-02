@@ -5,8 +5,8 @@ ob_start();
     <div>
         <img src="<?= $reponse['imageprofil'] ?>">
         <h3> <?= $reponse['pseudo'] ?> </h3>
-        <p>Inscrit depuis le </br><?= $reponse['date_inscription_fr'] ?></p>
-        <?php
+<!--         <p>Inscrit depuis le </br><?= $reponse['date_inscription_fr'] ?></p>
+ -->        <?php
             $position = $userManager -> getUserPosition($reponse['game_total']);
             $nbrOfPlayers = $userManager -> getNumberOfUsers();
 
@@ -42,11 +42,14 @@ ob_start();
             <b><?= $reponse['game_two_bs'] ?> </b>/ <?= $bestScoreGame2['game_two_bs'] ?>
         </p>
 
-        <p> XP : <?= ceil($reponse['game_total']/1000)  ?> </p>
+        <p> Joueur de niveau <?= ceil($reponse['game_total']/1000)  ?> </p>
 
     </div>
-    <a class="settingsBtn" href="index.php?action=playersview">Voir les autres joueurs</a>
-    <a class="settingsBtn" href="index.php?action=settingsview"><i class="fas fa-cog"></i>Paramètres</a>
+    <div>
+        <a class="settingsBtn" href="index.php?action=playersview">Voir les autres joueurs</a>
+        <a class="settingsBtn" href="index.php?action=settingsview"><i class="fas fa-cog"></i>Paramètres</a>
+    </div>
+
 
 </aside>
 
