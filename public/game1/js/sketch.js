@@ -143,7 +143,7 @@ function draw() {
                 text('Vous serez redirigé vers la page d\'accueil dans moins de 3 secondes ', width / 2, (height / 3 *2));
                 function endGame () {
                     remove();
-                    window.location.href = '/projet5/index.php?action=endgame&game=1&score='+ score*level;
+                    window.location.href = '/projet5/index.php?action=endgame&game=1&success=endgame&score='+ score*level;
                 }
                 setTimeout(endGame, 3000);
 

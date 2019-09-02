@@ -25,10 +25,8 @@
             require_once 'alertBox.php';
             echo $alertBox;
         }
-        ?>
 
-        <?php
-        include('view/frontend/headerFrontSide.php');
+        require ('view/frontend/headerFrontSide.php');
         echo $alertBox;
         ?>
 

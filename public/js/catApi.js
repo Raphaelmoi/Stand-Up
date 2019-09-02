@@ -1,8 +1,8 @@
 let url =  "https://api.thecatapi.com/v1/images/search?mime_types=jpg,png";
 let index = 0;
 
-function getTheCats(){
-	for (var i = 0; i < 6; i++) {
+function getTheCats(numberOfCats){
+	for (var i = 0; i < numberOfCats; i++) {
 		ajaxGet(url, function(reponse) {
 		  let listeLiens = JSON.parse(reponse);
 		    listeLiens.forEach(function(lien) {

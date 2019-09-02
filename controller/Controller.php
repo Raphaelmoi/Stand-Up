@@ -100,4 +100,10 @@ class Controller
         $comment = $commentManager -> getComments();
         require('view/backend/chatMessenger.php');        
     }
+
+    function playersView(){
+        $userManager = new UserManager(); 
+        $reponse = $userManager -> getUser($_SESSION['pseudo']);
+        require('view/backend/playersview.php');        
+    }
 }

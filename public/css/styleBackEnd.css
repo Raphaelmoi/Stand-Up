@@ -32,6 +32,13 @@ section{
 	text-align: center;
 	justify-content: space-between;
 }
+.leftAside>div{
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
+}
 .leftAside img{
 	width: 150px;
 	height: 150px;
@@ -43,6 +50,16 @@ section{
 }
 .leftAside h3{
 	margin: 0;
+	font-variant: small-caps;
+	font-size: 30px;
+}
+.leftAside p{
+	margin: 6px;
+	font-size: 18px;
+}
+.leftAside b{
+	font-weight: bold;
+	font-size: 20px;
 }
 .settingsBtn{
 	width: 90%;
@@ -152,15 +169,29 @@ section{
 	border : none;
 }
 /*Buttons design*/
-.postComment input, .btnSubmitSetting{
+.postComment input, .btnSubmitSetting, .moreCats{
 	background-image:linear-gradient(#4fc3f7, #0288d1);
 	height: 40px;
 	border: 1px #0288d1 solid;
 	margin-top: 5px;
 	border-radius:5px;
 }
-.postComment input:hover, .btnSubmitSetting:hover{
+.moreCats{
+	width: 300px;
+	height: 40px;
+	text-align: center;
+	cursor: pointer ;
+	font-size: 20px;
+	line-height: 40px;
+}
+.postComment input:hover, .btnSubmitSetting:hover, .moreCats:hover{
 	background-image:linear-gradient(#0288d1, #4fc3f7);
+}
+.btnInscriptionBox
+{
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
 }
 /*APPEAR in the chat when mouse hover pseudo or img of other player*/
 .infoAboutUser{
@@ -255,6 +286,7 @@ section{
 	overflow: hidden;
 	text-align: center;
 }
+
 .settings li:hover{
 	background-image:linear-gradient(orange, #fdd835);
 }

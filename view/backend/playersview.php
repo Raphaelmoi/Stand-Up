@@ -1,6 +1,6 @@
 <!-- HOME PAGE -->
 <?php
-$title = 'paramètres';
+$title = 'players view';
 ob_start();
 ?>
     <section class="settingView">  

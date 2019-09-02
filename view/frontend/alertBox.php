@@ -22,6 +22,11 @@ if (isset($_GET['erreur'])) {
 	    	<p>L'ancien mail n'est pas le bon</p>
 	    <?php
 		}
+		elseif ($_GET['erreur'] == 'badmail' ) {
+	    ?>
+	    	<p>Votre email a une mauvaise syntaxe</p>
+	    <?php
+		}
 		elseif ($_GET['erreur'] == 'passpseudo' ) {
 	    ?>
 	    	<p>Vous avez saisi un mauvais pseudo ou mot de passe</p>
@@ -35,6 +40,31 @@ if (isset($_GET['erreur'])) {
 		elseif ($_GET['erreur'] == 'samepw') {
 			?>
 			<p>Vous avez saisie deux fois le même mot de passe </p>
+			<?php
+		}
+		elseif ($_GET['erreur'] == 'sessionexist') {
+			?>
+			<p>Vous êtes déjà connecté </p>
+			<?php
+		}
+		elseif ($_GET['erreur'] == 'diffmail') {
+			?>
+			<p>Erreur lors de la confirmation de l'adresse mail </p>
+			<?php
+		}
+		elseif ($_GET['erreur'] == 'pseudoindb') {
+			?>
+			<p>Ce pseudo existe déjà </p>
+			<?php
+		}
+		elseif ($_GET['erreur'] == 'mailalreadydatabase') {
+			?>
+			<p>Il y a déjà un compte avec cette adresse mail </p>
+			<?php
+		}
+		elseif ($_GET['erreur'] == 'badpass') {
+			?>
+			<p>Les deux mots de passe ne sont pas identiques </p>
 			<?php
 		}
 	?>
@@ -90,6 +120,20 @@ elseif (isset($_GET['success'])) {
 			?>
 			<p>Votre photo de profil a bien été mise à jour! </p>
 			<?php
+		}
+		elseif ($_GET['success'] == 'endgame' ) {
+			if (!empty($_SESSION['pseudo']) && $reponse['game_two_bs'] == 0 && $_GET['score'] >= 200) {
+					?>
+					<p>Vous avez terminé la partie avec <?= $_GET['score']?> points ! </p>
+					</br>
+					<p><b>Félicitations ! Vous débloquez le jeu suivant ! </b></p>
+					<?php
+			}
+			else{
+				?>
+				<p>Vous avez terminé la partie avec <?= $_GET['score']?> points ! </p>
+				<?php
+			}
 		}
 		elseif ($_GET['success'] == 'bye' ) {
 			?>

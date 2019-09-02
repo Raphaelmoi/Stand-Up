@@ -38,7 +38,6 @@ try {
         elseif ($_GET['action'] == 'logout'){
                 $controller -> logOut();
         }
-
         elseif ($_GET['action'] == 'postcomment'){
             if (isset($_POST['id_user']) AND isset($_POST['comm'])) {
                 $controller -> postComment($_POST['id_user'], $_POST['comm']);
@@ -79,17 +78,22 @@ try {
             $controller -> deleteComment($_GET['id']);
         }
         elseif ($_GET['action'] == 'endgame') {
-            if (isset($_GET['score'])) {
-                if (isset($_GET['game']) && $_GET['game'] == 1 ) {
-                    $controller -> endGameOne($_GET['score']);
+            if (!empty($_SESSION['pseudo'])) {
+                if (isset($_GET['score'])) {
+                    if (isset($_GET['game']) && $_GET['game'] == 1 ) {
+                        $controller -> endGameOne($_GET['score']);
+                    }
+                    if (isset($_GET['game']) && $_GET['game'] == 2 ) {
+                        $controller -> endGameTwo($_GET['score']);
+                    }
                 }
-                if (isset($_GET['game']) && $_GET['game'] == 2 ) {
-                    $controller -> endGameTwo($_GET['score']);
-                }
-            }
+            }else $controller -> homePage();
         }
         elseif ($_GET['action'] == 'reload') {
             $controller -> reloadChat();
+        }
+        elseif ($_GET['action'] == 'playersview') {
+            $controller -> playersView();
         }
     }
     else {

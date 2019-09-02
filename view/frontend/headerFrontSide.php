@@ -17,12 +17,11 @@ ob_start();
                 </div>
             </div>
 
-
             <form class="connexionBox" action='index.php?action=login' method="post">
                 <h2>Se connecter</h2>
                 <div>
-                    <input type="name" name="name" placeholder="Pseudo">
-                    <input type="password" name="pass" placeholder="mot de passe">
+                    <input type="name" name="name" placeholder="Pseudo" required>
+                    <input type="password" name="pass" placeholder="mot de passe" required>
                 </div>
                 <input class="btnFormValidate" type="submit" value="Connexion" >
             </form>
@@ -34,7 +33,7 @@ ob_start();
     }
     elseif (isset($_GET['action']) && $_GET['action'] == 'signup') {
     ?>
-    <script> getTheCats(); </script>
+    <script> getTheCats(6); </script>
 
         <header id="headerConnexion">
             <div class="connect">
@@ -67,7 +66,7 @@ ob_start();
         </header>
         <?php
         }
-        elseif (!isset($_GET['action'])) {            
+        else{            
             ?>
             <header id="bigHeader">
                 <div class="connect">

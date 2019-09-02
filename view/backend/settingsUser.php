@@ -50,13 +50,19 @@ ob_start();
 		?>
 			<div class="mainContentSettings" >
 				<h3>Changer ma photo de profil</h3>
-	   			<script> getTheCats(); </script>
+
+	   			<script> getTheCats(12); </script>
 	            <form class="inscriptionBox" action='index.php?action=newcat' method="post">	                
 	                <div id="boxImg"></div>
 	                <input type="hidden" name="imageUrl" id="hiddenInputInscription" value="">
-	                <input class="btnSubmitSetting" type="submit" name="submit" value="Changer mon image">
+	                <div class="btnInscriptionBox">
+						<div class="moreCats" onclick="getTheCats(6)"> Je n'ai pas trouvé mon chat</div>
+		                <input class="btnSubmitSetting" type="submit" name="submit" value="Changer mon image">
+	                </div>
+
 	            </form>
 	        </div>
+
 		<?php
 		}
 		// Delete account

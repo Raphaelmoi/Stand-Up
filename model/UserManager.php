@@ -18,7 +18,26 @@ class UserManager extends Manager
           $req = $bdd->query("SELECT count(*) from user where game_total > '$userScore'")->fetchColumn();
         return $req;
     }
-
+    public function getNumberOfUsers()
+    {
+        $bdd = $this->dbConnect();
+          $req = $bdd->query("SELECT count(*) from user")->fetchColumn();
+        return $req;
+    }
+    public function getBestScoreGOne(){
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('SELECT game_one_bs FROM user ORDER BY game_one_bs DESC');
+        $req->execute();
+        $result = $req->fetch();
+        return $result;
+    }
+    public function getBestScoreGTwo(){
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('SELECT game_two_bs FROM user ORDER BY game_two_bs DESC');
+        $req->execute();
+        $result = $req->fetch();
+        return $result;  
+    }
     public function getUserWithId($id)
     {
       $bdd = $this->dbConnect();
