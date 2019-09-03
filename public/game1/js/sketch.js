@@ -37,6 +37,7 @@ let explosionSound, catchGemSound, gameoverSound, startSound;
 let util, draws;
 let soundAlreadyPlay = false;
 
+let time = 0;
 
 function preload() {
     imgBackground = loadImage('img/sky.jpg');
@@ -116,8 +117,14 @@ function draw() {
             push();
             translate(width, 0);
             scale(-1, 1);
-            //image(video, 0, 0, displayWidth, displayHeight);//met la video dans le canvas
             image(imgBackground, 0, 0, width, height);
+            time++;
+            if (time < 80) 
+            {
+                noTint();
+                tint(255,255,255, (200 - time*5));
+                image(video,  0, 0, width, height);//met la video dans le canvas
+             }
             pop();
 
             draws.drawBird();
@@ -140,12 +147,12 @@ function draw() {
                 text("SCORE : " + score * level, width / 2, height / 2);
                 fill(244, 244, 244);
                 textSize(25);
-                text('Vous serez redirigé vers la page d\'accueil dans moins de 3 secondes ', width / 2, (height / 3 *2));
+                text('Vous serez redirigé vers la page d\'accueil dans moins de 2 secondes ', width / 2, (height -100));
                 function endGame () {
                     remove();
                     window.location.href = '/projet5/index.php?action=endgame&game=1&success=endgame&score='+ score*level;
                 }
-                setTimeout(endGame, 3000);
+                setTimeout(endGame, 2000);
 
             }
         }

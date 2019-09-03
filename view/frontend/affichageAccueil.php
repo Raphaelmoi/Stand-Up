@@ -41,8 +41,15 @@ ob_start();
         </article>
 
         <article>
-            <p>Grâce à votre webcam, ces jeux se jouent avec la position de votre nez ou de vos oreilles. Vous devez atteindre 200 points pour accéder au deuxième jeu et être connecter pour jouer aux autres jeux</p>
-            <p><a href="index.php?action=signup">Inscrivez-vous</a> et rejoignez la communauté de StandUp! </p>       
+            <div class="descriptionHomePage">
+                <p> Ces jeux fonctionnent grâce à la reconnaissance faciale. En activant votre webcam, 
+                    la position de votre nez sera détecté et vous allez pouvoir controller votre personnage  avec parfois votre nez, parfois vos oreilles!
+                    Vous devez atteindre 200 points pour accéder au deuxième jeu et être connecter pour jouer aux autres jeux</p>
+                <div>
+                    <a href="index.php?action=signup">Inscrivez-vous</a> et rejoignez la communauté de StandUp! 
+                </div>
+            </div>
+                   
         </article>
     </section>
 

@@ -42,6 +42,7 @@ let explosionSound, catchGemSound, gameoverSound, startSound;
 let soundAlreadyPlay = false;
 let util, draws;
 
+let time = 0;
 function preload() {
     imgBackground = loadImage('img/sky.jpg');
 
@@ -129,8 +130,14 @@ function draw() {
             push();
             translate(width, 0);
             scale(-1, 1);
-            //image(video, 0, 0, displayWidth, displayHeight);//met la video dans le canvas
             image(imgBackground, 0, 0, width, height);
+            time++;
+            if (time < 60) 
+            {
+                noTint();
+                tint(255,255,255, (200 - time*7));
+                image(video,  0, 0, width, height);//met la video dans le canvas
+            }
             pop();
             draws.drawsEverything();
         } else {

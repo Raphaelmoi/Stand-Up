@@ -116,7 +116,7 @@ class Draws {
                 rightShipLife = 0;
                 util.newSpaceShip(1);
             } 
-            if (stones[i].currentYPosition() > height) {
+            if (stones[i].currentYPosition() != undefined  && stones[i].currentYPosition() > height) {
                 stones.splice(i, 1);
                 util.newStone(1);
             }

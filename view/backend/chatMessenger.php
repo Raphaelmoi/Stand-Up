@@ -1,7 +1,11 @@
     <h2>--- Chat ---</h2>
     <?php
+        $nbrOfComments = 0;
         while ($data = $comment->fetch())
         {
+            //maximum of 70 msg in the chat
+            if ($nbrOfComments < 70) {
+                $nbrOfComments++;
         ?>
         <div class="messageChat">
             <div class="messageChatTitle">
@@ -17,7 +21,7 @@
                         <div>                    
                             <h4><?= $user['pseudo']?></h4>
                             <p>Niveau <?= ceil($user['game_total']/1000)?> </p>
-                        <p>En position n°<?= $position + 1?></p>
+                            <p>En position n°<?= $position + 1?></p>
                         </div>
                     </div>
                     <div style="display: flex; flex-direction: column;">
@@ -28,8 +32,8 @@
             </div>
             <p><?= $data['comment']?></p>
         </div>
-
         <?php
+            }
         }
         $comment->closeCursor(); // Termine le traitement de la requête
         ?>

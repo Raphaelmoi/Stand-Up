@@ -33,10 +33,10 @@ body
             animation-fill-mode: both;
 }
 #b1 {
-    background-color: #b3e5fc;
+    background-color: #81d4fa;
 }
 #b2 {
-    background-color: #81d4fa;
+    background-color: #4fc3f7;
     -webkit-animation-delay: 100ms;
             animation-delay: 100ms;
 }

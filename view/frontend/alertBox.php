@@ -124,9 +124,7 @@ elseif (isset($_GET['success'])) {
 		elseif ($_GET['success'] == 'endgame' ) {
 			if (!empty($_SESSION['pseudo']) && $reponse['game_two_bs'] == 0 && $_GET['score'] >= 200) {
 					?>
-					<p>Vous avez terminé la partie avec <?= $_GET['score']?> points ! </p>
-					</br>
-					<p><b>Félicitations ! Vous débloquez le jeu suivant ! </b></p>
+					<p>Vous avez terminé la partie avec <?= $_GET['score']?> points ! Vous débloquez le jeu suivant !</p>
 					<?php
 			}
 			else{
