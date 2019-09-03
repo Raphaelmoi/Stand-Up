@@ -34,7 +34,7 @@ class UserController {
 		}
 	}
 	public function logOut() {
-		session_start();
+		// session_start();
 		$_SESSION = array();
 		session_destroy();
 	}
@@ -142,14 +142,21 @@ class UserController {
 		$connexionManager = new UserManager();
 		$user = $connexionManager->updateCat($_SESSION['pseudo'], $imageUrl);
 	}
-	public function deleteAccount() {
+	public function deleteAccount($pseudo, $pass) {
 		require_once ("model/UserManager.php");
 		$connexionManager = new UserManager();
 		$commentManager = new CommentManager();
-		$reponse = $connexionManager->getUser($_SESSION['pseudo']);
-		$deleteComments = $commentManager->deleteCommentFromOneUser($reponse['id']);
-		$user = $connexionManager->deleteAccount($_SESSION['pseudo']);
-		$this->logOut();
+		$count = $connexionManager->count($pseudo);
+
+		if ($count != 0) { //if the asked pseudo is found
+			$req = $connexionManager->getUser($pseudo);
+				if (password_verify($pass, $req['pass'])) {
+					$deleteComments = $commentManager->deleteCommentFromOneUser($req['id']);
+					$user = $connexionManager->deleteAccount($_SESSION['pseudo']);
+					$this->logOut();
+					header('Location: index.php?success=bye');
+				} else header('Location: index.php?action=settingsview&change=account&erreur=passpseudo');
+			} else header('Location: index.php?action=settingsview&change=account&erreur=passpseudo');
 	}
 	public function AdminDeleteAccount($id) {
 		require_once ("model/UserManager.php");

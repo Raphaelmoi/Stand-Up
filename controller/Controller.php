@@ -72,10 +72,10 @@ class Controller
         $newCat = $connect -> newCat($imageUrl);
         header('Location: index.php?action=settingsview&success=updateimage');  
     }
-    function deleteAccount(){
+    function deleteAccount($pseudo, $pass){
         $userController = new UserController();
-        $deleteAccount = $userController -> deleteAccount();
-        header('Location: index.php?success=bye');
+        $deleteAccount = $userController -> deleteAccount($pseudo, $pass);
+        // header('Location: index.php?success=bye');
     }
     function adminDeleteAccount($id){
         $userController = new UserController();

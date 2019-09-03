@@ -72,7 +72,9 @@ try {
             }
         }
         elseif ($_GET['action'] == 'deleteaccount') {
-            $controller -> deleteAccount();
+            if (isset($_POST['pseudo']) and isset($_POST['password'])){
+                $controller -> deleteAccount($_POST['pseudo'], $_POST['password']);
+            }
         }
         elseif ($_GET['action'] == 'adminDeleteAccount') {
             if (isset($_GET['id'])) {
