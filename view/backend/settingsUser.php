@@ -102,7 +102,7 @@ ob_start();
 			    {
 			    ?>
 					<p><span>Le <?= $donnees['date_commentaire_fr'] ?> :</span> <?= $donnees['comment'] ?>
-					<a href="index.php?action=deletecomment&amp;id=<?=$donnees['id'] ?>"
+					<a class="deleteComment" href="index.php?action=deletecomment&amp;id=<?=$donnees['id'] ?>"
 					onclick="return confirm('Êtes vous sûr de vouloir supprimer ce commentaire ?\nCette action est irréversible')"
 						>Supprimer ce commentaire</a>
 				</p>

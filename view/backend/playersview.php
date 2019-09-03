@@ -74,9 +74,13 @@ echo $asideLeft;
                    if ($reponse['authority'] == 1) {
                     ?>
                    <td>
-                    <a href="index.php?action=seecomments&id=<?= $data['id']?>">Voir commentaires</a>
-                  </br>
-                    <a href="index.php?action=adminDeleteAccount&id=<?= $data['id']?>">Supprimer compte</a> </td>
+                    <a href="index.php?action=seecomments&id=<?= $data['id']?>">Voir les commentaires</a>
+                    </br>
+                            <a style="color:red;" href="index.php?action=adminDeleteAccount&id=<?= $reponse['id']?>" 
+                          onclick="return confirm('Êtes vous sûr de vouloir supprimer ce compte ?\nCette action est irréversible')">
+                          Supprimer ce compte
+                        </a> 
+                  </td>
                     <?php
                     }
                    ?>

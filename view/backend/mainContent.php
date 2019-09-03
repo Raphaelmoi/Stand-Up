@@ -31,7 +31,6 @@ ob_start();
             if ($reponse['game_one_bs'] <= 200) {
                 ?>
                 <div class="lockedGame"><i class="fas fa-lock"></i>
-                    <p><?= $reponse['game_one_bs'] ?></p>
                     <p>Débloquez ce jeux en faisant un score de 200 points sur le premier jeux </p>
                 </div>
             <?php

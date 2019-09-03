@@ -10,12 +10,16 @@ ob_start();
     <div class="messageChat postComment">
         <div class="messageChatTitle">
             <img src="<?= $reponse['imageprofil'] ?>">
-            <h4><?= $reponse['pseudo'] ?></h4>
+            <h4 style="line-height: 35px;"><?= $reponse['pseudo'] ?></h4>
         </div>
         <form action="index.php?action=postcomment" method="post">
             <input type="hidden" name="id_user" value="<?= $reponse['id'] ?>">
             <textarea name="comm">Saisissez votre commentaire</textarea>
-            <input class="btnValideChat" type="submit" name="valide">
+            <div class="btnValideChat">
+                <input  type="submit" name="valide" value="">  
+                <i class="fas fa-paper-plane fa-lg"></i> 
+
+            </div>
         </form>
     </div>
 </aside>
