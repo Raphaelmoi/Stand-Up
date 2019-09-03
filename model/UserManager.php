@@ -7,12 +7,19 @@ class UserManager extends Manager
     public function getUser($pseudo)
     {
     	$bdd = $this->dbConnect();
-		  $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, DATE_FORMAT(date_inscription, \'%d/%m/%Y \') AS date_inscription_fr, game_one, game_one_bs, game_two, game_two_bs, game_total FROM user WHERE pseudo = ?');
+		  $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, DATE_FORMAT(date_inscription, \'%d/%m/%Y \') AS date_inscription_fr, game_one, game_one_bs, game_two, game_two_bs, game_total, authority FROM user WHERE pseudo = ?');
 		$req->execute(array($pseudo));
         $result = $req->fetch();
 		return $result;
     }
-
+    public function getUserWithId($id)
+    {
+      $bdd = $this->dbConnect();
+      $req = $bdd->prepare('SELECT * FROM user WHERE id = ?');
+      $req->execute(array($id));
+        $result = $req->fetch();
+    return $result;
+    }
     public function getAllUsers($arg, $order)
     {
         $bdd = $this->dbConnect();
@@ -47,14 +54,7 @@ class UserManager extends Manager
         $result = $req->fetch();
         return $result;  
     }
-    public function getUserWithId($id)
-    {
-      $bdd = $this->dbConnect();
-      $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, date_inscription FROM user WHERE id = ?');
-      $req->execute(array($id));
-        $result = $req->fetch();
-    return $result;
-    }
+
 
     //when user want to change password
     public function updateUserPw($pass, $pseudo){
@@ -128,5 +128,10 @@ class UserManager extends Manager
     {
         $bdd = $this->dbConnect();
         $delete = $bdd->query("DELETE FROM user WHERE pseudo = '$pseudo'; ");  
+    }
+    public function deleteAccountWithId($id)
+    {
+        $bdd = $this->dbConnect();
+        $delete = $bdd->query("DELETE FROM user WHERE id = '$id'; ");  
     }
 }

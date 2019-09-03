@@ -26,32 +26,17 @@ ob_start();
                 <div id="contenuOfDisplayGame">
                      <a href="public/game1/index.php">
                         <img src="public/img/sc.jpg">
-                        <div class="unlockedGame"> jeux 1</div>
+                        <div class="unlockedGame"> Finger in the noise, un jeux qui se joue exclusivement au pif ! </div>
                     </a>
                     <a  href="javascript:;" onclick="alert('Vous devez être connecté pour accéder à cette partie ')">
                         <img src="public/img/G10.jpg">
-                        <div class="lockedGame"><i class="fas fa-lock">2</i></div>
+                        <div class="lockedGame"><i class="fas fa-lock"></i>Finger in the hear</br> vous en entendrez parler</div>
                     </a>
                     <a href="javascript:;">
                         <img src="public/img/assto4.png">
-                        <div class="lockedGame"><i class="fas fa-lock">3</i></div>
+                        <div class="lockedGame"><i class="fas fa-lock"></i>En construction</div>
                     </a>
-                    <a href="javascript:;">
-                        <img src="public/img/G10.jpg">
-                        <div class="lockedGame"><i class="fas fa-lock">4</i></div>
-                    </a>  
-                    <a href="javascript:;">
-                        <img src="public/img/assto4.png">
-                        <div class="lockedGame"><i class="fas fa-lock">5</i></div>
-                    </a>
-                    <a href="javascript:;">
-                        <img src="public/img/G10.jpg">
-                        <div class="lockedGame"><i class="fas fa-lock">6</i></div>
-                    </a>  
-                </div>
-            </div>
-            <div id='scrollerbox' class="scrollerbox">
-                <button id='scroller'></button>
+                   
             </div>
         </article>
 

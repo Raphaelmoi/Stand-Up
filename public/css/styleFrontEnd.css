@@ -39,7 +39,7 @@ article p
 form
 {
 	position: absolute;
-	z-index: 99;
+	z-index: 15;
 	top: 0;
 	left: 50%;
 	transform: translateX(-50%);
@@ -135,7 +135,7 @@ form h2{
 	top: 50px;
 	width: 200px;
 	right: -20px;
-	z-index: 99;
+	z-index: 100;
 	background-color: transparent;
 }
 .astroImgTwo
@@ -148,7 +148,6 @@ form h2{
 	border-radius: 6px 6px 0 0;
 }
 .displayGame{	
-	overflow: hidden;
 	position: relative;
 	background: rgba(200,200,200,0.4);
 	z-index: 0;
@@ -158,14 +157,16 @@ form h2{
 	position: relative;
 	display: flex;
 	width: 100%;
+	justify-content: space-around;
 }
 .displayGame a{
 	margin: 10px;
 	position: relative;
 	height: 220px;
+	width: 31%;
 }
 .displayGame img{
-	width: 340px;
+	width: 100%;
 	height: 100%;
 	object-fit: cover;
 }
@@ -242,7 +243,6 @@ form h2{
 {
 	padding-top: 20px;
 	position: relative;
-	border-radius: 0 0 6px 6px;
 }
 .deuxiemeArticle h2{
 	margin-bottom: 25px;

@@ -74,8 +74,16 @@ try {
         elseif ($_GET['action'] == 'deleteaccount') {
             $controller -> deleteAccount();
         }
+        elseif ($_GET['action'] == 'adminDeleteAccount') {
+            if (isset($_GET['id'])) {
+                $controller -> adminDeleteAccount($_GET['id']);
+            }
+        }
         elseif ($_GET['action'] == 'deletecomment') {
             $controller -> deleteComment($_GET['id']);
+        }
+        elseif ($_GET['action'] == 'deletecommentadmin') {
+            $controller -> deleteCommentAdmin($_GET['idmsg'], $_GET['idplayer']);
         }
         elseif ($_GET['action'] == 'endgame') {
             if (!empty($_SESSION['pseudo'])) {
@@ -92,6 +100,7 @@ try {
         elseif ($_GET['action'] == 'reload') {
             $controller -> reloadChat();
         }
+
         elseif ($_GET['action'] == 'playersview') {
             if (isset($_GET['sortby']) && isset($_GET['order'])) {
                 if ( $_GET['order'] == 'antichrono') {
@@ -124,6 +133,14 @@ try {
                 }
             }
             else $controller -> playersView('game_total', "DESC");
+        }
+        elseif ($_GET['action'] == 'admin') {
+            $controller -> adminView();
+        }
+        elseif ($_GET['action'] == 'seecomments') {
+            if (isset($_GET['id'])) {
+                $controller -> seeCommentAdmin($_GET['id']);
+            }
         }
     }
     else {

@@ -342,9 +342,10 @@ header{
 	width: 80%;
 	float: right;
 	clear: both;
+	margin-top: 46px;
 }
 
-.playersViewSection>a{
+/*.playersViewSection>a{
 	background-image:linear-gradient(#fdd835, orange );
 	width: 200px;
 	margin: 20px;
@@ -359,7 +360,7 @@ header{
 }
 .playersViewSection i{
 	margin-right: 15px;
-}
+}*/
 table{
 	background-color: whitesmoke;
 	width: 100%;

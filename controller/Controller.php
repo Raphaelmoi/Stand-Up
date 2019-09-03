@@ -77,10 +77,20 @@ class Controller
         $deleteAccount = $userController -> deleteAccount();
         header('Location: index.php?success=bye');
     }
+    function adminDeleteAccount($id){
+        $userController = new UserController();
+        $deleteAccount = $userController -> adminDeleteAccount($id);
+        header('Location: index.php?action=playersview&sortby=scoretotal&order=antichrono&success=deleteplayer');
+    }
     function deleteComment($id){
         $commentManager = new CommentManager();
         $comment = $commentManager -> deleteComment($id); 
         header('Location: index.php?action=settingsview&success=deletecomment');
+    }
+    function deleteCommentAdmin($id, $idplayer){
+        $commentManager = new CommentManager();
+        $comment = $commentManager -> deleteComment($id); 
+        header('Location: index.php?action=seecomments&id='.$idplayer);
     }
 
     function endGameOne($score){
@@ -108,4 +118,25 @@ class Controller
 
         require('view/backend/playersview.php');        
     }
+    function adminView(){
+        $userManager = new UserManager(); 
+        $rep = $userManager -> getAllUsers($arg, $order);
+        $reponse = $userManager -> getUser($_SESSION['pseudo']);
+
+        $commentManager = new CommentManager();
+        $comment = $commentManager -> getComments();
+        require('view/backend/adminView.php');        
+    }
+
+    function seeCommentAdmin($id){
+        $userManager = new UserManager(); 
+        $reponse = $userManager -> getUserWithId($id);
+            $rep = $userManager -> getAllUsers('game_total', "DESC");
+        $commentManager = new CommentManager();
+        $comment = $commentManager -> getComments($id); 
+        $comment = $commentManager->getCommentsForOneUser($id);
+
+        require('view/backend/adminCommentView.php');        
+    }
+
 }

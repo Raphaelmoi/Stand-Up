@@ -145,6 +145,11 @@ elseif (isset($_GET['success'])) {
 			<p>Le commentaire a été supprimé </p>
 			<?php
 		}
+		elseif ($_GET['success'] == 'deleteplayer' ) {
+			?>
+			<p>Le joueur et ses commentaires ont bien été supprimés</p>
+			<?php
+		}
 		?>
 	</section>  
 <?php

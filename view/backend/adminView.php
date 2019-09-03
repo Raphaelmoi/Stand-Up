@@ -7,11 +7,14 @@ include('view/backend/asideLeft.php');
 echo $asideLeft;
 ?>
     <section class="playersViewSection">  
+        <a href="index.php?action=backendHome"><i class="fas fa-chevron-left fa-lg"></i> Retour accueil</a>
+
         <table>
             <tr class="titleTable">
                 <?php
 
                 if(isset($_GET['order']) && $_GET['order'] == "antichrono" ){
+                    echo $reponse['authority'];
                 ?>
                    <th><i class="fas fa-chevron-down"></i></th>
                    <th><a href="index.php?action=playersview&sortby=scoretotal&order=chrono">Position</a> </th>
@@ -22,7 +25,7 @@ echo $asideLeft;
                    <?php
                    if ($reponse['authority'] == 1) {
                     ?>
-                   <th>Admin </th>
+                   <th><a href="index.php?action=playersview&sortby=scoretotal&order=chrono">admin</a> </th>
                     <?php
                     }
                    ?>
@@ -42,7 +45,7 @@ echo $asideLeft;
                    <?php
                    if ($reponse['authority'] == 1) {
                     ?>
-                   <th>Admin </th>
+                   <th><a href="index.php?action=playersview&sortby=scoretotal&order=chrono">admin</a> </th>
                     <?php
                     }
                    ?>
@@ -69,14 +72,10 @@ echo $asideLeft;
                 <td><?= $data['game_one_bs']?></td>
                 <td><?= $data['game_two_bs']?></td>
                 <td><?= $data['game_total']?></td>
-
                    <?php
                    if ($reponse['authority'] == 1) {
                     ?>
-                   <td>
-                    <a href="index.php?action=seecomments&id=<?= $data['id']?>">Voir commentaires</a>
-                  </br>
-                    <a href="index.php?action=adminDeleteAccount&id=<?= $data['id']?>">Supprimer compte</a> </td>
+                   <td><a href="index.php?action=playersview&sortby=scoretotal&order=chrono">delete</a> </td>
                     <?php
                     }
                    ?>

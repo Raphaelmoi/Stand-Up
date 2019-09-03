@@ -151,6 +151,14 @@ class UserController {
 		$user = $connexionManager->deleteAccount($_SESSION['pseudo']);
 		$this->logOut();
 	}
+	public function AdminDeleteAccount($id) {
+		require_once ("model/UserManager.php");
+		$connexionManager = new UserManager();
+		$commentManager = new CommentManager();
+		$deleteComments = $commentManager->deleteCommentFromOneUser($id);
+		$user = $connexionManager->deleteAccountWithID($id);
+
+	}
 	public function endGameOne($score) {
 		require_once ("model/UserManager.php");
 		$connexionManager = new UserManager();

@@ -32,6 +32,6 @@
 
         <?= $content ?> 
         <script type="text/javascript" src="public/js/menu.js"></script>
-        <script type="text/javascript" src="public/js/scrollbar.js"></script>
-    </body>
+<!--         <script type="text/javascript" src="public/js/scrollbar.js"></script>
+ -->    </body>
 </html>

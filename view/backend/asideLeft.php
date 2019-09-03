@@ -1,12 +1,11 @@
 <?php
 ob_start();
 ?>
-<aside class="leftAside">
+<aside class="leftAside" id="leftAsideId">
     <div>
         <img src="<?= $reponse['imageprofil'] ?>">
         <h3> <?= $reponse['pseudo'] ?> </h3>
-<!--         <p>Inscrit depuis le </br><?= $reponse['date_inscription_fr'] ?></p>
- -->        <?php
+        <?php
             $position = $userManager -> getUserPosition($reponse['game_total']);
             $nbrOfPlayers = $userManager -> getNumberOfUsers();
 
@@ -46,7 +45,17 @@ ob_start();
 
     </div>
     <div>
-        <a class="settingsBtn" href="index.php?action=playersview">Voir les autres joueurs</a>
+        <?php
+        if (isset($_GET['action']) && $_GET['action'] == 'playersview') {
+            ?>
+        <a class="settingsBtn" href="index.php?action=backendHome"><i class="fas fa-chevron-left fa-lg"></i>Retour accueil</a>
+            <?php
+        }else{
+            ?>
+            <a class="settingsBtn" href="index.php?action=playersview">Voir les autres joueurs</a>
+            <?php
+        }
+        ?>
         <a class="settingsBtn" href="index.php?action=settingsview"><i class="fas fa-cog"></i>Paramètres</a>
     </div>
 
