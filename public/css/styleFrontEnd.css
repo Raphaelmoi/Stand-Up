@@ -14,7 +14,7 @@ body, html{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding-bottom: 200px;
+	padding-bottom: 100px;
 }
 article
 {
@@ -72,6 +72,7 @@ form h2{
 	margin: 20px;
 	z-index: 0;
 }
+
 #triangleYellow
 {
 	position: absolute;
@@ -96,7 +97,7 @@ form h2{
     z-index: -2;
 }
 .topTriangle{
-	top: 200px;
+	top: 196px;
 }
 .connectTY, .connectTT{
 	top: 400px;
@@ -144,6 +145,19 @@ form h2{
 	left: -20px;
 	transform: scale(-1, 1);
 }
+
+.astroSmallHeader
+{
+    position: fixed;
+    top: 0px;
+    width: 50px;
+    z-index: 99;
+    background-color: transparent;
+    left: -4px;
+    transform: scale(-1, 1);
+    opacity: 0;
+}
+
 .premierArticle{
 	border-radius: 6px 6px 0 0;
 }
@@ -218,6 +232,7 @@ form h2{
 }
 .inscriptionBox{
 	display: inline;
+	width: 70%;
 }
 .inscriptionBox input{
 	margin-top: 10px;
@@ -276,4 +291,61 @@ form h2{
         z-index: 99;
         width: 100%;
     }
+}
+
+@media all and (max-width: 1200px) {
+	.inscriptionBox{
+		width: 80%;
+	}
+	.astroImg{
+		width: 150px;
+	}
+	#boxImg {
+		height: 120px;
+	}
+	#boxImg img
+	{
+		height: 100px;
+		width: 100px;
+	}
+}
+@media all and (max-width: 1000px) {
+	input, .connexionBox input{
+		width: 200px;
+		font-size: 15px;
+	}
+	.inscriptionBox{
+		width: 70%;
+	}
+	.astroImg{
+		width: 120px;
+	}
+	form h2{
+		margin: 5px;
+		margin-top: 40px;
+		font-size: 25px;
+	}
+	.btnFormValidate{
+		height: 30px;
+	border : 2px #0288d1 solid;
+	}
+
+
+}
+
+@media all and (max-width: 720px) {
+	.inscriptionBox{
+		width: 100%;
+	}
+	.astroImg{
+		width: 100px;
+	}
+	input{
+		height: 30px;
+		border-bottom: 2px #0288d1 solid;
+	}
+	#boxImg{
+		margin: 0;
+	}
+
 }

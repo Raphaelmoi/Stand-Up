@@ -16,6 +16,8 @@
 
         <script src= public/js/ajax.js></script>
         <script src= public/js/catApi.js></script>
+
+</style>
     </head>
 
     <body>

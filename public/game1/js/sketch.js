@@ -135,7 +135,9 @@ function draw() {
             draws.drawExplosion();
             draws.drawHealthAndText();
         } else {
+
             if (gameOver) { //prevent the song to be play more than one time
+
                 noLoop();
                 gameoverSound.play();
                 gameOver = false;
@@ -152,7 +154,7 @@ function draw() {
                     remove();
                     window.location.href = '/projet5/index.php?action=endgame&game=1&success=endgame&score='+ score*level;
                 }
-                setTimeout(endGame, 2000);
+                setTimeout(endGame, 4000);
 
             }
         }

@@ -14,7 +14,7 @@ ob_start();
         </div>
         <form action="index.php?action=postcomment" method="post">
             <input type="hidden" name="id_user" value="<?= $reponse['id'] ?>">
-            <textarea name="comm">Saisissez votre commentaire</textarea>
+            <textarea name="comm" placeholder="Saisissez votre commentaire" required></textarea>
             <div class="btnValideChat">
                 <input  type="submit" name="valide" value="">  
                 <i class="fas fa-paper-plane fa-lg"></i> 

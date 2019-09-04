@@ -104,7 +104,7 @@ header{
 .chatContainer{
 	position: absolute;
 	top: 0;
-	bottom: 20%;
+	bottom: 15%;
 	width: 100%;
 	overflow-y: scroll;
 	overflow-x: hidden;
@@ -156,6 +156,7 @@ header{
 .postComment{
 	position: absolute;
 	bottom: 0;
+	padding: 0;
 	margin-bottom: 3px;
 	border-radius: 10px;
 	box-shadow: 0px 0px 5px gray;
@@ -340,7 +341,12 @@ header{
 }
 .infoUserSettings{
 	padding: 20px;
+	background-color: #DDD;
+	border-radius: 10px;
 }
+.infoUserSettings div{
+/*	background-color: blue;
+*/}
 .infoUserSettings img{
 	width: 200px;
 	height: 200px;
@@ -350,6 +356,7 @@ header{
 }
 .infoUserSettings h4{
 	font-size: 30px;
+	margin: 0;
 	font-variant: small-caps;
 }
 .commentsSettings{

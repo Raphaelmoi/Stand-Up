@@ -50,11 +50,14 @@ function adaptableMenu() {
         triangleTranspa.style.borderTop = 117 - Yposition + "px solid #0288d1"; //#0288d1
         astroRight.style.top = (50 - Yposition / 2) + 'px';
         titleH1.style.transform = "rotate(-6deg)";
+        document.getElementsByClassName('astroSmallHeader')[0].style.opacity = "0";
+
 
         if (Yposition > 130) {
             triangleTranspa.style.borderTop = 117 - Yposition + "px solid transparent";
             astroRight.style.top = 10 + 'px';
             titleH1.style.transform = "rotate(-2deg)";
+
         } else if (Yposition > 70) {
             titleH1.style.transform = "rotate(-4deg)";
             astroRight.style.top = 50 - Yposition / 2 + 'px';
@@ -76,4 +79,5 @@ function showSmallMenu(){
         smallTitle.style.lineHeight = '30px';
         astroRight.style.width = '0';
         astroLeft.style.width = '0';
+        document.getElementsByClassName('astroSmallHeader')[0].style.opacity = "1";
 }

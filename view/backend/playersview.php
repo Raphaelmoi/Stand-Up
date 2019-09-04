@@ -71,18 +71,19 @@ echo $asideLeft;
                 <td><?= $data['game_total']?></td>
 
                    <?php
-                   if ($reponse['authority'] == 1) {
+                   if ($reponse['authority'] == 1 && $data['authority'] != 1) {
                     ?>
                    <td>
                     <a href="index.php?action=seecomments&id=<?= $data['id']?>">Voir les commentaires</a>
                     </br>
-                            <a style="color:red;" href="index.php?action=adminDeleteAccount&id=<?= $reponse['id']?>" 
+                            <a style="color:red;" href="index.php?action=adminDeleteAccount&id=<?= $data['id']?>" 
                           onclick="return confirm('Êtes vous sûr de vouloir supprimer ce compte ?\nCette action est irréversible')">
                           Supprimer ce compte
                         </a> 
                   </td>
                     <?php
                     }
+                    else echo("<td></td>");
                    ?>
             </tr>
             <?php 

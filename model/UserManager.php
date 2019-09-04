@@ -127,7 +127,7 @@ class UserManager extends Manager
     public function deleteAccount($pseudo)
     {
         $bdd = $this->dbConnect();
-        $delete = $bdd->query("DELETE FROM user WHERE pseudo = '$pseudo'; ");  
+        $delete = $bdd->query("DELETE FROM user WHERE pseudo = '$pseudo';");  
     }
     public function deleteAccountWithId($id)
     {

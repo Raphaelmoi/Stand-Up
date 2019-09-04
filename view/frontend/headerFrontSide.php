@@ -120,6 +120,8 @@ ob_start();
     </header>
     <img src="public/img/assto2.png" class="astroImg">      
     <img src="public/img/assto2.png" class="astroImg astroImgTwo"> 
+    <img src="public/img/assto2.png" class="astroSmallHeader">      
+
 <?php
 $alertBox = ob_get_clean();
 ?>
