@@ -6,7 +6,6 @@ ob_start();
     <section class="mainSection">
         <article class="premierArticle">
             <h2>Esquivez les météorites et attrapez un maximum de pierres préciseuses</h2>
-
             <div class="startGame">
                 <a href="public/game1/index.php"> 
                     <img src="public/img/sc.jpg">

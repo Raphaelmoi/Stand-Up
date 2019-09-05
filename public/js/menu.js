@@ -7,8 +7,7 @@ let headerActual = document.getElementsByTagName('header')[0];
 let bigHeader = document.getElementById('bigHeader');
 let titleH1 = document.getElementsByTagName('h1')[0];
 let smallTitle = document.getElementsByTagName('h1')[1];
-let imgAstroWidth = astroLeft.offsetWidth;
-
+let imgAstroWidth  = 0;
 let headerSize = 0;
 
 window.onscroll = function() {
@@ -22,11 +21,13 @@ function adaptableMenu() {
         let Yposition = window.scrollY;
 
         while (headerSize <1) {
+            imgAstroWidth = astroLeft.offsetWidth;
+
             headerSize = bigHeader.offsetHeight;
 
             bigHeader.style.height = headerSize +'px';
-            triangleTranspa.style.top = headerSize +'px';
-            triangleYellow.style.top = (headerSize - 100)+'px';
+            triangleTranspa.style.top = headerSize+'px';
+            triangleYellow.style.top = headerSize+'px';
             headerSize++;
         }
 
