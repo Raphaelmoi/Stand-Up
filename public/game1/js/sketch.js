@@ -78,7 +78,6 @@ function setup() {
     //ml5 posenet initialisation
     poseNet = ml5.poseNet(video, modelReady);
     poseNet.on('pose', gotPoses);
-
     screenSizeAdaptator = windowWidth / 1400;
     if (screenSizeAdaptator < 0.5) {
         screenSizeAdaptator = 0.5;
@@ -115,9 +114,12 @@ function draw() {
         } //Since player is alive
         if (life > 0) {
             push();
-            translate(width, 0);
-            scale(-1, 1);
-            image(imgBackground, 0, 0, width, height);
+            if (windowWidth > 800) {
+                translate(width, 0);
+                scale(-1, 1);
+                image(imgBackground, 0, 0, width, height);
+            }
+            else background(0);
             time++;
             if (time < 80) 
             {
@@ -137,7 +139,6 @@ function draw() {
         } else {
 
             if (gameOver) { //prevent the song to be play more than one time
-
                 noLoop();
                 gameoverSound.play();
                 gameOver = false;
@@ -148,7 +149,7 @@ function draw() {
                 text("GAME OVER", width / 2, height / 3);
                 text("SCORE : " + score * level, width / 2, height / 2);
                 fill(244, 244, 244);
-                textSize(25);
+                textSize(20);
                 text('Vous serez redirigé vers la page d\'accueil dans moins de 2 secondes ', width / 2, (height -100));
                 function endGame () {
                     remove();

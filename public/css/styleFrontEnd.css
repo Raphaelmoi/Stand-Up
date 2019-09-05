@@ -336,12 +336,6 @@ form h2{
 		height: 30px;
 		border : 2px #0288d1 solid;
 	}
-	#bigHeader h1, #connectHeader h1
-	{
-		margin-top: 100px; 
-		font-size: 30px;
-		line-height: 20px;
-	}
 }
 
 @media all and (max-width: 720px) {
@@ -411,5 +405,4 @@ form h2{
 	.descriptionHomePage p, .descriptionHomePage div{
 		font-size: 14px;
 	}
-
 }
