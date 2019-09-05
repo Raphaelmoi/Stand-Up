@@ -18,56 +18,58 @@ window.onscroll = function() {
 };
 
 function adaptableMenu() {
-    let Yposition = window.scrollY;
+    if (window.innerWidth > 700) {
+        let Yposition = window.scrollY;
 
-    while (headerSize <1) {
-        headerSize = bigHeader.offsetHeight;
+        while (headerSize <1) {
+            headerSize = bigHeader.offsetHeight;
 
-        bigHeader.style.height = headerSize +'px';
-        triangleTranspa.style.top = headerSize+'px';
-        triangleYellow.style.top = headerSize+'px';
-        headerSize++;
-    }
-
-    if (Yposition <= 145) {
-        bigHeader.style.display = 'block';
-        smallHeader.style.display = 'none';
-
-        astroLeft.style.width = (imgAstroWidth - Yposition / 1.4) + 'px';
-        astroRight.style.width = (imgAstroWidth - Yposition / 1.4) + 'px';
-        astroLeft.style.opacity = 1 - Yposition / 1.4 / 100;
-
-        bigHeader.style.height = (headerSize - Yposition) + 'px';
-        triangleTranspa.style.top = (headerSize - Yposition) + 'px';
-        triangleYellow.style.top = (headerSize - Yposition) + 'px';
-
-        triangleYellow.style.borderTop = 100 - Yposition + "px solid #fdd835"; //#fdd835
-        triangleTranspa.style.borderLeft = 1100 + Yposition + "px solid transparent"; //transparent
-        triangleTranspa.style.borderRight = 1100 + Yposition + "px solid transparent";
-        titleH1.style.fontSize = (120 - Yposition / 2) + 'px';
-        titleH1.style.lineHeight = (headerSize - Yposition) + 'px';
-
-        triangleTranspa.style.borderTop = 117 - Yposition + "px solid #0288d1"; //#0288d1
-        astroRight.style.top = (50 - Yposition / 2) + 'px';
-        titleH1.style.transform = "rotate(-6deg)";
-        document.getElementsByClassName('astroSmallHeader')[0].style.opacity = "0";
-
-
-        if (Yposition > 130) {
-            triangleTranspa.style.borderTop = 117 - Yposition + "px solid transparent";
-            astroRight.style.top = 10 + 'px';
-            titleH1.style.transform = "rotate(-2deg)";
-
-        } else if (Yposition > 70) {
-            titleH1.style.transform = "rotate(-4deg)";
-            astroRight.style.top = 50 - Yposition / 2 + 'px';
-        } else {
-            triangleTranspa.style.borderTop = 117 - Yposition + "px solid #0288d1";
-            astroRight.style.top = 50 - Yposition / 2 + 'px';
-            titleH1.style.transform = "rotate(-6deg)";
+            bigHeader.style.height = headerSize +'px';
+            triangleTranspa.style.top = headerSize +'px';
+            triangleYellow.style.top = (headerSize - 100)+'px';
+            headerSize++;
         }
-    } else if (Yposition > 145) {
-        showSmallMenu();
+
+        if (Yposition <= 145) {
+            bigHeader.style.display = 'block';
+            smallHeader.style.display = 'none';
+
+            astroLeft.style.width = (imgAstroWidth - Yposition / 1.4) + 'px';
+            astroRight.style.width = (imgAstroWidth - Yposition / 1.4) + 'px';
+            astroLeft.style.opacity = 1 - Yposition / 1.4 / 100;
+
+            bigHeader.style.height = (headerSize - Yposition) + 'px';
+            triangleTranspa.style.top = (headerSize - Yposition) + 'px';
+            triangleYellow.style.top = (headerSize - Yposition) + 'px';
+
+            triangleYellow.style.borderTop = 100 - Yposition + "px solid #fdd835"; //#fdd835
+            triangleTranspa.style.borderLeft = 1100 + Yposition + "px solid transparent"; //transparent
+            triangleTranspa.style.borderRight = 1100 + Yposition + "px solid transparent";
+            titleH1.style.fontSize = (120 - Yposition / 2) + 'px';
+            titleH1.style.lineHeight = (headerSize - Yposition) + 'px';
+
+            triangleTranspa.style.borderTop = 117 - Yposition + "px solid #0288d1"; //#0288d1
+            astroRight.style.top = (50 - Yposition / 2) + 'px';
+            titleH1.style.transform = "rotate(-6deg)";
+            document.getElementsByClassName('astroSmallHeader')[0].style.opacity = "0";
+
+
+            if (Yposition > 130) {
+                triangleTranspa.style.borderTop = 117 - Yposition + "px solid transparent";
+                astroRight.style.top = 10 + 'px';
+                titleH1.style.transform = "rotate(-2deg)";
+
+            } else if (Yposition > 70) {
+                titleH1.style.transform = "rotate(-4deg)";
+                astroRight.style.top = 50 - Yposition / 2 + 'px';
+            } else {
+                triangleTranspa.style.borderTop = 117 - Yposition + "px solid #0288d1";
+                astroRight.style.top = 50 - Yposition / 2 + 'px';
+                titleH1.style.transform = "rotate(-6deg)";
+            }
+        } else if (Yposition > 145) {
+            showSmallMenu();
+        }
     }
 }
 

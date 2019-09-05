@@ -13,12 +13,12 @@ echo $asideLeft;
 
                 if(isset($_GET['order']) && $_GET['order'] == "antichrono" ){
                 ?>
-                   <th><i class="fas fa-chevron-down"></i></th>
-                   <th><a href="index.php?action=playersview&sortby=scoretotal&order=chrono">Position</a> </th>
+                   <th class='imgTD'><i class="fas fa-chevron-down"></i></th>
+                   <th id="positionTD"><a href="index.php?action=playersview&sortby=scoretotal&order=chrono">Position</a> </th>
                    <th><a href="index.php?action=playersview&sortby=pseudo&order=chrono">Pseudo</a></th>
-                   <th><a href="index.php?action=playersview&sortby=scoreone&order=chrono">Meilleur score jeu 1</a></th>
-                   <th><a href="index.php?action=playersview&sortby=scoretwo&order=chrono">Meilleur score jeu 2</a></th>
-                   <th><a href="index.php?action=playersview&sortby=scoretotal&order=chrono">Nombre total de points</a> </th>
+                   <th class='scoreTD'><a href="index.php?action=playersview&sortby=scoreone&order=chrono">Meilleur score jeu 1</a></th>
+                   <th class='scoreTD'><a href="index.php?action=playersview&sortby=scoretwo&order=chrono">Meilleur score jeu 2</a></th>
+                   <th class="totalScoreTD"><a href="index.php?action=playersview&sortby=scoretotal&order=chrono">Nombre total de points</a> </th>
                    <?php
                    if ($reponse['authority'] == 1) {
                     ?>
@@ -33,12 +33,12 @@ echo $asideLeft;
                 }
                 elseif(!isset($_GET['order']) || $_GET['order'] == "chrono" ){
                 ?>   
-                   <th><i class="fas fa-chevron-up"></i></th>
-                   <th><a href="index.php?action=playersview&sortby=scoretotal&order=antichrono">Position</a></th>
+                   <th class='imgTD'><i class="fas fa-chevron-up"></i></th>
+                   <th id="positionTD"><a href="index.php?action=playersview&sortby=scoretotal&order=antichrono">Position</a></th>
                    <th><a href="index.php?action=playersview&sortby=pseudo&order=antichrono">Pseudo</a></th>
-                   <th><a href="index.php?action=playersview&sortby=scoreone&order=antichrono">Meilleur score jeu 1</a></th>
-                   <th><a href="index.php?action=playersview&sortby=scoretwo&order=antichrono">Meilleur score jeu 2</a></th>
-                   <th><a href="index.php?action=playersview&sortby=scoretotal&order=antichrono">Nombre total de points</a> </th>
+                   <th class='scoreTD'><a href="index.php?action=playersview&sortby=scoreone&order=antichrono">Meilleur score jeu 1</a></th>
+                   <th class='scoreTD'><a href="index.php?action=playersview&sortby=scoretwo&order=antichrono">Meilleur score jeu 2</a></th>
+                   <th class="totalScoreTD"><a href="index.php?action=playersview&sortby=scoretotal&order=antichrono">Nombre total de points</a> </th>
                    <?php
                    if ($reponse['authority'] == 1) {
                     ?>
@@ -63,12 +63,12 @@ echo $asideLeft;
                 } 
                 ?>                  
             >
-                <td> <img src="<?= $data['imageprofil']?>"></td>
-                <td ><?= $position + 1?></td>            
-                <td><?= $data['pseudo']?></td>
-                <td><?= $data['game_one_bs']?></td>
-                <td><?= $data['game_two_bs']?></td>
-                <td><?= $data['game_total']?></td>
+                <td class='imgTD'> <img src="<?= $data['imageprofil']?>"></td>
+                <td id="positionTD"><?= $position + 1?></td>            
+                <td id='pseudoTD'><?= $data['pseudo']?></td>
+                <td class='scoreTD'><?= $data['game_one_bs']?></td>
+                <td class='scoreTD'><?= $data['game_two_bs']?></td>
+                <td class="totalScoreTD"><?= $data['game_total']?></td>
 
                    <?php
                    if ($reponse['authority'] == 1 && $data['authority'] != 1) {

@@ -159,10 +159,8 @@ h1{
     border-right: 3px #fb8c00 solid; 
     border-bottom: 3px #fb8c00 solid; 
 }
-.connect span{
-    margin-left: 10px;
-    font-weight: normal;
-    line-height: 40px;
+.connect i{
+    margin-right: 10px;
 }
 .connect a{
     color: #4e342e;
@@ -237,4 +235,23 @@ h1{
     }
 }
 
+@media all and (max-width: 900px) {
+    .startGame{
+        height: 200px;
+    }
+    .titleBtn{
+
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+    }
+}
+@media all and (max-width: 720px) {
+    .connect{
+        height: 25px;
+        line-height: 25px;
+        right: 5px;
+    }
+
+}
 

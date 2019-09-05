@@ -5,7 +5,7 @@ body, html{
 	background-size: cover;
     background-repeat: no-repeat;
   	background-attachment: fixed;
-}
+	}
 .mainSection{
 	padding-top: 400px;
 	width: 80%;
@@ -73,40 +73,41 @@ form h2{
 	z-index: 0;
 }
 
-#triangleYellow
-{
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 1000px solid transparent;
-    border-right: 1000px solid transparent;
-    border-top: 100px solid #fdd835;
-    z-index: -1;
-}
-#triangleTranspa{
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 1100px solid transparent;
-    border-right: 1100px solid transparent;
-    border-top: 117px solid #0288d1;
-    z-index: -2;
-}
-.topTriangle{
-	top: 196px;
-}
-.connectTY, .connectTT{
-	top: 400px;
-}
-#headerConnexion
-{
-	height: 400px;
-	background-color: #fdd835;
-}
+	#triangleYellow
+	{
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	    width: 0;
+	    height: 0;
+	    border-left: 1000px solid transparent;
+	    border-right: 1000px solid transparent;
+	    border-top: 100px solid #fdd835;
+	    z-index: -1;
+
+	}
+	#triangleTranspa{
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	    width: 0;
+	    height: 0;
+	    border-left: 1100px solid transparent;
+	    border-right: 1100px solid transparent;
+	    border-top: 117px solid #0288d1;
+	    z-index: -2;
+	}
+	.topTriangle{
+		top: 196px;
+	}
+	.connectTY, .connectTT{
+		top: 400px;
+	}
+	#headerConnexion
+	{
+		height: 400px;
+		background-color: #fdd835;
+	}
 #bigHeader, #connectHeader
 {
 	height: 200px;
@@ -327,25 +328,96 @@ form h2{
 	}
 	.btnFormValidate{
 		height: 30px;
-	border : 2px #0288d1 solid;
+		border : 2px #0288d1 solid;
 	}
-
-
+	#bigHeader h1, #connectHeader h1
+	{
+		margin-top: 100px; 
+		font-size: 30px;
+		line-height: 20px;
+	}
 }
 
 @media all and (max-width: 720px) {
-	.inscriptionBox{
-		width: 100%;
+	#bigHeader{
+		position: absolute;
+		height: 250px;
+		display: none;
+	}
+	#smallHeader {
+		display: block;
+		height: 80px;
+	}
+	#smallHeader h1{
+		font-size: 30px;
+		line-height: 30px;
+		margin-top: 40px;
 	}
 	.astroImg{
-		width: 100px;
+		position: absolute;
+		top: 15px;
+		width: 70px;
+	}
+    .topTriangle{
+        top: 250px;
+    }
+    #headerConnexion
+    {
+        height: 350px;
+    }
+	.connectTY, .connectTT{
+		top: 340px;
+	}
+	#connectHeader{
+		height: 280px;
+		z-index: 10;
+	}
+	.inscriptionBox{
+		width: 100%;
 	}
 	input{
 		height: 30px;
 		border-bottom: 2px #0288d1 solid;
 	}
+	article p
+	{
+		margin:  10px 10px;
+	}
 	#boxImg{
 		margin: 0;
+	}
+	.mainSection{
+		padding-top: 125px;
+	}
+	article h2
+	{
+		font-size: 30px;
+		margin:  10px 0;
+		padding: 0 10px;
+	}
+	#contenuOfDisplayGame{
+		flex-direction: column;
+	}
+	.displayGame a{
+		width: 90%;
+		margin-left: 5%;
+		background-color: red;
+		height: 150px;
+	}
+	.unlockedGame
+	{
+		display: block;
+		height: 32%;
+		padding-top: 10px;
+		background-color: rgba(200,200,200,0.5);
+	}
+	.descriptionHomePage{
+		border : none;
+		width: 95%;
+		margin: 0;
+	}
+	.descriptionHomePage p, .descriptionHomePage div{
+		font-size: 14px;
 	}
 
 }

@@ -12,7 +12,7 @@ ob_start();
                 </div>
                 <div>
                     <a href="index.php?action=signin">
-                        <i class="fas fa-user"><span>Connexion </span></i>
+                        <i class="fas fa-user"></i>Connexion
                     </a>                
                 </div>
             </div>
@@ -33,7 +33,21 @@ ob_start();
     }
     elseif (isset($_GET['action']) && $_GET['action'] == 'signup') {
     ?>
-    <script> getTheCats(6); </script>
+    <script>
+        if (window.innerWidth >= 1000) {
+            getTheCats(6);             
+        }
+        else if (window.innerWidth >= 600) {
+            getTheCats(5);             
+        }
+        else if (window.innerWidth >= 400) {
+            getTheCats(3);             
+        }
+        else{
+            getTheCats(2);          
+        }
+
+    </script>
 
         <header id="headerConnexion">
             <div class="connect">
@@ -45,7 +59,7 @@ ob_start();
                 </div>
                 <div>
                     <a href="index.php?action=signin">
-                        <i class="fas fa-user"><span>Connexion </span></i>
+                        <i class="fas fa-user"></i>Connexion
                     </a>                
                 </div>
             </div>
@@ -85,7 +99,7 @@ ob_start();
                     </div>
                     <div>
                         <a href="index.php?action=signin">
-                            <i class="fas fa-user"><span>Connexion </span></i>
+                            <i class="fas fa-user"></i>Connexion
                         </a>                
                     </div>
                 </div>
@@ -95,6 +109,8 @@ ob_start();
             </header>
         <?php
     }
+    if (!isset($_GET['action']))
+    {
 ?>
     <header id="smallHeader">
         <div class="connect">
@@ -112,16 +128,17 @@ ob_start();
             </div>
             <div>
                 <a href="index.php?action=signin">
-                    <i class="fas fa-user"><span>Connexion </span></i>
+                    <i class="fas fa-user"></i>Connexion
                 </a>                
             </div>
         </div>
-        <h1> Stand up !</h1>
+        <h1 id="smallHeadertitle"> Stand up !</h1>
     </header>
     <img src="public/img/assto2.png" class="astroImg">      
     <img src="public/img/assto2.png" class="astroImg astroImgTwo"> 
     <img src="public/img/assto2.png" class="astroSmallHeader">      
 
 <?php
+}
 $alertBox = ob_get_clean();
 ?>
