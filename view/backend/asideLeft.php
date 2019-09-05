@@ -9,7 +9,6 @@ ob_start();
             <?php
                 $position = $userManager -> getUserPosition($reponse['game_total']);
                 $nbrOfPlayers = $userManager -> getNumberOfUsers();
-
                 $bestScoreGame1 = $userManager -> getBestScoreGOne();
                 $bestScoreGame2 = $userManager -> getBestScoreGTwo();
 
@@ -41,17 +40,15 @@ ob_start();
             <p>Meilleur score du 2nd jeu </br>
                 <b><?= $reponse['game_two_bs'] ?> </b>/ <?= $bestScoreGame2['game_two_bs'] ?>
             </p>
-
             <p> Joueur de niveau <?= ceil($reponse['game_total']/1000)  ?> </p>
-
         </div>
-        
     </div>
+
     <div class="btnsAsideLeft">
         <?php
         if (isset($_GET['action']) && $_GET['action'] == 'playersview') {
             ?>
-        <a class="settingsBtn" href="index.php?action=backendHome"><i class="fas fa-chevron-left fa-lg"></i>Retour accueil</a>
+            <a class="settingsBtn" href="index.php?action=backendHome"><i class="fas fa-chevron-left fa-lg"></i>Retour accueil</a>
             <?php
         }else{
             ?>
@@ -61,8 +58,6 @@ ob_start();
         ?>
         <a class="settingsBtn" href="index.php?action=settingsview"><i class="fas fa-cog"></i>Paramètres</a>
     </div>
-
-
 </aside>
 
 <?php

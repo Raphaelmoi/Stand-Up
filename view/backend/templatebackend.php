@@ -6,7 +6,6 @@
         <link rel="stylesheet" type="text/css" href="public/css/style.css">
         <link rel="stylesheet" type="text/css" href="public/css/styleBackEnd.css">
         <link rel="icon" type="image/x-icon" href="public/img/astroicone.ico" />
-
         <title>Stand up</title>
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
@@ -20,9 +19,7 @@
               src="https://code.jquery.com/jquery-3.4.1.min.js"
               integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
               crossorigin="anonymous"></script>        
-
         <script src= public/js/chat.js></script>
-
         <script src= public/js/ajax.js></script>
         <script src= public/js/catApi.js></script>
     </head>
@@ -40,19 +37,16 @@
                 </div>
             </div>
             <h1> Stand up !</h1>
-            </header>
+        </header>
             <img src="public/img/assto2.png" class="astroImg">    
-
-        <!-- display success or error message -->
-        <?php 
-        if (isset($_GET['erreur']) || isset($_GET['success']))
-        {
-            require_once 'view/frontend/alertBox.php';
-            echo $alertBox;
-        }
-        ?>  
- 
+            <!-- display success or error message -->
+            <?php 
+            if (isset($_GET['erreur']) || isset($_GET['success']))
+            {
+                require_once 'view/frontend/alertBox.php';
+                echo $alertBox;
+            }
+        ?> 
         <?= $content ?> 
-    
     </body>
 </html>

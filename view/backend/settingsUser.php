@@ -28,8 +28,7 @@ ob_start();
 			   <input class="btnSubmitSetting" type="submit" value="Changer de pseudo" >
 			</form> 	
 		</div>
-
-			<?php
+		<?php
 		}
 		// default : change the password view
 		elseif (isset($_GET['change']) && $_GET['change'] == 'pass' ){
@@ -50,7 +49,6 @@ ob_start();
 		?>
 			<div class="mainContentSettings" >
 				<h3>Changer ma photo de profil</h3>
-
 	   			<script> getTheCats(12); </script>
 	            <form class="inscriptionBox" action='index.php?action=newcat' method="post">	                
 	                <div id="boxImg"></div>
@@ -59,10 +57,8 @@ ob_start();
 						<div class="moreCats" onclick="getTheCats(6)"> Je n'ai pas trouvé mon chat</div>
 		                <input class="btnSubmitSetting" type="submit" name="submit" value="Changer mon image">
 	                </div>
-
 	            </form>
 	        </div>
-
 		<?php
 		}
 		// Delete account
@@ -80,7 +76,7 @@ ob_start();
 		<?php
 		}
 		else{
-			// Basic view with profil information and every comment from user
+		// Basic view with profil information and every comment from the user
 		?>
 		<div class="mainContentSettings">
 			<h3>Mon profil</h3>
@@ -94,7 +90,6 @@ ob_start();
 			</div>
 			<div class="commentsSettings" >
 				<h3>Mes commentaires</h3>
-
 			    <?php
 				$comment = $commentManager -> getCommentsForOneUser($reponse['id']); 
 			    while ($donnees = $comment->fetch())
@@ -112,7 +107,6 @@ ob_start();
 			</div>
 		</div>
 		<?php
-		}
-		
+		}		
 $settingsforms = ob_get_clean();
 ?>

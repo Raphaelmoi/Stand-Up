@@ -1,12 +1,10 @@
 <?php
 ob_start();
 ?>
-
 <aside class="rightAside" >
     <div class="chatContainer" id="refreshAside">
         <script> reloadChat();</script>
     </div>
-
     <div class="messageChat postComment">
         <div class="messageChatTitle">
             <img src="<?= $reponse['imageprofil'] ?>">
@@ -18,12 +16,10 @@ ob_start();
             <div class="btnValideChat">
                 <input  type="submit" name="valide" value="">  
                 <i class="fas fa-paper-plane fa-lg"></i> 
-
             </div>
         </form>
     </div>
 </aside>
-
 <?php
 $asideRight = ob_get_clean();
 ?>

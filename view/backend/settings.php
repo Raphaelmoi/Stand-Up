@@ -3,8 +3,7 @@
 $title = 'paramètres';
 ob_start();
 ?>
-    <section class="settingView">  
-
+    <section class="settingView">
         <nav class="settings">
             <ul>
                 <a href="index.php?action=backendHome"><li><i class="fas fa-chevron-left fa-lg"></i> Retour accueil</li></a>
@@ -16,7 +15,6 @@ ob_start();
                 <a href="index.php?action=settingsview&change=account"><li>Supprimer mon compte</li></a>
             </ul>
         </nav>
-
 <?php 
     require 'settingsUser.php';//choice of style and sort article
     echo $settingsforms;

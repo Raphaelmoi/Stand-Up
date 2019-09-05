@@ -1,7 +1,6 @@
 <!-- Show error message or success message for $_GET['erreur'] et $_GET['success']  -->
 <?php
 ob_start();
-
 if (isset($_GET['erreur'])) {
 	?>
 	<section class="alert alertRed">
@@ -152,7 +151,6 @@ elseif (isset($_GET['success'])) {
 	</section>  
 <?php
 }
-
 $alertBox = ob_get_clean();
 ?>
 

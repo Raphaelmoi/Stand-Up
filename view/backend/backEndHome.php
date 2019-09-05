@@ -17,7 +17,6 @@ if (!empty($_SESSION['pseudo'])) {
             ?>
         </section> 
     <?php 
-
     $content = ob_get_clean();
     require ('templatebackend.php'); 
     }

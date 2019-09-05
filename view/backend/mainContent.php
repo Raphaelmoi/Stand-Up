@@ -26,7 +26,6 @@ ob_start();
                 </p>
             </div>
         </a>
-
         <?php
             if ($reponse['game_one_bs'] <= 200) {
                 ?>
@@ -44,7 +43,7 @@ ob_start();
             <div class="panel"> 
                 <h3> En construction</h3>
                 <p>
-                    Encore un peu de patience... Votre futur nouveau jeu favori arrive bientôt !
+                    Encore un peu de patience... Votre futur nouveau jeu préféré arrive  !
                 </p>
             </div>
         </a>
