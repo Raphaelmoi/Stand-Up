@@ -7,10 +7,8 @@ ob_start();
         <div>
             <h3> <?= $reponse['pseudo'] ?> </h3>
             <?php
-                $position = $userManager -> getUserPosition($reponse['game_total']);
-                $nbrOfPlayers = $userManager -> getNumberOfUsers();
-                $bestScoreGame1 = $userManager -> getBestScoreGOne();
-                $bestScoreGame2 = $userManager -> getBestScoreGTwo();
+                    $position = $userManager -> getUserPosition($reponse['game_total']);
+        $nbrOfPlayers = $userManager -> getNumberOfUsers();
 
                 if ($position == 0) {
                     ?>

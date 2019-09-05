@@ -11,18 +11,19 @@ let colorAside = document.getElementById('leftAsideId').style.background = 'rgba
 <section class="playersViewSection">         
     <div class="mainContentSettings">
         <div class="commentsSettings" >         
-            <h3>Les commentaires de <?=$reponse['pseudo'] ?></h3>
-            <a class="deleteBtn" href="index.php?action=adminDeleteAccount&id=<?=$reponse['id'] ?>" 
+            <h3>Les commentaires de <?=$userWithId['pseudo'] ?></h3>
+            <a class="deleteBtn" href="index.php?action=adminDeleteAccount&id=<?=$userWithId['id'] ?>" 
               onclick="return confirm('Êtes vous sûr de vouloir supprimer ce compte ?\nCette action est irréversible')"> Supprimer ce compte
             </a>
             <?php
             while ($donnees = $comment->fetch()) {
             ?>
                 <p><span>Le <?=$donnees['date_commentaire_fr'] ?> :</span> <?=$donnees['comment'] ?>
-                    <a class="deleteComment" href="index.php?action=deletecommentadmin&amp;idmsg=<?=$donnees['id'] ?>&amp;idplayer=<?=$reponse['id'] ?>"
+                    <a class="deleteComment" href="index.php?action=deletecommentadmin&amp;idmsg=<?=$donnees['id'] ?>&amp;idplayer=<?=$userWithId['id'] ?>"
                         onclick="return confirm('Êtes vous sûr de vouloir supprimer ce commentaire ?\nCette action est irréversible')">Supprimer ce commentaire</a>
                 </p>
-              <?php}
+              <?php
+          }
             $comment->closeCursor(); // Termine le traitement de la requête
             ?>
         </div>

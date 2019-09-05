@@ -34,8 +34,13 @@ class UserManager extends Manager {
     }
     public function getAllUsers($arg, $order) {
         $bdd = $this->dbConnect();
-        $req = $bdd->query("SELECT * FROM user ORDER BY $arg $order");
-        return $req;
+
+        $req = $bdd->prepare("SELECT * FROM user ORDER BY $arg $order");
+        $req->execute();
+        /* Fetch all of the remaining rows in the result set */
+        $result = $req->fetchAll();
+        return $result;
+
     }
     //give the position of the player compare to all the other player
     public function getUserPosition($userScore) {

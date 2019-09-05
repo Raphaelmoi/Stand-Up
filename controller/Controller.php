@@ -36,6 +36,12 @@ class Controller {
         $reponse = $userManager->getUser($_SESSION['pseudo']);
         $commentManager = new CommentManager();
         $comment = $commentManager->getComments();
+
+        $position = $userManager -> getUserPosition($reponse['game_total']);
+        $nbrOfPlayers = $userManager -> getNumberOfUsers();
+        $bestScoreGame1 = $userManager -> getBestScoreGOne();
+        $bestScoreGame2 = $userManager -> getBestScoreGTwo();
+
         require ('view/backend/backEndHome.php');
     }
     function postComment($id, $commentaire) {
@@ -119,16 +125,27 @@ class Controller {
     function playersView($arg, $order) {
         $userManager = new UserManager();
         $rep = $userManager->getAllUsers($arg, $order);
+
         $reponse = $userManager->getUser($_SESSION['pseudo']);
+        $position = $userManager -> getUserPosition($reponse['game_total']);
+        $nbrOfPlayers = $userManager -> getNumberOfUsers();
+        $bestScoreGame1 = $userManager -> getBestScoreGOne();
+        $bestScoreGame2 = $userManager -> getBestScoreGTwo();
+
         require ('view/backend/playersview.php');
     }
     function seeCommentAdmin($id) {
         $userManager = new UserManager();
-        $reponse = $userManager->getUserWithId($id);
+        $userWithId = $userManager->getUserWithId($id);
         $rep = $userManager->getAllUsers('game_total', "DESC");
         $commentManager = new CommentManager();
-        $comment = $commentManager->getComments($id);
         $comment = $commentManager->getCommentsForOneUser($id);
+        $reponse = $userManager->getUser($userWithId['pseudo']);
+        $position = $userManager -> getUserPosition($userWithId['game_total']);
+        $nbrOfPlayers = $userManager -> getNumberOfUsers();
+        $bestScoreGame1 = $userManager -> getBestScoreGOne();
+        $bestScoreGame2 = $userManager -> getBestScoreGTwo();
+
         require ('view/backend/adminCommentView.php');
     }
 }
