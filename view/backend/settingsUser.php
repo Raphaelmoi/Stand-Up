@@ -91,18 +91,17 @@ ob_start();
 			<div class="commentsSettings" >
 				<h3>Mes commentaires</h3>
 			    <?php
-				$comment = $commentManager -> getCommentsForOneUser($reponse['id']); 
-			    while ($donnees = $comment->fetch())
+
+			    foreach ($comment as $row => $data) 
 			    {
 			    ?>
-					<p><span>Le <?= $donnees['date_commentaire_fr'] ?> :</span> <?= $donnees['comment'] ?>
-					<a class="deleteComment" href="index.php?action=deletecomment&amp;id=<?=$donnees['id'] ?>"
+					<p><span>Le <?= $data['date_commentaire_fr'] ?> :</span> <?= $data['comment'] ?>
+					<a class="deleteComment" href="index.php?action=deletecomment&amp;id=<?=$data['id'] ?>"
 					onclick="return confirm('Êtes vous sûr de vouloir supprimer ce commentaire ?\nCette action est irréversible')"
 						>Supprimer ce commentaire</a>
 				</p>
 			    <?php
 			    }
-			    $comment->closeCursor(); // Termine le traitement de la requête
 			    ?>
 			</div>
 		</div>

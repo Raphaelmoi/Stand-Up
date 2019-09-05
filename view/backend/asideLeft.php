@@ -7,9 +7,7 @@ ob_start();
         <div>
             <h3> <?= $reponse['pseudo'] ?> </h3>
             <?php
-                    $position = $userManager -> getUserPosition($reponse['game_total']);
-        $nbrOfPlayers = $userManager -> getNumberOfUsers();
-
+            
                 if ($position == 0) {
                     ?>
                     <p> 

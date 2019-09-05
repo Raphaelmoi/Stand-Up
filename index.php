@@ -115,7 +115,6 @@ try {
                 }
             }
             else $controller->homePage(); //if user in not connected
-            
         }
         //ALL THE PLAYERS VIEW, differents action for the table order
         elseif ($_GET['action'] == 'playersview') {

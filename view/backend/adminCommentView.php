@@ -16,15 +16,15 @@ let colorAside = document.getElementById('leftAsideId').style.background = 'rgba
               onclick="return confirm('Êtes vous sûr de vouloir supprimer ce compte ?\nCette action est irréversible')"> Supprimer ce compte
             </a>
             <?php
-            while ($donnees = $comment->fetch()) {
+            foreach ($comment as $row => $result) {
             ?>
-                <p><span>Le <?=$donnees['date_commentaire_fr'] ?> :</span> <?=$donnees['comment'] ?>
-                    <a class="deleteComment" href="index.php?action=deletecommentadmin&amp;idmsg=<?=$donnees['id'] ?>&amp;idplayer=<?=$userWithId['id'] ?>"
-                        onclick="return confirm('Êtes vous sûr de vouloir supprimer ce commentaire ?\nCette action est irréversible')">Supprimer ce commentaire</a>
+                <p><span>Le <?=$result['date_commentaire_fr'] ?> :</span> <?=$result['comment'] ?>
+                    <a class="deleteComment" href="index.php?action=deletecommentadmin&amp;idmsg=<?=$result['id'] ?>&amp;idplayer=<?=$userWithId['id'] ?>"
+
+                    onclick="return confirm('Êtes vous sûr de vouloir supprimer ce commentaire ?\nCette action est irréversible')">Supprimer ce commentaire</a>
                 </p>
               <?php
-          }
-            $comment->closeCursor(); // Termine le traitement de la requête
+            }
             ?>
         </div>
     </div>
