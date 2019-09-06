@@ -101,7 +101,7 @@ class Controller {
         else {
             $user = $connexionManager->updateScoreOne($_SESSION['pseudo'], $score, 0);
         }
-        $this->backendHome();
+        header('Location: index.php?action=backendHome&success=endgame&game=1&score='. $score);
     }
     function endGameTwo($score) {
         $connexionManager = new UserManager();
@@ -112,7 +112,7 @@ class Controller {
         else {
             $user = $connexionManager->updateScoreTwo($_SESSION['pseudo'], $score, 0);
         }
-        $this->backendHome();
+        header('Location: index.php?action=backendHome&success=endgame&game=2&score='. $score);
     }
     function reloadChat() {
         $userManager = new UserManager();
@@ -121,9 +121,9 @@ class Controller {
         $retourComments = $commentManager->getComments();
         require ('view/backend/chatMessenger.php');
     }
-    function playersView($arg, $order) {
+    function playersView($arg, $order, $offset) {
         $userManager = new UserManager();
-        $rep = $userManager->getAllUsers($arg, $order);
+        $rep = $userManager->getAllUsers($arg, $order, $offset);
         $reponse = $userManager->getUser($_SESSION['pseudo']);
         $position = $userManager -> getUserPosition($reponse['game_total']);
         $nbrOfPlayers = $userManager -> getNumberOfUsers();

@@ -118,37 +118,43 @@ try {
         }
         //ALL THE PLAYERS VIEW, differents action for the table order
         elseif ($_GET['action'] == 'playersview') {
-            if (isset($_GET['sortby']) && isset($_GET['order'])) {
+            if (isset($_GET['sortby']) && isset($_GET['order']) && isset($_GET['page'])) {
                 if ($_GET['order'] == 'antichrono') {
                     if ($_GET['sortby'] == 'pseudo') {
-                        $controller->playersView('pseudo', "DESC");
+                        $controller->playersView('pseudo', "DESC", $_GET['page']);
                     }
                     elseif ($_GET['sortby'] == 'scoreone') {
-                        $controller->playersView('game_one_bs', "DESC");
+                        $controller->playersView('game_one_bs', "DESC", $_GET['page']);
                     }
                     elseif ($_GET['sortby'] == 'scoretwo') {
-                        $controller->playersView('game_two_bs', "DESC");
+                        $controller->playersView('game_two_bs', "DESC", $_GET['page']);
                     }
                     elseif ($_GET['sortby'] == 'scoretotal') {
-                        $controller->playersView('game_total', "DESC");
+                        $controller->playersView('game_total', "DESC", $_GET['page']);
                     }
                 }
                 elseif ($_GET['order'] == 'chrono') {
                     if ($_GET['sortby'] == 'pseudo') {
-                        $controller->playersView('pseudo', "ASC");
+                        $controller->playersView('pseudo', "ASC", $_GET['page']);
                     }
                     elseif ($_GET['sortby'] == 'scoreone') {
-                        $controller->playersView('game_one_bs', "ASC");
+                        $controller->playersView('game_one_bs', "ASC", $_GET['page']);
                     }
                     elseif ($_GET['sortby'] == 'scoretwo') {
-                        $controller->playersView('game_two_bs', "ASC");
+                        $controller->playersView('game_two_bs', "ASC", $_GET['page']);
                     }
                     elseif ($_GET['sortby'] == 'scoretotal') {
-                        $controller->playersView('game_total', "ASC");
+                        $controller->playersView('game_total', "ASC", $_GET['page']);
                     }
                 }
             } //default view
-            else $controller->playersView('game_total', "DESC");
+            else{
+                $_GET['page'] = 0;
+                $_GET['sortby'] = 'scoretotal';
+                $_GET['order'] = 'antichrono'; 
+                $controller->playersView('game_total', "DESC", $_GET['page']); 
+            }
+
         }
     }
     else {

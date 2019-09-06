@@ -219,7 +219,19 @@ header{
 	font-size: 20px;
 	line-height: 40px;
 }
-.btnSubmitSetting:hover, .moreCats:hover{
+.btnPagination{
+	height: 24px;
+	line-height: 24px;
+	margin: 2px;
+	padding: 4px;
+	color: whitesmoke;
+	font-size: 15px;
+	background-image:linear-gradient(#4fc3f7, #0288d1);
+	border: 1px #0288d1 solid;
+	margin-top: 5px;
+	border-radius:5px;
+}
+.btnSubmitSetting:hover, .moreCats:hover, .btnPagination:hover{
 	background-image:linear-gradient(#0288d1, #4fc3f7);
 }
 .btnValideChat:hover i{
@@ -448,8 +460,21 @@ tr:hover {
 	background-image:linear-gradient(red, #ff5131);
 }
 
-
-
+.paginationDiv{
+	position: absolute;
+	bottom: 0;
+	left: 18%;
+	right: 0;
+	height: 40px;
+	background-color: whitesmoke;
+	padding: 0 20px;
+	display: flex;
+	justify-content: space-between;
+}
+.paginationDiv>div{
+	height: 40px;
+	line-height: 40px;
+}
 @media all and (max-width: 720px) {
 	#smallHeader{
 		height: 67px;
@@ -635,5 +660,8 @@ tr:hover {
 	}
 	.infoUserSettings p{
 		margin: 3px;
+	}
+	.paginationDiv{
+		left: 0;
 	}
 }

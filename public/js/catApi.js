@@ -33,7 +33,6 @@ function chooseACat(){
 		images[i].style.background = 'transparent';
 		images[i].style.opacity = "0.85";
 	}
-
     var choosedCat = event.target;
 	choosedCat.style.background = '#0288d1';
 	choosedCat.style.opacity = "1";
