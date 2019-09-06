@@ -34,11 +34,11 @@ class UserManager extends Manager {
     }
     public function getAllUsers($arg, $order, $offset = 0) {
         if ($offset > 0) {
-            $offset *= 10;
+            $offset *= 7;
         };
         $bdd = $this->dbConnect();
 
-        $req = $bdd->prepare("SELECT * FROM user ORDER BY $arg $order LIMIT ".$offset.",10");
+        $req = $bdd->prepare("SELECT * FROM user ORDER BY $arg $order LIMIT ".$offset.",7");
         $req->execute();
         /* Fetch all of the remaining rows in the result set */
         $result = $req->fetchAll();

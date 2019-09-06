@@ -78,14 +78,19 @@ echo $asideLeft;
     </table>
     <div class="paginationDiv">
         <?php 
-            $nbrPage = floor($nbrOfPlayers/3);
+            $nbrPage = floor($nbrOfPlayers/7);
 
         if ($_GET['page'] > 0):
             ?>
             <a class="btnPagination" href="index.php?action=playersview&sortby=<?=$_GET['sortby']?>&order=<?=$_GET['order']?>&page=<?=$_GET['page']- 1?>">Page précédente</a>
             <?php
+        else: ?> <a class="btnPagination" href="javascript:" style="background-image: none; background-color: gray; border:none;">Page précédente</a>
+            <?php
         endif;
-        ?> <div> <?php
+
+        ?>
+        <div>
+        <?php
             for ($i=0; $i <= $nbrPage; $i++):
                 if ($i == $_GET['page']):
                     ?>
@@ -97,11 +102,15 @@ echo $asideLeft;
                 <?php
                 endif;
             endfor;
-        ?> </div> <?php
+        ?>
+        </div>
+        <?php
 
         if($_GET['page'] <= $nbrPage-1):
             ?>
             <a class="btnPagination" href="index.php?action=playersview&sortby=<?=$_GET['sortby']?>&order=<?=$_GET['order']?>&page=<?=$_GET['page']+1?>">Page suivante</a>
+            <?php
+            else: ?> <a class="btnPagination" href="javascript:" style="background-image: none; background-color: gray;">Page suivante</a>
             <?php
         endif;
         ?>
