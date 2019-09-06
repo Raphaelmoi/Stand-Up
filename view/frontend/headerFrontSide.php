@@ -1,6 +1,6 @@
 <?php
 ob_start();
-if (isset($_GET['action']) && $_GET['action'] == 'signin') {
+if (isset($_GET['action']) && $_GET['action'] == 'signin'):
 ?>
     <header id="connectHeader">
         <div class="connect">
@@ -28,8 +28,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'signin') {
         <div id='triangleTranspa' class='topTriangle'></div>            
     </header>
     <?php
-}
-elseif (isset($_GET['action']) && $_GET['action'] == 'signup') {
+elseif (isset($_GET['action']) && $_GET['action'] == 'signup'):
 ?>
     <script>
         if (window.innerWidth >= 1000) { getTheCats(6); }
@@ -66,8 +65,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'signup') {
         <div id='triangleTranspa' class='connectTT'></div>
     </header>
     <?php
-}
-elseif (!isset($_GET['action'])) {
+elseif (!isset($_GET['action'])):
     ?>
      <header id="bigHeader">
         <div class="connect">
@@ -97,13 +95,13 @@ elseif (!isset($_GET['action'])) {
     <header id="smallHeader">
         <div class="connect">
             <?php
-            if (!empty($_SESSION['pseudo'])) {
+            if (!empty($_SESSION['pseudo'])):
                 ?>
                     <div id='backBtn'>
                         <a href="index.php?action=backendHome">profil</a>
                     </div>
                 <?php
-                    }
+                endif;
                 ?>
             <div>
                 <a href="index.php?action=signup">Inscription</a>
@@ -120,6 +118,6 @@ elseif (!isset($_GET['action'])) {
     <img src="public/img/assto2.png" class="astroImg astroImgTwo"> 
     <img src="public/img/assto2.png" class="astroSmallHeader">      
 <?php
-}
+endif;
 $alertBox = ob_get_clean();
 ?>

@@ -5,11 +5,13 @@ ob_start();
     <div class="chatContainer" id="refreshAside">
         <script> reloadChat();</script>
     </div>
+
     <div class="messageChat postComment">
         <div class="messageChatTitle">
             <img src="<?= $reponse['imageprofil'] ?>">
             <h4 style="line-height: 35px;"><?= $reponse['pseudo'] ?></h4>
         </div>
+
         <form action="index.php?action=postcomment" method="post">
             <input type="hidden" name="id_user" value="<?= $reponse['id'] ?>">
             <textarea name="comm" placeholder="Saisissez votre commentaire" required></textarea>
@@ -18,6 +20,7 @@ ob_start();
                 <i class="fas fa-paper-plane fa-lg"></i> 
             </div>
         </form>
+        
     </div>
 </aside>
 <?php

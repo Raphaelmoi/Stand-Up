@@ -21,11 +21,10 @@
     <body>
         <!-- display success or error message -->
         <?php 
-        if (isset($_GET['erreur']) || isset($_GET['success']))
-        {
+        if (isset($_GET['erreur']) || isset($_GET['success'])):
             require_once 'alertBox.php';
             echo $alertBox;
-        }
+        endif;
 
         require ('view/frontend/headerFrontSide.php');
         echo $alertBox;

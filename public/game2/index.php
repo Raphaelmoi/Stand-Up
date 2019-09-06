@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>image_classification</title>
+	<title>Finger in the hear</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">    
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
@@ -22,7 +22,6 @@
 	<script src="js/fallingItems/Ammo.js"></script>	
 	<script src="js/fallingItems/LeftEarSpaceShip.js"></script>
 	<script src="js/fallingItems/RightEarSpaceShip.js"></script>
-
 </head>
 
 	<body>

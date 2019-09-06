@@ -9,7 +9,7 @@ echo $asideLeft;
     <table>
         <tr class="titleTable">
             <?php
-            if (isset($_GET['order']) && $_GET['order'] == "antichrono") {
+            if (isset($_GET['order']) && $_GET['order'] == "antichrono"):
             ?>
                <th class='imgTD'><i class="fas fa-chevron-down"></i></th>
                <th id="positionTD"><a href="index.php?action=playersview&sortby=scoretotal&order=chrono">Position</a> </th>
@@ -18,13 +18,12 @@ echo $asideLeft;
                <th class='scoreTD'><a href="index.php?action=playersview&sortby=scoretwo&order=chrono">Meilleur score jeu 2</a></th>
                <th class="totalScoreTD"><a href="index.php?action=playersview&sortby=scoretotal&order=chrono">Nombre total de points</a> </th>
                <?php
-                    if ($reponse['authority'] == 1) {
+                if ($reponse['authority'] == 1):
                 ?>
                     <th>Admin </th>
                 <?php
-                }
-            }
-            elseif (!isset($_GET['order']) || $_GET['order'] == "chrono") {
+                endif;
+            elseif (!isset($_GET['order']) || $_GET['order'] == "chrono"):
             ?>   
                <th class='imgTD'><i class="fas fa-chevron-up"></i></th>
                <th id="positionTD"><a href="index.php?action=playersview&sortby=scoretotal&order=antichrono">Position</a></th>
@@ -33,24 +32,24 @@ echo $asideLeft;
                <th class='scoreTD'><a href="index.php?action=playersview&sortby=scoretwo&order=antichrono">Meilleur score jeu 2</a></th>
                <th class="totalScoreTD"><a href="index.php?action=playersview&sortby=scoretotal&order=antichrono">Nombre total de points</a> </th>
                <?php
-                if ($reponse['authority'] == 1) {
-            ?>
+                if ($reponse['authority'] == 1):
+                ?>
                     <th>Admin </th>
                 <?php
-            }
-        }
+            endif;
+        endif;
         ?>    
        </tr>
     <?php
-    foreach ($rep as $row => $data) {
+    foreach ($rep as $row => $data):
         $position = $userManager->getUserPosition($data['game_total']);
         ?>
         <tr
-            <?php
+        <?php
         //DIFFERENT COLOR FOR THE PLAYER LINE IN THE TAB
-        if ($data['pseudo'] == $_SESSION['pseudo']) {
+        if ($data['pseudo'] == $_SESSION['pseudo']):
             echo "style=\"background: rgba(253, 216, 53, 0.7);\"";
-            } ?>                  
+            endif; ?>                  
         >
         <td class='imgTD'> <img src="<?=$data['imageprofil'] ?>"></td>
         <td id="positionTD"><?=$position + 1 ?></td>            
@@ -59,7 +58,7 @@ echo $asideLeft;
         <td class='scoreTD'><?=$data['game_two_bs'] ?></td>
         <td class="totalScoreTD"><?=$data['game_total'] ?></td>
         <?php
-        if ($reponse['authority'] == 1 && $data['authority'] != 1) {
+        if ($reponse['authority'] == 1 && $data['authority'] != 1):
         ?>
             <td>
                 <a href="index.php?action=seecomments&id=<?=$data['id'] ?>">Voir les commentaires</a>
@@ -69,12 +68,12 @@ echo $asideLeft;
                 </a> 
             </td>
         <?php
-        }
-        else echo ("<td></td>");
+        else: echo ("<td></td>");
+        endif;
         ?>
         </tr>
         <?php
-    }
+    endforeach;
     ?>
     </table>
 </section>  

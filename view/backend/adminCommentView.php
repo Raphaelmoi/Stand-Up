@@ -16,7 +16,7 @@ let colorAside = document.getElementById('leftAsideId').style.background = 'rgba
               onclick="return confirm('Êtes vous sûr de vouloir supprimer ce compte ?\nCette action est irréversible')"> Supprimer ce compte
             </a>
             <?php
-            foreach ($comment as $row => $result) {
+            foreach ($comment as $row => $result):
             ?>
                 <p><span>Le <?=$result['date_commentaire_fr'] ?> :</span> <?=$result['comment'] ?>
                     <a class="deleteComment" href="index.php?action=deletecommentadmin&amp;idmsg=<?=$result['id'] ?>&amp;idplayer=<?=$userWithId['id'] ?>"
@@ -24,7 +24,7 @@ let colorAside = document.getElementById('leftAsideId').style.background = 'rgba
                     onclick="return confirm('Êtes vous sûr de vouloir supprimer ce commentaire ?\nCette action est irréversible')">Supprimer ce commentaire</a>
                 </p>
               <?php
-            }
+            endforeach;
             ?>
         </div>
     </div>

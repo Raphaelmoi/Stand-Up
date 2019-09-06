@@ -240,10 +240,20 @@ h1{
         height: 200px;
     }
     .titleBtn{
-
         height: 40px;
         line-height: 40px;
         font-size: 20px;
+    }
+    .panel{
+        bottom: 40px;
+    }
+    .panel h3
+    {
+        font-size: 18px;
+    }
+    .panel p{
+        margin: 0 10px;
+        font-size: 12px;
     }
 }
 @media all and (max-width: 720px) {

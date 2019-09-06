@@ -3,7 +3,7 @@ ob_start();
 ?>
 	<!-- Change the mail -->
 	<?php
-		if (isset($_GET['change']) && $_GET['change'] == 'mail' ) {?>
+		if (isset($_GET['change']) && $_GET['change'] == 'mail' ):?>
 			<div class="mainContentSettings">
 				<h3>Changer mon adresse mail</h3>
 				<form action="index.php?action=newmail" method="post">
@@ -15,9 +15,8 @@ ob_start();
 				</form> 
 			</div>
 		<?php
-		}
 		// Change the pseudo
-		elseif (isset($_GET['change']) && $_GET['change'] == 'pseudo' ) {
+		elseif (isset($_GET['change']) && $_GET['change'] == 'pseudo' ):
 		?>
 		<div class="mainContentSettings">
 			<h3>Changer mon pseudo</h3>
@@ -29,9 +28,8 @@ ob_start();
 			</form> 	
 		</div>
 		<?php
-		}
 		// default : change the password view
-		elseif (isset($_GET['change']) && $_GET['change'] == 'pass' ){
+		elseif (isset($_GET['change']) && $_GET['change'] == 'pass' ):
 		?>
 		<div class="mainContentSettings" >
 			<h3>Changer mon mot de passe</h3>
@@ -43,9 +41,8 @@ ob_start();
 			</form> 
 		</div>
 		<?php
-		}
 		// Change the profil picture
-		elseif (isset($_GET['change']) && $_GET['change'] == 'cat' ){
+		elseif (isset($_GET['change']) && $_GET['change'] == 'cat' ):
 		?>
 			<div class="mainContentSettings" >
 				<h3>Changer ma photo de profil</h3>
@@ -60,9 +57,8 @@ ob_start();
 	            </form>
 	        </div>
 		<?php
-		}
 		// Delete account
-		elseif (isset($_GET['change']) && $_GET['change'] == 'account' ){
+		elseif (isset($_GET['change']) && $_GET['change'] == 'account' ):
 		?>
 			<div class="mainContentSettings" >
 				<h3> Supprimer mon compte</h3>
@@ -74,8 +70,7 @@ ob_start();
 	            </form>
 	        </div>
 		<?php
-		}
-		else{
+		else:
 		// Basic view with profil information and every comment from the user
 		?>
 		<div class="mainContentSettings">
@@ -91,9 +86,7 @@ ob_start();
 			<div class="commentsSettings" >
 				<h3>Mes commentaires</h3>
 			    <?php
-
-			    foreach ($comment as $row => $data) 
-			    {
+			    foreach ($comment as $row => $data):
 			    ?>
 					<p><span>Le <?= $data['date_commentaire_fr'] ?> :</span> <?= $data['comment'] ?>
 					<a class="deleteComment" href="index.php?action=deletecomment&amp;id=<?=$data['id'] ?>"
@@ -101,11 +94,11 @@ ob_start();
 						>Supprimer ce commentaire</a>
 				</p>
 			    <?php
-			    }
+			    endforeach;
 			    ?>
 			</div>
 		</div>
 		<?php
-		}		
+		endif;
 $settingsforms = ob_get_clean();
 ?>

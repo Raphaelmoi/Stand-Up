@@ -40,24 +40,24 @@ class Draws {
     }
     drawLeftEarship(){
         if (leftShipLife > 0) {
-            image(spaceShipLeftEar, width - leftEarX - 50, leftEarY - 50);
+            image(spaceShipLeftEar, width - leftEarX - 40*screenSizeAdaptator, leftEarY - 40*screenSizeAdaptator, 80*screenSizeAdaptator, 80*screenSizeAdaptator);
             if(ammoL> 0){
-                this.drawLaser(leftEarX, leftEarY, laserLeftImg, 0, 30);
-                this.drawLaser(leftEarX, leftEarY, laserLeftImg, 2, 30);   
-                this.drawLaser(leftEarX, leftEarY, laserLeftImg, 4, -30);
-                this.drawLaser(leftEarX, leftEarY , laserLeftImg, 6, -30);
+                this.drawLaser(leftEarX, leftEarY, laserLeftImg, 0, 28*screenSizeAdaptator);
+                this.drawLaser(leftEarX, leftEarY, laserLeftImg, 2, 28*screenSizeAdaptator);   
+                this.drawLaser(leftEarX, leftEarY, laserLeftImg, 4, -42*screenSizeAdaptator);
+                this.drawLaser(leftEarX, leftEarY , laserLeftImg, 6, -42*screenSizeAdaptator);
                 ammoL -=4;
             }            
         }
     }
     drawRightEarship(){
         if (rightShipLife > 0) {
-            image(spaceShipRightEar, width - rightEarX - 50, rightEarY - 50);  
+            image(spaceShipRightEar, width - rightEarX - 40*screenSizeAdaptator, rightEarY - 40*screenSizeAdaptator, 80*screenSizeAdaptator, 80*screenSizeAdaptator);  
             if (ammoR > 0) {
-                this.drawLaser(rightEarX, rightEarY, laserRightImg, 1, 30);
-                this.drawLaser(rightEarX, rightEarY, laserRightImg, 3, 30);   
-                this.drawLaser(rightEarX, rightEarY, laserRightImg, 5, -30);
-                this.drawLaser(rightEarX, rightEarY , laserRightImg, 7, -30);
+                this.drawLaser(rightEarX, rightEarY, laserRightImg, 1, 28*screenSizeAdaptator );
+                this.drawLaser(rightEarX, rightEarY, laserRightImg, 3, 28*screenSizeAdaptator);   
+                this.drawLaser(rightEarX, rightEarY, laserRightImg, 5, -42*screenSizeAdaptator);
+                this.drawLaser(rightEarX, rightEarY , laserRightImg, 7, -42*screenSizeAdaptator);
                 ammoR -=4;
             }                  
         }

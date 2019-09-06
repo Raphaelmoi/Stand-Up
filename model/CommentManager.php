@@ -5,14 +5,14 @@ class CommentManager extends Manager {
     //get all the comments
     public function getComments() {
         $bdd = $this->dbConnect();
-        $comment = $bdd->query("SELECT id, id_user, comment, DATE_FORMAT(date_publication, '%d/%m/%Y à %Hh%i') AS date_commentaire_fr, report FROM comment ORDER BY date_publication DESC");
+        $comment = $bdd->query("SELECT id, id_user, comment, DATE_FORMAT(date_publication, '%d/%m/%Y à %Hh%i') AS date_commentaire_fr FROM comment ORDER BY date_publication DESC");
         $result = $comment->fetchAll();
         return $result;
     }
     public function getCommentsForOneUser($id) {
         $bdd = $this->dbConnect();
 
-        $req = $bdd->prepare("SELECT id, id_user, comment, DATE_FORMAT(date_publication, '%d/%m/%Y à %Hh%i') AS date_commentaire_fr, report FROM comment WHERE id_user = '$id' ");
+        $req = $bdd->prepare("SELECT id, id_user, comment, DATE_FORMAT(date_publication, '%d/%m/%Y à %Hh%i') AS date_commentaire_fr FROM comment WHERE id_user = '$id' ");
         $req->execute();
         $result = $req->fetchAll();
         return $result;
