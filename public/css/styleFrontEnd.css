@@ -229,6 +229,12 @@ form h2{
 	width: 100%;
 	justify-content: flex-start;
 }
+.connexionBox a{
+	color: #555;
+}
+.connexionBox a:hover{
+	color: #111;
+}
 .connexionBox input{
 	width: 400px;	
 }
@@ -272,6 +278,7 @@ form h2{
 	height: 50px;
 	border : 5px #0288d1 solid;
 	border-radius: 10px;
+	cursor: pointer;
 }
 
 .premierArticle{

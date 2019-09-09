@@ -156,9 +156,7 @@ class UserManager extends Manager {
         $result = $sql->fetch();
 
         $email = $result['email'];
-
         return $email;
-
     }
 
     // public function findMailResetPw(semail){

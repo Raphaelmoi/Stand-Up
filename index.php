@@ -53,9 +53,7 @@ try {
         }
 
         elseif ($_GET['action'] == 'updatepw') {
-            echo "index ";
             if (isset($_POST['pass']) && isset($_POST['confirmpass']) && isset($_POST['token'])) {
-                    echo "index isset";
                 $controller->resetNewPass(htmlspecialchars($_POST['pass']), htmlspecialchars($_POST['confirmpass']), $_POST['token']);
             }
         }
