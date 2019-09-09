@@ -30,11 +30,13 @@ class CommentManager extends Manager {
     //admin can delete any comment
     public function deleteComment($id) {
         $bdd = $this->dbConnect();
-        $delete = $bdd->query("DELETE FROM comment WHERE id = $id; ");
+        $delete = $bdd->prepare("DELETE FROM comment WHERE id = $id; ");
+        $delete->execute();
     }
     //admin can delete any comment
     public function deleteCommentFromOneUser($id) {
         $bdd = $this->dbConnect();
-        $delete = $bdd->query("DELETE FROM comment WHERE id_user = $id; ");
+        $delete = $bdd->prepare("DELETE FROM comment WHERE id_user = $id; ");
+        $delete->execute();
     }
 }

@@ -3,7 +3,7 @@ class Controller {
     function __construct() {
         spl_autoload_register('Controller::chargerClasse');
         require 'controller/UserController.php';
-        require 'controller/UtilController.php';
+        require 'controller/ResetPassController.php';
     }
     //autoloader
     function chargerClasse($classname) {
@@ -15,10 +15,6 @@ class Controller {
     function signIn() {
         require ('view/frontend/affichageAccueil.php');
     }
-    function signUp() {
-        require 'view/frontend/affichageAccueil.php';
-    }
-
     function inscription($pseudo, $motdepasse, $motdepasseVerif, $email, $linkImg) {
         $register = new UserController();
         $connexion = $register->newUser($pseudo, $motdepasse, $motdepasseVerif, $email, $linkImg);
@@ -35,13 +31,13 @@ class Controller {
     function sendNewPass($email){
         $userManager = new UserManager();
         $results = $userManager->findMail($email);
-        $utilController = new UtilController();
-        $sendToken = $utilController->sendToken($email, $results);
+        $ResetPassController = new ResetPassController();
+        $sendToken = $ResetPassController->sendToken($email, $results);
     }
     function resetNewPass($newpass, $newpassconfirm, $token){
         echo "controller";
-        $utilController = new UtilController();
-        $resetPass = $utilController->resetPass($newpass, $newpassconfirm, $token);
+        $ResetPassController = new ResetPassController();
+        $resetPass = $ResetPassController->resetPass($newpass, $newpassconfirm, $token);
     }
     function backendHome() {
         $userManager = new UserManager();

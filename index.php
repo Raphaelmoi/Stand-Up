@@ -9,13 +9,7 @@ try {
         if ($_GET['action'] == 'homePage') {
             $controller->homePage();
         }
-        else if ($_GET['action'] == 'signin') {
-            $controller->signIn();
-        }
-        else if ($_GET['action'] == 'signup') {
-            $controller->signUp();
-        }
-        else if ($_GET['action'] == 'forgotpass' || $_GET['action'] == 'pending' || $_GET['action'] == 'resetpass') {
+        else if ($_GET['action'] == 'signin' || $_GET['action'] == 'signup' || $_GET['action'] == 'forgotpass' || $_GET['action'] == 'pending' || $_GET['action'] == 'resetpass') {
             $controller->signIn();
         }
         // Home of the Back End
@@ -51,10 +45,12 @@ try {
                 $controller->sendNewPass(htmlspecialchars($_POST['email']));
             }
         }
-
         elseif ($_GET['action'] == 'updatepw') {
             if (isset($_POST['pass']) && isset($_POST['confirmpass']) && isset($_POST['token'])) {
-                $controller->resetNewPass(htmlspecialchars($_POST['pass']), htmlspecialchars($_POST['confirmpass']), $_POST['token']);
+                $controller->resetNewPass(
+                	htmlspecialchars($_POST['pass']), 
+                    htmlspecialchars($_POST['confirmpass']), 
+                    htmlspecialchars($_POST['token']));
             }
         }
         elseif ($_GET['action'] == 'logout') {
@@ -69,25 +65,36 @@ try {
         //PUBLISH A COMMENT in the database
         elseif ($_GET['action'] == 'postcomment') {
             if (isset($_POST['id_user']) and isset($_POST['comm'])) {
-                $controller->postComment(htmlspecialchars($_POST['id_user']) , htmlspecialchars($_POST['comm']));
+                $controller->postComment(htmlspecialchars($_POST['id_user']), 
+                htmlspecialchars($_POST['comm']));
             }
         }
         //CHANGE THE PASSWORD
         elseif ($_GET['action'] == 'newpw') {
             if (isset($_POST['pseudo']) and isset($_POST['old_password']) and isset($_POST['new_password'])) {
-                $controller->updatePass(htmlspecialchars($_POST['old_password']) , htmlspecialchars($_POST['new_password']) , htmlspecialchars($_POST['pseudo']));
+                $controller->updatePass(
+                	htmlspecialchars($_POST['old_password']), 
+                	htmlspecialchars($_POST['new_password']), 
+                	htmlspecialchars($_POST['pseudo']));
             }
         }
         //CHANGE THE EMAIL
         elseif ($_GET['action'] == 'newmail') {
             if (isset($_POST['pseudo']) and isset($_POST['comfirm_mail']) and isset($_POST['new_mail']) and isset($_POST['pass'])) {
-                $controller->updateMail(htmlspecialchars($_POST['pseudo']) , htmlspecialchars($_POST['comfirm_mail']) , htmlspecialchars($_POST['new_mail']) , htmlspecialchars($_POST['pass']));
+                $controller->updateMail(
+                	htmlspecialchars($_POST['pseudo']), 
+                	htmlspecialchars($_POST['comfirm_mail']), 
+                	htmlspecialchars($_POST['new_mail']), 
+                	htmlspecialchars($_POST['pass']));
             }
         }
         //CHANGE THE PSEUDO
         elseif ($_GET['action'] == 'newpseudo') {
             if (isset($_POST['newpseudo']) and isset($_POST['pseudo']) and isset($_POST['pass'])) {
-                $controller->updatePseudo(htmlspecialchars($_POST['newpseudo']) , htmlspecialchars($_POST['pseudo']) , htmlspecialchars($_POST['pass']));
+                $controller->updatePseudo(
+                	htmlspecialchars($_POST['newpseudo']), 
+                	htmlspecialchars($_POST['pseudo']), 
+                	htmlspecialchars($_POST['pass']));
             }
         }
         //CHANGE PROFIL PICTURE
@@ -99,7 +106,9 @@ try {
         //DELETE ACCOUNT
         elseif ($_GET['action'] == 'deleteaccount') {
             if (isset($_POST['pseudo']) and isset($_POST['password'])) {
-                $controller->deleteAccount(htmlspecialchars($_POST['pseudo']) , htmlspecialchars($_POST['password']));
+                $controller->deleteAccount(
+                	htmlspecialchars($_POST['pseudo']), 
+                	htmlspecialchars($_POST['password']));
             }
         }
         //DELETE ANY ACCOUNT FOR ADMIN
@@ -114,21 +123,28 @@ try {
         }
         //DELETE COMMENT FROM ANY USER FOR ADMIN
         elseif ($_GET['action'] == 'deletecommentadmin') {
-            $controller->deleteCommentAdmin(htmlspecialchars($_GET['idmsg']) , htmlspecialchars($_GET['idplayer']));
+            $controller->deleteCommentAdmin(
+            	htmlspecialchars($_GET['idmsg']), 
+            	htmlspecialchars($_GET['idplayer']));
         }
         //RETURN WHEN GAMES ARE OVER
-        elseif ($_GET['action'] == 'endgame') {
+        elseif ($_GET['action'] == 'endgame' && isset($_GET['game'])) {
             if (!empty($_SESSION['pseudo'])) {
                 if (isset($_GET['score'])) {
-                    if (isset($_GET['game']) && $_GET['game'] == 1) {
+                    if ($_GET['game'] == 1) {
                         $controller->endGameOne(htmlspecialchars($_GET['score']));
                     }
-                    if (isset($_GET['game']) && $_GET['game'] == 2) {
+                    if ($_GET['game'] == 2) {
                         $controller->endGameTwo(htmlspecialchars($_GET['score']));
                     }
                 }
             }
-            else header('Location: index.php'); //if user in not connected
+            else{
+                if ($_GET['game'] == 1) {
+                    $_SESSION['score'] = $_GET['score'];
+                }
+                header('Location: index.php'); //if user in not connected                
+            }
         }
         //ALL THE PLAYERS VIEW, differents action for the table order
         elseif ($_GET['action'] == 'playersview') {
