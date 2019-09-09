@@ -15,6 +15,9 @@ try {
         else if ($_GET['action'] == 'signup') {
             $controller->signUp();
         }
+        else if ($_GET['action'] == 'forgotpass' || $_GET['action'] == 'pending' || $_GET['action'] == 'resetpass') {
+            $controller->signIn();
+        }
         // Home of the Back End
         elseif ($_GET['action'] == 'backendHome') {
             $controller->backendHome();
@@ -41,6 +44,19 @@ try {
         elseif ($_GET['action'] == 'login') {
             if (isset($_POST['name']) and isset($_POST['pass'])) {
                 $controller->logIn(htmlspecialchars($_POST['name']) , htmlspecialchars($_POST['pass']));
+            }
+        }
+        elseif ($_GET['action'] == 'sendNewPass') {
+            if (isset($_POST['reset-password']) && isset($_POST['email'])) {
+                $controller->sendNewPass(htmlspecialchars($_POST['email']));
+            }
+        }
+
+        elseif ($_GET['action'] == 'updatepw') {
+            echo "index ";
+            if (isset($_POST['pass']) && isset($_POST['confirmpass']) && isset($_POST['token'])) {
+                    echo "index isset";
+                $controller->resetNewPass(htmlspecialchars($_POST['pass']), htmlspecialchars($_POST['confirmpass']), $_POST['token']);
             }
         }
         elseif ($_GET['action'] == 'logout') {
@@ -114,7 +130,7 @@ try {
                     }
                 }
             }
-            else $controller->homePage(); //if user in not connected
+            else header('Location: index.php'); //if user in not connected
         }
         //ALL THE PLAYERS VIEW, differents action for the table order
         elseif ($_GET['action'] == 'playersview') {
@@ -154,7 +170,6 @@ try {
                 $_GET['order'] = 'antichrono'; 
                 $controller->playersView('game_total', "DESC", $_GET['page']); 
             }
-
         }
     }
     else {

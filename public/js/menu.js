@@ -7,7 +7,7 @@ let headerActual = document.getElementsByTagName('header')[0];
 let bigHeader = document.getElementById('bigHeader');
 let titleH1 = document.getElementsByTagName('h1')[0];
 let smallTitle = document.getElementsByTagName('h1')[1];
-let imgAstroWidth  = 0;
+let imgAstroWidth = 0;
 let headerSize = 0;
 
 window.onscroll = function() {
@@ -17,15 +17,16 @@ window.onscroll = function() {
 };
 
 function adaptableMenu() {
+    //if the screen is bigger than 700px
     if (window.innerWidth > 700) {
         let Yposition = window.scrollY;
 
-        while (headerSize <1) {
+        while (headerSize < 1) {
             imgAstroWidth = astroLeft.offsetWidth;
             headerSize = bigHeader.offsetHeight;
-            bigHeader.style.height = headerSize +'px';
-            triangleTranspa.style.top = headerSize+'px';
-            triangleYellow.style.top = headerSize+'px';
+            bigHeader.style.height = headerSize + 'px';
+            triangleTranspa.style.top = headerSize + 'px';
+            triangleYellow.style.top = headerSize + 'px';
         }
         if (Yposition <= 145) {
             bigHeader.style.display = 'block';
@@ -36,10 +37,10 @@ function adaptableMenu() {
             astroRight.style.width = (imgAstroWidth - Yposition / 1.4) + 'px';
             astroRight.style.top = (50 - Yposition / 2) + 'px';
             triangleYellow.style.top = (headerSize - Yposition) + 'px';
-            triangleYellow.style.borderTop = 100 - Yposition + "px solid #fdd835"; 
+            triangleYellow.style.borderTop = 100 - Yposition + "px solid #fdd835";
             triangleTranspa.style.top = (headerSize - Yposition) + 'px';
-            triangleTranspa.style.borderTop = 117 - Yposition + "px solid #0288d1"; 
-            triangleTranspa.style.borderLeft = 1100 + Yposition + "px solid transparent"; 
+            triangleTranspa.style.borderTop = 117 - Yposition + "px solid #0288d1";
+            triangleTranspa.style.borderLeft = 1100 + Yposition + "px solid transparent";
             triangleTranspa.style.borderRight = 1100 + Yposition + "px solid transparent";
             titleH1.style.fontSize = (120 - Yposition / 2) + 'px';
             titleH1.style.lineHeight = (headerSize - Yposition) + 'px';
@@ -65,13 +66,13 @@ function adaptableMenu() {
     }
 }
 
-function showSmallMenu(){
-        bigHeader.style.display = 'none';     
-        smallHeader.style.display = 'block';
-        smallHeader.style.height = '40px';
-        smallTitle.style.fontSize = '30px';
-        smallTitle.style.lineHeight = '30px';
-        astroRight.style.width = '0';
-        astroLeft.style.width = '0';
-        document.getElementsByClassName('astroSmallHeader')[0].style.opacity = "1";
+function showSmallMenu() {
+    bigHeader.style.display = 'none';
+    smallHeader.style.display = 'block';
+    smallHeader.style.height = '40px';
+    smallTitle.style.fontSize = '30px';
+    smallTitle.style.lineHeight = '30px';
+    astroRight.style.width = '0';
+    astroLeft.style.width = '0';
+    document.getElementsByClassName('astroSmallHeader')[0].style.opacity = "1";
 }

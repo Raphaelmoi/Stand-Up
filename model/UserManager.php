@@ -13,6 +13,7 @@ class UserManager extends Manager {
             'adressmail' => $mail
         ));
     }
+
     public function getUser($pseudo) {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, DATE_FORMAT(date_inscription, \'%d/%m/%Y \') AS date_inscription_fr, game_one, game_one_bs, game_two, game_two_bs, game_total, authority FROM user WHERE pseudo = ?');
@@ -77,6 +78,11 @@ class UserManager extends Manager {
         $req = $bdd->query("UPDATE user SET pass = '$pass' WHERE pseudo = '$pseudo';");
         return $req;
     }
+    public function updateUserPwWithMail($pass, $mail) {
+        $bdd = $this->dbConnect();
+        $req = $bdd->query("UPDATE user SET pass = '$pass' WHERE mail = '$mail';");
+        return $req;
+    }
     //when user want to change mail
     public function updateUserMail($mail, $pseudo) {
         $bdd = $this->dbConnect();
@@ -132,4 +138,32 @@ class UserManager extends Manager {
         $bdd = $this->dbConnect();
         $delete = $bdd->query("DELETE FROM user WHERE id = '$id'; ");
     }
+
+    public function saveAToken($email, $token){
+        $bdd = $this->dbConnect();
+        $add = $bdd->prepare("INSERT INTO password_resets(email, token) VALUES (:email, :token)");
+        $add->execute(array(
+            'email' => $email,
+            'token' => $token,
+        ));
+    }
+
+    public function findTokenMatch($token) {
+        $bdd = $this->dbConnect();
+
+        $sql = $bdd->prepare("SELECT email FROM password_resets WHERE token='$token' LIMIT 1");
+        $sql->execute();
+        $result = $sql->fetch();
+
+        $email = $result['email'];
+
+        return $email;
+
+    }
+
+    // public function findMailResetPw(semail){
+    //     $bdd = $this->dbConnect();
+    //     $count = $bdd->query("SELECT count(mail) FROM user WHERE mail = '$mail'")->fetchColumn();
+    //     return $count;
+    // }
 }

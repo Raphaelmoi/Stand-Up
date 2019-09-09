@@ -3,6 +3,7 @@ class Controller {
     function __construct() {
         spl_autoload_register('Controller::chargerClasse');
         require 'controller/UserController.php';
+        require 'controller/UtilController.php';
     }
     //autoloader
     function chargerClasse($classname) {
@@ -30,6 +31,17 @@ class Controller {
         $userController = new UserController();
         $connexion = $userController->logOut();
         header('Location: /projet5/index.php?success=disconnect');
+    }
+    function sendNewPass($email){
+        $userManager = new UserManager();
+        $results = $userManager->findMail($email);
+        $utilController = new UtilController();
+        $sendToken = $utilController->sendToken($email, $results);
+    }
+    function resetNewPass($newpass, $newpassconfirm, $token){
+        echo "controller";
+        $utilController = new UtilController();
+        $resetPass = $utilController->resetPass($newpass, $newpassconfirm, $token);
     }
     function backendHome() {
         $userManager = new UserManager();
