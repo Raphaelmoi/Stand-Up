@@ -39,8 +39,13 @@ let soundAlreadyPlay = false;
 
 let time = 0;
 
+var x1 = 0;
+var x2 = 0;
+var scrollSpeed = 1;
+
 function preload() {
-    imgBackground = loadImage('img/sky.jpg');
+    imgBackground = loadImage('img/sky2.jpg');
+    imgBackgroundDeux = loadImage('img/sky.jpg');
     imgStone0 = loadImage('img/stone0.png');
     imgStone1 = loadImage('img/stone1.png');
     imgStone2 = loadImage('img/stone2.png');
@@ -91,6 +96,7 @@ function setup() {
     util.newGem(10);
     util.newPill(2);
     util.newPotion(1);
+    x1 = -height;
 }
 
 function modelReady() {
@@ -117,7 +123,20 @@ function draw() {
             if (windowWidth > 800) {
                 translate(width, 0);
                 scale(-1, 1);
-                image(imgBackground, 0, 0, width, height);
+                image(imgBackground, 0, x1, width, height);
+                image(imgBackgroundDeux, 0, x2, width, height);
+
+              x1 += scrollSpeed;
+              x2 += scrollSpeed;
+              console.log('x1 : '+ x1);
+              console.log('x2 : '+ x2);
+
+              if (x1 >= height){
+                x1 = -height;
+              }
+              if (x2 >= height){
+                x2 = -height;
+              }
             }
             else background(0);
             time++;

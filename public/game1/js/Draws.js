@@ -1,5 +1,5 @@
 /*
-Contain methods called from the draw function in sketches.js
+Contain methods called from the draw function in sketchs.js
 drawBird()
 drawExplosion()
 drawHealthAndText()
@@ -13,7 +13,7 @@ class Draws {
         this.explosionY = 0;
         this.explosion = false;
         this.exploseindex = 0;
-        this.index = 0; //will allowed to move fom one image to another in birdImages
+        this.index = 0; //will allowed to move from one image to another in birdImages
     }
     drawBird() {
         if (lastNoseX - noseX > -10) { //-10 give a direction when player dont move
