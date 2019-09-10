@@ -2,7 +2,7 @@
 require_once ("Manager.php");
 
 class UserManager extends Manager {
-    //Get user and all data about him
+    //Add a new user
     public function newUser($pseudo, $pass, $mail, $imgUrl) {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('INSERT INTO user( pseudo, pass, mail, imageprofil, date_inscription) VALUES( :pseudo, :motdepasse, :adressmail, :imageUrl, NOW())');
@@ -12,7 +12,7 @@ class UserManager extends Manager {
             'imageUrl' => $imgUrl,
             'adressmail' => $mail
         ));
-    }
+    }//get an user by Pseudo
     public function getUser($pseudo) {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, DATE_FORMAT(date_inscription, \'%d/%m/%Y \') AS date_inscription_fr, game_one, game_one_bs, game_two, game_two_bs, game_total, authority FROM user WHERE pseudo = ?');
@@ -28,6 +28,7 @@ class UserManager extends Manager {
         $result = $req->fetch();
         return $result;
     }
+    // get all the users with a pagination argmument. Give results per 7
     public function getAllUsers($arg, $order, $offset = 0) {
         if ($offset > 0) {
             $offset *= 7;
@@ -38,7 +39,7 @@ class UserManager extends Manager {
         $result = $req->fetchAll();
         return $result;
     }
-    //give the position of the player compare to all the other player
+    //give the qtt of players who have a better score 
     public function getUserPosition($userScore) {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare("SELECT count(*) from user where game_total > '$userScore'");
@@ -53,6 +54,7 @@ class UserManager extends Manager {
         $result = $req->fetchColumn();
         return $result;
     }
+    //give the best score of first game
     public function getBestScoreGOne() {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('SELECT game_one_bs FROM user ORDER BY game_one_bs DESC');
@@ -67,13 +69,14 @@ class UserManager extends Manager {
         $result = $req->fetch();
         return $result;
     }
-    //when user want to change password
+    //Update the password
     public function updateUserPw($pass, $pseudo) {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare("UPDATE user SET pass = '$pass' WHERE pseudo = '$pseudo';");
         $req->execute();
         return $req;
     }
+    //Update pass with the email, in case user forgot password
     public function updateUserPwWithMail($pass, $mail) {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare("UPDATE user SET pass = '$pass' WHERE mail = '$mail';");
@@ -94,34 +97,25 @@ class UserManager extends Manager {
         $req->execute();
         return $req;
     }
+    //update profil picture
     public function updateCat($pseudo, $imageUrl) {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare("UPDATE user SET imageprofil = '$imageUrl' WHERE pseudo = '$pseudo';");
         $req->execute();
         return $req;
     }
-    public function updateScoreOne($pseudo, $score, $bestScore) {
+    public function updateScore($pseudo, $score, $bestScore, $game, $bestScoreGame) {
         $bdd = $this->dbConnect();
         if ($bestScore == 1) {
-            $req = $bdd->prepare("UPDATE user SET game_one = '$score', game_total = game_total + '$score', game_one_bs = '$score'  WHERE pseudo = '$pseudo';");
+            $req = $bdd->prepare("UPDATE user SET $game = '$score', game_total = game_total + '$score', $bestScoreGame = '$score'  WHERE pseudo = '$pseudo';");
         }
         else {
-            $req = $bdd->prepare("UPDATE user SET game_one = '$score', game_total = game_total + '$score' WHERE pseudo = '$pseudo';");
+            $req = $bdd->prepare("UPDATE user SET $game = '$score', game_total = game_total + '$score' WHERE pseudo = '$pseudo';");
         }
         $req->execute();
         return $req;
     }
-    public function updateScoreTwo($pseudo, $score, $bestScore) {
-        $bdd = $this->dbConnect();
-        if ($bestScore == 1) {
-            $req = $bdd->prepare("UPDATE user SET game_two = '$score', game_total = game_total + '$score', game_two_bs = '$score'  WHERE pseudo = '$pseudo';");
-        }
-        else {
-            $req = $bdd->prepare("UPDATE user SET game_two = '$score', game_total = game_total + '$score' WHERE pseudo = '$pseudo';");
-        }
-        $req->execute();
-        return $req;
-    }
+    //loof if a specified pseudo is already in the database or not
     public function count($pseudo) {
         $bdd = $this->dbConnect();
         $count = $bdd->prepare("SELECT count(pseudo) FROM user WHERE pseudo = '$pseudo'");

@@ -21,6 +21,10 @@ if (isset($_GET['erreur'])):
 	    ?>
 	    	<p>Votre email a une mauvaise syntaxe</p>
 	    <?php
+		elseif ($_GET['erreur'] == 'mailnotdb' ):
+	    ?>
+	    	<p>Aucun compte n'est enregistré avec cette adresse email</p>
+	    <?php
 		elseif ($_GET['erreur'] == 'passpseudo' ):
 	    ?>
 	    	<p>Vous avez saisi un mauvais pseudo ou mot de passe</p>

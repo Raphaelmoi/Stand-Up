@@ -10,10 +10,10 @@ class Controller {
         require 'model/' . $classname . '.php';
     }
     function homePage() {
-        require ('view/frontend/affichageAccueil.php');
+        require ('view/frontend/homeFrontEnd.php');
     }
     function signIn() {
-        require ('view/frontend/affichageAccueil.php');
+        require ('view/frontend/homeFrontEnd.php');
     }
     function inscription($pseudo, $motdepasse, $motdepasseVerif, $email, $linkImg) {
         $register = new UserController();
@@ -104,10 +104,10 @@ class Controller {
         $connexionManager = new UserManager();
         $reponse = $connexionManager->getUser($_SESSION['pseudo']);
         if ($score > $reponse['game_one_bs']) {
-            $user = $connexionManager->updateScoreOne($_SESSION['pseudo'], $score, 1);
+            $user = $connexionManager->updateScore($_SESSION['pseudo'], $score, 1, "game_one", 'game_one_bs');
         }
         else {
-            $user = $connexionManager->updateScoreOne($_SESSION['pseudo'], $score, 0);
+            $user = $connexionManager->updateScore($_SESSION['pseudo'], $score, 0, "game_one", 'game_one_bs');
         }
         header('Location: index.php?action=backendHome&success=endgame&game=1&score='. $score);
     }
@@ -115,10 +115,10 @@ class Controller {
         $connexionManager = new UserManager();
         $reponse = $connexionManager->getUser($_SESSION['pseudo']);
         if ($score > $reponse['game_two_bs']) {
-            $user = $connexionManager->updateScoreTwo($_SESSION['pseudo'], $score, 1);
+            $user = $connexionManager->updateScore($_SESSION['pseudo'], $score, 1, "game_two", 'game_two_bs');
         }
         else {
-            $user = $connexionManager->updateScoreTwo($_SESSION['pseudo'], $score, 0);
+            $user = $connexionManager->updateScore($_SESSION['pseudo'], $score, 0, "game_two", 'game_two_bs');
         }
         header('Location: index.php?action=backendHome&success=endgame&game=2&score='. $score);
     }

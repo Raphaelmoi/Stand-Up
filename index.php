@@ -23,6 +23,9 @@ try {
         elseif ($_GET['action'] == 'reload') {
             $controller->reloadChat();
         }
+        elseif ($_GET['action'] == 'logout') {
+            $controller->logOut();
+        }
         //INSCRIPTION OF A NEW USER
         elseif ($_GET['action'] == 'inscription') {
             if (isset($_POST['name']) and isset($_POST['pass']) and isset($_POST['passTwo']) and isset($_POST['mail']) and isset($_POST['imageUrl'])) {
@@ -52,9 +55,6 @@ try {
                     htmlspecialchars($_POST['confirmpass']), 
                     htmlspecialchars($_POST['token']));
             }
-        }
-        elseif ($_GET['action'] == 'logout') {
-            $controller->logOut();
         }
         //VIEW FOR ADMIN WHO SEE ANY INFO AND COMMENT FOR ONE USER
         elseif ($_GET['action'] == 'seecomments') {
@@ -143,39 +143,28 @@ try {
                 if ($_GET['game'] == 1) {
                     $_SESSION['score'] = $_GET['score'];
                 }
-                header('Location: index.php'); //if user in not connected                
+                header('Location: index.php?success=endgame&score='.$_GET['score']); //if user in not connected                
             }
         }
         //ALL THE PLAYERS VIEW, differents action for the table order
         elseif ($_GET['action'] == 'playersview') {
             if (isset($_GET['sortby']) && isset($_GET['order']) && isset($_GET['page'])) {
+
                 if ($_GET['order'] == 'antichrono') {
-                    if ($_GET['sortby'] == 'pseudo') {
-                        $controller->playersView('pseudo', "DESC", $_GET['page']);
-                    }
-                    elseif ($_GET['sortby'] == 'scoreone') {
-                        $controller->playersView('game_one_bs', "DESC", $_GET['page']);
-                    }
-                    elseif ($_GET['sortby'] == 'scoretwo') {
-                        $controller->playersView('game_two_bs', "DESC", $_GET['page']);
-                    }
-                    elseif ($_GET['sortby'] == 'scoretotal') {
-                        $controller->playersView('game_total', "DESC", $_GET['page']);
-                    }
+                    $order = "DESC";
+                }else $order = "ASC";
+                
+                if ($_GET['sortby'] == 'pseudo') {
+                    $controller->playersView('pseudo', $order, $_GET['page']);
                 }
-                elseif ($_GET['order'] == 'chrono') {
-                    if ($_GET['sortby'] == 'pseudo') {
-                        $controller->playersView('pseudo', "ASC", $_GET['page']);
-                    }
-                    elseif ($_GET['sortby'] == 'scoreone') {
-                        $controller->playersView('game_one_bs', "ASC", $_GET['page']);
-                    }
-                    elseif ($_GET['sortby'] == 'scoretwo') {
-                        $controller->playersView('game_two_bs', "ASC", $_GET['page']);
-                    }
-                    elseif ($_GET['sortby'] == 'scoretotal') {
-                        $controller->playersView('game_total', "ASC", $_GET['page']);
-                    }
+                elseif ($_GET['sortby'] == 'scoreone') {
+                    $controller->playersView('game_one_bs', $order, $_GET['page']);
+                }
+                elseif ($_GET['sortby'] == 'scoretwo') {
+                    $controller->playersView('game_two_bs', $order, $_GET['page']);
+                }
+                elseif ($_GET['sortby'] == 'scoretotal') {
+                    $controller->playersView('game_total', $order, $_GET['page']);
                 }
             } //default view
             else{

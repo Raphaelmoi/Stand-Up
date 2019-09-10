@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -19,7 +19,7 @@
               src="https://code.jquery.com/jquery-3.4.1.min.js"
               integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
               crossorigin="anonymous"></script>        
-        <script src= public/js/chat.js></script>
+        <script src= public/js/messenger.js></script>
         <script src= public/js/ajax.js></script>
         <script src= public/js/catApi.js></script>
     </head>
@@ -38,7 +38,7 @@
             </div>
             <h1> Stand up !</h1>
         </header>
-            <img src="public/img/assto2.png" class="astroImg">    
+            <img src="public/img/assto2.png" class="astroImg" alt="astronaute">    
             <!-- display success or error message -->
             <?php 
             if (isset($_GET['erreur']) || isset($_GET['success'])):
