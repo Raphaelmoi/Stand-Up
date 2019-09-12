@@ -15,23 +15,28 @@ let life = 100;
 let loadingAnimation;
 //Images
 let imgBackground;
+let stoneImg; 
 
-
-let soundAlreadyPlay = false;
-
-var x1 = 0;
-var x2;
+var posBck1 = 0;
+var posBck2;
 var scrollSpeed = 7;
 
 let imgRunSprite;
 let runImg = [];
 
+let baseUnit = 0;
+let noseItem;
 
-let referenceOFRealPositionOfNoise = 0;
+let ennemies = [];
+let blocStep = [];
+
+let c;
+
 
 function preload() {
     imgBackground = loadImage('img/2d.jpg');
     imgRunSprite = loadImage('img/running.png');
+    stoneImg = loadImage('img/assto2.png');
 }
 
 function setup() {
@@ -41,7 +46,10 @@ function setup() {
     video = createCapture(VIDEO);
     video.size(width, height);
     video.hide();
-    x2 = -width;
+    posBck2 = -width;
+
+    noseItem = new NoseItem();
+
     //ml5 posenet initialisation
     poseNet = ml5.poseNet(video, modelReady);
     poseNet.on('pose', gotPoses);
@@ -50,21 +58,26 @@ function setup() {
     if (screenSizeAdaptator < 0.5) {
         screenSizeAdaptator = 0.5;
     }
-    frameRate(60);
+    frameRate(70);
     util.spriteImage(imgRunSprite, runImg, 240, 240, 10, 50);
-    
-
 }
 
 function modelReady() {
     console.log('model ready');
     readyToStart = true;
     loadingAnimation.addClass('display-none');
-    referenceOFRealPositionOfNoise = noseY;
+}
+
+function keyPressed(){
+    if (key == ' ') {
+        noseItem.jump();
+    }
 }
 
 function draw() {
     if (readyToStart) {
+        baseUnit++;
+        // console.log(baseUnit);
          //Since player is alive
         if (life > 0) {
             push();
@@ -72,28 +85,37 @@ function draw() {
             scale(-1, 1);
             // image(video, 0, 0, width, height);//met la video dans le canvas          
             drawBackground();
-
             pop();
-            draws.drawBird();
+            // draws.drawNosePerson();
+
+            if (random(1) < 0.009) {
+                // ennemies.push(new Ennemie());
+                blocStep.push(new Decors(2, 500));
+            }
+            noseItem.move();
+            noseItem.show();
+
+            // for (let e of ennemies){
+            //     e.move();
+            //     e.show();
+            //     if (noseItem.hits(e)) {
+            //         console.log('gameOver');
+            //     }
+            // }
+            let see = blocStep.length;
+            for (let b of blocStep){
+                b.move();
+                b.show();
+                if (noseItem.hitsStepFromUpper(b)) {
+                    noseItem.y = b.getHeight();
+                    noseItem.isJumping = false;
+                }
+
+            }
 
         } else {
             if (gameOver) { //prevent the song to be play more than one time
-                gameoverSound.play();
                 gameOver = false;
-                //background(0);
-                fill(244, 36, 36);
-                textSize(40);
-                textAlign(CENTER);
-                text("GAME OVER", width / 2, height / 3);
-                text("SCORE : " + (collectedGems * level + explosedStones ) , width / 2, height / 2);
-                fill(244, 244, 244);
-                textSize(25);
-                text('Vous serez redirigé vers la page d\'accueil dans moins de 3 secondes ', width / 2, (height / 3 *2));
-                function endGame () {
-                    remove();
-                    window.location.href = '/projet5/index.php?action=endgame&success=endgame&game=2&score='+ (collectedGems * level + explosedStones );
-                }
-                setTimeout(endGame, 3000);
             }
         }
     } //if still loading        
@@ -113,21 +135,19 @@ function gotPoses(poses) {
         lastNoseY = noseY;
         let newNoseX = poses[0].pose.keypoints[0].position.x;
         let newNoseY = poses[0].pose.keypoints[0].position.y;
-
         noseX = lerp(noseX, newNoseX, 0.9);
         noseY = lerp(noseY, newNoseY, 0.9);
     }
 }
-
 function drawBackground(){
-    image(imgBackground, x1, 0, width, height);
-    image(imgBackground, x2, 0, width, height);
-        x1 += scrollSpeed;
-    x2 += scrollSpeed;
-    if (x1 >= width){
-      x1 = -width;
+    image(imgBackground, posBck1, 0, width, height);
+    image(imgBackground, posBck2, 0, width, height);
+    posBck1 += scrollSpeed;
+    posBck2 += scrollSpeed;
+    if (posBck1 >= width){
+      posBck1 = -width;
     }
-    if (x2 >= width){
-      x2 = -width;
+    if (posBck2 >= width){
+      posBck2 = -width;
     }
 }
