@@ -1,10 +1,12 @@
 class Decors{
-	constructor(nbrOfStepsFromGround, xSize){
-		this.nbrOfStepsFromGround = (nbrOfStepsFromGround*100)+70;
+	constructor(step, xSize){
+		this.step = step;
+		this.nbrOfStepsFromGround = (step*100)+70;
 		this.xSize = xSize;
 		this.ySize = 30;
 		this.x = width;
 		this.y = height - this.ySize -this.nbrOfStepsFromGround;
+		this.isActive = false;
 	}
 
 	move(){

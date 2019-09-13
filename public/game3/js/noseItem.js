@@ -12,20 +12,41 @@ class NoseItem {
 	}
 
 	hits(ennemie){
+		ellipseMode(CENTER);
+
 		let x1 = this.x + this.r * 0.5;
 		let y1 = this.y + this.r * 0.5;
 		let x2 = ennemie.x + ennemie.r * 0.5;
 		let y2 = ennemie.y + ennemie.r * 0.5;
-		return collideCircleCircle(x1, y1, this.r, x2, y2, ennemie.r)
+		return collideCircleCircle(x1, y1, this.r, x2, y2, ennemie.r);
 	}
 
-	hitsStepFromUpper(step){
-		let x1 = this.x + this.r * 0.5;
-		let y1 = this.y + this.r * 0.5;
+	hitsStep(step){
+		let x1 = this.x;
+		let y1 = this.y;
 		rectMode(CORNER);
-		return collideRectCircle(step.x, step.y, step.xSize, step.ySize, x1, y1, this.r)
+		ellipseMode(CENTER);
+		return collideRectCircle(step.x, step.y, step.xSize, step.ySize, x1, y1, this.r);
 	}
+	hitsStepFromUnder(step){
+		let stepLeftTop = [step.x, step.y];
+		let stepRightTop = [(step.x+step.xSize), step.y];
+		let stepLeftBot = [step.x, (step.y+step.ySize)];
+		let stepRightBot = [(step.x+step.xSize), (step.y+step.ySize)];
+		let xCircle = this.x + this.r * 0.5;
+		let yCircle = this.y + this.r * 0.5;
+		let yCircleBottom = this.y - this.r;
+		let xCircleBottom = this.x + this.r;
 
+		ellipseMode(CENTER);
+		let collision;
+		// if the center of the circle is under the box
+		if (yCircle > stepLeftBot[1]) { 
+				collision = true;
+			}
+			else collision = false;
+		return collision
+	}
 
 	jump(){
 		if (!this.isJumping ) {
@@ -49,16 +70,21 @@ class NoseItem {
 	        if (this.index >= 31) {
 	            this.index = 0;
 	        }
-			image(runImg[this.index],this.x, this.y-this.groundHeight, this.r, this.r);
+			image(runImg[this.index],(this.x-this.r*0.5), (this.y-this.r*0.5), this.r, this.r);
 	        this.index = (this.index + 1);
 
     		fill(255, 50);
-    		ellipseMode(CORNER);
-	        ellipse(this.x, this.y-this.groundHeight, this.r, this.r )
+			ellipseMode(CENTER);
+	        ellipse(this.x, this.y, this.r );
+	        fill(255, 0, 255);
+    		ellipse(this.x, this.y, 10 );
+
 		}
 		else if(this.isJumping){
-			image(runImg[40],this.x, this.y-this.groundHeight, this.r, this.r);
-			ellipse(this.x, this.y-this.groundHeight, this.r, this.r )
+			image(runImg[40],(this.x-this.r*0.5), (this.y-this.r*0.5), this.r, this.r);
+			ellipse(this.x, this.y, this.r, this.r )
+	        fill(255, 0, 255);
+    		ellipse(this.x, this.y, 10);
 		} 
 	}
 	setBckGdHeight(element){

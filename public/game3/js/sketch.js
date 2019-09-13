@@ -3,7 +3,7 @@ let poseNet;
 let screenSizeAdaptator;
 let readyToStart = false;
 let gameOver = true;
-let time = 0;
+// let time = 0;
 let util, draws;
 
 //body position
@@ -30,7 +30,7 @@ let noseItem;
 let ennemies = [];
 let blocStep = [];
 
-let c;
+let chose = true;
 
 
 function preload() {
@@ -41,7 +41,7 @@ function preload() {
 
 function setup() {
     util = new Util();
-    draws = new Draws();
+    // draws = new Draws();
     createCanvas(windowWidth, windowHeight);
     video = createCapture(VIDEO);
     video.size(width, height);
@@ -49,6 +49,7 @@ function setup() {
     posBck2 = -width;
 
     noseItem = new NoseItem();
+    util.spriteImage(imgRunSprite, runImg, 240, 240, 10, 50);
 
     //ml5 posenet initialisation
     poseNet = ml5.poseNet(video, modelReady);
@@ -59,7 +60,6 @@ function setup() {
         screenSizeAdaptator = 0.5;
     }
     frameRate(70);
-    util.spriteImage(imgRunSprite, runImg, 240, 240, 10, 50);
 }
 
 function modelReady() {
@@ -77,8 +77,7 @@ function keyPressed(){
 function draw() {
     if (readyToStart) {
         baseUnit++;
-        // console.log(baseUnit);
-         //Since player is alive
+         //while player is alive
         if (life > 0) {
             push();
             translate(width, 0);
@@ -86,11 +85,10 @@ function draw() {
             // image(video, 0, 0, width, height);//met la video dans le canvas          
             drawBackground();
             pop();
-            // draws.drawNosePerson();
 
-            if (random(1) < 0.009) {
+            if (baseUnit%100 == 0) {
                 // ennemies.push(new Ennemie());
-                blocStep.push(new Decors(2, 500));
+                blocStep.push(new Decors(2.2, 500));
             }
             noseItem.move();
             noseItem.show();
@@ -103,16 +101,36 @@ function draw() {
             //     }
             // }
             let see = blocStep.length;
-            for (let b of blocStep){
-                b.move();
-                b.show();
-                if (noseItem.hitsStepFromUpper(b)) {
-                    noseItem.y = b.getHeight();
-                    noseItem.isJumping = false;
+
+            for (var i = blocStep.length - 1; i >= 0; i--) {
+                if (noseItem.hitsStep(blocStep[i]))
+                {
+                    console.log("hitsstep = true");
+
+                    if (noseItem.hitsStepFromUnder(blocStep[i]))
+                    {
+                        console.log("hitsStepFromUnder = true");
+                        noseItem.vy = 10;
+                    }else{
+                        noseItem.y = blocStep[i].y - (noseItem.r*0.5);
+                        noseItem.isJumping = false;
+                    }
                 }
 
-            }
+                //if the position of the bloc is behind the players
+                if (blocStep[i].x + blocStep[i].xSize <= noseItem.x) {
+                    noseItem.isJumping = true;
+                    console.log("else");
+                }
 
+                blocStep[i].move();
+                blocStep[i].show();
+                    //if the block is out of the screen
+                if ( blocStep[i].x+blocStep[i].xSize < 0) {
+                    blocStep.splice(i, 1);
+                    console.log('splice');
+                }
+            }
         } else {
             if (gameOver) { //prevent the song to be play more than one time
                 gameOver = false;
