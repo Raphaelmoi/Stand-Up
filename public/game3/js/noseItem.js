@@ -13,7 +13,6 @@ class NoseItem {
 
 	hits(ennemie){
 		ellipseMode(CENTER);
-
 		let x1 = this.x + this.r * 0.5;
 		let y1 = this.y + this.r * 0.5;
 		let x2 = ennemie.x + ennemie.r * 0.5;
@@ -22,26 +21,23 @@ class NoseItem {
 	}
 
 	hitsStep(step){
-		let x1 = this.x;
-		let y1 = this.y;
 		rectMode(CORNER);
-		ellipseMode(CENTER);
-		return collideRectCircle(step.x, step.y, step.xSize, step.ySize, x1, y1, this.r);
+		return collideRectCircle(step.x, step.y, step.xSize, step.ySize, this.x, this.y, this.r);
 	}
 	hitsStepFromUnder(step){
-		let stepLeftTop = [step.x, step.y];
-		let stepRightTop = [(step.x+step.xSize), step.y];
-		let stepLeftBot = [step.x, (step.y+step.ySize)];
-		let stepRightBot = [(step.x+step.xSize), (step.y+step.ySize)];
-		let xCircle = this.x + this.r * 0.5;
+		// let stepLeftTop = [step.x, step.y];
+		// let stepRightTop = [(step.x+step.xSize), step.y];
+		// let stepLeftBot = [step.x, (step.y+step.ySize)];
+		let stepBorderBottom = step.y+step.ySize;
+		// let stepRightBot = [(step.x+step.xSize), (step.y+step.ySize)];
+		// let xCircle = this.x + this.r * 0.5;
 		let yCircle = this.y + this.r * 0.5;
-		let yCircleBottom = this.y - this.r;
-		let xCircleBottom = this.x + this.r;
-
-		ellipseMode(CENTER);
+		// let yCircleBottom = this.y - this.r;
+		// let xCircleBottom = this.x + this.r;
+		// ellipseMode(CENTER);
 		let collision;
 		// if the center of the circle is under the box
-		if (yCircle > stepLeftBot[1]) { 
+		if (yCircle > stepBorderBottom) { 
 				collision = true;
 			}
 			else collision = false;
@@ -72,19 +68,18 @@ class NoseItem {
 	        }
 			image(runImg[this.index],(this.x-this.r*0.5), (this.y-this.r*0.5), this.r, this.r);
 	        this.index = (this.index + 1);
-
-    		fill(255, 50);
-			ellipseMode(CENTER);
-	        ellipse(this.x, this.y, this.r );
-	        fill(255, 0, 255);
-    		ellipse(this.x, this.y, 10 );
+   //  		fill(255, 50);
+			// ellipseMode(CENTER);
+	  //       ellipse(this.x, this.y, this.r );
+	  //       fill(255, 0, 255);
+   //  		ellipse(this.x, this.y, 10 );
 
 		}
 		else if(this.isJumping){
 			image(runImg[40],(this.x-this.r*0.5), (this.y-this.r*0.5), this.r, this.r);
-			ellipse(this.x, this.y, this.r, this.r )
-	        fill(255, 0, 255);
-    		ellipse(this.x, this.y, 10);
+			// ellipse(this.x, this.y, this.r, this.r )
+	  //       fill(255, 0, 255);
+   //  		ellipse(this.x, this.y, 10);
 		} 
 	}
 	setBckGdHeight(element){

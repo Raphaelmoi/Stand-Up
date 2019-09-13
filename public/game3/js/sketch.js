@@ -17,6 +17,11 @@ let loadingAnimation;
 let imgBackground;
 let stoneImg; 
 
+let stepImg;
+let stepImgBegin;
+let stepImgEnd;
+
+
 var posBck1 = 0;
 var posBck2;
 var scrollSpeed = 7;
@@ -37,6 +42,9 @@ function preload() {
     imgBackground = loadImage('img/2d.jpg');
     imgRunSprite = loadImage('img/running.png');
     stoneImg = loadImage('img/assto2.png');
+    stepImg = loadImage('img/forest/forest_pack_13.png');
+    stepImgBegin = loadImage('img/forest/forest_pack_38.png');
+    stepImgEnd = loadImage('img/forest/forest_pack_15.png');
 }
 
 function setup() {
@@ -88,7 +96,8 @@ function draw() {
 
             if (baseUnit%100 == 0) {
                 // ennemies.push(new Ennemie());
-                blocStep.push(new Decors(2.2, 500));
+                let randomStep = floor(random(0.8,4));
+                blocStep.push(new Decors(randomStep, 5));
             }
             noseItem.move();
             noseItem.show();
