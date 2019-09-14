@@ -21,6 +21,10 @@ let stepImg;
 let stepImgBegin;
 let stepImgEnd;
 
+let blockEarthImg;
+let cornerleftTopEarthImg;
+let cornerRightTopEarthImg;
+let centerTopEarthImg;
 
 var posBck1 = 0;
 var posBck2;
@@ -33,9 +37,13 @@ let baseUnit = 0;
 let noseItem;
 
 let ennemies = [];
-let blocStep = [];
+let flyingStep = [];
+let blocStep = []
 
-let chose = true;
+let jumperEnnemie = []; 
+let imgJumper1;
+let imgJumper2;
+// let chose = true;
 
 
 function preload() {
@@ -45,11 +53,19 @@ function preload() {
     stepImg = loadImage('img/forest/forest_pack_13.png');
     stepImgBegin = loadImage('img/forest/forest_pack_38.png');
     stepImgEnd = loadImage('img/forest/forest_pack_15.png');
+
+    blockEarthImg = loadImage('img/forest/forest_pack_35.png');
+    cornerleftTopEarthImg = loadImage('img/forest/forest_pack_03.png');
+    cornerRightTopEarthImg = loadImage('img/forest/forest_pack_07.png');
+    centerTopEarthImg = loadImage('img/forest/forest_pack_05.png');
+
+    imgJumper1 = loadImage('img/jump_up.png');
+    imgJumper2 = loadImage('img/jump_fall.png');
 }
 
 function setup() {
     util = new Util();
-    // draws = new Draws();
+    draws = new Draws();
     createCanvas(windowWidth, windowHeight);
     video = createCapture(VIDEO);
     video.size(width, height);
@@ -57,6 +73,7 @@ function setup() {
     posBck2 = -width;
 
     noseItem = new NoseItem();
+    jumperEnnemie = new JumperEnnemie();
     util.spriteImage(imgRunSprite, runImg, 240, 240, 10, 50);
 
     //ml5 posenet initialisation
@@ -76,12 +93,6 @@ function modelReady() {
     loadingAnimation.addClass('display-none');
 }
 
-function keyPressed(){
-    if (key == ' ') {
-        noseItem.jump();
-    }
-}
-
 function draw() {
     if (readyToStart) {
         baseUnit++;
@@ -94,52 +105,89 @@ function draw() {
             drawBackground();
             pop();
 
-            if (baseUnit%100 == 0) {
-                // ennemies.push(new Ennemie());
-                let randomStep = floor(random(0.8,4));
-                blocStep.push(new Decors(randomStep, 5));
-            }
+            draws.gamePlay();
+            // if (baseUnit%50 == 0) {
+            //     let randomStep = round(random(1,4))
+            //     let randomObject =  round(random(1, 3));
+            //     console.log(randomStep);
+            //     switch (randomObject){
+            //         case 1:
+            //             flyingStep.push(new FlyingStep(randomStep, 4, 1));
+            //             break;
+            //         case 2:
+            //             ennemies.push(new Ennemie());
+            //         break;
+            //         case 3 :
+            //             blocStep.push(new BlockStep(0, 5, 3));
+            //         break;
+            //     }
+            // }
             noseItem.move();
             noseItem.show();
 
-            // for (let e of ennemies){
-            //     e.move();
-            //     e.show();
-            //     if (noseItem.hits(e)) {
-            //         console.log('gameOver');
-            //     }
-            // }
-            let see = blocStep.length;
+            // jumperEnnemie.jump();
+            // jumperEnnemie.move();
+            // jumperEnnemie.show();
+            for (let e of ennemies){
+                e.jump()
+                e.move();
+                e.show();
+                if (noseItem.hits(e)) {
+                    console.log('gameOver');
+                }
+            }
+
+            for (var i = flyingStep.length - 1; i >= 0; i--) {
+                if (noseItem.hitsStep(flyingStep[i]))
+                {
+                    if (noseItem.hitsStepFromUnder(flyingStep[i]))
+                    {
+                        noseItem.vy = 10;
+                    }
+                    else{
+                        noseItem.y = flyingStep[i].y - (noseItem.r*0.5);
+                        noseItem.isJumping = false;
+                    }
+                }
+                //if the position of the bloc is behind the players
+                if (flyingStep[i].x + flyingStep[i].xSize <= noseItem.x) {
+                    noseItem.isJumping = true;
+                }
+                flyingStep[i].move();
+                flyingStep[i].show();
+                //if the block is out of the screen
+                if ( flyingStep[i].x+flyingStep[i].xSize < 0) {
+                    flyingStep.splice(i, 1);
+                }
+            }
 
             for (var i = blocStep.length - 1; i >= 0; i--) {
                 if (noseItem.hitsStep(blocStep[i]))
                 {
-                    console.log("hitsstep = true");
-
                     if (noseItem.hitsStepFromUnder(blocStep[i]))
                     {
-                        console.log("hitsStepFromUnder = true");
                         noseItem.vy = 10;
                     }else{
                         noseItem.y = blocStep[i].y - (noseItem.r*0.5);
                         noseItem.isJumping = false;
                     }
                 }
-
                 //if the position of the bloc is behind the players
                 if (blocStep[i].x + blocStep[i].xSize <= noseItem.x) {
                     noseItem.isJumping = true;
-                    console.log("else");
                 }
-
                 blocStep[i].move();
                 blocStep[i].show();
-                    //if the block is out of the screen
-                if ( blocStep[i].x+blocStep[i].xSize < 0) {
+                //if the block is out of the screen
+                if (blocStep[i].x + blocStep[i].xSize < 0) {
                     blocStep.splice(i, 1);
-                    console.log('splice');
                 }
             }
+
+            if (lastNoseY - noseY > 15) {
+                noseItem.jump();
+            }
+
         } else {
             if (gameOver) { //prevent the song to be play more than one time
                 gameOver = false;
@@ -159,7 +207,9 @@ function draw() {
 function gotPoses(poses) {
     if (poses.length > 0) {
         lastNoseX = noseX;
-        lastNoseY = noseY;
+        if (baseUnit%2 == 0){
+            lastNoseY = noseY;
+        }
         let newNoseX = poses[0].pose.keypoints[0].position.x;
         let newNoseY = poses[0].pose.keypoints[0].position.y;
         noseX = lerp(noseX, newNoseX, 0.9);

@@ -20,6 +20,10 @@
 	<script src="js/noseItem.js"></script>
 	<script src="js/Ennemie.js"></script>
 	<script src="js/Decors.js"></script>
+	<script src="js/FlyingStep.js"></script>	
+	<script src="js/BlockStep.js"></script>	
+	<script src="js/JumperEnnemie.js"></script>	
+
 
 	<script src="js/fallingItems/FallingItems.js"></script>
 	<script src="js/fallingItems/Rocks.js"></script>
