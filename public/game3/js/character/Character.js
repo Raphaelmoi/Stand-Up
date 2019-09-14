@@ -1,5 +1,5 @@
 class Character {
-	constructor(){
+	constructor(){	
 	}
 
 	hits(ennemie){

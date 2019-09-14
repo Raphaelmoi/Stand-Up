@@ -23,7 +23,11 @@ let blockEarthImg;
 let cornerleftTopEarthImg;
 let cornerRightTopEarthImg;
 let centerTopEarthImg;
+let borderLeftImg;
+let noGrassLeftImg;
+let noGrassRightImg;
 
+let borderRightImg
 var posBck1 = 0;
 var posBck2;
 var scrollSpeed = 2;
@@ -46,17 +50,21 @@ let currentGroundHeight;
 function preload() {
     imgBackground = loadImage('img/forest/bg_forest.png');
     imgRunSprite = loadImage('img/running.png');
-    stepImg = loadImage('img/forest/forest_pack_13.png');
-    stepImgBegin = loadImage('img/forest/forest_pack_38.png');
-    stepImgEnd = loadImage('img/forest/forest_pack_15.png');
+    stepImg = loadImage('img/PNG/Tile_11.png');
+    stepImgBegin = loadImage('img/PNG/Tile_10.png');
+    stepImgEnd = loadImage('img/PNG/Tile_12.png');
 
-    blockEarthImg = loadImage('img/forest/forest_pack_35.png');
-    cornerleftTopEarthImg = loadImage('img/forest/forest_pack_03.png');
-    cornerRightTopEarthImg = loadImage('img/forest/forest_pack_07.png');
-    centerTopEarthImg = loadImage('img/forest/forest_pack_05.png');
-
+    blockEarthImg = loadImage('img/PNG/Tile_5.png');
+    cornerleftTopEarthImg = loadImage('img/PNG/Tile_1.png');
+    cornerRightTopEarthImg = loadImage('img/PNG/Tile_3.png');
+    centerTopEarthImg = loadImage('img/PNG/Tile_2.png');
+    borderLeftImg = loadImage('img/PNG/Tile_4.png');
+    borderRightImg = loadImage('img/PNG/Tile_6.png');
     imgJumper1 = loadImage('img/jump_up.png');
     imgJumper2 = loadImage('img/jump_fall.png');
+
+    noGrassLeftImg = loadImage('img/PNG/Tile_18.png');
+    noGrassRightImg = loadImage('img/PNG/Tile_19.png');
 }
 
 function setup() {

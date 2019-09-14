@@ -8,4 +8,12 @@ class BlockStep extends Decors {
 		this.imgEnd = cornerRightTopEarthImg;
 		this.imgCenter = centerTopEarthImg;
 	}
+
+	// haveNoLeftCorner(){
+	// 	this.haveLeftCorner = false;
+	// }
+	// haveNoRightCorner(){
+	// 	this.haveRightCorner = false;
+	// }
+
 }
