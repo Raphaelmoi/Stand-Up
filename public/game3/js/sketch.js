@@ -2,8 +2,8 @@ let video;
 let poseNet;
 let screenSizeAdaptator;
 let readyToStart = false;
+let loadingAnimation;
 let gameOver = true;
-// let time = 0;
 let util, draws;
 
 //body position
@@ -11,11 +11,9 @@ let noseX = 0, noseY = 0;
 let lastNoseX = 0, lastNoseY = 0;
 let life = 100;
 
-//loading animation
-let loadingAnimation;
+
 //Images
 let imgBackground;
-let stoneImg; 
 
 let stepImg;
 let stepImgBegin;
@@ -28,28 +26,26 @@ let centerTopEarthImg;
 
 var posBck1 = 0;
 var posBck2;
-var scrollSpeed = 7;
-
+var scrollSpeed = 2;
+var groundSpeed = 7;
 let imgRunSprite;
 let runImg = [];
 
 let baseUnit = 0;
-let noseItem;
 
-let ennemies = [];
 let flyingStep = [];
 let blocStep = []
 
-let jumperEnnemie = []; 
 let imgJumper1;
 let imgJumper2;
-// let chose = true;
 
+let characteres = [];
+
+let currentGroundHeight;
 
 function preload() {
-    imgBackground = loadImage('img/2d.jpg');
+    imgBackground = loadImage('img/forest/bg_forest.png');
     imgRunSprite = loadImage('img/running.png');
-    stoneImg = loadImage('img/assto2.png');
     stepImg = loadImage('img/forest/forest_pack_13.png');
     stepImgBegin = loadImage('img/forest/forest_pack_38.png');
     stepImgEnd = loadImage('img/forest/forest_pack_15.png');
@@ -72,8 +68,8 @@ function setup() {
     video.hide();
     posBck2 = -width;
 
-    noseItem = new NoseItem();
-    jumperEnnemie = new JumperEnnemie();
+    characteres.push(new NoseItem());
+
     util.spriteImage(imgRunSprite, runImg, 240, 240, 10, 50);
 
     //ml5 posenet initialisation
@@ -106,86 +102,59 @@ function draw() {
             pop();
 
             draws.gamePlay();
-            // if (baseUnit%50 == 0) {
-            //     let randomStep = round(random(1,4))
-            //     let randomObject =  round(random(1, 3));
-            //     console.log(randomStep);
-            //     switch (randomObject){
-            //         case 1:
-            //             flyingStep.push(new FlyingStep(randomStep, 4, 1));
-            //             break;
-            //         case 2:
-            //             ennemies.push(new Ennemie());
-            //         break;
-            //         case 3 :
-            //             blocStep.push(new BlockStep(0, 5, 3));
-            //         break;
-            //     }
-            // }
-            noseItem.move();
-            noseItem.show();
 
-            // jumperEnnemie.jump();
-            // jumperEnnemie.move();
-            // jumperEnnemie.show();
-            for (let e of ennemies){
-                e.jump()
-                e.move();
-                e.show();
-                if (noseItem.hits(e)) {
-                    console.log('gameOver');
-                }
-            }
-
-            for (var i = flyingStep.length - 1; i >= 0; i--) {
-                if (noseItem.hitsStep(flyingStep[i]))
-                {
-                    if (noseItem.hitsStepFromUnder(flyingStep[i]))
-                    {
-                        noseItem.vy = 10;
-                    }
-                    else{
-                        noseItem.y = flyingStep[i].y - (noseItem.r*0.5);
-                        noseItem.isJumping = false;
-                    }
-                }
-                //if the position of the bloc is behind the players
-                if (flyingStep[i].x + flyingStep[i].xSize <= noseItem.x) {
-                    noseItem.isJumping = true;
-                }
+            for (var i = 0; i < flyingStep.length; i++) {
                 flyingStep[i].move();
                 flyingStep[i].show();
-                //if the block is out of the screen
                 if ( flyingStep[i].x+flyingStep[i].xSize < 0) {
                     flyingStep.splice(i, 1);
                 }
             }
-
-            for (var i = blocStep.length - 1; i >= 0; i--) {
-                if (noseItem.hitsStep(blocStep[i]))
-                {
-                    if (noseItem.hitsStepFromUnder(blocStep[i]))
-                    {
-                        noseItem.vy = 10;
-                    }else{
-                        noseItem.y = blocStep[i].y - (noseItem.r*0.5);
-                        noseItem.isJumping = false;
-                    }
-                }
-                //if the position of the bloc is behind the players
-                if (blocStep[i].x + blocStep[i].xSize <= noseItem.x) {
-                    noseItem.isJumping = true;
-                }
+            for (var i = 0; i < blocStep.length; i++) {
                 blocStep[i].move();
                 blocStep[i].show();
-                //if the block is out of the screen
                 if (blocStep[i].x + blocStep[i].xSize < 0) {
                     blocStep.splice(i, 1);
                 }
             }
+            
+            let decors = [flyingStep, blocStep];
+            for (let c of characteres){
+                //check the existence of the jump() method before calling it
+                if (typeof c.jump === "function") { 
+                    c.jump();
+                }
+                c.move();
+                c.show();
+
+                for (var j = 0; j < decors.length; j++) {
+
+                    for (var i = decors[j].length - 1; i >= 0; i--) {
+                        if (c.hitsStep(decors[j][i])){
+                            if (c.hitsStepFromUnder(decors[j][i])) {
+                                c.vy = 10;
+                            }
+                            else{
+                                c.y = decors[j][i].y - (c.r*0.5);
+                                c.isJumping = false;
+                            }
+                        }
+                        //if the position of the bloc is behind the players
+                        // if (decors[j][i].x + decors[j][i].xSize <= c.x) {
+                        //     c.isJumping = true;
+                        // }
+                    }
+                }
+            }
+            //delete chips when they are out of screen
+            for (var i = 0; i >= characteres.length -1; i--) {
+                if (characteres[i].x < 0) {
+                    characteres[i].splice(i, 1);
+                }
+            }
 
             if (lastNoseY - noseY > 15) {
-                noseItem.jump();
+                characteres[0].jumpWithNose();
             }
 
         } else {
@@ -219,6 +188,7 @@ function gotPoses(poses) {
 function drawBackground(){
     image(imgBackground, posBck1, 0, width, height);
     image(imgBackground, posBck2, 0, width, height);
+
     posBck1 += scrollSpeed;
     posBck2 += scrollSpeed;
     if (posBck1 >= width){

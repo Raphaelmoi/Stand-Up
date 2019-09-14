@@ -1,31 +1,28 @@
 class Draws {
     constructor() {
-        this.index = 0; //will allowed to move from one image to another in birdImages
-        this.bodyPosition = 0;
-        this.isJumping = false;
-        this.goingUp = true;
-        this.coef = 0;
-        this.jumpSize = 0;
     }
 
     gamePlay(){
+     //    let randomStep = round(random(1,4));
+	    let randomHeightJump = random(5, 35);
 
-        let randomStep = round(random(1,4));
-	    let randomObject =  round(random(1, 3));
-	    let randomHeightJump = floor(random(10, 25));
-
-        if (baseUnit%20 == 0) {
-	       	ennemies.push(new JumperEnnemie(randomHeightJump));
+        if (baseUnit%100 == 0) {
+	       	characteres.push(new JumperEnnemie(randomHeightJump));
+			blocStep.push(new BlockStep(-0.5, 10, 1.2));
 	    }
 
 	    switch (baseUnit){
+	    	case 1:
+				blocStep.push(new BlockStep(-0.5, 30, 1.2));
+				blocStep[blocStep.length-1].x = 0;
+				console.log('msg');
+	    	break;
 	    	case 30 : 
 				flyingStep.push(new FlyingStep(1.5, 4, 1));
 			break;
 			case 90 :
 				flyingStep.push(new FlyingStep(2.5, 3, 1));
 			break;
-
 			case 150 : 
 	    		blocStep.push(new BlockStep(0, 4, 2));
 	    	break;

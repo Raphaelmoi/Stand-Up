@@ -17,22 +17,12 @@
 	<script src="js/sketch.js"></script>
 	<script src="js/Draws.js"></script>
 	<script src="js/Util.js"></script>
-	<script src="js/noseItem.js"></script>
-	<script src="js/Ennemie.js"></script>
-	<script src="js/Decors.js"></script>
-	<script src="js/FlyingStep.js"></script>	
-	<script src="js/BlockStep.js"></script>	
-	<script src="js/JumperEnnemie.js"></script>	
-
-
-	<script src="js/fallingItems/FallingItems.js"></script>
-	<script src="js/fallingItems/Rocks.js"></script>
-	<script src="js/fallingItems/Gems.js"></script>
-	<script src="js/fallingItems/Pill.js"></script>
-	<script src="js/fallingItems/Potion.js"></script>
-	<script src="js/fallingItems/Ammo.js"></script>	
-	<script src="js/fallingItems/LeftEarSpaceShip.js"></script>
-	<script src="js/fallingItems/RightEarSpaceShip.js"></script>
+	<script src="js/item/Decors.js"></script>
+	<script src="js/character/Character.js"></script>	
+	<script src="js/item/FlyingStep.js"></script>	
+	<script src="js/item/BlockStep.js"></script>	
+	<script src="js/character/noseItem.js"></script>
+	<script src="js/character/JumperEnnemie.js"></script>	
 </head>
 
 	<body>

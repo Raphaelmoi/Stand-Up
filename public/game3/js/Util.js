@@ -20,42 +20,5 @@ class Util{
           }
         }
     }
-    newStone(qtt){
-        for (let i = 0; i < qtt; i++) {
-            let choice = boxImgStones[Math.floor(Math.random()*boxImgStones.length)];
-            stones.push(new Rocks(random(0, width), choice));    
-        }
-    }
-    newGem(qtt)
-    {
-        for (let i = 0; i < qtt; i++) { 
-            let item = boxImgGems[Math.floor(Math.random()*boxImgGems.length)];
-            boxGems.push(new Gems(random(0, width), item));    
-        }
-    }
-    newPill(qtt){
-        for (let i = 0; i < qtt; i++) { 
-            pills.push(new Pill(random(0, width)));    
-        }
-    }
-    newPotion(qtt){
-        for (let i = 0; i < qtt; i++) { 
-            potions.push(new Potion(random(0, width))); 
-        }
-    }
-    newAmmo(qtt){
-        for (let i = 0; i < qtt; i++) { 
-            ammos.push(new Ammo(random(0, width))); 
-        }
-    }
-    newSpaceShip(choiceSide){
-        if (choiceSide == 0 ) {
-            newSpaceShipL = new LeftEarSpaceShip(random(0, width));
-            fallingSpaceShipL = true;
-        }
-        else if(choiceSide == 1){
-            newSpaceShipR = new RightEarSpaceShip(random(0, width));
-            fallingSpaceShipR = true;
-        }
-    }
+
 }
