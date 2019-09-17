@@ -1,4 +1,5 @@
 <!-- HOME PAGE -->
+<!-- cannot be reach if user is not connected -->
 <?php
 if (!empty($_SESSION['pseudo'])) {
     $title = 'page principale';

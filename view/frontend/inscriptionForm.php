@@ -1,7 +1,9 @@
 <?php
+// Show the signin form  
 ob_start();
 ?>
-<script>
+    <script>
+        //determine how many cats have to be shown according to screen size
         if (window.innerWidth >= 1000) { CatApi.getTheCats(6); }
         else if (window.innerWidth >= 600) { CatApi.getTheCats(5); }
         else if (window.innerWidth >= 400) { CatApi.getTheCats(3); }

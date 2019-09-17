@@ -35,7 +35,6 @@ class Controller {
         $sendToken = $ResetPassController->sendToken($email, $results);
     }
     function resetNewPass($newpass, $newpassconfirm, $token){
-        echo "controller";
         $ResetPassController = new ResetPassController();
         $resetPass = $ResetPassController->resetPass($newpass, $newpassconfirm, $token);
     }
@@ -83,17 +82,17 @@ class Controller {
         $userController = new UserController();
         $deleteAccount = $userController->deleteAccount($pseudo, $pass);       
     }
+    function deleteComment($id) {
+        $commentManager = new CommentManager();
+        $comment = $commentManager->deleteComment($id);
+        header('Location: index.php?action=settingsview&success=deletecomment');
+    }
     function adminDeleteAccount($id) {
         $connexionManager = new UserManager();
         $commentManager = new CommentManager();
         $deleteComments = $commentManager->deleteCommentFromOneUser($id);
         $user = $connexionManager->deleteAccountWithID($id);
         header('Location: index.php?action=playersview&sortby=scoretotal&order=antichrono&success=deleteplayer');
-    }
-    function deleteComment($id) {
-        $commentManager = new CommentManager();
-        $comment = $commentManager->deleteComment($id);
-        header('Location: index.php?action=settingsview&success=deletecomment');
     }
     function deleteCommentAdmin($id, $idplayer) {
         $commentManager = new CommentManager();

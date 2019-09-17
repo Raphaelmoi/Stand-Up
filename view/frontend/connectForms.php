@@ -1,4 +1,9 @@
 <?php
+//display forms depending of the  'action' received 
+//signin -> to connect
+//forgot pass -> mail form
+//pending -> say to the user we sent him a mail
+//resetpass -> form with the received token 
 ob_start();
 ?>        
     <header id="connectHeader">

@@ -1,4 +1,5 @@
 <?php
+// Container of the chat, instant messaging
 ob_start();
 ?>
 <aside class="rightAside" >

@@ -1,4 +1,4 @@
-<!-- HOME PAGE -->
+<!-- Display the btns for any change user want to do with his personnal information -->
 <?php
 $title = 'paramètres';
 ob_start();

@@ -1,4 +1,6 @@
 <?php
+//view displaying form for updating any information of an account (mail, pseudo , profil picture,..)
+//default view show all the users comments and a links to each form
 ob_start();
 ?>
 	<!-- Change the mail -->

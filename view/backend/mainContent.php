@@ -1,5 +1,6 @@
 <?php
 ob_start();
+//dispaly the connected home page content, buttons for accesssing game
 ?>
 <article class="centerArticle">
     <div class="startGame">

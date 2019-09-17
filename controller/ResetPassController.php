@@ -1,6 +1,6 @@
 <?php
 class ResetPassController {
-	// When user lost him pw, we send him a unique token to him mailbox
+	// When user lost his pw, we send him a unique token to his mailbox
 	function sendToken($email, $results){
 		if ($results == 0) {
 			header('Location: /projet5/index.php?error=mailnotdb');

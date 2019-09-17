@@ -1,3 +1,5 @@
+<!-- Display the chat with instant messaging -->
+
 <h2>--- Chat ---</h2>
 <?php
 $nbrOfComments = 0;

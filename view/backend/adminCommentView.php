@@ -5,9 +5,11 @@ ob_start();
 include ('view/backend/asideLeft.php');
 echo $asideLeft;
 ?>
+<!-- give a special color for other players than self -->
 <script> 
 let colorAside = document.getElementById('leftAsideId').style.background = 'rgba(79, 195, 247, 0.2)'; 
 </script>
+
 <section class="playersViewSection">         
     <div class="mainContentSettings">
         <div class="commentsSettings" >         

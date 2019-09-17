@@ -12,7 +12,8 @@ class UserManager extends Manager {
             'imageUrl' => $imgUrl,
             'adressmail' => $mail
         ));
-    }//get an user by Pseudo
+    }
+    //Find an user by Pseudo
     public function getUser($pseudo) {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('SELECT id, pseudo, pass, mail, imageprofil, DATE_FORMAT(date_inscription, \'%d/%m/%Y \') AS date_inscription_fr, game_one, game_one_bs, game_two, game_two_bs, game_total, authority FROM user WHERE pseudo = ?');
@@ -20,7 +21,7 @@ class UserManager extends Manager {
         $result = $req->fetch();
         return $result;
     }
-    //Find a user with him ID
+    //Find an user with him ID
     public function getUserWithId($id) {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('SELECT * FROM user WHERE id = ?');
@@ -54,7 +55,7 @@ class UserManager extends Manager {
         $result = $req->fetchColumn();
         return $result;
     }
-    //give the best score of first game
+    //give the best score for the first game
     public function getBestScoreGOne() {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('SELECT game_one_bs FROM user ORDER BY game_one_bs DESC');
@@ -104,6 +105,7 @@ class UserManager extends Manager {
         $req->execute();
         return $req;
     }
+    //update score, the function receive 0 or 1 as value for the $bestScore argument, determine if it's have to had a best score value or not
     public function updateScore($pseudo, $score, $bestScore, $game, $bestScoreGame) {
         $bdd = $this->dbConnect();
         if ($bestScore == 1) {
@@ -115,7 +117,7 @@ class UserManager extends Manager {
         $req->execute();
         return $req;
     }
-    //loof if a specified pseudo is already in the database or not
+    //look if a specified pseudo is already in the database or not
     public function count($pseudo) {
         $bdd = $this->dbConnect();
         $count = $bdd->prepare("SELECT count(pseudo) FROM user WHERE pseudo = '$pseudo'");

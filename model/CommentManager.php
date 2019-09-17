@@ -1,6 +1,5 @@
 <?php
 require_once ("model/Manager.php");
-
 class CommentManager extends Manager {
     //get all the comments
     public function getComments() {
@@ -11,7 +10,6 @@ class CommentManager extends Manager {
     }
     public function getCommentsForOneUser($id) {
         $bdd = $this->dbConnect();
-
         $req = $bdd->prepare("SELECT id, id_user, comment, DATE_FORMAT(date_publication, '%d/%m/%Y à %Hh%i') AS date_commentaire_fr FROM comment WHERE id_user = '$id' ");
         $req->execute();
         $result = $req->fetchAll();

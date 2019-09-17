@@ -1,7 +1,6 @@
 <?php
 /*
- *USER LOGIN, LOGOUT AND PASSWORD CHANGING FUNCTIONS
- *logIN() -> connect
+ *logIn() -> connect
  *logOut() -> disconnect
  *newUser() -> creation of a new user
  *newPass() -> change password
@@ -11,6 +10,7 @@
  *verifyPassAndPseudo() -> verification of the user identification
 */
 class UserController {
+
 	public function logIn($pseudo, $pass) {
 		require_once ("model/UserManager.php");
 		$connexionManager = new UserManager();
@@ -24,10 +24,12 @@ class UserController {
 		}
 		else header('Location: index.php?action=signin&erreur=identifiant');
 	}
+
 	public function logOut() {
 		$_SESSION = array();
 		session_destroy();
 	}
+
 	public function newUser($pseudo, $pass, $passTwo, $mail, $imgUrl) {
 		require_once ("model/UserManager.php");
 		$connexionManager = new UserManager();
@@ -114,18 +116,19 @@ class UserController {
 		}
 		else header('Location: index.php?action=settingsview&change=account&erreur=passpseudo');
 	}
+	
 	//will return true if the pseudo is in the database and the pass is correct, else false
 	public function verifyPseudoAndPass($pseudo, $pass) {
-		$val = false;
+		$returnedValue = false;
 		$connexionManager = new UserManager();
 		$count = $connexionManager->count($pseudo);
 		if ($count != 0) {
 			$donnees = $connexionManager->getUser($pseudo);
 			if (password_verify($pass, $donnees['pass'])) {
-				return $val = true;
+				return $returnedValue = true;
 			}
 		}
-		return $val;
+		return $returnedValue;
 	}
 }
 

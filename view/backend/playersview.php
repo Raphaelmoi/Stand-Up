@@ -5,6 +5,7 @@ ob_start();
 include ('view/backend/asideLeft.php');
 echo $asideLeft;
 ?>
+
 <section class="playersViewSection">  
     <table>
         <tr class="titleTable">
@@ -12,17 +13,21 @@ echo $asideLeft;
             if (isset($_GET['order']) && $_GET['order'] == "antichrono"):
             ?>
                <th class='imgTD'><i class="fas fa-chevron-down"></i></th>
-               <th id="positionTD"><a href="index.php?action=playersview&sortby=scoretotal&order=chrono&page=0">Position</a> </th>
-               <th><a href="index.php?action=playersview&sortby=pseudo&order=chrono&page=0">Pseudo</a></th>
+               <th id="positionTD"><a href="index.php?action=playersview&sortby=scoretotal&order=chrono&page=0">Position</a></th>
+               <th><a href="index.php?action=playersview&sortby=pseudo&order=chrono&page=0">
+               Pseudo</a></th>
                <th class='scoreTD'><a href="index.php?action=playersview&sortby=scoreone&order=chrono&page=0">Meilleur score jeu 1</a></th>
                <th class='scoreTD'><a href="index.php?action=playersview&sortby=scoretwo&order=chrono&page=0">Meilleur score jeu 2</a></th>
-               <th class="totalScoreTD"><a href="index.php?action=playersview&sortby=scoretotal&order=chrono&page=0">Nombre total de points</a> </th>
+               <th class="totalScoreTD"><a href="index.php?action=playersview&sortby=scoretotal&order=chrono&page=0">
+               Nombre total de points</a></th>
                <?php
                 if ($reponse['authority'] == 1):
                 ?>
                     <th>Admin </th>
                 <?php
                 endif;
+
+
             elseif (!isset($_GET['order']) || $_GET['order'] == "chrono"):
             ?>   
                <th class='imgTD'><i class="fas fa-chevron-up"></i></th>
@@ -36,11 +41,12 @@ echo $asideLeft;
                 ?>
                     <th>Admin </th>
                 <?php
+                endif;
             endif;
-        endif;
         ?>    
-       </tr>
+        </tr>
     <?php
+
     foreach ($rep as $row => $data):
         $position = $userManager->getUserPosition($data['game_total']);
         ?>
@@ -57,6 +63,7 @@ echo $asideLeft;
         <td class='scoreTD'><?=$data['game_one_bs'] ?></td>
         <td class='scoreTD'><?=$data['game_two_bs'] ?></td>
         <td class="totalScoreTD"><?=$data['game_total'] ?></td>
+
         <?php
         if ($reponse['authority'] == 1 && $data['authority'] != 1):
         ?>
@@ -84,13 +91,14 @@ echo $asideLeft;
             ?>
             <a class="btnPagination" href="index.php?action=playersview&sortby=<?=$_GET['sortby']?>&order=<?=$_GET['order']?>&page=<?=$_GET['page']- 1?>">Page précédente</a>
             <?php
-        else: ?> <a class="btnPagination" href="javascript:" style="background-image: none; background-color: gray; border:none;">Page précédente</a>
+        else: ?> <a class="btnPagination forbidenBtn" href="javascript:">Page précédente</a>
             <?php
         endif;
 
         ?>
         <div>
         <?php
+        // Show a number for each page with a special style for the current page
             for ($i=0; $i <= $nbrPage; $i++):
                 if ($i == $_GET['page']):
                     ?>
@@ -110,7 +118,7 @@ echo $asideLeft;
             ?>
             <a class="btnPagination" href="index.php?action=playersview&sortby=<?=$_GET['sortby']?>&order=<?=$_GET['order']?>&page=<?=$_GET['page']+1?>">Page suivante</a>
             <?php
-            else: ?> <a class="btnPagination" href="javascript:" style="background-image: none; background-color: gray;">Page suivante</a>
+            else: ?> <a class="btnPagination forbidenBtn" href="javascript:">Page suivante</a>
             <?php
         endif;
         ?>

@@ -43,11 +43,13 @@ try {
                 $controller->logIn(htmlspecialchars($_POST['name']) , htmlspecialchars($_POST['pass']));
             }
         }
+        //send new pass by mail
         elseif ($_GET['action'] == 'sendNewPass') {
             if (isset($_POST['reset-password']) && isset($_POST['email'])) {
                 $controller->sendNewPass(htmlspecialchars($_POST['email']));
             }
         }
+        //update pw with token sent by mail
         elseif ($_GET['action'] == 'updatepw') {
             if (isset($_POST['pass']) && isset($_POST['confirmpass']) && isset($_POST['token'])) {
                 $controller->resetNewPass(
@@ -56,7 +58,7 @@ try {
                     htmlspecialchars($_POST['token']));
             }
         }
-        //VIEW FOR ADMIN WHO SEE ANY INFO AND COMMENT FOR ONE USER
+        //VIEW FOR ADMIN WHO CAN SEE ANY INFO AND COMMENT FOR ONE USER
         elseif ($_GET['action'] == 'seecomments') {
             if (isset($_GET['id'])) {
                 $controller->seeCommentAdmin(htmlspecialchars($_GET['id']));
@@ -139,17 +141,18 @@ try {
                     }
                 }
             }
+            //if the user is not connected
             else{
                 if ($_GET['game'] == 1) {
                     $_SESSION['score'] = $_GET['score'];
                 }
-                header('Location: index.php?success=endgame&score='.$_GET['score']); //if user in not connected                
+                header('Location: index.php?success=endgame&score='.$_GET['score']);                
             }
         }
-        //ALL THE PLAYERS VIEW, differents action for the table order
+        //ALL THE PLAYERS VIEW, differents actions for the table order
         elseif ($_GET['action'] == 'playersview') {
             if (isset($_GET['sortby']) && isset($_GET['order']) && isset($_GET['page'])) {
-
+                // give the sql order value
                 if ($_GET['order'] == 'antichrono') {
                     $order = "DESC";
                 }else $order = "ASC";

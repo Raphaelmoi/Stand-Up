@@ -6,8 +6,8 @@ if (isset($_GET['action']) && $_GET['action']!= 'signup'):
 elseif (isset($_GET['action']) && $_GET['action'] == 'signup'):
         require 'inscriptionForm.php';
         echo $signUpForm;
-//DEFAULT VIEW         
 elseif (!isset($_GET['action'])):
+    //DEFAULT VIEW         
 ?>
     <header id="bigHeader">
         <div class="connect">
@@ -35,6 +35,7 @@ elseif (!isset($_GET['action'])):
         <div class='topTriangle' id='triangleTranspa'></div>
     </header>
 
+<!-- Defauls small header, for small screen and when user have scrolled on the page -->
     <header id="smallHeader">
         <div class="connect">
             <?php
@@ -63,5 +64,5 @@ elseif (!isset($_GET['action'])):
     <img src="public/img/assto2.png" class="astroSmallHeader" alt="astronaute">      
     <?php
 endif;
-$alertBox = ob_get_clean();
+$header = ob_get_clean();
 ?>

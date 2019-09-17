@@ -30,7 +30,7 @@
         endif;
 
         require ('view/frontend/headerFrontSide.php');
-        echo $alertBox;
+        echo $header;
         ?>
 
         <?= $content ?>

@@ -231,6 +231,11 @@ header{
 	margin-top: 5px;
 	border-radius:5px;
 }
+.forbidenBtn{
+	background-image: none; 
+	background-color: gray; 
+	border:none;
+}
 .btnSubmitSetting:hover, .moreCats:hover, .btnPagination:hover{
 	background-image:linear-gradient(#0288d1, #4fc3f7);
 }
