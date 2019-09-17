@@ -1,6 +1,6 @@
 /*sprite arguments :
   img to sprite -> the img to sprite, have to be declare and load in the preload function
-  box -> empty array to store each img, have to be declare in sketch
+  box -> empty array to store each img
   widthImg -> the width of each frame, numeric value put directly when call the function
   heightImg -> the height of each frame, idem
   column -> number of column of the imgtosprite

@@ -45,7 +45,6 @@ let util, draws;
 let time = 0;
 function preload() {
     imgBackground = loadImage('img/sky.jpg');
-
     imgStone0 = loadImage('img/stone0.png');
     imgStone1 = loadImage('img/stone1.png');
     imgStone2 = loadImage('img/stone2.png');
@@ -64,7 +63,7 @@ function preload() {
     pillImg = loadImage('img/pill.png');
     potionImg = loadImage('img/potion.png');
     ammoImg = loadImage('img/ammo.png');
-    astroImg  = loadImage('img/assto7.png');
+    astroImg  = loadImage('img/astro.png');
     spaceShipLeftEar = loadImage('img/PNG/playerShip2_blue.png');
     spaceShipRightEar = loadImage('img/PNG/playerShip2_orange.png');
     laserLeftImg = loadImage('img/PNG/Lasers/laserBlue16.png');
@@ -72,7 +71,6 @@ function preload() {
     explosionSprite = loadImage('img/explosion.png');
     fallingShipL = loadImage('img/PNG/ufoBlue.png');
     fallingShipR = loadImage('img/PNG/ufoRed.png');
-    
     explosionSound = loadSound('sound/fall.wav');
     catchGemSound = loadSound('sound/coin.wav');
     gameoverSound = loadSound('sound/round_end.wav');

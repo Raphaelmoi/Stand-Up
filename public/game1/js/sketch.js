@@ -39,8 +39,8 @@ let soundAlreadyPlay = false;
 
 let time = 0;
 
-var x1 = 0;
-var x2 = 0;
+var xFirstBackground = 0;
+var xSecndBackground = 0;
 var scrollSpeed = 1;
 
 function preload() {
@@ -65,7 +65,6 @@ function preload() {
     explosionSprite = loadImage('img/explosion.png');
     pillImg = loadImage('img/pill.png');
     potionImg = loadImage('img/potion.png');
-
     explosionSound = loadSound('sound/fall.wav');
     catchGemSound = loadSound('sound/coin.wav');
     gameoverSound = loadSound('sound/round_end.wav');
@@ -83,12 +82,13 @@ function setup() {
     //ml5 posenet initialisation
     poseNet = ml5.poseNet(video, modelReady);
     poseNet.on('pose', gotPoses);
+
     screenSizeAdaptator = windowWidth / 1400;
     if (screenSizeAdaptator < 0.5) {
         screenSizeAdaptator = 0.5;
     }
-
     frameRate(18);
+
     util.spriteImage(imgBirdSprite, bird, 110, 101, 5, 14);
     util.spriteImage(explosionSprite, explose, 192, 192, 5, 6);
     //falling items minimum set
@@ -96,9 +96,10 @@ function setup() {
     util.newGem(10);
     util.newPill(2);
     util.newPotion(1);
-    x1 = -height;
-}
 
+    xFirstBackground = -height;
+}
+// when game is ready
 function modelReady() {
     console.log('model ready');
     readyToStart = true;
@@ -121,30 +122,16 @@ function draw() {
         if (life > 0) {
             push();
             if (windowWidth > 800) {
-                translate(width, 0);
-                scale(-1, 1);
-                image(imgBackground, 0, x1, width, height);
-                image(imgBackgroundDeux, 0, x2, width, height);
-
-              x1 += scrollSpeed;
-              x2 += scrollSpeed;
-              console.log('x1 : '+ x1);
-              console.log('x2 : '+ x2);
-
-              if (x1 >= height){
-                x1 = -height;
-              }
-              if (x2 >= height){
-                x2 = -height;
-              }
+                draws.drawBackground();
             }
-            else background(0);
-            time++;
+            else background(0);//black background for small screen
+            //players see his face for a short time
             if (time < 80) 
             {
+                time++;
                 noTint();
                 tint(255,255,255, (200 - time*5));
-                image(video,  0, 0, width, height);//met la video dans le canvas
+                image(video,  0, 0, width, height);
              }
             pop();
 
@@ -156,7 +143,6 @@ function draw() {
             draws.drawExplosion();
             draws.drawHealthAndText();
         } else {
-
             if (gameOver) { //prevent the song to be play more than one time
                 noLoop();
                 gameoverSound.play();
@@ -175,7 +161,6 @@ function draw() {
                     window.location.href = '/projet5/index.php?action=endgame&game=1&success=endgame&score='+ score*level;
                 }
                 setTimeout(endGame, 4000);
-
             }
         }
     } //if still loading        

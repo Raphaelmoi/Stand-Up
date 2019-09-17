@@ -1,3 +1,4 @@
+// reaction of the header when user scroll on the main page
 let astroLeft = document.getElementsByClassName('astroImg')[0];
 let astroRight = document.getElementsByClassName('astroImg')[1];
 let smallHeader = document.getElementById('smallHeader');
@@ -15,12 +16,11 @@ window.onscroll = function() {
         adaptableMenu();
     }
 };
-
 function adaptableMenu() {
     //if the screen is bigger than 700px
     if (window.innerWidth > 700) {
         let Yposition = window.scrollY;
-
+        //set some values at the beggining
         while (headerSize < 1) {
             imgAstroWidth = astroLeft.offsetWidth;
             headerSize = bigHeader.offsetHeight;

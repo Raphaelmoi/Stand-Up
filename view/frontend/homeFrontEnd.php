@@ -45,7 +45,7 @@ ob_start();
                 </a>
             <?php endif; ?>
                 <a href="javascript:;">
-                    <img src="public/img/assto4.png" alt="astronaute">
+                    <img src="public/img/jump.JPG" alt="astronaute">
                     <div class="lockedGame"><i class="fas fa-lock"></i>En construction</div>
                 </a>
             </div>

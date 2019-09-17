@@ -39,7 +39,7 @@ ob_start();
     </div>            
     <div class="startGame">
         <a href="public/game1/index.php"> 
-            <img src="public/img/G10.JPG">
+            <img src="public/img/jump.JPG">
             <div class="titleBtn">En construction... coming soon</div>
             <div class="panel"> 
                 <h3> En construction</h3>

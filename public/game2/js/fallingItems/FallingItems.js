@@ -13,11 +13,9 @@ class FallingItems {
         this.newPosition = this.speed * this.fall;
         push();
         translate(this.position.x, this.position.y + this.newPosition);
-        //ellipse(-this.elementSize / 3.7, -this.elementSize / 3.7, this.elementSize, this.elementSize)
         image(this.imgOfTheObject, -this.elementSize / 3.7, -this.elementSize / 3.7, this.elementSize, this.elementSize);
         pop();
     }
-
     //check if the falling item has caught the bird
     isOver(width, mX, mY) {
         let positionX = width - mX;

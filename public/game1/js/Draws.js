@@ -6,6 +6,7 @@ drawHealthAndText()
 drawStones()
 drawGems()
 drawPotionsOrPills()
+drawBackground()
 */
 class Draws {
     constructor() {
@@ -127,5 +128,21 @@ class Draws {
         textSize(24);
         text(score * level, width - 50, 30);
         pop();
+    }
+    drawBackground(){
+        translate(width, 0);
+        scale(-1, 1);
+        image(imgBackground, 0, xFirstBackground, width, height);
+        image(imgBackgroundDeux, 0, xSecndBackground, width, height);
+
+        xFirstBackground += scrollSpeed;
+        xSecndBackground += scrollSpeed;
+
+        if (xFirstBackground >= height){
+          xFirstBackground = -height;
+        }
+        if (xSecndBackground >= height){
+          xSecndBackground = -height;
+        }
     }
 }

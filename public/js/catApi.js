@@ -1,3 +1,4 @@
+// Get cats from the api thecatapi.com for the profil picures of users
 var CatApi = {
     url : "https://api.thecatapi.com/v1/images/search?mime_types=jpg,png",
     
@@ -26,7 +27,7 @@ var CatApi = {
 			})
 		}	
 	},
-	//display blue border on the selected cat, per default first one
+	//display blue border on the selected cat, default is first one
 	chooseACat(){
 		let images = document.getElementsByClassName('imgCats');
 		for (var i = images.length - 1; i >= 0; i--) {
