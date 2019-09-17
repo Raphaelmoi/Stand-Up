@@ -11,7 +11,6 @@ let noseX = 0, noseY = 0;
 let lastNoseX = 0, lastNoseY = 0;
 let life = 100;
 
-
 //Images
 let imgBackground;
 
@@ -36,7 +35,6 @@ let trunkImg;
 let treeImg = [];
 let bushesImg = [];
 
-
 var posBck1 = 0;
 var posBck2;
 var scrollSpeed = 2;
@@ -52,8 +50,8 @@ let drawnDragon = [];
 let dragonImgBox = [];
 let dragonImgBoxRight = [];
 
-let rotateCoinBoxImg = [];
-
+let rotateCoinImg;
+let coinBoxImg = [];
 let imgJumper1;
 let imgJumper2;
 
@@ -61,14 +59,20 @@ let characteres = [];
 
 let currentGroundHeight;
 
+let score = 0;
+let catchCoinSound, startSound;
+let soundAlreadyPlay = false;
+
 function preload() {
     for (var i = 0; i < 11; i++) {
         dragonImgBox.push(loadImage('img/dragon/drag_wr_'+i+'.png'));
         dragonImgBoxRight.push(loadImage('img/dragon/drag_wl_'+i+'.png'));
     }
-    for (var i = 1; i <= 6; i++) {
-        rotateCoinBoxImg.push(loadImage('img/coin/star'+i+'.png'));
-    }
+    // for (var i = 1; i <= 6; i++) {
+    //     rotateCoinBoxImg.push(loadImage('img/coin/star'+i+'.png'));
+    // }
+
+    rotateCoinImg = loadImage('img/coin.png');
     imgBackground = loadImage('img/forest/bg_forest.png');
     imgRunSprite = loadImage('img/running.png');
 
@@ -98,7 +102,12 @@ function preload() {
     treeImg.push(loadImage('img/PNG/Object_17.png'));
     bushesImg.push(loadImage('img/PNG/Object_12.png'));
     bushesImg.push(loadImage('img/PNG/Object_13.png'));
-}
+
+    catchCoinSound = loadSound('sound/coin.wav');
+    startSound = loadSound('sound/start73.mp3');
+
+    }
+
 
 function setup() {
     util = new Util();
@@ -112,6 +121,8 @@ function setup() {
     characteres.push(new NoseItem());
 
     util.spriteImage(imgRunSprite, runImg, 240, 240, 10, 50);
+
+    util.spriteImage(rotateCoinImg, coinBoxImg, 84, 84, 6, 6);
     //ml5 posenet initialisation
     poseNet = ml5.poseNet(video, modelReady);
     poseNet.on('pose', gotPoses);
@@ -131,6 +142,10 @@ function modelReady() {
 
 function draw() {
     if (readyToStart) {
+        if (!soundAlreadyPlay) {
+            startSound.play();
+            soundAlreadyPlay = true;
+        }
         baseUnit++;
          //while player is alive
         if (life > 0) {
@@ -165,13 +180,25 @@ function draw() {
                 }
                 c.move();
                 c.show();
+
+                // if (characteres[0].hits(c)) {
+                //     console.log('prout');
+                // }
             }
             //clean all the charactere who all ready appear
             let k = characteres.length;
             while (k--) {
                 if (characteres[k].x < 0) {
                     characteres.splice(k, 1);
-                }                   
+                }     
+                if (characteres[k] != undefined) { 
+                    if (k > 0 && characteres[k].hits(characteres[0])) {
+                        console.log('prout');
+                        characteres[k].actionWhenHit();
+                        characteres.splice(k, 1);
+                    }  
+                }
+           
             }
 
 
@@ -182,6 +209,7 @@ function draw() {
         } else {
             if (gameOver) { //prevent the song to be play more than one time
                 gameOver = false;
+                background(0);
             }
         }
     } //if still loading        

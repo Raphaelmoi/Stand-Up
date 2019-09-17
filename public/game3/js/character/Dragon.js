@@ -37,4 +37,8 @@ class Dragon extends Character{
 	        this.index = 0;
 	    }
 	}
+	actionWhenHit(){
+		life -= 10;
+		console.log("life: " + life);
+	}
 }

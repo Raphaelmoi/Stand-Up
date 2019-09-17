@@ -49,4 +49,9 @@ class JumperEnnemie extends Character{
 		 // fill(255, 50);
    //       ellipse(this.x, this.y, this.r );
 	}
+
+	actionWhenHit(){
+		life -= 1;
+		console.log("life: " + life);
+	}
 }
