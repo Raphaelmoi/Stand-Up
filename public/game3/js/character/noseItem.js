@@ -19,6 +19,8 @@ class NoseItem extends Character{
 		}
 	}
 	move(){
+		super.interactionWithDecors();
+
 		this.y += this.vy;
 		this.y = constrain(this.y, 0, height - this.r);
 		if (this.isJumping) {

@@ -26,4 +26,46 @@ class Character {
 			else collision = false;
 		return collision
 	}
+
+	hitsStepFromRight(step){
+		let stepBorderRight = step.x+step.xSize;
+		let xCircle = this.x + this.r * 0.5;
+		let collision;
+		// if the center of the circle is under the box
+			if (xCircle == stepBorderRight + 10 && xCircle >= stepBorderRight - 10 ) {
+				collision = true;
+			}
+			else collision = false;
+		return collision
+	}
+
+	hitsStepFromLeft(step){
+		let stepBorderLeft = step.x;
+		let xCircle = this.x + this.r* 0.5;
+		let collision;
+		// if the center of the circle is under the box
+			if (xCircle == stepBorderLeft + 10 && xCircle >= stepBorderLeft - 10 ) {
+				collision = true;
+			}
+			else collision = false;
+		return collision
+	}
+
+	interactionWithDecors(){
+        let decors = [flyingStep, blocStep];
+
+		for (var j = 0; j < decors.length; j++) {
+			for (var i = decors[j].length - 1; i >= 0; i--) {
+				if (this.hitsStep(decors[j][i])){
+					if (this.hitsStepFromUnder(decors[j][i])) {
+						this.vy = 10;
+					}
+					else{
+						this.y = decors[j][i].y - (this.r*0.5);
+						this.isJumping = false;
+					}
+				}
+			}
+		}
+	}
 }

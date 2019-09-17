@@ -1,14 +1,14 @@
 class JumperEnnemie extends Character{
-	constructor(heightJump){
+	constructor(heightJump, yOrigin){
 		super();
-		this.r = 35;
+		this.r = 45;
 		this.x = width;
-		this.y = height - this.r;
+		this.y = yOrigin - this.r;
 		this.heightJump= - heightJump;
 		this.vy = 0;
 		this.gravity = 0.9;
 		this.isJumping = false;
-		this.groundHeight = 70;
+		this.groundHeight = 30;
 		this.goingUp = true;
 	}
 	jump(){
@@ -19,10 +19,16 @@ class JumperEnnemie extends Character{
 		}
 	}
 	move(){
+		super.interactionWithDecors();
+
 		this.x -= 14; 
 		this.y += this.vy;
 		if (this.vy == 0) {
 			this.goingUp = false;
+		}
+		if (this.y  <= 0 ) {
+			this.goingUp = false;
+			this.vy = 0;
 		}
 		this.y = constrain(this.y, 0, height - this.r);
 		if (this.isJumping) {

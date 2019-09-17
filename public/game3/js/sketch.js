@@ -24,10 +24,19 @@ let cornerleftTopEarthImg;
 let cornerRightTopEarthImg;
 let centerTopEarthImg;
 let borderLeftImg;
-let noGrassLeftImg;
-let noGrassRightImg;
-
 let borderRightImg
+let blockAloneImg;
+let underBlockAlone;
+
+let flyingBlockStepImgLeftCorner;
+let flyingBlockStepImgRightCorner;
+let flyingBlockStepImgCenter;
+
+let trunkImg;
+let treeImg = [];
+let bushesImg = [];
+
+
 var posBck1 = 0;
 var posBck2;
 var scrollSpeed = 2;
@@ -38,7 +47,12 @@ let runImg = [];
 let baseUnit = 0;
 
 let flyingStep = [];
-let blocStep = []
+let blocStep = [];
+let drawnDragon = [];
+let dragonImgBox = [];
+let dragonImgBoxRight = [];
+
+let rotateCoinBoxImg = [];
 
 let imgJumper1;
 let imgJumper2;
@@ -48,8 +62,16 @@ let characteres = [];
 let currentGroundHeight;
 
 function preload() {
+    for (var i = 0; i < 11; i++) {
+        dragonImgBox.push(loadImage('img/dragon/drag_wr_'+i+'.png'));
+        dragonImgBoxRight.push(loadImage('img/dragon/drag_wl_'+i+'.png'));
+    }
+    for (var i = 1; i <= 6; i++) {
+        rotateCoinBoxImg.push(loadImage('img/coin/star'+i+'.png'));
+    }
     imgBackground = loadImage('img/forest/bg_forest.png');
     imgRunSprite = loadImage('img/running.png');
+
     stepImg = loadImage('img/PNG/Tile_11.png');
     stepImgBegin = loadImage('img/PNG/Tile_10.png');
     stepImgEnd = loadImage('img/PNG/Tile_12.png');
@@ -58,13 +80,24 @@ function preload() {
     cornerleftTopEarthImg = loadImage('img/PNG/Tile_1.png');
     cornerRightTopEarthImg = loadImage('img/PNG/Tile_3.png');
     centerTopEarthImg = loadImage('img/PNG/Tile_2.png');
+
     borderLeftImg = loadImage('img/PNG/Tile_4.png');
     borderRightImg = loadImage('img/PNG/Tile_6.png');
+
+
     imgJumper1 = loadImage('img/jump_up.png');
     imgJumper2 = loadImage('img/jump_fall.png');
 
-    noGrassLeftImg = loadImage('img/PNG/Tile_18.png');
-    noGrassRightImg = loadImage('img/PNG/Tile_19.png');
+    blockAloneImg = loadImage('img/PNG/Tile_13.png');
+    underBlockAlone = loadImage('img/PNG/Tile_15.png');
+    flyingBlockStepImgLeftCorner = loadImage('img/PNG/Tile_7.png');
+    flyingBlockStepImgRightCorner = loadImage('img/PNG/Tile_9.png');
+    flyingBlockStepImgCenter = loadImage('img/PNG/Tile_8.png');
+    trunkImg = loadImage('img/PNG/Object_4.png');
+    treeImg.push(loadImage('img/PNG/Object_16.png'));
+    treeImg.push(loadImage('img/PNG/Object_17.png'));
+    bushesImg.push(loadImage('img/PNG/Object_12.png'));
+    bushesImg.push(loadImage('img/PNG/Object_13.png'));
 }
 
 function setup() {
@@ -79,7 +112,6 @@ function setup() {
     characteres.push(new NoseItem());
 
     util.spriteImage(imgRunSprite, runImg, 240, 240, 10, 50);
-
     //ml5 posenet initialisation
     poseNet = ml5.poseNet(video, modelReady);
     poseNet.on('pose', gotPoses);
@@ -125,8 +157,7 @@ function draw() {
                     blocStep.splice(i, 1);
                 }
             }
-            
-            let decors = [flyingStep, blocStep];
+
             for (let c of characteres){
                 //check the existence of the jump() method before calling it
                 if (typeof c.jump === "function") { 
@@ -134,32 +165,15 @@ function draw() {
                 }
                 c.move();
                 c.show();
-
-                for (var j = 0; j < decors.length; j++) {
-
-                    for (var i = decors[j].length - 1; i >= 0; i--) {
-                        if (c.hitsStep(decors[j][i])){
-                            if (c.hitsStepFromUnder(decors[j][i])) {
-                                c.vy = 10;
-                            }
-                            else{
-                                c.y = decors[j][i].y - (c.r*0.5);
-                                c.isJumping = false;
-                            }
-                        }
-                        //if the position of the bloc is behind the players
-                        // if (decors[j][i].x + decors[j][i].xSize <= c.x) {
-                        //     c.isJumping = true;
-                        // }
-                    }
-                }
             }
-            //delete chips when they are out of screen
-            for (var i = 0; i >= characteres.length -1; i--) {
-                if (characteres[i].x < 0) {
-                    characteres[i].splice(i, 1);
-                }
+            //clean all the charactere who all ready appear
+            let k = characteres.length;
+            while (k--) {
+                if (characteres[k].x < 0) {
+                    characteres.splice(k, 1);
+                }                   
             }
+
 
             if (lastNoseY - noseY > 15) {
                 characteres[0].jumpWithNose();

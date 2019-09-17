@@ -1,0 +1,42 @@
+class Coin extends Character{
+	constructor(y = 0){
+		super();
+		this.r = 45;
+		this.globalSize = height;
+		this.x = width;
+		this.y = y;
+		this.vy = 0;
+		this.gravity = 1;
+		this.index = 0;
+		this.isJumping = true;
+		this.separationFromGround = -60;
+		this.groundHeight = 30 + this.separationFromGround;
+		this.alternator = true;
+	}
+
+	move(){
+		super.interactionWithDecors();
+		this.x -= 10; 
+
+		this.y += this.vy;
+		this.y = constrain(this.y, 0, height - this.r);
+		if (this.isJumping) {
+			this.vy += this.gravity;
+		}
+		//if the charac reach the floor
+		if (this.y == height-this.r) { 
+			this.isJumping = false;
+		 }
+	}
+	show(){
+
+	        if (this.index >= 6) {
+	            this.index = 0;
+	        }
+			image(rotateCoinBoxImg[this.index],(this.x-this.r*0.5), (this.y-this.r*0.5)+this.groundHeight, this.r, this.r);
+	        if (this.alternator) {
+		        this.index = (this.index + 1);
+	        }
+	        this.alternator = !this.alternator;
+	}
+}

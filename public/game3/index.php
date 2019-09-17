@@ -21,8 +21,10 @@
 	<script src="js/character/Character.js"></script>	
 	<script src="js/item/FlyingStep.js"></script>	
 	<script src="js/item/BlockStep.js"></script>	
+	<script src="js/character/Dragon.js"></script>	
 	<script src="js/character/noseItem.js"></script>
 	<script src="js/character/JumperEnnemie.js"></script>	
+	<script src="js/character/Coin.js"></script>	
 </head>
 
 	<body>
