@@ -9,7 +9,6 @@ class NoseItem extends Character{
 		this.gravity = 1;
 		this.index = 0;
 		this.isJumping = false;
-		this.groundHeight = 30;
 	}
 
 	jumpWithNose(){
@@ -36,11 +35,13 @@ class NoseItem extends Character{
 	        if (this.index >= 31) {
 	            this.index = 0;
 	        }
-			image(runImg[this.index],(this.x-this.r*0.5), (this.y-this.r*0.5)+this.groundHeight, this.r, this.r);
+			image(runImg[this.index],(this.x-this.r*0.5), (this.y-this.r*0.5)+groundHeight, this.r, this.r);
 	        this.index = (this.index + 1);
 		}
 		else if(this.isJumping){
-			image(runImg[40],(this.x-this.r*0.5), (this.y-this.r*0.5)+this.groundHeight, this.r, this.r);
-		} 
+			image(runImg[40],(this.x-this.r*0.5), (this.y-this.r*0.5)+groundHeight, this.r, this.r);
+		}
+		// fill(255, 50);
+  //       ellipse(this.x, this.y+this.groundHeight, this.r );
 	}
 }

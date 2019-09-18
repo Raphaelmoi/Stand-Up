@@ -3,14 +3,13 @@ class Coin extends Character{
 		super();
 		this.r = 45;
 		this.globalSize = height;
-		this.x = width;
+		this.x = width + 200;
 		this.y = y;
-		this.vy = 0;
+		this.vy = 10;
 		this.gravity = 1;
 		this.index = 0;
 		this.isJumping = true;
-		this.separationFromGround = -60;
-		this.groundHeight = 30 + this.separationFromGround;
+		this.separationFromGround = -14 - groundHeight;
 		this.alternator = 0;
 	}
 
@@ -26,10 +25,6 @@ class Coin extends Character{
 		if (this.y == height-this.r) { 
 			this.isJumping = false;
 		 }
-
-		// if (super.hits(characteres[0])) {
-
-		// }
 	}
 	show(){
 	    if (this.index >= 5) {
@@ -41,15 +36,15 @@ class Coin extends Character{
 		    this.alternator = 0;
 	    }
 	    this.alternator += 1;
-		 // fill(255, 50);
-   //       ellipse(this.x, this.y, this.r );
-		image(coinBoxImg[this.index],(this.x-this.r*0.5), (this.y-this.r*0.5)+this.groundHeight, this.r, this.r);
+		image(coinBoxImg[this.index],(this.x-this.r*0.5), (this.y-this.r*0.5)+groundHeight+this.separationFromGround, this.r, this.r);
+	
+			// fill(255, 50);
+			//ellipse(this.x, this.y+this.groundHeight, this.r );
 	}
 
 	actionWhenHit(){
 		score += 1;
 		console.log('score : '+score);
 		catchCoinSound.play();
-
 	}
 }

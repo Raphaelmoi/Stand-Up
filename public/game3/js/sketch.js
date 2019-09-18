@@ -4,7 +4,7 @@ let screenSizeAdaptator;
 let readyToStart = false;
 let loadingAnimation;
 let gameOver = true;
-let util, draws;
+let util, draws, gamePlay;
 
 //body position
 let noseX = 0, noseY = 0;
@@ -13,64 +13,49 @@ let life = 100;
 
 //Images
 let imgBackground;
-
-let stepImg;
-let stepImgBegin;
-let stepImgEnd;
-
-let blockEarthImg;
-let cornerleftTopEarthImg;
-let cornerRightTopEarthImg;
-let centerTopEarthImg;
-let borderLeftImg;
-let borderRightImg
-let blockAloneImg;
-let underBlockAlone;
-
-let flyingBlockStepImgLeftCorner;
-let flyingBlockStepImgRightCorner;
-let flyingBlockStepImgCenter;
+//img flyingstep
+let stepImg, stepImgBegin, stepImgEnd;
+//img floor step top and under
+let cornerleftTopEarthImg, cornerRightTopEarthImg, centerTopEarthImg;
+let borderLeftImg,blockEarthImg, borderRightImg
+//unused for now
+let blockAloneImg, underBlockAlone;
+let flyingBlockStepImgLeftCorner, flyingBlockStepImgRightCorner, flyingBlockStepImgCenter;
 
 let trunkImg;
-let treeImg = [];
-let bushesImg = [];
+let treeImg = [], bushesImg = [];
+//mouving background
+let posBck1 = 0, posBck2;
+var scrollSpeed = 2;//speed of bkg mouve
+var groundSpeed = 7;//spedd of the floor
 
-var posBck1 = 0;
-var posBck2;
-var scrollSpeed = 2;
-var groundSpeed = 7;
+let imgJumper1, imgJumper2;
+//Players image and box
 let imgRunSprite;
 let runImg = [];
-
+//iterate all along the game and play elements at given value
 let baseUnit = 0;
 
-let flyingStep = [];
-let blocStep = [];
-let drawnDragon = [];
-let dragonImgBox = [];
+let flyingStep = [], blocStep = [], dragonImgBox = [];
 let dragonImgBoxRight = [];
 
 let rotateCoinImg;
 let coinBoxImg = [];
-let imgJumper1;
-let imgJumper2;
 
 let characteres = [];
-
+let groundHeight = 30;
 let currentGroundHeight;
 
 let score = 0;
-let catchCoinSound, startSound;
+
+let catchCoinSound, startSound, hitSound;
 let soundAlreadyPlay = false;
 
 function preload() {
     for (var i = 0; i < 11; i++) {
         dragonImgBox.push(loadImage('img/dragon/drag_wr_'+i+'.png'));
-        dragonImgBoxRight.push(loadImage('img/dragon/drag_wl_'+i+'.png'));
+        // dragonImgBoxRight.push(loadImage('img/dragon/drag_wl_'+i+'.png'));
     }
-    // for (var i = 1; i <= 6; i++) {
-    //     rotateCoinBoxImg.push(loadImage('img/coin/star'+i+'.png'));
-    // }
 
     rotateCoinImg = loadImage('img/coin.png');
     imgBackground = loadImage('img/forest/bg_forest.png');
@@ -88,7 +73,6 @@ function preload() {
     borderLeftImg = loadImage('img/PNG/Tile_4.png');
     borderRightImg = loadImage('img/PNG/Tile_6.png');
 
-
     imgJumper1 = loadImage('img/jump_up.png');
     imgJumper2 = loadImage('img/jump_fall.png');
 
@@ -105,13 +89,15 @@ function preload() {
 
     catchCoinSound = loadSound('sound/coin.wav');
     startSound = loadSound('sound/start73.mp3');
+    hitSound = loadSound('sound/fall.wav');
 
     }
-
 
 function setup() {
     util = new Util();
     draws = new Draws();
+    gamePlay = new GamePlay();
+
     createCanvas(windowWidth, windowHeight);
     video = createCapture(VIDEO);
     video.size(width, height);
@@ -121,8 +107,8 @@ function setup() {
     characteres.push(new NoseItem());
 
     util.spriteImage(imgRunSprite, runImg, 240, 240, 10, 50);
-
     util.spriteImage(rotateCoinImg, coinBoxImg, 84, 84, 6, 6);
+
     //ml5 posenet initialisation
     poseNet = ml5.poseNet(video, modelReady);
     poseNet.on('pose', gotPoses);
@@ -147,62 +133,24 @@ function draw() {
             soundAlreadyPlay = true;
         }
         baseUnit++;
+
          //while player is alive
         if (life > 0) {
             push();
             translate(width, 0);
             scale(-1, 1);
             // image(video, 0, 0, width, height);//met la video dans le canvas          
-            drawBackground();
+            draws.drawBackground();
             pop();
 
-            draws.gamePlay();
+            draws.drawHealthAndText();
+            gamePlay.gamePlay();
 
-            for (var i = 0; i < flyingStep.length; i++) {
-                flyingStep[i].move();
-                flyingStep[i].show();
-                if ( flyingStep[i].x+flyingStep[i].xSize < 0) {
-                    flyingStep.splice(i, 1);
-                }
-            }
-            for (var i = 0; i < blocStep.length; i++) {
-                blocStep[i].move();
-                blocStep[i].show();
-                if (blocStep[i].x + blocStep[i].xSize < 0) {
-                    blocStep.splice(i, 1);
-                }
-            }
+            draws.eraseOutItem();
+            draws.animateAndDestroyCharacteres();
 
-            for (let c of characteres){
-                //check the existence of the jump() method before calling it
-                if (typeof c.jump === "function") { 
-                    c.jump();
-                }
-                c.move();
-                c.show();
-
-                // if (characteres[0].hits(c)) {
-                //     console.log('prout');
-                // }
-            }
-            //clean all the charactere who all ready appear
-            let k = characteres.length;
-            while (k--) {
-                if (characteres[k].x < 0) {
-                    characteres.splice(k, 1);
-                }     
-                if (characteres[k] != undefined) { 
-                    if (k > 0 && characteres[k].hits(characteres[0])) {
-                        console.log('prout');
-                        characteres[k].actionWhenHit();
-                        characteres.splice(k, 1);
-                    }  
-                }
-           
-            }
-
-
-            if (lastNoseY - noseY > 15) {
+            //if they is a result bigger than 5 mean jump action
+            if (lastNoseY - noseY > 5) {
                 characteres[0].jumpWithNose();
             }
 
@@ -233,18 +181,5 @@ function gotPoses(poses) {
         let newNoseY = poses[0].pose.keypoints[0].position.y;
         noseX = lerp(noseX, newNoseX, 0.9);
         noseY = lerp(noseY, newNoseY, 0.9);
-    }
-}
-function drawBackground(){
-    image(imgBackground, posBck1, 0, width, height);
-    image(imgBackground, posBck2, 0, width, height);
-
-    posBck1 += scrollSpeed;
-    posBck2 += scrollSpeed;
-    if (posBck1 >= width){
-      posBck1 = -width;
-    }
-    if (posBck2 >= width){
-      posBck2 = -width;
     }
 }

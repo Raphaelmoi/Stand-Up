@@ -17,6 +17,7 @@
 	<script src="js/sketch.js"></script>
 	<script src="js/Draws.js"></script>
 	<script src="js/Util.js"></script>
+	<script src="js/GamePlay.js"></script>
 	<script src="js/item/Decors.js"></script>
 	<script src="js/character/Character.js"></script>	
 	<script src="js/item/FlyingStep.js"></script>	

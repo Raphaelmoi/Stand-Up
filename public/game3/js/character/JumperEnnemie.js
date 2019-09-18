@@ -1,14 +1,13 @@
 class JumperEnnemie extends Character{
 	constructor(heightJump, yOrigin){
 		super();
-		this.r = 45;
+		this.r = 55;
 		this.x = width;
 		this.y = yOrigin - this.r;
-		this.heightJump= - heightJump;
+		this.heightJump = - heightJump;
 		this.vy = 0;
 		this.gravity = 0.9;
 		this.isJumping = false;
-		this.groundHeight = 30;
 		this.goingUp = true;
 	}
 	jump(){
@@ -41,17 +40,15 @@ class JumperEnnemie extends Character{
 	}
 	show(){
 		if (!this.goingUp) {
-			image(imgJumper1,(this.x-this.r*0.5), (this.y-this.r*0.5), this.r, this.r);
+			image(imgJumper1,(this.x-this.r*0.5), (this.y-this.r*0.5)+groundHeight, this.r, this.r);
 		}
 		else if(this.goingUp){
-			image(imgJumper2,(this.x-this.r*0.5), (this.y-this.r*0.5), this.r, this.r);
+			image(imgJumper2,(this.x-this.r*0.5), (this.y-this.r*0.5)+groundHeight, this.r, this.r);
 		} 
-		 // fill(255, 50);
-   //       ellipse(this.x, this.y, this.r );
 	}
 
 	actionWhenHit(){
-		life -= 1;
-		console.log("life: " + life);
+		life -= 5;
+		hitSound.play();
 	}
 }

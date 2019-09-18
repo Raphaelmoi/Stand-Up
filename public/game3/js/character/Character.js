@@ -4,9 +4,9 @@ class Character {
 
 	hits(ennemie){
 		ellipseMode(CENTER);
-		let x1 = this.x + this.r * 0.5;
-		let y1 = this.y + this.r * 0.5;
-		let x2 = ennemie.x + ennemie.r * 0.5;
+		let x1 = this.x + this.r  * 0.5;
+		let y1 = this.y + this.r  * 0.5;
+		let x2 = ennemie.x;
 		let y2 = ennemie.y + ennemie.r * 0.5;
 		return collideCircleCircle(x1, y1, this.r, x2, y2, ennemie.r);
 	}
