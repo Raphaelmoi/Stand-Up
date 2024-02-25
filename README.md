@@ -12,3 +12,5 @@ Stand Up! is a website that offers a playful experience based on facial recognit
 - **Account Creation**: Users can create a personalized account to access all the site's features.
 - **Score Comparison**: Compare your scores with those of other players to see where you stand.
 - **Built-in Chat**: Chat with other players in real-time using our integrated chat feature.
+
+![G10 98f28b0](https://github.com/Raphaelmoi/Stand-Up/assets/46026576/66f411a7-2946-4cb4-a7db-a72bdfe1fbf7)
