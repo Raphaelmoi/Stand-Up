@@ -1,6 +1,14 @@
-Stand up!
+**Stand Up!**
 
-Here my website code for the last project of the openclassroom's formation 'développeur web junior'
+Welcome to the source code of my website created for the final project of the "Junior Web Developer" course at OpenClassrooms.
 
-It's a website where people can play game with facial reconition technology, mld5.
-Possibility to create an account and compare others people score or chat with them. 
+**Description**
+
+Stand Up! is a website that offers a playful experience based on facial recognition technology and the MD5 algorithm. Users can create an account, play games using facial recognition, compare their scores with others, and even chat with them.
+
+**Features**
+
+- **Facial Recognition**: Play interactive games using facial recognition technology for a unique experience.
+- **Account Creation**: Users can create a personalized account to access all the site's features.
+- **Score Comparison**: Compare your scores with those of other players to see where you stand.
+- **Built-in Chat**: Chat with other players in real-time using our integrated chat feature.
